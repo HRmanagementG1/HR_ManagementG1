@@ -1,3 +1,4 @@
+(() => { 
 // global vars
 let currentUser = null;
 let isAdmin = false;
@@ -48,7 +49,7 @@ saveData("site_leaves", [
 
 async function loadEmployees() {
     try {
-        const response = await fetch("employees.json");
+        const response = await fetch("/employees.json");
         if (!response.ok) {
             throw new Error("Could not load employees.json");
         }
@@ -411,3 +412,5 @@ async function init() {
 
 
 init();
+
+})();
