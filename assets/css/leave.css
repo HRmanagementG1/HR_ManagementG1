@@ -5,23 +5,26 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f3f5ef;
+    background-color: #fff;
     color: #263333;
 }
 
 .leave-page {
-    width: 90%;
-    max-width: 1200px;
+    width: 100%;
     margin: 40px auto;
+    padding: 1vh 2rem;
 }
 
+
 .leave-banner {
-    background-color: #ffffff;
+    background-color: #f3f5ef;
     border-radius: 15px;
     padding: 30px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     margin-bottom: 25px;
 }
 
@@ -60,18 +63,30 @@ body {
     color: #666;
 }
 
+
 .leave-workspace {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 45px 24px 80px;
 }
 
 .leave-panel {
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 15px;
     padding: 25px;
 }
-
+.leave-panel.border {
+    padding: 32px;
+    border: 1px solid #e4e7df;
+    border-radius: 22px;
+    background: white;
+}
+.bg-primary{    
+    background-color: #f3f5ef;
+}
 .panel-heading {
     margin-bottom: 25px;
 }
@@ -89,6 +104,7 @@ body {
     border-radius: 20px;
     font-size: 13px;
 }
+
 
 .form-grid {
     display: grid;
@@ -142,10 +158,13 @@ body {
 .submit-button {
     margin-top: 20px;
     padding: 12px 25px;
+
     border: none;
     border-radius: 25px;
+
     background-color: #005253;
     color: white;
+
     font-size: 15px;
     cursor: pointer;
 }
@@ -170,6 +189,7 @@ body {
     background-color: #e3f5e8;
     color: #237a3b;
 }
+
 
 .panel-heading {
     position: relative;
@@ -219,7 +239,11 @@ body {
     border-radius: 15px;
     font-size: 12px;
 }
-
+.status.approved
+{
+    background-color: #005253;
+    color: #fff;
+}
 .spread {
     display: flex;
     justify-content: space-between;
@@ -233,6 +257,7 @@ body {
     border: 1px dashed #ccc;
     border-radius: 10px;
 }
+
 
 @media (max-width: 768px) {
 

@@ -16,7 +16,7 @@
 
             <div>
                 <p class="breadcrumb">Home / Services</p>
-                <h1>Make room for life.</h1>
+                <h1 id="heding">Make room for life.</h1>
                 <p>
                     Submit your time-off request, choose the dates,
                     and keep track of its status.
@@ -60,18 +60,7 @@
                                 Leave type
                             </label>
                             <select id="type" name="type" required>
-                                <option value="Annual">
-                                    Annual
-                                </option>
-                                <option value="Sick">
-                                    Sick
-                                </option>
-                                <option value="Personal">
-                                    Personal
-                                </option>
-                                <option value="Unpaid">
-                                    Unpaid
-                                </option>
+                                
                             </select>
                         </div>
 
@@ -103,8 +92,7 @@
 
                     </div>
 
-                    <div id="form-error" class="form-message error"></div>
-                    <div id="form-success" class="form-message success"></div>
+                    <div id="form-result" class="form-message error"></div>
 
                     <button type="submit" class="submit-button">
                         Submit application
@@ -140,7 +128,7 @@
         </section>
 
     </main>
-
+    <script src="assets/js/leave.js"></script>
 </body>
 
 </html>
