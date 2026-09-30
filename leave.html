@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Applications</title>
+    <link rel="stylesheet" href="assets/css/leave.css">
+</head>
+
+<body>
+
+    <main class="leave-page">
+
+        <section class="leave-banner">
+
+            <div>
+                <p class="breadcrumb">Home / Services</p>
+                <h1 id="heding">Make room for life.</h1>
+                <p>
+                    Submit your time-off request, choose the dates,
+                    and keep track of its status.
+                </p>
+            </div>
+
+            <div class="leave-summary">
+                <strong id="request-count">0</strong>
+                <span>Your requests</span>
+            </div>
+
+        </section>
+
+
+        <section class="leave-workspace">
+
+            <div class="leave-panel">
+
+                <div class="panel-heading">
+                    <span class="tag">New request</span>
+                    <h2>Apply for leave</h2>
+                </div>
+
+                <form id="leave-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="employee">
+                                Employee
+                            </label>
+                            <select id="employee" name="employee" required>
+                                <option value="">
+                                    Loading employees...
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">
+                                Leave type
+                            </label>
+                            <select id="type" name="type" required>
+                                
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="start">
+                                Start date
+                            </label>
+                            <input type="date" id="start" name="start" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="end">
+                                End date
+                            </label>
+                            <input type="date" id="end" name="end" required>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="reason">
+                                Reason
+                            </label>
+                            <textarea id="reason" name="reason" minlength="5" maxlength="1000"
+                                placeholder="Tell us a little about your request..." required></textarea>
+                            <small>
+                                <span id="reason-count">0</span>
+                                /1000 characters
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <div id="form-result" class="form-message error"></div>
+
+                    <button type="submit" class="submit-button">
+                        Submit application
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div class="leave-panel">
+
+                <div class="panel-heading">
+                    <span class="tag">
+                        Your history
+                    </span>
+                    <h2>
+                        Submitted requests
+                    </h2>
+                    <span class="badge" id="pending-count">
+                        0 pending
+                    </span>
+                </div>
+
+                <div id="leave-list" class="leave-list">
+                    <div class="empty">
+                        Loading your leave requests...
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    <script src="assets/js/leave.js"></script>
+</body>
+
+</html>

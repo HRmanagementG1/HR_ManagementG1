@@ -1,0 +1,290 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #263333;
+}
+
+.leave-page {
+    width: 100%;
+    margin: 40px auto;
+    padding: 1vh 2rem;
+}
+
+
+.leave-banner {
+    background-color: #f3f5ef;
+    border-radius: 15px;
+    padding: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.breadcrumb {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.leave-banner h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    color: #005253;
+}
+
+.leave-banner p {
+    margin: 0;
+    color: #666;
+}
+
+.leave-summary {
+    text-align: center;
+    background-color: #f3f5ef;
+    padding: 20px 30px;
+    border-radius: 12px;
+}
+
+.leave-summary strong {
+    display: block;
+    font-size: 30px;
+    color: #005253;
+}
+
+.leave-summary span {
+    font-size: 14px;
+    color: #666;
+}
+
+
+.leave-workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 45px 24px 80px;
+}
+
+.leave-panel {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 25px;
+}
+.leave-panel.border {
+    padding: 32px;
+    border: 1px solid #e4e7df;
+    border-radius: 22px;
+    background: white;
+}
+.bg-primary{    
+    background-color: #f3f5ef;
+}
+.panel-heading {
+    margin-bottom: 25px;
+}
+
+.panel-heading h2 {
+    margin: 8px 0 0;
+    color: #005253;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #fff3c4;
+    color: #005253;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / 3;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d5d9d4;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #005253;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-group small {
+    text-align: right;
+    color: #777;
+    margin-top: 5px;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 12px 25px;
+
+    border: none;
+    border-radius: 25px;
+
+    background-color: #005253;
+    color: white;
+
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #003f40;
+}
+
+.form-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 7px;
+    display: none;
+}
+
+.form-message.error {
+    background-color: #ffe5e5;
+    color: #b00020;
+}
+
+.form-message.success {
+    background-color: #e3f5e8;
+    color: #237a3b;
+}
+
+
+.panel-heading {
+    position: relative;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #fff3c4;
+    color: #665000;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+.leave-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.leave-record {
+    border: 1px solid #e0e3df;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.leave-record h3 {
+    margin: 0 0 5px;
+    color: #005253;
+}
+
+.leave-record p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+.leave-meta {
+    font-size: 13px;
+    color: #777;
+}
+
+.status {
+    background-color: #fff3c4;
+    color: #665000;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+.status.approved
+{
+    background-color: #005253;
+    color: #fff;
+}
+.spread {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.empty {
+    padding: 30px;
+    text-align: center;
+    color: #777;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 768px) {
+
+    .leave-page {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .leave-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .leave-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: 1;
+    }
+
+    .leave-summary {
+        width: 100%;
+    }
+}
