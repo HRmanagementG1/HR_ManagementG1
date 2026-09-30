@@ -98,8 +98,13 @@ ul { list-style: none; }
   gap: 28px;
   justify-self: end;
 }
-.login { font-size: 1rem; transition: color .2s; }
-.login:hover { color: var(--primary); }
+.login { 
+  font-size: 1rem; 
+  transition: color .2s;
+  text-decoration:underline;
+  text-underline-offset: 4px;
+ }
+.login:hover {color: var(--primary); }
  
 .btn-join {
   display: inline-block;
