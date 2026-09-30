@@ -1,3 +1,11 @@
+fetch('navbar_Home.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading navbar:', error));
+
+
 document.addEventListener('DOMContentLoaded', () => {
       const togglePasswordBtn = document.getElementById('togglePasswordBtn');
       const passwordInput = document.getElementById('password');
