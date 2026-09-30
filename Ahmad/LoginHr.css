@@ -1,0 +1,142 @@
+body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    /* Typography & Colors */
+    .text-teal { color: #18554a !important; }
+    .bg-teal { background-color: #18554a !important; }
+    .text-yellow { color: #fdbf49 !important; }
+    .bg-offwhite { background-color: #f8f9f7; }
+    
+    .fw-medium { font-weight: 500; }
+    .fw-semibold { font-weight: 600; }
+    
+    /* Custom Components */
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      padding-top: 2px;
+    }
+
+    .split-panel {
+      border-radius: 2rem;
+      overflow: hidden;
+    }
+
+    /* Left Panel Styling */
+    .left-panel {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200');
+      background-size: cover;
+      background-position: center;
+      min-height: 400px;
+    }
+
+    @media (min-width: 992px) {
+      .left-panel, .right-panel {
+        min-height: calc(100vh - 160px); /* Adjust based on header/footer */
+      }
+    }
+
+    .gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 100%);
+    }
+
+    .pill-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Right Panel Styling */
+    .form-container {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .overline-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+    }
+
+    .overline-line {
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background-color: #18554a;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    /* Form Controls */
+    .form-control {
+      padding: 0.85rem 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid #dee2e6;
+      font-size: 0.95rem;
+    }
+    
+    .form-control:focus {
+      border-color: #18554a;
+      box-shadow: 0 0 0 0.25rem rgba(24, 85, 74, 0.15);
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-login {
+      background-color: #fec859;
+      color: #1a1a1a;
+      border: none;
+      padding: 1rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-login:hover {
+      background-color: #f2ba48;
+    }
+
+    /* Password Toggle */
+    .password-wrapper {
+      position: relative;
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #18554a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0;
+      cursor: pointer;
+    }
+    
+    .password-toggle:focus {
+      outline: none;
+      text-decoration: underline;
+    }
