@@ -1,0 +1,69 @@
+[
+  {
+    "id": "1",
+    "name": "Lina Haddad",
+    "email": "lina@workforce.example",
+    "position": "People & Culture Lead",
+    "department": "Human Resources",
+    "role": "HR",
+    "phone": "+962 6 555 0101",
+    "location": "Amman, Jordan"
+    
+  },
+  {
+    "id": "2",
+    "name": "Omar Khalil",
+    "email": "omar@workforce.example",
+    "position": "Frontend Developer",
+    "department": "Engineering",
+    "role": "Employee",
+    "phone": "+962 6 555 0102",
+    "location": "Amman, Jordan"
+
+    
+  },
+  {
+    "id": "3",
+    "name": "Sara Nasser",
+    "email": "sara@workforce.example",
+    "position": "Product Designer",
+    "department": "Design",
+    "role": "Employee",
+    "phone": "+962 6 555 0103",
+    "location": "Amman, Jordan"
+    
+  },
+  {
+    "id": "4",
+    "name": "Yousef Saleh",
+    "email": "yousef@workforce.example",
+    "position": "Project Manager",
+    "department": "Operations",
+    "role": "Employee",
+    "phone": "+962 6 555 0104",
+    "location": "Amman, Jordan"
+    
+  },
+  {
+    "id": "5",
+    "name": "Noor Hamdan",
+    "email": "noor@workforce.example",
+    "position": "QA Engineer",
+    "department": "Engineering",
+    "role": "Employee",
+    "phone": "+962 6 555 0105",
+    "location": "Irbid, Jordan"
+    
+  },
+  {
+    "id": "6",
+    "name": "Kareem Ali",
+    "email": "kareem@workforce.example",
+    "position": "Marketing Specialist",
+    "department": "Marketing",
+    "role": "Employee",
+    "phone": "+962 6 555 0106",
+    "location": "Amman, Jordan"
+    
+  }
+]
