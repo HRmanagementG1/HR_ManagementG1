@@ -1,0 +1,53 @@
+<!-- Reusable sidebar. Edit navigation labels and links here. -->
+<aside class="hr-dashboard-sidebar" data-hr-sidebar>
+  <a class="hr-brand" href="../index.html">
+    <span class="hr-brand-logo" aria-hidden="true">w</span>
+    <span class="hr-brand-name">
+      workforce
+      <small class="hr-brand-tagline">PEOPLE FIRST. ALWAYS.</small>
+    </span>
+  </a>
+
+  <p class="hr-workspace-label">YOUR WORKSPACE</p>
+
+  <nav class="hr-navigation" aria-label="HR workspace">
+    <!-- Replace these spans with links when the pages are ready. -->
+    <span class="hr-nav-item"><i class="bi bi-grid" aria-hidden="true"></i> Dashboard</span>
+    <span class="hr-nav-item"><i class="bi bi-people" aria-hidden="true"></i> All Employees</span>
+    <a class="hr-nav-item" data-hr-nav="leave" href="../Wessam/hr_leave.html">
+      <i class="bi bi-calendar2-week" aria-hidden="true"></i> Leave Requests
+    </a>
+    <span class="hr-nav-item"><i class="bi bi-check2-circle" aria-hidden="true"></i> Tasks</span>
+    <a class="hr-nav-item" data-hr-nav="policies" href="../Ahmad/policyHr/policyHr.html">
+      <i class="bi bi-book" aria-hidden="true"></i> Policies
+    </a>
+    <span class="hr-nav-item"><i class="bi bi-camera-video" aria-hidden="true"></i> Zoom Meetings</span>
+    <span class="hr-nav-item"><i class="bi bi-chat-square" aria-hidden="true"></i> Feedback</span>
+  </nav>
+
+  <div class="hr-promo">
+    <span class="hr-promo-icon"><i class="bi bi-heart" aria-hidden="true"></i></span>
+    <strong>A better workday<br />starts with your people.</strong>
+    <small>Your connected HR workspace.</small>
+  </div>
+
+  <button class="hr-logout" type="button" data-hr-logout>
+    <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Logout
+  </button>
+</aside>
+
+<!-- Reusable search bar and logged-in user. -->
+<header class="hr-dashboard-topbar" data-hr-topbar>
+  <div class="hr-search">
+    <i class="bi bi-search" aria-hidden="true"></i>
+    <input id="global-search" type="search" placeholder="Search workspace…" aria-label="Search workspace" />
+  </div>
+
+  <div class="hr-user">
+    <span class="hr-user-avatar" data-hr-user-initials>?</span>
+    <div class="hr-user-details">
+      <strong data-hr-user-name>Guest</strong>
+      <small data-hr-user-role>Not signed in</small>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "code": "POL-2026-01",
+    "title": "Working Hours & Remote Attendance Policy (v4.2)",
+    "meta": "Effective Date: Sep 1, 2026 • Applies to: All Global Workforce Employees",
+    "fileName": "Working_Hours_Attendance_v4.2.pdf",
+    "clauses": [
+      {
+        "title": "Standard Business Hours",
+        "body": "Core operations span Sunday through Thursday, 9:00 AM – 5:00 PM. Flexible shift options may be negotiated directly with department heads."
+      },
+      {
+        "title": "Punctuality & Advance Notice",
+        "body": "Any unplanned absence or tardiness must be reported via Workforce Leaves or direct message before 8:30 AM local team time."
+      },
+      {
+        "title": "Core Collaboration Hours",
+        "body": "All active team members must be reachable between 10:00 AM and 3:00 PM for cross-departmental handoffs, Zoom meetings, and task tracking."
+      },
+      {
+        "title": "Overtime & Compensation",
+        "body": "Overtime hours require written pre-authorization from HR Operations and are recorded strictly via the Workforce digital portal."
+      }
+    ],
+    "category": "everyday",
+    "shortTitle": "Working hours & attendance",
+    "description": "Clarifies our core week, flexible arrival windows, attendance accountability, and team sync schedules.",
+    "version": "4.2",
+    "isNew": false
+  },
+  {
+    "id": 2,
+    "code": "POL-2026-02",
+    "title": "Leave & Time Off Guidelines (v3.8)",
+    "meta": "Effective Date: Sep 1, 2026 • Applies to: Full-time & Contract Associates",
+    "fileName": "Leave_Time_Off_Guidelines_v3.8.pdf",
+    "clauses": [
+      {
+        "title": "Annual Leave Allocation",
+        "body": "Every full-time team member accrues 24 paid vacation days annually, credited on the first day of each calendar month."
+      },
+      {
+        "title": "Sick & Medical Absences",
+        "body": "Consecutive sick leave exceeding 2 days requires an official registered doctor's note uploaded via the Leaves portal."
+      },
+      {
+        "title": "Notice Timelines",
+        "body": "Leaves longer than 3 business days must be requested at least 14 days in advance to ensure team capacity coverage."
+      },
+      {
+        "title": "Parental & Compassionate Leave",
+        "body": "Fully paid parental leaves and emergency bereavement allowances are supported without impacting personal holiday balances."
+      }
+    ],
+    "category": "wellbeing",
+    "shortTitle": "Leave & time off",
+    "description": "Your guide to annual leave, sick days, parental leave, and planning time away from work.",
+    "version": "3.8",
+    "isNew": false
+  },
+  {
+    "id": 3,
+    "code": "POL-2026-03",
+    "title": "Respect & Equal Opportunity Framework (v5.0)",
+    "meta": "Effective Date: Sep 1, 2026 • Applies to: All Global Workforce Personnel",
+    "fileName": "Respect_Equal_Opportunity_v5.0.pdf",
+    "clauses": [
+      {
+        "title": "Zero Tolerance Stance",
+        "body": "Harassment, discrimination, or intimidation of any nature is strictly prohibited across all digital and physical workplaces."
+      },
+      {
+        "title": "Equitable Hiring & Promotion",
+        "body": "Talent acquisition and career progression decisions are governed exclusively by verified merits, abilities, and achievements."
+      },
+      {
+        "title": "Psychological Safety in Meetings",
+        "body": "Every contributor is encouraged to voice diverse viewpoints respectfully without fear of retaliation or censure."
+      },
+      {
+        "title": "Confidential Grievance Reporting",
+        "body": "Anonymous and protected reporting channels are available 24/7 via the HR Feedback system with strict ombudsman oversight."
+      }
+    ],
+    "category": "culture",
+    "shortTitle": "Respect & equal opportunity",
+    "description": "Our shared commitment to an inclusive workplace, fair opportunities, and respectful collaboration.",
+    "version": "5.0",
+    "isNew": true
+  },
+  {
+    "id": 4,
+    "code": "POL-2026-04",
+    "title": "Information & Data Care Policy (v6.1)",
+    "meta": "Effective Date: Sep 1, 2026 • Applies to: All Employees, Contractors & Partners",
+    "fileName": "Information_Data_Care_v6.1.pdf",
+    "clauses": [
+      {
+        "title": "Device Encryption & Locks",
+        "body": "Company-managed devices must remain protected with BitLocker/FileVault and auto-lock after 3 minutes of inactivity."
+      },
+      {
+        "title": "Credential Security",
+        "body": "Single Sign-On (SSO) with hardware MFA is mandatory for accessing Workforce portals, Google Workspace, and task hubs."
+      },
+      {
+        "title": "Customer Data Privacy",
+        "body": "Exporting personally identifiable information (PII) to personal devices or unauthorized external clouds is strictly forbidden."
+      },
+      {
+        "title": "Incident Reporting",
+        "body": "Any suspected phishing, misplaced hardware, or abnormal login attempts must be declared to IT within 60 minutes."
+      }
+    ],
+    "category": "security",
+    "shortTitle": "Information & data care",
+    "description": "Protect company information with secure devices, safe access, and clear incident reporting.",
+    "version": "6.1",
+    "isNew": true
+  },
+  {
+    "id": 5,
+    "code": "POL-2026-05",
+    "title": "Remote Work & Distributed Collaboration (v2.4)",
+    "meta": "Effective Date: Sep 1, 2026 • Applies to: Hybrid & Distributed Teams",
+    "fileName": "Remote_Work_Guidelines_v2.4.pdf",
+    "clauses": [
+      {
+        "title": "Home Office Stipend",
+        "body": "New employees receive a one-off ergonomics allowance to configure dedicated ergonomic work surfaces and monitors."
+      },
+      {
+        "title": "Asynchronous Communication First",
+        "body": "Prioritize clear documented updates in task management boards and project hubs before demanding synchronous calls."
+      },
+      {
+        "title": "Zoom Sync Etiquette",
+        "body": "Cameras are welcomed for team intimacy but optional for larger briefings. All syncs require concise agendas shared beforehand."
+      },
+      {
+        "title": "Security in Public Spaces",
+        "body": "Remote work in cafes or airports requires VPN activation and privacy filters applied to laptop displays."
+      }
+    ],
+    "category": "everyday",
+    "shortTitle": "Remote work & collaboration",
+    "description": "Practical guidance for a productive home office, distributed teamwork, and secure remote work.",
+    "version": "2.4",
+    "isNew": false
+  },
+  {
+    "id": 6,
+    "code": "POL-2026-06",
+    "title": "Feedback & Continuous Improvement (v2.0)",
+    "meta": "Effective Date: Sep 1, 2026 • Applies to: All Departments & Management",
+    "fileName": "Feedback_Workplace_Improvement_v2.0.pdf",
+    "clauses": [
+      {
+        "title": "Quarterly Reflection Cycles",
+        "body": "Transparent bidirectional performance evaluations occur quarterly, emphasizing mutual growth and skill progression."
+      },
+      {
+        "title": "Open Door Ethos",
+        "body": "Leaders maintain recurring drop-in office hours every Thursday for unscheduled employee feedback and ideas."
+      },
+      {
+        "title": "Constructive Peer Reviews",
+        "body": "Peer appreciations and constructive developmental notes are recorded through the dedicated Feedback tool."
+      },
+      {
+        "title": "Actionable Survey Accountability",
+        "body": "Employee Net Promoter (eNPS) outcomes are published company-wide alongside clear departmental action plans."
+      }
+    ],
+    "category": "culture",
+    "shortTitle": "Feedback & continuous improvement",
+    "description": "Make your voice heard through reflection cycles, open conversations, and constructive feedback.",
+    "version": "2.0",
+    "isNew": false
+  }
+]

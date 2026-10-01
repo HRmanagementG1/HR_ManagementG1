@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workforce | Employee Policies</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="policyEmp.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+  <script defer src="policyEmp.js"></script>
+</head>
+<body>
+  <div id="employee-policies">
+    <header class="site-header">
+      <div class="navbar-inner">
+        <a class="brand" href="../../Deyaa/HomePage.html" aria-label="Workforce home">
+          <span class="brand-mark" aria-hidden="true">w</span>
+          <span class="brand-copy"><span class="brand-name">Workforce</span><span class="brand-tagline">PEOPLE • WORK •<br>GROW TOGETHER</span></span>
+        </a>
+        <nav class="employee-nav" aria-label="Employee navigation">
+          <!-- Connect the remaining navigation items when their pages are available. -->
+          <span class="nav-item nav-teal" aria-disabled="true" title="My Profile page is not available yet">My Profile</span>
+          <a class="nav-item nav-teal" href="../../Wessam/leave.html">Leaves</a>
+          <span class="nav-item" aria-disabled="true" title="Tasks page is not available yet">Tasks</span>
+          <a class="nav-item active" href="policyEmp.html" aria-current="page">Policy</a>
+          <span class="nav-item" aria-disabled="true" title="Zoom meeting page is not available yet">Zoom meeting</span>
+          <span class="nav-item" aria-disabled="true" title="Feedback page is not available yet">FeedBack</span>
+          <a class="nav-item" href="../../Wessam/about.html">Information</a>
+        </nav>
+        <a class="logout-link" href="../LoginEmp/LoginEmp.html">Log out</a>
+      </div>
+    </header>
+    <main class="container page-container py-4 py-md-5">
+      <section class="hero d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4">
+        <div class="hero-copy"><p class="eyebrow mb-2">Home / Services / Policies</p><h1>Clarity for every workday.</h1><p class="mb-0">The shared principles, workplace guidelines, and official policies that keep our team connected, fair, and fully supported.</p></div>
+        <div class="policy-total"><strong id="total-count">6</strong><span>Active policies</span><small id="latest-update">Updated Sep 2026</small></div>
+      </section>
+      <div class="new-notice d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4"><div><strong><span class="notice-dot"></span>Stay up to date</strong><span class="d-block mt-1">New policies are ready for you to review.</span></div><button class="btn btn-outline-policy btn-sm" id="show-new">View new policies <span id="new-count" class="ms-1">2</span></button></div>
+      <section class="toolbar d-flex flex-column gap-3 my-4" aria-label="Search and filter policies">
+        <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="policy-search" class="form-control rounded-pill" type="search" placeholder="Search policy title, keyword, or topic…" aria-label="Search policies"></div>
+        <div id="filters" class="d-flex flex-wrap gap-2" role="group" aria-label="Policy categories"></div>
+      </section>
+      <div class="row g-4 g-xl-5 align-items-start">
+        <section class="col-lg-7" aria-label="Policy list">
+          <div class="list-heading d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3"><div><span class="guidelines-tag">Company guidelines</span><small class="ms-2">Select a policy to read</small></div><small id="results-count" aria-live="polite"></small></div>
+          <div id="policy-list" class="d-flex flex-column gap-3"></div>
+          <div id="empty-state" class="empty-state text-center p-5" hidden><h2>No policies found</h2><p>Try a different keyword or category.</p><button id="reset-filters" class="btn btn-outline-policy">Clear filters</button></div>
+        </section>
+        <aside class="col-lg-5 reader-column" aria-label="Policy reader">
+          <section class="reader" id="reader">
+            <div class="reader-toolbar d-flex align-items-center justify-content-between"><span>▤ <span class="ms-2">Policy reader</span></span><button id="print-policy" class="btn btn-sm btn-outline-policy">Print</button></div>
+            <div class="reader-body"><div class="d-flex align-items-center justify-content-between mb-3"><span class="document-code" id="doc-code"></span><span class="official-tag">Official document</span></div><h2 id="doc-title"></h2><p class="document-meta" id="doc-meta"></p><div class="reader-rule"></div><div id="doc-clauses"></div></div>
+            <div class="reader-footer"><p class="mb-3">Keep a copy for your records and refer to these guidelines whenever you need them.</p><button class="btn btn-primary-policy w-100" id="download-selected">↓ Download policy PDF</button></div>
+          </section>
+          <div class="support-box mt-3"><strong>Need a little clarity?</strong><p class="mb-0 mt-2">Contact your HR team if you have questions about a policy or how it applies to you.</p></div>
+        </aside>
+      </div>
+      <p class="sample-note mt-4">Demonstration policy content. Replace these samples with your HR team's approved policies before use.</p>
+    </main>
+    <footer class="site-footer"><div class="container page-container d-flex flex-wrap justify-content-between gap-2"><span>© 2026 Workforce HR Systems. All rights reserved.</span><span>Your connected HR workspace.</span></div></footer>
+    <div id="policy-status" role="status" aria-live="polite" class="status-toast" hidden></div>
+  </div>
+</body>
+</html>

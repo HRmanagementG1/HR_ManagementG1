@@ -1,0 +1,91 @@
+#employee-policies{--primary:#00393a;--primary-hover:#005253;--surface:#f8faf3;--soft:#f3f4ee;--muted:#6f7979;--ink:#191c19;background:var(--surface);color:var(--ink);font:14px/1.6 Inter,sans-serif;min-height:100vh}
+body{margin:0;background:#f8faf3}#employee-policies *{box-sizing:border-box}#employee-policies .page-container{max-width:1400px;padding-left:32px;padding-right:32px}#employee-policies h1,#employee-policies h2,#employee-policies h3,#employee-policies .brand{font-family:'Plus Jakarta Sans',sans-serif;color:var(--primary)}#employee-policies .site-header{background:white;border-bottom:1px solid #bfc8c84d}#employee-policies .hero{padding:36px 40px;background:var(--soft);border-radius:20px}#employee-policies .hero-copy{max-width:680px}#employee-policies h1{font-size:32px;line-height:1.3;letter-spacing:-1px;font-weight:600;margin-bottom:12px}#employee-policies .hero p{color:#3f4948}#employee-policies .eyebrow{font-size:13px;color:var(--muted)!important}#employee-policies .policy-total{min-width:150px;text-align:right;display:flex;flex-direction:column}#employee-policies .policy-total strong{font:700 48px/1.1 'Plus Jakarta Sans',sans-serif;color:var(--primary)}#employee-policies .policy-total span{font-size:16px;font-weight:600;margin-top:5px}#employee-policies small,#employee-policies .policy-total small{font-size:12px;color:var(--muted)}#employee-policies .new-notice{border:1px solid #e7e9e2;background:#fffdf5;border-radius:14px;padding:16px 22px}#employee-policies .new-notice strong{color:var(--primary)}#employee-policies .new-notice span.d-block{font-size:12px;color:#6f7979}#employee-policies .notice-dot{display:inline-block;width:8px;height:8px;background:#edc14d;border-radius:50%;margin-right:8px}#employee-policies .btn{font-size:13px;font-weight:500;border-radius:50px;padding:9px 17px}#employee-policies .btn-sm{padding:6px 14px;font-size:12px}#employee-policies .btn-primary-policy,#employee-policies .filter-pill.active{background:var(--primary);color:white;border-color:var(--primary)}#employee-policies .btn-primary-policy:hover{background:var(--primary-hover)}#employee-policies .btn-outline-policy{border:1px solid #bfc8c8;color:var(--primary)}#employee-policies .btn-outline-policy:hover,#employee-policies .btn-soft{background:var(--soft);color:var(--primary)}#employee-policies .btn-soft:hover{background:#e7e9e2}#employee-policies .search-wrap{position:relative;flex:1;max-width:470px}#employee-policies .search-wrap>span{position:absolute;left:15px;top:4px;font-size:26px;color:var(--muted)}#employee-policies .form-control{font-size:13px;padding:11px 16px 11px 43px;border:1px solid #e7e9e2;background:white}#employee-policies .form-control:focus{border-color:#005253;box-shadow:0 0 0 3px #00525320}#employee-policies .filter-pill{background:white;border:0;font-size:12px;padding:9px 15px}#employee-policies .guidelines-tag{background:#fdcf59;color:#735800;font-size:10px;text-transform:uppercase;letter-spacing:.7px;font-weight:600;padding:6px 11px;border-radius:50px}#employee-policies .policy-card{background:white;border-radius:16px;border:2px solid transparent;overflow:hidden;box-shadow:0 2px 12px #00000005}#employee-policies .policy-card.selected{border-color:var(--primary)}#employee-policies .card-content{padding:20px 22px;display:block;width:100%;border:0;background:none;text-align:left;color:inherit}#employee-policies .card-content:hover{background:#f8faf380}#employee-policies .policy-card h3{font-size:18px;font-weight:600;margin:10px 0 8px}#employee-policies .policy-card p{color:#3f4948;font-size:13px;margin-bottom:0}#employee-policies .category-tag{background:#00393a12;color:var(--primary);border-radius:50px;padding:3px 9px;font-size:10px;font-weight:600}#employee-policies .category-tag.wellbeing,#employee-policies .category-tag.culture{background:#fdcf5933;color:#735800}#employee-policies .new-tag{background:#fdcf59;color:#735800;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:600}#employee-policies .selection-check{background:var(--primary);color:white;border-radius:50%;width:23px;height:23px;display:grid;place-items:center;flex-shrink:0}#employee-policies .card-actions{background:#f3f4ee80;padding:12px 22px}#employee-policies .card-actions small{font-size:11px}#employee-policies .reader-column{position:sticky;top:24px}#employee-policies .reader{background:white;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px #00000005;border:1px solid #e7e9e2}#employee-policies .reader-toolbar{padding:16px 22px;background:var(--soft);color:var(--primary);font-weight:600;font-size:13px}#employee-policies .reader-body{padding:26px}#employee-policies .document-code{color:var(--muted);font-size:10px;font-weight:600;letter-spacing:1px}#employee-policies .official-tag{background:#e7e9e2;color:#3f4948;font-size:9px;padding:3px 8px;border-radius:5px}#employee-policies .reader h2{font-size:23px;line-height:1.45;letter-spacing:-.5px;margin-bottom:12px}#employee-policies .document-meta{color:var(--muted);font-size:11px;line-height:1.8}#employee-policies .reader-rule{height:1px;background:#e7e9e2;margin:22px 0}#employee-policies .clause{display:flex;gap:12px;margin-bottom:22px}#employee-policies .clause:last-child{margin-bottom:0}#employee-policies .clause-number{background:#e7e9e2;color:var(--primary);border-radius:5px;width:25px;height:25px;flex-shrink:0;display:grid;place-items:center;font-size:11px;font-weight:600}#employee-policies .clause h3{color:var(--ink);font-family:Inter,sans-serif;font-size:13px;font-weight:600;margin:3px 0 5px}#employee-policies .clause p{font-size:12px;line-height:1.8;color:#3f4948;margin:0}#employee-policies .reader-footer{padding:20px 26px;background:#f3f4ee80;font-size:11px;color:var(--muted)}#employee-policies .support-box{padding:22px;background:#edefe8;border-radius:14px;color:var(--primary)}#employee-policies .support-box p{font-size:12px;color:#3f4948}#employee-policies .empty-state{background:white;border-radius:16px}#employee-policies .empty-state h2{font-size:20px}#employee-policies .sample-note{font-size:11px;color:var(--muted)}#employee-policies .site-footer{background:white;border-top:1px solid #bfc8c84d;padding:24px 0;font-size:12px;color:#3f4948}#employee-policies .status-toast{position:fixed;bottom:24px;right:24px;max-width:calc(100vw - 48px);padding:14px 24px;background:var(--primary);color:white;border-radius:12px;box-shadow:0 8px 24px #00393a30;z-index:1100}#employee-policies button:focus-visible,#employee-policies a:focus-visible{outline:3px solid #edc14d;outline-offset:3px}
+@media(max-width:991px){#employee-policies .reader-column{position:static}}@media(max-width:575px){#employee-policies .page-container{padding-left:18px;padding-right:18px}#employee-policies .hero{padding:26px}#employee-policies h1{font-size:26px}#employee-policies .policy-total{text-align:left}#employee-policies .policy-total strong{font-size:36px}#employee-policies .search-wrap{max-width:none}#employee-policies .list-heading small.ms-2{display:none}#employee-policies .card-content{padding:18px}#employee-policies .card-actions{padding:12px 18px}}
+@media print{body{background:white}#employee-policies .site-header,#employee-policies .hero,#employee-policies .new-notice,#employee-policies .toolbar,#employee-policies .col-lg-7,#employee-policies .reader-toolbar,#employee-policies .reader-footer,#employee-policies .support-box,#employee-policies .site-footer,#employee-policies .sample-note,#employee-policies .status-toast{display:none!important}#employee-policies .reader-column{width:100%;position:static}#employee-policies .reader{border:0;box-shadow:none}#employee-policies .clause{break-inside:avoid}#employee-policies .page-container{max-width:none;padding:0}}
+
+/* Employee navigation follows the shared Workforce header. */
+#employee-policies .navbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  min-height: 96px;
+  padding: 16px 34px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+#employee-policies .brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: #005253;
+}
+#employee-policies .brand-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #005253;
+  color: #ffd15b;
+  font: 700 29px/1 'Plus Jakarta Sans', sans-serif;
+}
+#employee-policies .brand-copy { display: flex; flex-direction: column; }
+#employee-policies .brand-name { font-size: 25px; font-weight: 700; line-height: 1.1; letter-spacing: -.7px; }
+#employee-policies .brand-tagline { color: #667085; font: 500 11px/1.5 Inter, sans-serif; letter-spacing: .25px; }
+#employee-policies .employee-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+#employee-policies .employee-nav .nav-item {
+  position: relative;
+  flex-shrink: 0;
+  padding: 12px 18px;
+  color: #394356;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+#employee-policies .employee-nav .nav-teal { color: #005253; }
+#employee-policies .employee-nav a:hover { color: #005253; }
+#employee-policies .employee-nav .active::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: #ffd15b;
+}
+#employee-policies .logout-link {
+  flex-shrink: 0;
+  padding: 12px 28px;
+  border-radius: 50px;
+  background: #e7e9e2;
+  color: #191c19;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+#employee-policies .logout-link:hover { background: #dce0d6; }
+@media (max-width: 1250px) {
+  #employee-policies .navbar-inner { gap: 18px; padding-inline: 24px; }
+  #employee-policies .employee-nav .nav-item { padding-inline: 11px; font-size: 14px; }
+}
+@media (max-width: 1050px) {
+  #employee-policies .navbar-inner { flex-wrap: wrap; gap: 8px 20px; }
+  #employee-policies .logout-link { margin-left: auto; }
+  #employee-policies .employee-nav { order: 3; flex-basis: 100%; overflow-x: auto; padding-bottom: 3px; }
+}
+@media (max-width: 575px) {
+  #employee-policies .navbar-inner { padding: 14px 18px 5px; }
+  #employee-policies .brand-name { font-size: 23px; }
+  #employee-policies .logout-link { padding: 10px 20px; }
+}

@@ -9,76 +9,20 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script defer src="app.js"></script>
+    <link rel="stylesheet" href="../../Shared/hr_dashboard.css" />
+    <script defer src="../../Shared/hr_dashboard.js"></script>
+    <script defer src="policyHr.js"></script>
+
   </head>
   
   <body class="text-dark" style="font-family: 'Inter', sans-serif; background-color: #fafaf8;">
     
-    <!-- Sidebar -->
-    <aside class="d-none d-lg-flex position-fixed top-0 start-0 vh-100 col-lg-2 flex-column border-end bg-white p-3">
-      
-      <!-- Logo -->
-      <a class="d-flex align-items-center gap-2 text-decoration-none fs-4 fw-bold mb-5 mt-2 px-2" href="index.html">
-        <span class="rounded-circle d-flex align-items-center justify-content-center fs-4" style="background-color: #18554a; color: #fbd36b; width: 36px; height: 36px;" aria-hidden="true">w</span>
-        <span style="color: #18554a; letter-spacing: -0.5px;">workforce
-          <small class="d-block text-secondary mt-1" style="font-size: 0.65rem; letter-spacing: 0.1em;">PEOPLE FIRST. ALWAYS.</small>
-        </span>
-      </a>
-      
-      <div class="text-secondary fw-semibold mb-3 px-2" style="font-size: 0.7rem; letter-spacing: 0.1em;">YOUR WORKSPACE</div>
-      
-      <!-- Navigation -->
-      <nav class="nav flex-column gap-1 fw-medium" style="font-size: 0.95rem;">
-        <span class="nav-link text-secondary py-2 px-3 rounded-3" style="cursor: pointer;"><i class="bi bi-grid me-2"></i> Dashboard</span>
-        <span class="nav-link text-secondary py-2 px-3 rounded-3" style="cursor: pointer;"><i class="bi bi-people me-2"></i> All Employees</span>
-        <span class="nav-link text-secondary py-2 px-3 rounded-3" style="cursor: pointer;"><i class="bi bi-calendar2-week me-2"></i> Leave Requests</span>
-        <span class="nav-link text-secondary py-2 px-3 rounded-3" style="cursor: pointer;"><i class="bi bi-check2-circle me-2"></i> Tasks</span>
-        
-        <!-- Active Nav Item -->
-        <a class="nav-link position-relative py-2 px-3 my-1 rounded-3 fw-semibold text-decoration-none" href="index.html" aria-current="page" style="background-color: #eaf0eb; color: #18554a;">
-          <i class="bi bi-book me-2"></i> Policies
-          <span class="position-absolute rounded-circle" style="right: 16px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background-color: #18554a;"></span>
-        </a>
-        
-        <span class="nav-link text-secondary py-2 px-3 rounded-3" style="cursor: pointer;"><i class="bi bi-camera-video me-2"></i> Zoom Meetings</span>
-        <span class="nav-link text-secondary py-2 px-3 rounded-3" style="cursor: pointer;"><i class="bi bi-chat-square me-2"></i> Feedback</span>
-      </nav>
-      
-      <!-- Promo Card -->
-      <div class="mt-auto rounded-4 p-4 mb-3" style="background-color: #f6f7f4;">
-        <span class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 32px; height: 32px; background-color: #fbd36b; color: #18554a;">
-          <i class="bi bi-heart fs-6"></i>
-        </span>
-        <strong class="d-block fs-6 text-dark" style="line-height: 1.3;">A better workday<br />starts with your people.</strong>
-        <small class="d-block text-secondary mt-2" style="font-size: 0.75rem;">Your connected HR workspace.</small>
-      </div>
-      
-      <!-- Logout -->
-      <div class="d-flex gap-2 align-items-center text-secondary border-top pt-4 px-2" style="font-size: 0.9rem; cursor: pointer;">
-        <i class="bi bi-box-arrow-right"></i> Logout
-      </div>
-    </aside>
+    <div data-hr-dashboard-sidebar data-active-page="policies"></div>
 
     <!-- Main Content Area -->
-    <div class="col-12 col-lg-10 offset-lg-2 min-vh-100 d-flex flex-column">
+    <div class="hr-dashboard-content">
       
-      <!-- Top Header -->
-      <header class="d-flex align-items-center justify-content-between gap-3 bg-white border-bottom px-4 py-3">
-        <div class="d-flex align-items-center gap-3 rounded-pill py-1 px-3" style="background-color: #f6f7f4; width: 450px;">
-          <i class="bi bi-search text-secondary"></i>
-          <input class="form-control border-0 bg-transparent fs-6 shadow-none" id="global-search" type="search" placeholder="Search policies, documents…" aria-label="Search policies" />
-        </div>
-        
-        <div class="d-flex align-items-center gap-4">
-          <div class="d-flex align-items-center gap-3 border-start ps-4">
-            <span class="rounded-circle d-flex align-items-center justify-content-center fw-semibold fs-6" style="width: 40px; height: 40px; background-color: #eaf0eb; color: #18554a;" title="HR administrator">LH</span>
-            <span class="d-none d-md-block fs-6">
-              <strong class="d-block text-dark" style="font-size: 0.9rem;">Lina Haddad</strong>
-              <small class="d-block text-secondary" style="font-size: 0.75rem;">HR administrator</small>
-            </span>
-          </div>
-        </div>
-      </header>
+      <div data-hr-dashboard-topbar data-search-placeholder="Search policies, documents…" data-search-label="Search policies"></div>
 
       <main class="p-4 p-md-5 flex-grow-1">
         

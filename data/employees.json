@@ -7,7 +7,8 @@
     "department": "Human Resources",
     "role": "HR",
     "phone": "+962 6 555 0101",
-    "location": "Amman, Jordan"
+    "location": "Amman, Jordan",
+    "salary": 75000
     
   },
   {
@@ -18,7 +19,8 @@
     "department": "Engineering",
     "role": "Employee",
     "phone": "+962 6 555 0102",
-    "location": "Amman, Jordan"
+    "location": "Amman, Jordan",
+     "salary": 5000
 
     
   },
@@ -30,7 +32,8 @@
     "department": "Design",
     "role": "Employee",
     "phone": "+962 6 555 0103",
-    "location": "Amman, Jordan"
+    "location": "Amman, Jordan",
+     "salary": 65000
     
   },
   {
@@ -41,7 +44,8 @@
     "department": "Operations",
     "role": "Employee",
     "phone": "+962 6 555 0104",
-    "location": "Amman, Jordan"
+    "location": "Amman, Jordan",
+     "salary": 70000
     
   },
   {
@@ -52,7 +56,8 @@
     "department": "Engineering",
     "role": "Employee",
     "phone": "+962 6 555 0105",
-    "location": "Irbid, Jordan"
+    "location": "Irbid, Jordan",
+     "salary": 55000
     
   },
   {
@@ -63,7 +68,8 @@
     "department": "Marketing",
     "role": "Employee",
     "phone": "+962 6 555 0106",
-    "location": "Amman, Jordan"
+    "location": "Amman, Jordan",
+     "salary": 60000
     
   }
 ]
