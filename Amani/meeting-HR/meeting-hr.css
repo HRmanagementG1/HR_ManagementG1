@@ -1,0 +1,656 @@
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FFFFFF;
+    color: #20231F;
+}
+
+.hr-meeting-page {
+    width: 100%;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.meeting-hero {
+    background: #003F40;
+    padding: 50px 8%;
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-radius: 16px;
+    margin: 15px;
+}
+
+.meeting-hero p:first-child {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 0 0 25px;
+}
+
+.meeting-hero h1 {
+    color: #FFFFFF;
+    font-size: 48px;
+    font-weight: 500;
+    margin: 0 0 15px;
+}
+
+.meeting-hero p:last-child {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 700px;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.meeting-stats {
+    width: 82%;
+    margin: 40px auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: #F3F5EF;
+    border: 1px solid #E4E7DF;
+    border-radius: 16px;
+    padding: 25px 28px;
+}
+
+.stat-card span {
+    color: #70746D;
+    font-size: 13px;
+}
+
+.stat-card h2 {
+    color: #003F40;
+    font-size: 34px;
+    font-weight: 500;
+    margin: 10px 0 0;
+}
+
+
+/* =========================
+   MEETING REQUESTS
+========================= */
+
+.meeting-requests {
+    width: 82%;
+    margin: 0 auto 40px;
+
+    background: #FFFFFF;
+    border: 1px solid #E4E7DF;
+    border-radius: 16px;
+
+    padding: 30px;
+}
+
+
+/* =========================
+   SECTION HEADER
+========================= */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.section-header span,
+.schedule-header span,
+.availability-section span {
+    color: #005253;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.section-header h2,
+.schedule-header h2,
+.availability-section h2 {
+    color: #20231F;
+    font-size: 27px;
+    font-weight: 500;
+
+    margin: 8px 0;
+}
+
+.section-header p,
+.schedule-header p,
+.availability-section p {
+    color: #70746D;
+    font-size: 13px;
+    line-height: 1.5;
+
+    margin: 0;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+#open-schedule {
+    background: #FFD15B;
+    color: #20231F;
+
+    border: none;
+    border-radius: 25px;
+
+    padding: 12px 22px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition: 0.3s;
+}
+
+#open-schedule:hover {
+    background: #003F40;
+    color: #FFFFFF;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.meeting-filters {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+#meeting-status-filter,
+#meeting-search {
+    height: 42px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #E4E7DF;
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #20231F;
+    font-size: 13px;
+
+    outline: none;
+}
+
+#meeting-status-filter {
+    width: 180px;
+}
+
+#meeting-search {
+    width: 280px;
+}
+
+#meeting-status-filter:focus,
+#meeting-search:focus {
+    border-color: #003F40;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 850px;
+
+    border-collapse: collapse;
+}
+
+thead {
+    background: #F3F5EF;
+}
+
+th {
+    padding: 14px 12px;
+
+    color: #20231F;
+    font-size: 12px;
+    font-weight: 500;
+
+    text-align: left;
+    white-space: nowrap;
+}
+
+td {
+    padding: 15px 12px;
+
+    color: #70746D;
+    font-size: 13px;
+
+    border-bottom: 1px solid #E4E7DF;
+
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: #FAFAF7;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+    display: inline-block;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.status.pending {
+    background: #FFF4D6;
+    color: #856404;
+}
+
+.status.confirmed {
+    background: #DFF3F0;
+    color: #005253;
+}
+
+.status.completed {
+    background: #E5E7E3;
+    color: #50534E;
+}
+
+.status.cancelled {
+    background: #F8E1E1;
+    color: #9A3D3D;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.action-button {
+    padding: 7px 13px;
+
+    background: transparent;
+
+    border: 1px solid #E4E7DF;
+    border-radius: 20px;
+
+    color: #005253;
+
+    font-size: 11px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-button:hover {
+    background: #003F40;
+    color: #FFFFFF;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-meetings {
+    padding: 45px 20px;
+
+    background: #F3F5EF;
+    border-radius: 12px;
+
+    text-align: center;
+
+    margin-top: 15px;
+}
+
+.empty-meetings h3 {
+    color: #20231F;
+    font-size: 16px;
+    font-weight: 500;
+
+    margin: 0 0 7px;
+}
+
+.empty-meetings p {
+    color: #70746D;
+    font-size: 12px;
+
+    margin: 0;
+}
+
+
+/* =========================
+   SCHEDULE SECTION
+========================= */
+
+.schedule-section {
+    width: 82%;
+    margin: 0 auto 40px;
+
+    background: #FFFFFF;
+    border: 1px solid #E4E7DF;
+    border-radius: 16px;
+
+    padding: 30px;
+}
+
+.schedule-header {
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+#schedule-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.form-group label {
+    display: block;
+
+    color: #20231F;
+    font-size: 13px;
+    font-weight: 500;
+
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 44px;
+
+    padding: 10px 12px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #E4E7DF;
+    border-radius: 8px;
+
+    color: #20231F;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #003F40;
+}
+
+
+/* =========================
+   DATE + TIME
+========================= */
+
+.date-time {
+    display: flex;
+    gap: 15px;
+}
+
+.date-time .form-group {
+    width: 50%;
+}
+
+
+/* =========================
+   CREATE BUTTON
+========================= */
+
+#create-meeting {
+    grid-column: 1 / -1;
+
+    width: fit-content;
+
+    background: #FFD15B;
+    color: #20231F;
+
+    border: none;
+    border-radius: 25px;
+
+    padding: 12px 25px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#create-meeting:hover {
+    background: #003F40;
+    color: #FFFFFF;
+}
+
+
+/* =========================
+   AVAILABILITY
+========================= */
+
+.availability-section {
+    width: 82%;
+    margin: 0 auto 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background: #003F40;
+
+    border-radius: 16px;
+
+    padding: 30px;
+}
+
+.availability-section span {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.availability-section h2 {
+    color: #FFFFFF;
+}
+
+.availability-section p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.availability-times {
+    display: flex;
+    gap: 15px;
+}
+
+.availability-times div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.availability-times label {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+}
+
+.availability-times input {
+    height: 40px;
+
+    padding: 8px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: #FFFFFF;
+
+    outline: none;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .meeting-stats {
+        width: 88%;
+    }
+
+    .meeting-requests,
+    .schedule-section,
+    .availability-section {
+        width: 88%;
+    }
+
+    #schedule-form {
+        grid-template-columns: 1fr;
+    }
+
+    #create-meeting {
+        grid-column: auto;
+    }
+
+    .availability-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .meeting-hero {
+        padding: 40px 6%;
+        margin: 10px;
+    }
+
+    .meeting-hero h1 {
+        font-size: 36px;
+    }
+
+    .meeting-hero p:last-child {
+        font-size: 15px;
+    }
+
+    .meeting-stats {
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+
+    .meeting-requests,
+    .schedule-section,
+    .availability-section {
+        width: 90%;
+        padding: 24px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #open-schedule {
+        width: 100%;
+    }
+
+    .meeting-filters {
+        flex-direction: column;
+    }
+
+    #meeting-status-filter,
+    #meeting-search {
+        width: 100%;
+    }
+
+    .availability-times {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .availability-times div {
+        width: 100%;
+    }
+
+    .availability-times input {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .meeting-hero h1 {
+        font-size: 30px;
+    }
+
+    .section-header h2,
+    .schedule-header h2,
+    .availability-section h2 {
+        font-size: 23px;
+    }
+
+    .meeting-requests,
+    .schedule-section,
+    .availability-section {
+        padding: 20px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+}

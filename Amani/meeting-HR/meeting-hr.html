@@ -1,0 +1,472 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HR Meetings</title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/meeting-hr.css">
+    
+
+</head>
+
+
+<body>
+
+    <section class="hr-meeting-page">
+
+
+        <!-- HERO -->
+
+        <section class="meeting-hero">
+
+            <p>Home / HR Meetings</p>
+
+            <h1>Zoom Meetings & Sync</h1>
+
+            <p>
+                Manage employee meeting requests,
+                schedule HR meetings, and keep everything organized.
+            </p>
+
+        </section>
+
+
+
+        <!-- STATISTICS -->
+
+        <section class="meeting-stats">
+
+            <div class="stat-card">
+
+                <span>Total Meetings</span>
+
+                <h2 id="total-meetings">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>Pending Requests</span>
+
+                <h2 id="pending-meetings">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>Approved Today</span>
+
+                <h2 id="approved-today">
+                    0
+                </h2>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- MEETING REQUESTS -->
+
+        <section class="meeting-requests">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span>Meeting Requests</span>
+
+                    <h2>
+                        Employee Meeting Requests
+                    </h2>
+
+                    <p>
+                        Review and manage meeting requests
+                        submitted by employees.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="open-schedule"
+                >
+                    Schedule New Meeting
+                </button>
+
+            </div>
+
+
+
+            <!-- FILTER -->
+
+            <div class="meeting-filters">
+
+                <select id="meeting-status-filter">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                    <option value="Confirmed">
+                        Confirmed
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                    <option value="Cancelled">
+                        Cancelled
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="text"
+                    id="meeting-search"
+                    placeholder="Search employee..."
+                >
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Employee
+                            </th>
+
+                            <th>
+                                Topic
+                            </th>
+
+                            <th>
+                                Requested Date
+                            </th>
+
+                            <th>
+                                Time
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="hr-meeting-list">
+
+                        <!-- JavaScript will add meetings here -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                id="empty-meetings"
+                class="empty-meetings"
+            >
+
+                <h3>
+                    No meeting requests
+                </h3>
+
+                <p>
+                    Employee meeting requests
+                    will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SCHEDULE NEW MEETING -->
+
+        <section
+            id="schedule-section"
+            class="schedule-section"
+        >
+
+            <div class="schedule-header">
+
+                <div>
+
+                    <span>Quick Meeting Creator</span>
+
+                    <h2>
+                        Schedule New Meeting
+                    </h2>
+
+                    <p>
+                        Create a meeting for an employee
+                        and add the meeting details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="schedule-form">
+
+
+                <!-- EMPLOYEE -->
+
+                <div class="form-group">
+
+                    <label for="schedule-employee">
+                        Employee
+                    </label>
+
+                    <select
+                        id="schedule-employee"
+                        required
+                    >
+
+                        <option value="">
+                            Select employee
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- TOPIC -->
+
+                <div class="form-group">
+
+                    <label for="schedule-topic">
+                        Meeting Topic
+                    </label>
+
+                    <input
+                        type="text"
+                        id="schedule-topic"
+                        placeholder="Meeting topic"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DATE + TIME -->
+
+                <div class="date-time">
+
+                    <div class="form-group">
+
+                        <label for="schedule-date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="schedule-date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="schedule-time">
+                            Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="schedule-time"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DURATION -->
+
+                <div class="form-group">
+
+                    <label for="schedule-duration">
+                        Duration
+                    </label>
+
+                    <select
+                        id="schedule-duration"
+                        required
+                    >
+
+                        <option value="30">
+                            30 minutes
+                        </option>
+
+                        <option value="45">
+                            45 minutes
+                        </option>
+
+                        <option value="60">
+                            60 minutes
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- MEETING LINK -->
+
+                <div class="form-group">
+
+                    <label for="meeting-link">
+                        Meeting Link
+                    </label>
+
+                    <input
+                        type="url"
+                        id="meeting-link"
+                        placeholder="https://meet.jit.si/..."
+                    >
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    id="create-meeting"
+                >
+                    Create Meeting
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- HR AVAILABILITY -->
+
+        <section class="availability-section">
+
+            <div>
+
+                <span>
+                    HR Daily Availability Rules
+                </span>
+
+                <h2>
+                    Meeting availability
+                </h2>
+
+                <p>
+                    Define the hours during which employees
+                    can request HR meetings.
+                </p>
+
+            </div>
+
+
+            <div class="availability-times">
+
+                <div>
+
+                    <label for="start-time">
+                        Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="start-time"
+                        value="09:00"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="end-time">
+                        End Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="end-time"
+                        value="17:00"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </section>
+
+
+
+    <script src="assets/js/jitsi.js"></script>
+
+<script src="assets/js/meeting-hr.js"></script>
+
+</body>
+
+</html>
