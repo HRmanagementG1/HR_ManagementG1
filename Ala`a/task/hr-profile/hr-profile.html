@@ -1,0 +1,109 @@
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="search-bar top-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="user-profile-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="breadcrumb">
+                        <span class="dot"></span> SETTINGS / MY PROFILE
+                    </div>
+                    <h1 class="page-title">Your Profile</h1>
+                    <p class="page-subtitle">Manage your personal information and account settings.</p>
+                </div>
+
+                <div class="profile-grid">
+                    <!-- Left Column: Profile Card -->
+                    <div class="profile-card profile-summary">
+                        <div class="avatar-large" id="displayAvatar">AF</div>
+                        <h2 id="displayName">Ala'a Frihat</h2>
+                        <p class="profile-role" id="displayRole">HR Manager / Developer</p>
+                        <p class="profile-dept">PeoplePulse Administration</p>
+                        
+                        <div class="profile-divider"></div>
+                        
+                        <div class="profile-details-list">
+                            <div class="detail-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <small>Email</small>
+                                    <p id="displayEmail">alaa@peoplepulse.io</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <small>Phone</small>
+                                    <p id="displayPhone">+962 7 0000 0000</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <small>Location</small>
+                                    <p id="displayLocation">Irbid, Jordan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Edit Form -->
+                    <div class="profile-card profile-edit">
+                        <div class="card-heading">
+                            <h3><i class="fa-solid fa-pen-to-square"></i> Edit Profile Details</h3>
+                        </div>
+                        
+                        <div id="alertMessage" class="alert-box" style="display: none;"></div>
+
+                        <form id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="inputName" value="Ala'a Frihat" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" id="inputEmail" value="alaa@peoplepulse.io" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Job Title</label>
+                                    <input type="text" id="inputRole" value="HR Manager / Developer" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" id="inputPhone" value="+962 7 0000 0000">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" id="inputLocation" value="Irbid, Jordan">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bio / About Me</label>
+                                <textarea id="inputBio" rows="4">Managing human resources and exploring web development technologies.</textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-save"><i class="fa-solid fa-check"></i> Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>

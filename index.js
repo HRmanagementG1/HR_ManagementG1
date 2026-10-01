@@ -4,7 +4,7 @@ const leavesKey="site_leaves";
 const sessionKey="site_session";
 
 const leaveTypes=["Annual","Sick","Personal","Unpaid"];
-const visitorPaths = ["/Ahmad/loginEmp"];
+const visitorPaths = ["/Ahmad/loginEmp/LoginEmp"];
 
 
 let employees = [];
@@ -68,20 +68,20 @@ function getCurrentUser(){
 }
 
 
-// saveData("site_users", [
-//     { id:"1", name:"Lina Haddad", email:"lina@workforce.example", position:"People & Culture Lead", department:"Human Resources", role:"Employee", phone:"+962 6 555 0101", location:"Amman, Jordan", image:"", bio:"" },
-//     { id:"2", name:"Julian Drake",      email:"julian@workforce.example", position:"Senior Software Engineer",  department:"Engineering",     role:"Employee", phone:"",                 location:"Berlin, Germany",  image:"", bio:"" },
-//     { id:"3", name:"Aria Montgomery",   email:"aria@workforce.example",   position:"Lead Product Designer",     department:"Design",          role:"Employee", phone:"",                 location:"London, UK",       image:"", bio:"" },
-//     { id:"4", name:"Siddharth Kumar",   email:"sid@workforce.example",    position:"Data Operations Lead",      department:"Data",            role:"Employee", phone:"",                 location:"Bangalore, India", image:"", bio:"" },
-//     { id:"5", name:"Marcus Vance",      email:"marcus@workforce.example", position:"Director of Brand Strategy", department:"Marketing",      role:"Employee", phone:"",                 location:"New York, USA",    image:"", bio:"" }
-// ]);
+saveData("site_users", [
+    { id:"1", name:"Lina Haddad", email:"lina@workforce.example", position:"People & Culture Lead", department:"Human Resources", role:"HR", phone:"+962 6 555 0101", location:"Amman, Jordan", image:"", bio:"" },
+    { id:"2", name:"Julian Drake",      email:"julian@workforce.example", position:"Senior Software Engineer",  department:"Engineering",     role:"Employee", phone:"",                 location:"Berlin, Germany",  image:"", bio:"" },
+    { id:"3", name:"Aria Montgomery",   email:"aria@workforce.example",   position:"Lead Product Designer",     department:"Design",          role:"Employee", phone:"",                 location:"London, UK",       image:"", bio:"" },
+    { id:"4", name:"Siddharth Kumar",   email:"sid@workforce.example",    position:"Data Operations Lead",      department:"Data",            role:"Employee", phone:"",                 location:"Bangalore, India", image:"", bio:"" },
+    { id:"5", name:"Marcus Vance",      email:"marcus@workforce.example", position:"Director of Brand Strategy", department:"Marketing",      role:"Employee", phone:"",                 location:"New York, USA",    image:"", bio:"" }
+]);
 
-// saveData("site_session", {
-//     id:"1", name:"Lina Haddad", email:"lina@workforce.example",
-//     position:"People & Culture Lead", department:"Human Resources",
-//     role:"Employee", phone:"+962 6 555 0101", location:"Amman, Jordan",
-//     image:"", bio:""
-// });
+saveData("site_session", {
+    id:"1", name:"Lina Haddad", email:"lina@workforce.example",
+    position:"People & Culture Lead", department:"Human Resources",
+    role:"HR", phone:"+962 6 555 0101", location:"Amman, Jordan",
+    image:"", bio:""
+});
 
 
 let currentUser = null;
@@ -228,7 +228,7 @@ async function init(){
     if(isAdmin || isEmployee || visitorPaths.includes(currentPath)){
         await loadPage(currentPath, "app");
     }else{
-        window.location.href = "/Ahmad/loginEmp";
+        window.location.href = "/Ahmad/loginEmp/LoginEmp";
     }
 }
 

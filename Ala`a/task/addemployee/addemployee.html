@@ -1,0 +1,54 @@
+
+    <div class="main-content">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <!-- بطاقة الفورم -->
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-header theme-bg text-white text-center py-3 rounded-top-3">
+                        <h4 class="mb-0">Add New Employee</h4>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <!-- مكان مخصص لظهور رسالة النجاح أو الخطأ -->
+                        <div id="alertMessage" class="alert d-none" role="alert"></div>
+
+                        <form id="addEmployeeForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="empName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="empName" placeholder="Enter full name" required>
+                                </div>
+                                <div class="col-md-6 mt-3 mt-md-0">
+                                    <label for="empEmail" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="empEmail" placeholder="example@company.com" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="empDepartment" class="form-label">Department</label>
+                                    <select class="form-select" id="empDepartment" required>
+                                        <option value="" disabled selected>Select Department...</option>
+                                        <option value="IT">Information Technology (IT)</option>
+                                        <option value="HR">Human Resources (HR)</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Marketing">Marketing</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mt-3 mt-md-0">
+                                    <label for="empPosition" class="form-label">Job Title</label>
+                                    <input type="text" class="form-control" id="empPosition" placeholder="e.g., Full-Stack Developer" required>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-theme btn-lg">Save Employee Data</button>
+                                <!-- زر للعودة لصفحة عرض الموظفين -->
+                               <a href="allemployeehr.html" class="btn btn-outline-secondary">Back to Employees List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

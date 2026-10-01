@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="editprofile.css">
+</head>
+<body>
+
+    <main class="app-page">
+
+        <section class="app-banner">
+            <div>
+                <p class="breadcrumb">Home / Profile</p>
+                <h1>Your Profile.</h1>
+                <p>Manage your personal information and keep your details up to date.</p>
+            </div>
+            <div class="app-summary">
+                <strong id="profile-role">Trainee</strong>
+                <span>Current Role</span>
+            </div>
+        </section>
+
+        <section class="app-workspace">
+            
+  <!-- View Profile (Left Column) -->
+  <div class="app-panel bg-primary">
+      <div class="profile-header">
+    <div class="avatar-large">AF</div>
+    <h2>Ala'a Frihat</h2>
+    <p class="profile-title">Full-Stack Developer Trainee</p>
+    <p class="profile-dept">Orange Coding Academy</p>
+    <span class="badge">Front-End Focus</span>
+      </div>
+
+      <div class="profile-details">
+          <div class="detail-item">
+              <small>Email</small>
+              <p>alaa@workforce.example</p>
+          </div>
+          <div class="detail-item">
+              <small>Phone</small>
+              <p>+962 7 76135123</p>
+          </div>
+          <div class="detail-item">
+              <small>Location</small>
+              <p>Ajlon, Jordan</p>
+          </div>
+          
+      </div>
+  </div>
+
+    <!-- Edit Profile Form (Right Column) -->
+    <div class="app-panel border">
+        <div class="panel-heading">
+            <span class="tag">Update Details</span>
+            <h2>Edit Profile</h2>
+        </div>
+
+      <form id="profile-form">
+          <div class="form-grid">
+                        
+      <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" value="Ala'a Frihat" required>
+      </div>
+
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="alaa@workforce.example" required>
+      </div>
+
+      <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" id="position" name="position" value="Full-Stack Developer Trainee" required>
+      </div>
+
+      <div class="form-group">
+          <label for="department">Department</label>
+          <input type="text" id="department" name="department" value="Orange Coding Academy" required>
+      </div>
+      <div class="form-group">
+          <label for="Phone">Phone</label>
+          <input type="number" id="Phone" name="Phone" value="962776135123" required>
+      </div>
+       <div class="form-group">
+          <label for="Location">Location</label>
+          <input type="text" id="Location" name="Location" value="Ajlon" required>
+      </div>
+
+      <div class="form-group full">
+          <label for="bio">About You</label>
+          <textarea id="bio" name="bio" required>Web development trainee focusing on HTML, CSS, Bootstrap, and building responsive interfaces.</textarea>
+      </div>
+      <div class="photo">Profile photo</div>
+      <label class="full"><input name="photo" type="file" accept="image/jpeg,image/png,image/webp">
+        <span class="help">JPG, PNG, or WebP · Up to 500 KB</span></label>
+     
+    
+
+      </div>
+
+        <button type="submit" class="submit-button">Save Changes</button>
+    </form>
+</div>
+
+        </section>
+
+    </main>
+    <script src="editprofile.js"></script>
+
+</body>
+</html>

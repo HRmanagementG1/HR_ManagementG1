@@ -1,0 +1,280 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #263333;
+}
+
+.app-page {
+    width: 100%;
+    margin: 40px auto;
+    padding: 1vh 2rem;
+}
+
+.app-banner {
+    background-color: #f3f5ef;
+    border-radius: 15px;
+    padding: 52px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.breadcrumb {
+    color: #70746d;
+    font-size: 14px;
+    margin:0;
+}
+
+.app-banner h1 {
+    margin: 0 18px;
+    font-size: 32px;
+    color: #20231f;
+
+}
+
+.app-banner p {
+    margin: 0;
+    color: #666;
+}
+
+.app-summary {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    border: 1px solid #e4e7df;
+}
+
+.app-summary strong {
+    display: block;
+    font-size: 30px;
+    color: #005253;
+}
+
+.app-summary span {
+    font-size: 14px;
+    color: #666;
+}
+
+.app-workspace {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 25px;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 20px 0 80px;
+}
+
+.app-panel {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.app-panel.border {
+    padding: 32px;
+    border: 1px solid #e4e7df;
+    border-radius: 22px;
+}
+
+.bg-primary {    
+    background-color: #f3f5ef;
+}
+
+.panel-heading {
+    margin-bottom: 25px;
+}
+
+.panel-heading h2 {
+    margin: 8px 0 0;
+    color: #20231f;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #fff3c4;
+    color: #005253;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #fff3c4;
+    color: #665000;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+/* Profile Specific Styles */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-large {
+    background-color: #005253;
+    color: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 auto 15px;
+}
+
+.profile-header h2 {
+    color: #20231f;
+    margin: 0 0 5px;
+}
+
+.profile-title {
+    margin: 0;
+    font-weight: bold;
+    color: #263333;
+}
+
+.profile-dept {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.profile-details {
+    border-top: 1px solid #e4e7df;
+    padding-top: 20px;
+}
+
+.detail-item {
+    margin-bottom: 15px;
+}
+
+.detail-item small {
+    color: #777;
+    font-size: 13px;
+    display: block;
+}
+
+.detail-item p {
+    margin: 5px 0 0;
+    color: #263333;
+    font-size: 15px;
+}
+
+/* Form Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / 3;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d5d9d4;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #005253;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submit-button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: #005253;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: #003f40;
+}
+.full{
+
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #dce0d6;
+    border-radius: 9px;
+    background: white;
+    color:#20231f ;
+    margin-top: 7px;
+    font-size: 16px;
+    min-width: 0;
+    grid-column: span 2;
+}
+.help{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color:#70746d;
+    font-size:13px;
+}
+.photo{
+    color:#20231f;
+    font-size: 16px;
+    font-weight:bold;
+}
+@media (max-width: 768px) {
+    .app-page {
+        width: 94%;
+        margin: 20px auto;
+    }
+    .app-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .app-summary {
+        width: 100%;
+    }
+    .app-workspace {
+        grid-template-columns: 1fr;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full {
+        grid-column: 1;
+    }
+}
