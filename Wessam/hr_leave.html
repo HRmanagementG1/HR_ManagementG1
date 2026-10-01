@@ -1,0 +1,137 @@
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="main-content">
+
+    <div class="page-title-area">
+        <p class="breadcrumb">People Operations / Leave Requests</p>
+        <h2 class="page-title">Leave Management</h2>
+        <p class="page-subtitle">Review, approve, or decline time-off applications from across your global teams with real-time balance tracking.</p>
+    </div>
+
+    <!-- ===== Stats Cards ===== -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-label">Total Requests</span>
+                <div class="stat-icon"><i class="fa-solid fa-calendar"></i></div>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value" id="stat-total">0</span>
+                <span class="stat-badge green">All time</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="card-bg-accent"></div>
+            <div class="stat-header" style="position: relative; z-index: 10;">
+                <span class="stat-label">Pending Review</span>
+                <div class="stat-icon amber"><i class="fa-solid fa-hourglass-half"></i></div>
+            </div>
+            <div class="stat-body" style="position: relative; z-index: 10;">
+                <span class="stat-value" id="stat-pending">0</span>
+                <span class="stat-badge amber">Action Required</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-label">Approved</span>
+                <div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value" id="stat-approved">0</span>
+                <span class="stat-badge muted">Current cycle</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <span class="stat-label">Declined</span>
+                <div class="stat-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value" id="stat-declined">0</span>
+                <span class="stat-badge muted">Low impact</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Filter Bar ===== -->
+    <div class="filter-bar">
+        <div class="filter-left">
+            <div class="table-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input placeholder="Search employee name or reason..." type="text" id="hr-search"/>
+            </div>
+            <div class="pill-group" id="hr-filters">
+                <button class="pill active" data-filter="All">All Requests</button>
+                <button class="pill" data-filter="Pending">Pending (0)</button>
+                <button class="pill" data-filter="Annual">Annual Leave</button>
+                <button class="pill" data-filter="Sick">Sick Leave</button>
+                <button class="pill" data-filter="Personal">Personal</button>
+            </div>
+        </div>
+        <div class="filter-right">
+            <button class="action-btn" id="hr-refresh">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Refresh</span>
+            </button>
+            <button class="action-btn" id="hr-export">
+                <i class="fa-solid fa-download"></i>
+                <span>Export</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== Table ===== -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Leave Type</th>
+                    <th>Date Range</th>
+                    <th>Duration</th>
+                    <th>Reason / Note</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="leave-table-body">
+                <tr class="empty-row">
+                    <td colspan="7">Loading leave requests...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== Pagination ===== -->
+    <div class="pagination-container">
+        <div class="pagination-info">
+            Showing <span>0</span> of <span>0</span> requests
+        </div>
+        <div class="pagination-controls"></div>
+    </div>
+
+</div>
+
+<!-- ==================== MOBILE MENU SCRIPT ==================== -->
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const menuToggle = document.getElementById('menuToggle');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+    }
+</script>

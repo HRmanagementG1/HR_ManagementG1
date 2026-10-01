@@ -1,0 +1,74 @@
+<div class="leave-page">
+
+    <section class="leave-banner">
+        <div>
+            <p class="breadcrumb">Home / Leave</p>
+            <h1>Make room for life.</h1>
+            <p>Track your time-off requests at a glance and start a new application whenever you need a break.</p>
+        </div>
+
+        <div class="banner-action">
+            <a href="/Wessam/employee_leave_create" class="load-page primary-btn">
+                <i class="fa-solid fa-plus"></i>
+                New leave request
+            </a>
+        </div>
+    </section>
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-label">Total Requests</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-sub">All your submissions</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Pending
+                <span class="stat-icon amber"><i class="fa-solid fa-hourglass-half"></i></span>
+            </div>
+            <div class="stat-value" id="stat-pending">0</div>
+            <div class="stat-sub">Awaiting approval</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Approved
+                <span class="stat-icon green"><i class="fa-solid fa-circle-check"></i></span>
+            </div>
+            <div class="stat-value" id="stat-approved">0</div>
+            <div class="stat-sub">Confirmed days off</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Days Off
+                <span class="stat-icon"><i class="fa-solid fa-calendar"></i></span>
+            </div>
+            <div class="stat-value" id="stat-days">0</div>
+            <div class="stat-sub">Total days requested</div>
+        </div>
+
+    </section>
+
+    <section class="history-panel">
+        <div class="history-header">
+            <div class="history-title">
+                <span class="tag">Your history</span>
+                <h2>Submitted requests</h2>
+            </div>
+            <div class="filter-pills" id="history-filters">
+                <button class="pill active" data-filter="All">All</button>
+                <button class="pill" data-filter="Pending">Pending</button>
+                <button class="pill" data-filter="Approved">Approved</button>
+                <button class="pill" data-filter="Declined">Declined</button>
+            </div>
+        </div>
+
+        <div id="leave-list" class="leave-list">
+            <div class="empty">Loading your leave requests...</div>
+        </div>
+    </section>
+
+</div>
