@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information | Workforce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../information/information.css">
+<link rel="stylesheet" href="../../../Shared/employee_header.css"><script defer src="../../../Shared/hr_dashboard.js"></script><script defer src="../../../Shared/workspace.js"></script><link rel="stylesheet" href="../../../Shared/theme.css"><script defer src="../../../Shared/access.js"></script><link rel="stylesheet" href="../../../Shared/hr_dashboard.css"><link rel="stylesheet" href="../../../Shared/theme.css"></head>
+<body class="hr-workspace-page" data-workspace-role="HR">
+
+    <div data-hr-dashboard-sidebar data-active-page="employees"></div><div class="hr-dashboard-content"><div data-hr-dashboard-topbar></div><a class="back-directory" href="allemployeehr.html">← Back to employees</a>
+
+    <main class="main-container">
+        <section class="hero-banner">
+            <div class="hero-content">
+                <div class="breadcrumb">Home › <strong>Info</strong></div>
+                <h1 class="hero-title">Empowering your journey.</h1>
+                <p class="hero-subtitle">Detailed employee record, performance metrics, verified credentials, and compensation profile.</p>
+            </div>
+            <div class="hero-badges">
+                <div class="status-badge">
+                    <span class="dot"></span> <span id="recordStatus"></span>
+                </div>
+                <button class="btn-credential" type="button" id="credentialButton"><i class="fa-solid fa-id-badge"></i> Credential ID</button>
+            </div>
+        </section>
+
+        <div class="content-grid">
+            
+            <div class="left-column">
+                
+                <div class="profile-header">
+                    <div class="profile-image-container">
+                        <div class="profile-img" id="informationAvatar"></div>
+                        <span class="online-status"></span>
+                    </div>
+                    <div class="profile-info">
+                        <div class="name-row">
+                            <h2 data-user="name"></h2>
+                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Employee Record</span>
+                        </div>
+                        <p class="role-title" data-user="position"></p>
+                        <p class="dept-location" id="departmentLocation"></p>
+                    </div>
+                </div>
+
+                <div class="info-cards-grid">
+                    <div class="info-card bg-teal">
+                        <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
+                        <div class="card-text">
+                            <small>EMPLOYEE ID</small>
+                            <strong data-info="employeeId"></strong>
+                        </div>
+                    </div>
+                    <div class="info-card bg-orange">
+                        <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="card-text">
+                            <small>OFFICIAL EMAIL</small>
+                            <strong data-info="email"></strong>
+                        </div>
+                    </div>
+                    <div class="info-card bg-green">
+                        <div class="card-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="card-text">
+                            <small>PHONE NUMBER</small>
+                            <strong data-info="phone"></strong>
+                        </div>
+                    </div>
+                    <div class="info-card bg-blue">
+                        <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="card-text">
+                            <small>LOCATION / OFFICE</small>
+                            <strong data-info="location"></strong>
+                        </div>
+                    </div>
+                    <div class="info-card bg-purple">
+                        <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                        <div class="card-text">
+                            <small>HIRE DATE / TENURE</small>
+                            <strong data-info="hireDate"></strong>
+                        </div>
+                    </div>
+                    <div class="info-card bg-indigo">
+                        <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
+                        <div class="card-text">
+                            <small>DIRECT MANAGER</small>
+                            <strong data-info="manager"></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-section">
+                    <div class="section-header">
+                        <div class="header-icon"><i class="fa-solid fa-star"></i></div>
+                        <div class="header-text">
+                            <h3>Performance & Appraisals</h3>
+                            <p>Validated through continuous peer and leadership reviews</p>
+                        </div>
+                    </div>
+                    
+                    <span class="quarter-badge"><i class="fa-solid fa-circle"></i> Q3 2026 Completed</span>
+
+                    <div class="rating-box">
+                        <div class="rating-score">
+                            <span class="score-big">4.9</span><span class="score-small">/5.0</span>
+                            <div class="rating-stars-text">
+                                <div class="stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <strong>Exceptional Contributor</strong>
+                            </div>
+                        </div>
+                        <div class="bonus-badge">
+                            <i class="fa-solid fa-award"></i> Eligible for Leadership Bonus
+                        </div>
+                    </div>
+
+                    <div class="progress-bars">
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span class="label-with-dot"><span class="dot-color green"></span> Team Collaboration</span>
+                                <strong>5.0 / 5.0</strong>
+                            </div>
+                            <div class="progress-track"><div class="progress-fill green" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span class="label-with-dot"><span class="dot-color blue"></span> Leadership & Mentorship</span>
+                                <strong>4.9 / 5.0</strong>
+                            </div>
+                            <div class="progress-track"><div class="progress-fill blue" style="width: 98%;"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span class="label-with-dot"><span class="dot-color purple"></span> Initiative & Execution</span>
+                                <strong>4.8 / 5.0</strong>
+                            </div>
+                            <div class="progress-track"><div class="progress-fill purple" style="width: 96%;"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span class="label-with-dot"><span class="dot-color yellow"></span> Policy Adherence</span>
+                                <strong>5.0 / 5.0</strong>
+                            </div>
+                            <div class="progress-track"><div class="progress-fill yellow" style="width: 100%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="compensation-card">
+                    <div class="comp-header">
+                        <div class="comp-title-group">
+                            <div class="comp-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                            <div>
+                                <h3>Compensation Profile</h3>
+                                <p>Confidential Financial Details</p>
+                            </div>
+                        </div>
+                        <button class="btn-toggle-eye" id="toggleSalary" type="button" aria-label="Hide salary" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+
+                    <div class="salary-box">
+                        <div class="salary-left">
+                            <small>ANNUAL BASE SALARY</small>
+                            <strong id="annualSalary">$85,000 USD</strong>
+                        </div>
+                        <div class="salary-right">
+                            <strong id="monthlySalary">$7,083.33 / mo</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-left">
+            <span id="recordFooter"></span>
+        </div>
+        <div class="footer-right"><a href="../employee-profile/employee-profile.html">My Profile</a><a href="mailto:lina@workforce.example">Contact HR</a></div>
+    </footer>
+
+    </div><dialog id="credentialDialog"><h2>Employee credential</h2><p id="credentialDetails"></p><button type="button" id="closeCredential">Close</button></dialog><script defer src="../information/information.js"></script>
+</body>
+</html>

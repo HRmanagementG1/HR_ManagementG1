@@ -1,33 +1,10 @@
+import './workspace.js';
 // Simple browser-only login for this project.
 const employeesUrl = new URL('../data/employees.json', import.meta.url);
 
 async function loadLoginEmployees() {
-  let savedEmployees = null;
-  try {
-    savedEmployees = JSON.parse(localStorage.getItem('site_users'));
-  } catch (error) {
-    // Replace an old or invalid saved employee list with the JSON file.
-  }
-
-  const hasLoginDetails = Array.isArray(savedEmployees) && savedEmployees.length > 0
-    && savedEmployees.every(employee => employee && typeof employee.email === 'string'
-      && typeof employee.password === 'string' && typeof employee.role === 'string');
-
-  if (!hasLoginDetails) {
-    const response = await fetch(employeesUrl);
-    if (!response.ok) throw new Error('Could not load employees.json. Please refresh and try again.');
-    const employees = await response.json();
-    if (!Array.isArray(employees) || !employees.length) {
-      throw new Error('The employee file is empty or invalid.');
-    }
-    localStorage.setItem('site_users', JSON.stringify(employees.map(employee => ({
-      ...employee,
-      name: employee.name || employee.username
-    }))));
-  }
-
-  // Login always checks the copy in local storage.
-  return JSON.parse(localStorage.getItem('site_users'));
+  await window.workspace.ready;
+  return window.workspace.users();
 }
 
 export function setupLogin({ role, usernameId, destination }) {

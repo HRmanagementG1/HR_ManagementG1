@@ -1,189 +1,53 @@
-(() => {
-
-    // 1. الموظفون الافتراضيون
-    const defaultEmployees = [
-        { id: "100101", avatarImg: "", initials: "ER", name: "Elena Rostova", role: "Senior Frontend Lead", email: "elena.r@peoplepulse.io", department: "Product & Design", locationIcon: "fa-solid fa-building", locationText: "Amman HQ" },
-        { id: "100102", avatarImg: "", initials: "MC", name: "Marcus Chen", role: "Product Designer", email: "marcus.c@peoplepulse.io", department: "Product & Design", locationIcon: "fa-solid fa-building", locationText: "Amman HQ" },
-        { id: "100103", avatarImg: "", initials: "JD", name: "Julian Drake", role: "Staff Software Engineer", email: "julian.d@peoplepulse.io", department: "Engineering", locationIcon: "fa-solid fa-earth-americas", locationText: "Remote" },
-        { id: "100104", avatarImg: "", initials: "SK", name: "Siddharth Kumar", role: "Growth Marketing Lead", email: "siddharth.k@peoplepulse.io", department: "Marketing", locationIcon: "fa-solid fa-earth-americas", locationText: "Remote" },
-        { id: "100105", avatarImg: "", initials: "LH", name: "Lina Haddad", role: "People & Culture Lead", email: "lina.h@peoplepulse.io", department: "Human Resources", locationIcon: "fa-solid fa-building", locationText: "Amman HQ" },
-        { id: "100106", avatarImg: "", initials: "NH", name: "Noor Hamdan", role: "QA Automation Engineer", email: "noor.h@peoplepulse.io", department: "Engineering", locationIcon: "fa-solid fa-location-dot", locationText: "Irbid Branch" },
-        { id: "100107", avatarImg: "", initials: "KA", name: "Kareem Ali", role: "Content & Brand Strategist", email: "kareem.a@peoplepulse.io", department: "Marketing", locationIcon: "fa-solid fa-building", locationText: "Amman HQ" }
-    ];
-
-    // 2. جلب الموظفين الجدد
-    let storedEmployees = JSON.parse(localStorage.getItem('employees')) || [];
-    let newEmployeesMapped = storedEmployees.map(emp => {
-        let initials = emp.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-        return {
-            id: emp.id.toString(),
-            avatarImg: "", 
-            initials: initials,
-            name: emp.name,
-            role: emp.position,
-            email: emp.email,
-            department: emp.department,
-            locationIcon: "fa-solid fa-building",
-            locationText: "Amman HQ"
-        };
-    });
-
-    // دمج القائمتين لتكوين المصفوفة الشاملة
-    let allEmployees = [...defaultEmployees, ...newEmployeesMapped];
-    const tableBody = document.getElementById('employeeTableBody');
-
-    // دالة إنشاء الصورة الرمزية (Avatar)
-    function getAvatarHtml(emp) {
-        if (emp.avatarImg) {
-            return `<img src="${emp.avatarImg}" alt="${emp.name}" class="avatar">`;
-        } else {
-            return `<div class="avatar">${emp.initials}</div>`;
-        }
-    }
-
-    // 3. دالة طباعة الجدول
-    function renderTable(employeesArray) {
-        tableBody.innerHTML = ''; // مسح الجدول القديم
-
-        if (employeesArray.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#64748b;">No employees found in this category.</td></tr>';
-            return;
-        }
-
-        employeesArray.forEach((emp) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>
-                    <div class="emp-cell">
-                        ${getAvatarHtml(emp)}
-                        <div class="emp-info">
-                            <span class="emp-name">${emp.name}</span>
-                            <span class="emp-role-email">${emp.role} • ${emp.email}</span>
-                        </div>
-                    </div>
-                </td>
-                <td><span class="dept-badge">${emp.department}</span></td>
-                <td>
-                    <div class="location-cell"><i class="${emp.locationIcon}"></i> ${emp.locationText}</div>
-                </td>
-                <td>
-                    <button class="btn-more" data-id="${emp.id}">More Details <i class="fa-solid fa-chevron-right" style="font-size:10px; margin-left:4px;"></i></button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-
-    renderTable(allEmployees);
-
-    // 4. --- تفعيل شريط البحث ---
-    const searchInput = document.querySelector('.main-search input');
-    searchInput.addEventListener('input', function(e) {
-        const query = e.target.value.toLowerCase();
-        const filteredEmployees = allEmployees.filter(emp => 
-            emp.name.toLowerCase().includes(query) ||
-            emp.role.toLowerCase().includes(query) ||
-            emp.department.toLowerCase().includes(query) ||
-            emp.email.toLowerCase().includes(query)
-        );
-        renderTable(filteredEmployees);
-    });
-
-    // 5. --- منطق تشغيل النافذة المنبثقة (Modal) ---
-    const modal = document.getElementById('employeeModal');
-    const closeBtn = document.getElementById('closeModalBtn');
-
-    tableBody.addEventListener('click', function(e) {
-        const btn = e.target.closest('.btn-more');
-        if (!btn) return;
-
-        const empId = btn.getAttribute('data-id');
-        const emp = allEmployees.find(employee => employee.id === empId);
-
-        if(emp) {
-            document.getElementById('modalAvatar').textContent = emp.initials;
-            document.getElementById('modalName').textContent = emp.name;
-            document.getElementById('modalRole').textContent = emp.role;
-            document.getElementById('modalDepartment').textContent = emp.department;
-            document.getElementById('modalEmail').textContent = emp.email;
-            document.getElementById('modalLocation').textContent = emp.locationText;
-            document.getElementById('modalWorkId').textContent = emp.id.toString().slice(-6);
-            document.getElementById('modalFullName').textContent = emp.name;
-            modal.classList.add('active');
-        }
-    });
-
-    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
-    });
-
-    // ==========================================
-    // 6. --- التحديث الجديد: الفلترة (التبويبات + زر الفلتر) ---
-    // ==========================================
-
-    const tabs = document.querySelectorAll('.tab');
-    
-    // أ- دالة لتحديث الأرقام داخل التبويبات بناءً على العدد الفعلي
-    function updateTabCounts() {
-        if(tabs.length >= 6) {
-            tabs[0].textContent = `All Departments (${allEmployees.length})`;
-            tabs[1].textContent = `Engineering (${allEmployees.filter(e => e.department === 'Engineering').length})`;
-            tabs[2].textContent = `Product & Design (${allEmployees.filter(e => e.department === 'Product & Design').length})`;
-            tabs[3].textContent = `Marketing (${allEmployees.filter(e => e.department === 'Marketing').length})`;
-            tabs[4].textContent = `HR & Ops (${allEmployees.filter(e => e.department === 'Human Resources' || e.department === 'HR').length})`;
-            tabs[5].textContent = `Sales (${allEmployees.filter(e => e.department === 'Sales').length})`;
-        }
-    }
-    updateTabCounts(); // تحديث الأرقام فور تحميل الصفحة
-
-    // ب- تفعيل الفلترة عند الضغط على التبويبات
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            // تلوين التبويب النشط
-            tabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-
-            const tabText = this.textContent.toLowerCase();
-            let filtered = allEmployees;
-
-            // تحديد القسم المطلوب
-            if (!tabText.includes('all')) {
-                if (tabText.includes('engineering')) filtered = allEmployees.filter(emp => emp.department === 'Engineering');
-                else if (tabText.includes('product')) filtered = allEmployees.filter(emp => emp.department === 'Product & Design');
-                else if (tabText.includes('marketing')) filtered = allEmployees.filter(emp => emp.department === 'Marketing');
-                else if (tabText.includes('hr')) filtered = allEmployees.filter(emp => emp.department === 'Human Resources' || emp.department === 'HR');
-                else if (tabText.includes('sales')) filtered = allEmployees.filter(emp => emp.department === 'Sales');
-            }
-            
-            renderTable(filtered); // عرض النتيجة
-        });
-    });
-
-    // ج- تفعيل زر الفلتر (Filters) لترتيب الموظفين أبجدياً (A-Z)
-    const filterBtn = document.querySelector('.controls-row .btn-outline');
-    let isAscending = false; 
-
-    if(filterBtn) {
-        filterBtn.addEventListener('click', () => {
-            isAscending = !isAscending;
-            
-            // ترتيب البيانات
-            allEmployees.sort((a, b) => {
-                if (a.name.toLowerCase() < b.name.toLowerCase()) return isAscending ? -1 : 1;
-                if (a.name.toLowerCase() > b.name.toLowerCase()) return isAscending ? 1 : -1;
-                return 0;
-            });
-
-            // تغيير نص وأيقونة الزر
-            filterBtn.innerHTML = isAscending ? 
-                `<i class="fa-solid fa-arrow-down-a-z"></i> Sort A-Z` : 
-                `<i class="fa-solid fa-arrow-up-z-a"></i> Sort Z-A`;
-
-            // إعادة تشغيل التبويب النشط لتطبيق الترتيب على القسم المفتوح حالياً
-            const activeTab = document.querySelector('.tab.active');
-            if(activeTab) activeTab.click(); 
-        });
-    }
-
-})()
+document.addEventListener('DOMContentLoaded', async () => {
+  const W = window.workspace;
+  await W.ready;
+  if (!W.requireRole('HR')) return;
+  const all = W.users(), esc = W.escape;
+  const body = document.getElementById('employeeTableBody');
+  const search = document.querySelector('.main-search input');
+  search.value = new URLSearchParams(location.search).get('q') || '';
+  const tabs = [...document.querySelectorAll('.tab')];
+  const categories = [() => true, e => ['Engineering','IT'].includes(e.department), e => ['Product & Design','Design'].includes(e.department), e => e.department === 'Marketing', e => ['Human Resources','HR','Operations'].includes(e.department), e => e.department === 'Sales'];
+  let category = 0, ascending = true;
+  tabs.forEach((tab,index) => {
+    tab.textContent = `${tab.textContent.replace(/\s*\(.*\)/,'')} (${all.filter(categories[index]).length})`;
+    tab.onclick = () => { category = index; tabs.forEach(t => t.classList.toggle('active',t === tab)); render(); };
+  });
+  function render() {
+    const query = search.value.trim().toLowerCase();
+    const visible = all.filter(categories[category]).filter(e => [e.name,e.email,e.department,e.position].some(v => String(v || '').toLowerCase().includes(query))).sort((a,b) => (ascending ? 1 : -1) * a.name.localeCompare(b.name));
+    body.innerHTML = visible.map(e => `<tr><td><div class="emp-cell"><div class="avatar">${esc(e.name.split(' ').map(n => n[0]).join('').slice(0,2))}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || '—')}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button></td></tr>`).join('') || '<tr><td colspan="4">No employees found.</td></tr>';
+    document.querySelector('.pagination-info').textContent = `Showing ${visible.length} of ${all.length} employees`;
+  }
+  search.addEventListener('input',render);
+  document.querySelector('.pagination-controls').hidden = true;
+  const filter = document.querySelector('.controls-row .btn-outline');
+  filter.textContent = 'Sort A–Z';
+  filter.onclick = () => { ascending = !ascending; filter.textContent = ascending ? 'Sort A–Z' : 'Sort Z–A'; render(); };
+  const modal = document.getElementById('employeeModal');
+  body.onclick = event => {
+    const button = event.target.closest('[data-id]');
+    const e = all.find(e => e.id === button?.dataset.id);
+    if (!e) return;
+    const values = {modalAvatar:e.name.split(' ').map(n => n[0]).join('').slice(0,2),modalName:e.name,modalRole:e.position || e.role,modalDepartment:e.department,modalEmail:e.email,modalLocation:e.location || '—',modalWorkId:e.id,modalFullName:e.name};
+    Object.entries(values).forEach(([id,value]) => document.getElementById(id).textContent = value || '—');
+    document.getElementById('modalSalary').textContent = e.salary == null ? 'Not provided' : new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(e.salary);
+    document.getElementById('modalPhone').textContent = e.phone || 'Not provided';
+    document.getElementById('modalHireDate').textContent = e.hireDate || (e.joinDate ? new Date(e.joinDate).toLocaleDateString() : 'Not recorded');
+    document.getElementById('modalEmploymentType').textContent = e.employmentType || 'Full-time';
+    document.getElementById('fullEmployeeRecord').href = `employee-details.html?id=${encodeURIComponent(e.id)}`;
+    modal.classList.add('active');
+    document.getElementById('closeModalBtn').focus();
+  };
+  document.getElementById('closeModalBtn').onclick = () => modal.classList.remove('active');
+  modal.onclick = event => { if (event.target === modal) modal.classList.remove('active'); };
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') modal.classList.remove('active'); });
+  const cards = [...document.querySelectorAll('.stat-card')];
+  const labels = ['TOTAL WORKFORCE','ACTIVE WORKING','ON LEAVE','NEWLY ONBOARDED'];
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  const onLeave = new Set(W.read('site_leaves',[]).filter(leave => String(leave.status).toLowerCase() === 'approved' && leave.start <= today && leave.end >= today && all.some(e => e.id === String(leave.owner))).map(leave => String(leave.owner))).size;
+  const counts = [all.length,all.length-onLeave,onLeave,all.filter(e => { const date = new Date(e.hireDate || e.joinDate); return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear(); }).length];
+  cards.forEach((card,index) => { card.querySelector('.stat-title').textContent = labels[index]; card.querySelector('.stat-number').textContent = counts[index]; card.querySelectorAll('.stat-badge,.stat-desc,.stat-progress-bar').forEach(el => el.hidden = true); });
+  render();
+});

@@ -1,0 +1,24 @@
+
+/* تنسيقات خاصة بصفحة add-task */
+
+body[data-page="add-task"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="add-task"] .form-wrap,
+body[data-page="add-task"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="add-task"] .task-card,
+body[data-page="add-task"] .card,
+body[data-page="add-task"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="add-task"] .task-card:hover,
+body[data-page="add-task"] .card:hover,
+body[data-page="add-task"] .task-row:hover {
+    transform: translateY(-2px);
+}
+

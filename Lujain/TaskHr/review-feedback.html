@@ -1,0 +1,86 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- إعداد الصفحة وربط ملفات التنسيق -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Review & Feedback | Workforce</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../shared/components.css">
+    <link rel="stylesheet" href="hr.css">
+    <link rel="stylesheet" href="review-feedback.css">
+<link rel="stylesheet" href="../../Shared/hr_dashboard.css"><script defer src="../../Shared/hr_dashboard.js"></script><link rel="stylesheet" href="../../Shared/theme.css"><script defer src="../../Shared/access.js"></script><script defer src="../../Shared/attachments.js"></script></head>
+
+<body class="hr-workspace-page" data-workspace-role="HR">
+
+    <div data-hr-dashboard-sidebar data-active-page="tasks"></div><div class="hr-dashboard-content"><div data-hr-dashboard-topbar data-search-target="#searchTasks" data-search-placeholder="Search your workspace…"></div>
+
+
+
+        <main class="hr-main"><nav class="task-subnav" aria-label="Task tools"><a href="all-tasks.html">All tasks</a><a href="add-task.html">Create task</a><a href="submission-review.html">Submission review</a><a href="employee-tracking.html">Employee tracking</a></nav>
+
+            <div class="topbar">
+
+                <div>
+                    <h1>Review submission</h1>
+                    <p class="muted">
+                        Leave feedback and update the task status.
+                    </p>
+                </div>
+
+            </div>
+
+            <form id="reviewForm" class="form-wrap">
+
+                <div id="reviewTask"></div>
+
+                <label>HR notes</label>
+
+                <textarea
+                    name="feedback"
+                    rows="4"
+                    required
+                ></textarea>
+
+                <div class="actions">
+
+                    <button
+                        type="button"
+                        id="approveBtn"
+                        class="btn-teal"
+                    >
+                        Approve
+                    </button>
+
+                    <button
+                        type="button"
+                        id="reviseBtn"
+                        class="btn btn-warning"
+                    >
+                        Request revision
+                    </button>
+
+                </div>
+
+            </form>
+
+        </main>
+
+    </div>
+
+
+
+    <script src="../../Shared/workspace.js"></script><script src="hr.js"></script>
+    <script src="review-feedback.js"></script>
+
+</body>
+
+</html>
+

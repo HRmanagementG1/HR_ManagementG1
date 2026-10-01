@@ -1,0 +1,23 @@
+
+/* تنسيقات خاصة بصفحة review-feedback */
+
+body[data-page="review-feedback"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="review-feedback"] .form-wrap,
+body[data-page="review-feedback"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="review-feedback"] .task-card,
+body[data-page="review-feedback"] .card,
+body[data-page="review-feedback"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="review-feedback"] .task-card:hover,
+body[data-page="review-feedback"] .card:hover,
+body[data-page="review-feedback"] .task-row:hover {
+    transform: translateY(-2px);
+}

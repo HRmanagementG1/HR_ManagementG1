@@ -14,6 +14,11 @@
 
     async function loadEmployees() {
         try {
+            if (window.workspace) {
+                await window.workspace.ready;
+                employees = window.workspace.users();
+                return;
+            }
             const response = await fetch(employeesUrl);
             if (!response.ok) throw new Error('Could not load employees.');
             employees = (await response.json()).map(employee => ({ ...employee, name: employee.name || employee.username }));

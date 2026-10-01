@@ -1,0 +1,97 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- إعداد الصفحة وربط ملفات التنسيق -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add Task | Workforce</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../shared/components.css">
+    <link rel="stylesheet" href="hr.css">
+    <link rel="stylesheet" href="add-task.css">
+<link rel="stylesheet" href="../../Shared/hr_dashboard.css"><script defer src="../../Shared/hr_dashboard.js"></script><link rel="stylesheet" href="../../Shared/theme.css"><script defer src="../../Shared/access.js"></script><script defer src="../../Shared/attachments.js"></script></head>
+
+<body class="hr-workspace-page" data-workspace-role="HR">
+
+    <div data-hr-dashboard-sidebar data-active-page="tasks"></div><div class="hr-dashboard-content"><div data-hr-dashboard-topbar data-search-target="#searchTasks" data-search-placeholder="Search your workspace…"></div>
+
+
+        <main class="hr-main"><nav class="task-subnav" aria-label="Task tools"><a href="all-tasks.html">All tasks</a><a href="add-task.html">Create task</a><a href="submission-review.html">Submission review</a><a href="employee-tracking.html">Employee tracking</a></nav>
+
+            <div class="topbar">
+
+                <div>
+                    <h1>Create a task</h1>
+                    <p class="muted">Assign work and set a due date.</p>
+                </div>
+
+            </div>
+
+            <form id="taskForm" class="form-wrap">
+
+                <label>Task title</label>
+                <input name="title" required>
+
+                <label>Employee</label>
+                <select name="employeeId" id="employeeSelect"></select>
+
+                <label>Description</label>
+                <textarea name="description" rows="4" required></textarea>
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <label>Priority</label>
+
+                        <select name="priority">
+                            <option>Normal</option>
+                            <option>High</option>
+                            <option>Low</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col">
+
+                        <label>Due date</label>
+                        <input type="date" name="dueDate" required>
+
+                    </div>
+
+                </div>
+
+                <label for="taskVisibility">Employee visibility</label><select name="visibility" id="taskVisibility"><option value="visible">Visible to assigned employee</option><option value="hidden">HR only — hidden from employee</option></select><div class="actions">
+
+                    <button class="btn-teal">
+                        Create task
+                    </button>
+
+                    <a class="btn btn-light" href="all-tasks.html">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </main>
+
+    </div>
+
+
+
+    <script src="../../Shared/workspace.js"></script><script src="hr.js"></script>
+    <script src="add-task.js"></script>
+
+</body>
+
+</html>
+

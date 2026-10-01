@@ -8,30 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="information.css">
-</head>
-<body>
+<link rel="stylesheet" href="../../../Shared/employee_header.css"><script defer src="../../../Shared/employee_header.js"></script><script defer src="../../../Shared/workspace.js"></script><link rel="stylesheet" href="../../../Shared/theme.css"><script defer src="../../../Shared/access.js"></script></head>
+<body data-workspace-role="Employee">
 
-    <nav class="navbar">
-        <div class="nav-logo">
-            <div class="logo-icon">W</div>
-            <div class="logo-text">
-                <strong>WORKFORCE</strong>
-                <span>PEOPLE • WORK • GROW TOGETHER</span>
-            </div>
-        </div>
-        <div class="nav-links">
-            <a href="#">My Profile</a>
-            <a href="#">Leaves</a>
-            <a href="#">Tasks</a>
-            <a href="#">Policy</a>
-            <a href="#">Zoom meeting</a>
-            <a href="#">Feedback</a>
-            <a href="#" class="active">Information</a>
-        </div>
-        <div class="nav-actions">
-            <button class="btn-logout">Log out</button>
-        </div>
-    </nav>
+    <div data-employee-header data-active-page="information"></div>
 
     <main class="main-container">
         <section class="hero-banner">
@@ -42,9 +22,9 @@
             </div>
             <div class="hero-badges">
                 <div class="status-badge">
-                    <span class="dot"></span> EMP-001 • Active Full-Time
+                    <span class="dot"></span> <span id="recordStatus"></span>
                 </div>
-                <button class="btn-credential"><i class="fa-solid fa-id-badge"></i> Credential ID</button>
+                <button class="btn-credential" type="button" id="credentialButton"><i class="fa-solid fa-id-badge"></i> Credential ID</button>
             </div>
         </section>
 
@@ -54,16 +34,16 @@
                 
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Lina Haddad" class="profile-img">
+                        <div class="profile-img" id="informationAvatar"></div>
                         <span class="online-status"></span>
                     </div>
                     <div class="profile-info">
                         <div class="name-row">
-                            <h2>Lina Haddad</h2>
-                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Employee</span>
+                            <h2 data-user="name"></h2>
+                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Employee Record</span>
                         </div>
-                        <p class="role-title">People & Culture Lead</p>
-                        <p class="dept-location"><i class="fa-solid fa-building"></i> Human Resources Department • Amman Hub (HQ)</p>
+                        <p class="role-title" data-user="position"></p>
+                        <p class="dept-location" id="departmentLocation"></p>
                     </div>
                 </div>
 
@@ -72,42 +52,42 @@
                         <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
                         <div class="card-text">
                             <small>EMPLOYEE ID</small>
-                            <strong>EMP-001</strong>
+                            <strong data-info="employeeId"></strong>
                         </div>
                     </div>
                     <div class="info-card bg-orange">
                         <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
                         <div class="card-text">
                             <small>OFFICIAL EMAIL</small>
-                            <strong>lina@workforce.example</strong>
+                            <strong data-info="email"></strong>
                         </div>
                     </div>
                     <div class="info-card bg-green">
                         <div class="card-icon"><i class="fa-solid fa-phone"></i></div>
                         <div class="card-text">
                             <small>PHONE NUMBER</small>
-                            <strong>+962 6 555 0101</strong>
+                            <strong data-info="phone"></strong>
                         </div>
                     </div>
                     <div class="info-card bg-blue">
                         <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
                         <div class="card-text">
                             <small>LOCATION / OFFICE</small>
-                            <strong>Amman, Jordan</strong>
+                            <strong data-info="location"></strong>
                         </div>
                     </div>
                     <div class="info-card bg-purple">
                         <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
                         <div class="card-text">
                             <small>HIRE DATE / TENURE</small>
-                            <strong>Mar 15, 2022 (4.5 Yrs)</strong>
+                            <strong data-info="hireDate"></strong>
                         </div>
                     </div>
                     <div class="info-card bg-indigo">
                         <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
                         <div class="card-text">
                             <small>DIRECT MANAGER</small>
-                            <strong>Yousef Saleh (Ops Lead)</strong>
+                            <strong data-info="manager"></strong>
                         </div>
                     </div>
                 </div>
@@ -181,7 +161,7 @@
                                 <p>Confidential Financial Details</p>
                             </div>
                         </div>
-                        <button class="btn-toggle-eye" id="toggleSalary"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn-toggle-eye" id="toggleSalary" type="button" aria-label="Hide salary" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
                     </div>
 
                     <div class="salary-box">
@@ -200,15 +180,11 @@
 
     <footer class="page-footer">
         <div class="footer-left">
-            Workforce People Systems • Record EMP-001 Last synchronized today at 09:41 AM UTC
+            <span id="recordFooter"></span>
         </div>
-        <div class="footer-right">
-            <a href="#">Privacy Charter</a>
-            <a href="#">Audit Log</a>
-            <a href="#">Support Desk</a>
-        </div>
+        <div class="footer-right"><a href="../employee-profile/employee-profile.html">My Profile</a><a href="mailto:lina@workforce.example">Contact HR</a></div>
     </footer>
 
-    <script src="information.js"></script>
+    <dialog id="credentialDialog"><h2>Employee credential</h2><p id="credentialDetails"></p><button type="button" id="closeCredential">Close</button></dialog><script defer src="information.js"></script>
 </body>
 </html>

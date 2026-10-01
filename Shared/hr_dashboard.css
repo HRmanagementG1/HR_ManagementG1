@@ -59,6 +59,13 @@ body.hr-workspace-page {
   .hr-dashboard-content { width: 83.333333%; margin-left: 16.666667%; }
 }
 
+@media (max-width: 991.98px) {
+  .hr-dashboard-sidebar { display: flex; position: static; width: 100%; height: auto; flex-direction: column; }
+  .hr-dashboard-sidebar .hr-brand { margin: 0 0 12px; }
+  .hr-dashboard-sidebar .hr-navigation { display: flex; flex-wrap: wrap; gap: 6px; }
+  .hr-dashboard-sidebar .hr-promo, .hr-dashboard-sidebar .hr-workspace-label { display: none; }
+}
+
 /* Brand and navigation */
 .hr-brand {
   display: flex;

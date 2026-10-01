@@ -1,0 +1,25 @@
+
+/* تنسيقات خاصة بصفحة submission-review */
+
+body[data-page="submission-review"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="submission-review"] .form-wrap,
+body[data-page="submission-review"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="submission-review"] .task-card,
+body[data-page="submission-review"] .card,
+body[data-page="submission-review"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="submission-review"] .task-card:hover,
+body[data-page="submission-review"] .card:hover,
+body[data-page="submission-review"] .task-row:hover {
+    transform: translateY(-2px);
+}
+
+

@@ -1,0 +1,23 @@
+
+/* تنسيقات خاصة بصفحة revision-required */
+
+body[data-page="revision-required"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="revision-required"] .form-wrap,
+body[data-page="revision-required"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="revision-required"] .task-card,
+body[data-page="revision-required"] .card,
+body[data-page="revision-required"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="revision-required"] .task-card:hover,
+body[data-page="revision-required"] .card:hover,
+body[data-page="revision-required"] .task-row:hover {
+    transform: translateY(-2px);
+}

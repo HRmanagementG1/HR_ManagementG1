@@ -47,8 +47,10 @@ Available pages and their `data-active-page` values:
 | Zoom Meetings | `meetings` | `Amani/meeting-HR/meeting-hr.html` |
 | Feedback | `feedback` | `Amani/FeedbackHR/Feedbackhr.html` |
 
-My Profile, All Employees, and Tasks still need their page paths before they can
-be linked. Navigation opens the standalone HTML pages, so their own CSS and
+Dashboard links to `Lujain/TaskHr/dashboard.html`, All Employees to
+`Ala%60a/task/allemployeehr/allemployeehr.html`, and Tasks to
+`Lujain/TaskHr/all-tasks.html`. Their active-page values are `dashboard`,
+`employees`, and `tasks`. Navigation opens the standalone HTML pages, so their own CSS and
 JavaScript load along with the shared dashboard.
 
 Change the search text for other pages. Use `../Shared/` for pages one folder below the project root, or

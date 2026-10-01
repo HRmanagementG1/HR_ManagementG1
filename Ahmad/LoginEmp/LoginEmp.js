@@ -2,7 +2,7 @@ import('../../Shared/login.js').then(({ setupLogin }) => {
   setupLogin({
     role: 'Employee',
     usernameId: 'username',
-    destination: '../Wessam/employee_leave.html'
+    destination: '../Ala%60a/task/employee-profile/employee-profile.html'
   });
 }).catch(() => {
   const message = document.getElementById('login-message');

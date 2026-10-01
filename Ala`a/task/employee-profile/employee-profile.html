@@ -1,61 +1,45 @@
-
-
-    <!-- محتوى الصفحة الرئيسي -->
-    <main class="profile-main-content">
-        <div class="container profile-grid">
-            
-            <!-- البطاقة اليسرى (الملخص) -->
-            <div class="card-summary">
-                <div class="avatar">OK</div>
-                <h2>Ala'a Frihat</h2>
-                <p class="job-title">Full-Stack Developer Trainee</p>
-                <p class="department">Orange Coding Academy</p>
-                
-                <span class="badge">Employee</span>
-                
-                <p class="email-link">Ala'aFrihat@workforce.example</p>
-                
-                <button id="editProfileBtn" class="btn-edit">Edit profile</button>
-            </div>
-
-            <!-- البطاقة اليمنى (التفاصيل) -->
-            <div class="card-details">
-                <h3>Employee information</h3>
-                
-                <div class="info-grid">
-                    <div class="info-group">
-                        <label>Full name</label>
-                        <p>Ala'a Frihat</p>
-                    </div>
-                    <div class="info-group">
-                        <label>Email address</label>
-                        <p>Ala'aFrihat@workforce.example</p>
-                    </div>
-                    <div class="info-group">
-                        <label>Position</label>
-                        <p>Frontend Developer</p>
-                    </div>
-                    <div class="info-group">
-                        <label>Department</label>
-                        <p>Orange Coding Academy</p>
-                    </div>
-                    <div class="info-group">
-                        <label>Phone</label>
-                        <p>+962 6 555 0102</p>
-                    </div>
-                    <div class="info-group">
-                        <label>Location</label>
-                        <p>Amman, Jordan</p>
-                    </div>
-                </div>
-
-                <hr class="divider">
-
-                <div class="about-section">
-                    <h4>About</h4>
-                    <p>Building thoughtful web experiences with a focus on accessibility and collaboration.</p>
-                </div>
-            </div>
-
-        </div>
-    </main> 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Profile | Workforce</title>
+  <link rel="stylesheet" href="../../../Shared/employee_header.css">
+  <link rel="stylesheet" href="employee-profile.css">
+  <script defer src="../../../Shared/employee_header.js"></script>
+  <script defer src="../../../Shared/workspace.js"></script>
+  <script defer src="employee-profile.js"></script>
+<link rel="stylesheet" href="../../../Shared/theme.css"><script defer src="../../../Shared/access.js"></script></head>
+<body data-workspace-role="Employee">
+  <div data-employee-header data-active-page="profile"></div>
+  <main class="profile-page">
+    <section class="profile-hero"><p class="eyebrow">HOME / MY PROFILE</p><h1>Your employee profile.</h1><p>View your brief employee details and manage your account security and password.</p></section>
+    <div class="profile-layout">
+      <section class="profile-summary" aria-label="Employee details">
+        <span class="active-badge">● Active Employee</span>
+        <div class="profile-identity"><div class="profile-avatar" id="profileAvatar"></div><div><h2 data-user="name"></h2><p data-user="position"></p><span class="department-badge" id="profileDepartment"></span></div></div>
+        <p class="profile-note">Brief employee profile. Contact HR Operations for administrative record modifications.</p>
+        <dl class="profile-facts">
+          <div><span class="fact-icon" aria-hidden="true">@</span><div><dt>WORK EMAIL</dt><dd data-user="email"></dd></div></div>
+          <div><span class="fact-icon" aria-hidden="true">▦</span><div><dt>DEPARTMENT</dt><dd data-user="department"></dd></div></div>
+          <div><span class="fact-icon" aria-hidden="true">⌖</span><div><dt>LOCATION</dt><dd data-user="location"></dd></div></div>
+          <div><span class="fact-icon" aria-hidden="true">♙</span><div><dt>ROLE</dt><dd data-user="role"></dd></div></div>
+        </dl>
+        <p class="account-note">Keep your password private and update it regularly.</p>
+      </section>
+      <section class="security-panel">
+        <header><p class="eyebrow">SECURITY SETTINGS</p><h2>Change Password</h2></header>
+        <p class="security-hint" id="passwordHint">Make sure your new password is at least 8 characters long and contains letters and numbers.</p>
+        <form id="passwordForm">
+          <label for="currentPassword">Current Password</label><div class="password-input"><input id="currentPassword" type="password" autocomplete="current-password" required placeholder="Enter your current password"><button type="button" data-toggle="currentPassword" aria-label="Show current password">Show</button></div>
+          <label for="newPassword">New Password</label><div class="password-input"><input id="newPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="At least 8 characters" aria-describedby="passwordHint"><button type="button" data-toggle="newPassword" aria-label="Show new password">Show</button></div>
+          <div class="password-strength"><span id="strengthBar"></span></div><p id="strengthLabel" class="strength-label"></p>
+          <label for="confirmPassword">Confirm New Password</label><div class="password-input"><input id="confirmPassword" type="password" autocomplete="new-password" required placeholder="Re-enter your new password"><button type="button" data-toggle="confirmPassword" aria-label="Show confirmed password">Show</button></div>
+          <p id="passwordMessage" role="status" hidden></p>
+          <div class="password-actions"><button class="update-password" type="submit">♧ Update password</button><a href="mailto:lina@workforce.example">Need help with your credentials? →</a></div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer class="profile-footer"><div class="footer-grid"><section><h3>◉ Workforce</h3><p>A human-centered People Operations and talent platform designed to cultivate workplace trust, streamline operational compliance, and support personal employee development.</p></section><section><h3>Quick Links</h3><a href="../../../Lujain/TaskEmp/my-tasks.html">Actionable Tasks</a><a href="../../../Wessam/employee_leave.html">Leave Calendar</a><a href="../../../Ahmad/policyEmp/policyEmp.html">Company Policies</a><a href="../information/information.html">Employee Information</a></section><section><h3>Let's Talk</h3><p>Amman, Jordan</p><a href="mailto:lina@workforce.example">lina@workforce.example</a><a href="tel:+96265550101">+962 6 555 0101</a></section><section><h3>People Operations</h3><div class="footer-office">Amman HQ<br><span>● Active Hub</span></div></section></div><p class="footer-copyright">© <span id="copyrightYear"></span> Workforce People Operations Inc. All rights reserved.</p></footer>
+</body>
+</html>

@@ -1,0 +1,458 @@
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #F3F5EF;
+    color: #20231F;
+
+    padding: 80px 8% 0;
+
+    margin-top: 80px;
+}
+
+
+/* =========================
+   FOOTER CONTAINER
+========================= */
+
+.footer-container {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        1fr
+        1.4fr
+        1.6fr;
+
+    gap: 45px;
+
+    padding-bottom: 50px;
+
+    align-items: start;
+}
+
+
+/* =========================
+   FOOTER ITEMS
+========================= */
+
+.footer-company,
+.footer-column,
+.footer-contact {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================
+   COMPANY
+========================= */
+
+.footer-logo {
+    display: block;
+
+    width: 150px;
+    max-width: 100%;
+
+    margin-bottom: 20px;
+}
+
+.footer-company p {
+    color: #70746D;
+
+    line-height: 1.7;
+
+    max-width: 320px;
+}
+
+
+/* =========================
+   SOCIAL ICONS
+========================= */
+
+.footer-social {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    flex-wrap: wrap;
+}
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #E4E7DF;
+
+    border-radius: 10px;
+
+    color: #20231F;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.footer-social a i {
+    font-size: 18px;
+}
+
+.footer-social a:hover {
+    background: #FFD15B;
+
+    color: #20231F;
+
+    border-color: #FFD15B;
+}
+
+
+/* =========================
+   COLUMN HEADINGS
+========================= */
+
+.footer-column h3,
+.footer-contact h3 {
+    color: #20231F;
+
+    margin: 0 0 22px;
+
+    font-size: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.footer-column h3 i,
+.footer-contact h3 i {
+    color: #FFD15B;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   COLUMN LINKS
+========================= */
+
+.footer-column a {
+    display: flex;
+
+    align-items: center;
+
+    color: #70746D;
+
+    text-decoration: none;
+
+    margin-bottom: 14px;
+
+    transition: 0.2s;
+}
+
+.footer-column a i {
+    width: 22px;
+
+    margin-right: 7px;
+
+    color: #FFD15B;
+}
+
+.footer-column a:hover {
+    color: #005253;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.footer-contact p {
+    color: #70746D;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 0 14px;
+}
+
+.footer-contact p i {
+    flex-shrink: 0;
+
+    color: #FFD15B;
+
+    font-size: 17px;
+}
+
+.footer-contact a {
+    color: #70746D;
+
+    text-decoration: none;
+
+    word-break: break-word;
+
+    transition: 0.2s;
+}
+
+.footer-contact a:hover {
+    color: #005253;
+}
+
+
+/* =========================
+   GOOGLE MAP
+========================= */
+
+.footer-map {
+    width: 100%;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.footer-map iframe {
+    display: block;
+    width: 100%;
+    height: 210px;
+    border: 0;
+    border-radius: 14px;
+}
+
+
+/* =========================
+   FOOTER BOTTOM
+========================= */
+
+.footer-bottom {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 25px 0;
+
+    border-top: 1px solid #E4E7DF;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+/* =========================
+   COPYRIGHT
+========================= */
+
+.footer-copyright {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.footer-copyright p {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0;
+
+    color: #70746D;
+
+    font-size: 14px;
+}
+
+.footer-copyright p i {
+    color: #FFD15B;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   DESIGNED BY
+========================= */
+
+.designed-by a {
+    color: #005253;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.designed-by a:hover {
+    color: #FFD15B;
+}
+
+
+/* =========================
+   FOOTER LINKS
+========================= */
+
+.footer-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.footer-links a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #70746D;
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.footer-links a i {
+    color: #FFD15B;
+
+    font-size: 15px;
+}
+
+.footer-links a:hover {
+    color: #005253;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+
+    .footer {
+        padding: 70px 6% 0;
+
+        margin-top: 60px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 40px;
+    }
+
+    .footer-map {
+        width: 100%;
+    }
+
+    .footer-map iframe {
+        width: 100%;
+
+        height: 220px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 60px 5% 0;
+
+        margin-top: 50px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .footer-company p {
+        max-width: 100%;
+    }
+
+    .footer-map {
+        width: 100%;
+    }
+
+    .footer-map iframe {
+        width: 100%;
+
+        height: 220px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .footer-links {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .footer {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .footer-map iframe {
+        height: 200px;
+    }
+
+    .footer-social a {
+        width: 40px;
+        height: 40px;
+    }
+
+}

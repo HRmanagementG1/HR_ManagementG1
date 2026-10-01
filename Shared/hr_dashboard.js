@@ -80,6 +80,14 @@
       pageSearch.addEventListener('input', () => {
         search.value = pageSearch.value;
       });
+    } else {
+      search.placeholder = 'Search employees and press Enter…';
+      search.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' || !search.value.trim()) return;
+        const destination = new URL('../Ala%60a/task/allemployeehr/allemployeehr.html', sharedUrl);
+        destination.searchParams.set('q', search.value.trim());
+        window.location.href = destination.href;
+      });
     }
 
     // Refresh the displayed user when another tab changes the login session.
