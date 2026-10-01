@@ -1,0 +1,308 @@
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #F3F5EF;
+    color: #20231F;
+    padding: 80px 8% 0;
+
+    margin-top: 80px;
+}
+
+
+/* =========================
+   FOOTER CONTAINER
+========================= */
+
+.footer-container {
+    max-width: 1400px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 50px;
+
+    padding-bottom: 50px;
+}
+
+
+/* =========================
+   COMPANY
+========================= */
+
+.footer-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+
+.footer-company p {
+    color: #70746D;
+    line-height: 1.7;
+    max-width: 320px;
+}
+
+
+/* =========================
+   SOCIAL ICONS
+========================= */
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #E4E7DF;
+    border-radius: 10px;
+
+    color: #20231F;
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+
+.footer-social a i {
+    font-size: 18px;
+}
+
+
+.footer-social a:hover {
+    background: #FFD15B;
+    color: #20231F;
+    border-color: #FFD15B;
+}
+
+
+/* =========================
+   FOOTER COLUMNS
+========================= */
+
+.footer-column h3,
+.footer-contact h3 {
+    color: #20231F;
+    margin-bottom: 22px;
+    font-size: 18px;
+}
+
+
+.footer-column a {
+    display: block;
+
+    color: #70746D;
+
+    text-decoration: none;
+
+    margin-bottom: 14px;
+
+    transition: .2s;
+}
+
+
+.footer-column a:hover {
+    color: #005253;
+}
+
+
+/* =========================
+   COLUMN ICONS
+========================= */
+
+.footer-column a i {
+    width: 22px;
+    margin-right: 7px;
+
+    color: #FFD15B;
+}
+
+
+.footer-column p {
+    color: #70746D;
+    margin-bottom: 14px;
+}
+
+
+.footer-column p i {
+    width: 22px;
+    margin-right: 7px;
+
+    color: #FFD15B;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.footer-contact p {
+    color: #70746D;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+
+.footer-contact p i {
+    color: #FFD15B;
+    font-size: 17px;
+}
+
+
+.footer-contact a {
+    color: #70746D;
+    text-decoration: none;
+}
+
+
+.footer-contact a:hover {
+    color: #005253;
+}
+
+
+/* =========================
+   GOOGLE MAP
+========================= */
+
+.footer-map {
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.footer-map iframe {
+    width: 100%;
+    height: 150px;
+
+    border: 0;
+    border-radius: 12px;
+}
+
+
+/* =========================
+   FOOTER BOTTOM
+========================= */
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: auto;
+
+    border-top: 1px solid #E4E7DF;
+
+    padding: 22px 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.footer-bottom p {
+    color: #70746D;
+    margin: 0;
+}
+
+
+.footer-bottom div {
+    display: flex;
+    gap: 25px;
+}
+
+
+.footer-bottom a {
+    color: #70746D;
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+
+.footer-bottom a:hover {
+    color: #005253;
+}
+
+.powered-by {
+    text-align: center;
+}
+
+#poweredBy {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 2px solid #005253;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #005253;
+    position: relative;
+    top: -140px;
+    transition: 0.3s;
+    margin-right: 45px;
+}
+
+#poweredBy:hover {
+    background-color: #FFD15B;
+    border-color: #FFD15B;
+    color: #005253;
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+
+    .footer {
+        margin-top: 60px;
+    }
+
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 60px 5% 0;
+        margin-top: 50px;
+    }
+
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .footer-bottom div {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
