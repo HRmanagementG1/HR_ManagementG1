@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Login - Workforce</title>
+  <title>HR Login - Workforce</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="/assets/css/LoginHr.css">
+  <link rel="stylesheet" href="/Ahmad/loginHr/LoginHr.css">
 
 </head>
     
@@ -18,18 +18,8 @@
 
 <body class="min-h-screen flex flex-col bg-white text-gray-900">
 
-  <header >
-    
-    <!-- <div class="flex items-center gap-2 cursor-pointer">
-      <div class="w-8 h-8 rounded-full bg-[#18554a] text-[#fdbf49] flex items-center justify-center font-bold text-lg leading-none pt-0.5">
-        w
-      </div>
-      <span class="text-xl font-bold tracking-tight text-gray-800">Workforce</span>
-    </div> -->
+  <header>
     <div id="navbar-placeholder"></div>
-    <!-- <div class="text-sm font-medium text-gray-600">
-      New employee? <a href="#" class="text-[#18554a] font-semibold hover:underline">Create an account</a>
-    </div> -->
   </header>
 
   <main class="flex-1 flex items-center justify-center px-4 pb-4 lg:px-6 w-full max-w-[1800px] mx-auto h-full">
@@ -37,7 +27,7 @@
       
       <div class="relative w-full lg:w-1/2 h-[400px] lg:h-full rounded-[2rem] overflow-hidden group shadow-sm flex-shrink-0">
         <!-- Added a reliable fallback image just in case the local path fails -->
-        <img src="/assets/images/hero.jpg" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200'" alt="Colleagues talking in office" class="absolute inset-0 w-full h-full object-cover">
+        <img src="#" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200'" alt="Colleagues talking in office" class="absolute inset-0 w-full h-full object-cover">
         
         <!-- Dark Overlay Gradient -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
@@ -59,18 +49,18 @@
           <!-- Overline -->
           <div class="flex items-center gap-3 mb-6">
             <div class="w-6 h-px bg-[#18554a]"></div>
-            <span class="text-[#18554a] text-xs font-bold tracking-[0.15em] uppercase">Employee Workspace</span>
+            <span class="text-[#18554a] text-xs font-bold tracking-[0.15em] uppercase">HR Workspace</span>
           </div>
 
           <!-- Main Headings -->
-          <h2 class="text-4xl lg:text-[2.75rem] font-bold text-gray-900 mb-3 tracking-tight">Employee Login</h2>
+          <h2 class="text-4xl lg:text-[2.75rem] font-bold text-gray-900 mb-3 tracking-tight">HR Login</h2>
           <p class="text-gray-600 mb-10 text-[15px]">Sign in with your credentials to continue.</p>
 
           <form id="loginForm" class="flex flex-col gap-6">
-            <!-- Username Input -->
+            
             <div class="form-group flex flex-col gap-2.5">
-              <label for="username" class="text-[13px] font-semibold text-gray-800">Username</label>
-              <input type="text" id="username" name="username" placeholder="your.username" required
+              <label for="username" class="text-[13px] font-semibold text-gray-800">Wrok Email</label>
+              <input type="email" id="workEmail" name="workEmail" placeholder="you@company.com" required
                      class="px-4 py-3.5 rounded-xl border border-gray-200 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#18554a] focus:border-transparent transition-shadow text-[15px]">
             </div>
 
@@ -93,10 +83,7 @@
             </button>
           </form>
 
-          <!-- Footer Link inside form panel -->
-          <div class="mt-8 text-center text-sm text-gray-500">
-            First time here? <a href="#" class="text-[#18554a] font-medium underline underline-offset-2 hover:text-[#0e362f] transition-colors">Create an employee account</a>
-          </div>
+          
 
         </div>
       </div>
@@ -109,7 +96,7 @@
     <div>Employee access - People first.</div>
   </footer>
 
-  <script src="/assets/js/LoginEmp.js">
+  <script src="/Ahmad/loginEmp/LoginEmp.js">
    
   </script>
 </body>

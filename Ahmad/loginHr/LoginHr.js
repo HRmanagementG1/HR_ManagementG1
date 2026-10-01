@@ -1,4 +1,4 @@
-fetch('navbar_Home.html')
+fetch('../../Deyaa/navbar_Home.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('navbar-placeholder').innerHTML = data;
