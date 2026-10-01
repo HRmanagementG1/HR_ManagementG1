@@ -21,7 +21,7 @@ function saveData(key,data){
 /* ---------------- Employee helpers ---------------- */
 async function loadEmployees() {
     try {
-        const res = await fetch("/employees.json");
+        const res = await fetch("/data/employees.json");
         if (!res.ok) throw new Error("Could not load employees.json");
         employees = await res.json();
     } catch (err) {
@@ -188,7 +188,6 @@ async function loadLayout(){
 async function init(){
     await loadLayout();
     let currentPath = window.location.pathname;
-    alert(currentPath);
     if(isAdmin || isEmployee || visitorPaths.includes(currentPath)){
         await loadPage(currentPath,"app");
     }else{
