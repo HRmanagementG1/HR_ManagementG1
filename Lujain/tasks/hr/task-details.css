@@ -1,0 +1,10 @@
+/* تنسيقات خاصة بصفحة task-details */
+body[data-page="task-details"] .hero { margin-bottom: 1.5rem; }
+body[data-page="task-details"] .form-wrap,
+body[data-page="task-details"] .emp-form { max-width: 850px; }
+body[data-page="task-details"] .task-card,
+body[data-page="task-details"] .card,
+body[data-page="task-details"] .task-row { transition: box-shadow .2s ease, transform .2s ease; }
+body[data-page="task-details"] .task-card:hover,
+body[data-page="task-details"] .card:hover,
+body[data-page="task-details"] .task-row:hover { transform: translateY(-2px); }

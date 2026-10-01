@@ -1,0 +1,24 @@
+
+/* تنسيقات خاصة بصفحة submission-success */
+
+body[data-page="submission-success"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="submission-success"] .form-wrap,
+body[data-page="submission-success"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="submission-success"] .task-card,
+body[data-page="submission-success"] .card,
+body[data-page="submission-success"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="submission-success"] .task-card:hover,
+body[data-page="submission-success"] .card:hover,
+body[data-page="submission-success"] .task-row:hover {
+    transform: translateY(-2px);
+}
+```

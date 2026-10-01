@@ -1,0 +1,24 @@
+
+/* تنسيقات خاصة بصفحة dashboard */
+
+body[data-page="dashboard"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="dashboard"] .form-wrap,
+body[data-page="dashboard"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="dashboard"] .task-card,
+body[data-page="dashboard"] .card,
+body[data-page="dashboard"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="dashboard"] .task-card:hover,
+body[data-page="dashboard"] .card:hover,
+body[data-page="dashboard"] .task-row:hover {
+    transform: translateY(-2px);
+}
+

@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- إعداد الصفحة وربط ملفات التنسيق -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Submit Task | Workforce</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../shared/components.css">
+    <link rel="stylesheet" href="employee.css">
+    <link rel="stylesheet" href="submit-task.css">
+</head>
+
+<body>
+
+    
+    <main class="emp-main">
+
+        <section class="hero">
+
+            <h1>Submit your task</h1>
+
+            <p>Share your completed work with HR.</p>
+
+        </section>
+
+        <form id="submitForm" class="emp-form">
+
+            <div id="submitTaskTitle"></div>
+
+            <label>File or work link</label>
+
+            <input
+                name="submission"
+                placeholder="Paste a link or enter a file name"
+                required
+            >
+
+            <label>Comment</label>
+
+            <textarea name="comment" rows="4"></textarea>
+
+            <button class="btn-teal mt-3">
+                Submit task
+            </button>
+
+        </form>
+
+    </main>
+
+    <script src="../shared/data.js"></script>
+    <script src="../shared/storage.js"></script>
+    <script src="employee.js"></script>
+    <script src="submit-task.js"></script>
+
+</body>
+
+</html>
+```

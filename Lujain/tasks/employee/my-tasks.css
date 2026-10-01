@@ -1,0 +1,23 @@
+
+/* تنسيقات خاصة بصفحة my-tasks */
+
+body[data-page="my-tasks"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="my-tasks"] .form-wrap,
+body[data-page="my-tasks"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="my-tasks"] .task-card,
+body[data-page="my-tasks"] .card,
+body[data-page="my-tasks"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="my-tasks"] .task-card:hover,
+body[data-page="my-tasks"] .card:hover,
+body[data-page="my-tasks"] .task-row:hover {
+    transform: translateY(-2px);
+}

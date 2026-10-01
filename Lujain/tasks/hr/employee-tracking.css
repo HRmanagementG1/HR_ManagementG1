@@ -1,0 +1,23 @@
+
+/* تنسيقات خاصة بصفحة employee-tracking */
+
+body[data-page="employee-tracking"] .hero {
+    margin-bottom: 1.5rem;
+}
+
+body[data-page="employee-tracking"] .form-wrap,
+body[data-page="employee-tracking"] .emp-form {
+    max-width: 850px;
+}
+
+body[data-page="employee-tracking"] .task-card,
+body[data-page="employee-tracking"] .card,
+body[data-page="employee-tracking"] .task-row {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body[data-page="employee-tracking"] .task-card:hover,
+body[data-page="employee-tracking"] .card:hover,
+body[data-page="employee-tracking"] .task-row:hover {
+    transform: translateY(-2px);
+}
