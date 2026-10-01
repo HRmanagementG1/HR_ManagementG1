@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Send Feedback</title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/Feedback-employee.css">
+    
+
+</head>
+
+
+<body>
+    <header id="">
+    </header>
+
+    <section class="feedback-page">
+
+
+        <!-- HERO -->
+
+        <section class="feedback-hero">
+
+            <p>Home / Feedback</p>
+
+            <h1>
+                We'd love to hear from you.
+            </h1>
+
+            <p>
+                Share your thoughts, ideas, or anything
+                that could improve your workplace.
+            </p>
+
+        </section>
+
+
+
+        <!-- FEEDBACK CONTENT -->
+
+        <section class="feedback-section">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="feedback-info">
+
+                <span>
+                    Employee feedback
+                </span>
+
+                <h2>
+                    Your voice matters.
+                </h2>
+
+                <p>
+                    Your feedback helps us understand what is
+                    working and where we can make things better.
+                </p>
+
+                <p>
+                    Send a message to the HR team and we will
+                    review it through the HR feedback inbox.
+                </p>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="feedback-form">
+
+                <h2>
+                    Send a message
+                </h2>
+
+                <p class="form-description">
+                    Tell us how we can help or what you would
+                    like to share.
+                </p>
+
+
+
+                <!-- EMPLOYEE INFO -->
+
+                <form id="feedback-form">
+
+                    <div class="employee-info">
+
+                        <div>
+
+                            <span>
+                                Employee
+                            </span>
+
+                            <strong id="employee-name">
+                                Employee Name
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Email
+                            </span>
+
+                            <strong id="employee-email">
+                                employee@email.com
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TOPIC -->
+
+                    <div class="form-group">
+
+                        <label for="topic">
+                            Topic
+                        </label>
+
+                        <select
+                            id="topic"
+                            name="topic"
+                        >
+
+                            <option value="General question">
+                                General question
+                            </option>
+
+                            <option value="Feedback">
+                                Feedback
+                            </option>
+
+                            <option value="Support">
+                                Support
+                            </option>
+
+                            <option value="Suggestion">
+                                Suggestion
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Your message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="How can we help?"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- BUTTON -->
+
+                    <button type="submit">
+                        Submit feedback
+                    </button>
+
+
+                    <p class="form-note">
+                        Your feedback will be saved and sent
+                        to the HR inbox.
+                    </p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FEEDBACK HISTORY -->
+
+        <section class="feedback-history">
+
+            <div class="history-header">
+
+                <div>
+
+                    <span>
+                        Your feedback
+                    </span>
+
+                    <h2>
+                        My Feedback History
+                    </h2>
+
+                    <p>
+                        View the feedback messages you have
+                        submitted before.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- JAVASCRIPT WILL DISPLAY FEEDBACK HERE -->
+
+            <div id="feedback-history-list">
+
+            </div>
+
+
+
+            <!-- NO FEEDBACK -->
+
+            <div
+                id="no-feedback"
+                class="no-feedback"
+            >
+
+                <p>
+                    You haven't submitted any feedback yet.
+                </p>
+
+                <span>
+                    Your submitted feedback will appear here.
+                </span>
+
+            </div>
+
+        </section>
+
+
+    </section>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="assets/js/Feedback-employee.js"></script>
+
+</body>
+
+</html>
