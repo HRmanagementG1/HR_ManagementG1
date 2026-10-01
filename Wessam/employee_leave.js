@@ -1,5 +1,4 @@
 (() => {
-    console.log(currentUser);
     const LEAVES_KEY = (typeof leavesKey !== "undefined") ? leavesKey : "site_leaves";
     let currentFilter = "All";
     let imagesDB = null;
