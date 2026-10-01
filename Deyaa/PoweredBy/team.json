@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Ahmad Smairat",
+        "role": "HR Manager",
+        "image": "assets/images/team1.jpg",
+        "description": "People and Culture Lead"
+    },
+    {
+        "name": "Deyaa Alwardat",
+        "role": "Frontend Developer",
+        "image": "assets/images/team2.jpg",
+        "description": "Building modern web experiences"
+    },
+    {
+        "name": "Amani",
+        "role": "UI/UX Designer",
+        "image": "assets/images/team3.jpg",
+        "description": "Designing simple user experiences"
+    },
+    {
+        "name": "wessam khraisat ",
+        "role": "UI/UX Designer",
+        "image": "assets/images/team3.jpg",
+        "description": "Designing simple user experiences"
+    },
+    {
+        "name": "Amani",
+        "role": "UI/UX Designer",
+        "image": "assets/images/team3.jpg",
+        "description": "Designing simple user experiences"
+    },
+    {
+        "name": "Amani",
+        "role": "UI/UX Designer",
+        "image": "assets/images/team3.jpg",
+        "description": "Designing simple user experiences"
+    }
+]

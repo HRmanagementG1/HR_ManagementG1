@@ -4,7 +4,7 @@ const leavesKey="site_leaves";
 const sessionKey="site_session";
 
 const leaveTypes=["Annual","Sick","Personal","Unpaid"];
-const visitorPaths = ["/Ahmad/loginEmp"];
+const visitorPaths = ["/Ahmad/loginEmp/loginEmp"];
 
 
 let employees = [];
@@ -228,7 +228,7 @@ async function init(){
     if(isAdmin || isEmployee || visitorPaths.includes(currentPath)){
         await loadPage(currentPath, "app");
     }else{
-        window.location.href = "/Ahmad/loginEmp";
+        window.location.href = "/Ahmad/loginEmp/loginEmp";
     }
 }
 

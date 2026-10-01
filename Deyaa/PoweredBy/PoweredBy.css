@@ -1,0 +1,159 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F3F5EF;
+    color: #20231F;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.team-header {
+    text-align: center;
+    padding: 70px 20px 40px;
+}
+
+.team-header h1 {
+    color: #005253;
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.team-header p {
+    color: #70746D;
+    font-size: 16px;
+}
+
+
+/* =========================
+   TEAM CONTAINER
+========================= */
+
+#teamContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px 80px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+/* =========================
+   TEAM CARD
+========================= */
+
+.team-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E7DF;
+    border-radius: 18px;
+
+    padding: 25px;
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0, 82, 83, 0.08);
+
+    transition: 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.team-card img {
+    width: 120px;
+    height: 120px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    margin-bottom: 18px;
+
+    border: 4px solid #FFD15B;
+}
+
+
+/* =========================
+   NAME
+========================= */
+
+.team-card h2 {
+    color: #005253;
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   ROLE
+========================= */
+
+.team-card h3 {
+    color: #20231F;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.team-card p {
+    color: #70746D;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    #teamContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .team-header {
+        padding: 50px 20px 30px;
+    }
+
+    .team-header h1 {
+        font-size: 32px;
+    }
+
+    #teamContainer {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+}
