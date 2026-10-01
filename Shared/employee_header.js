@@ -24,7 +24,7 @@
       try {
         const response = await fetch(new URL('../data/employees.json', sharedUrl));
         if (!response.ok) throw new Error('Could not load employees.');
-        return await response.json();
+        return (await response.json()).map(employee => ({ ...employee, name: employee.name || employee.username }));
       } catch (error) {
         console.warn('Using saved employees.', error);
         return getData('site_users') || [];
