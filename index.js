@@ -1,142 +1,241 @@
-const root = document.location.origin;
-const app = document.getElementById("app");
+const root=document.location.origin;
 
-const pageAssets = {
-    css: [],
-    js: []
+const leavesKey="site_leaves";
+const sessionKey="site_session";
+
+const leaveTypes=["Annual","Sick","Personal","Unpaid"];
+const visitorPaths = ["/Ahmad/loginEmp"];
+
+
+let employees = [];
+function getData(key){
+    let data=localStorage.getItem(key);
+    return data?JSON.parse(data):null;
+}
+
+function saveData(key,data){
+    localStorage.setItem(key,JSON.stringify(data));
+}
+
+
+/* ---------------- Employee helpers ---------------- */
+async function loadEmployees() {
+    try {
+        const res = await fetch("/employees.json");
+        if (!res.ok) throw new Error("Could not load employees.json");
+        employees = await res.json();
+    } catch (err) {
+        console.log("Falling back to site_users:", err);
+        employees = getData("site_users") || [];
+    }
+    return employees;
+}
+
+function getEmployee(id) {
+    return employees.find(e => String(e.id) === String(id)) || null;
+}
+
+function getEmployeeByEmail(email) {
+    return employees.find(e => String(e.email) === String(email)) || null;
+}
+
+function getEmployeeName(id) {
+    const e = getEmployee(id);
+    return e ? e.name : "Unknown Employee";
+}
+
+function getEmployeeRole(id) {
+    const e = getEmployee(id);
+    return e ? (e.position || e.role || "") : "";
+}
+
+function getEmployeeAvatar(id) {
+    const e = getEmployee(id);
+    if (e && e.image) return e.image;
+    const name = e ? e.name : "Unknown";
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0F4C3A&color=fff&bold=true`;
+}
+
+function getCurrentUser(){
+    let session=getData(sessionKey);
+    if(!session)return null;
+
+    return getEmployee(session.id)??null;
+}
+
+let currentUser=getCurrentUser();
+let isAdmin = false;
+let isEmployee = false;
+
+if(currentUser){
+    if(currentUser.role==="HR"){
+        isAdmin = true;
+    }else{
+        isEmployee = true;
+    }
+}
+
+const pageAssets={
+    header:{css:[],js:[]},
+    footer:{css:[],js:[]},
+    app:{css:[],js:[]}
 };
 
-async function loadPage(path) {
+function removeAssets(area){
+    if(!pageAssets[area])return;
 
-    try {
+    pageAssets[area].css.forEach(link=>{
+        if(link&&link.parentNode)link.remove();
+    });
 
-        // =========================
-        // 1. Load HTML
-        // =========================
+    pageAssets[area].js.forEach(script=>{
+        if(script&&script.parentNode)script.remove();
+    });
 
-        if(path == "" || path == "/"){
-            path = "Deyaa/HomePage";
+    pageAssets[area].css=[];
+    pageAssets[area].js=[];
+}
+
+function showLoader(){
+    const app=document.getElementById("app");
+    if(!app)return;
+    app.innerHTML=`
+        <div class="page-loader">
+            <div class="loader"></div>
+        </div>
+    `;
+}
+
+function hideLoader(){
+    const loader=document.querySelector("#app .page-loader");
+    if(loader)loader.remove();
+}
+
+async function loadPage(path,replace="app"){
+    const app=document.getElementById(replace);
+
+    if(!app)return;
+
+    try{
+        if(path===""||path==="/")path="Deyaa/HomePage";
+
+        if(replace==="app"){
+            showLoader();
         }
-        const mainPath = root + "/" +  path.replace(/^\//, "")
-        
-        const url = mainPath + ".html";
-        const response = await fetch(url);
 
-        if (!response.ok) {
-            throw new Error("Page not found");
+        const mainPath=root+"/"+path.replace(/^\//,"");
+        const response=await fetch(mainPath+".html");
+
+        if(!response.ok)throw new Error("Page not found");
+
+        const html=await response.text();
+
+        removeAssets(replace);
+
+        if(replace==="app"){
+            await new Promise(resolve=>setTimeout(resolve,500));
         }
 
-        const html = await response.text();
+        app.innerHTML=html;
 
-        app.innerHTML = html;
-
-
-        // =========================
-        // 2. Remove old page CSS
-        // =========================
-
-        pageAssets.css.forEach(link => {
-            link.remove();
-        });
-
-        pageAssets.css = [];
-
-
-        // =========================
-        // 3. Remove old page JS
-        // =========================
-
-        pageAssets.js.forEach(script => {
-            script.remove();
-        });
-
-        pageAssets.js = [];
-
-
-        // =========================
-        // 4. Load new CSS
-        // =========================
-
-        const css = document.createElement("link");
-
-        css.rel = "stylesheet";
-        css.href = mainPath + ".css";
-
-        css.dataset.pageAsset = "true";
+        const css=document.createElement("link");
+        css.rel="stylesheet";
+        css.href=mainPath+".css";
+        css.dataset.pageAsset="true";
+        css.dataset.area=replace;
 
         document.head.appendChild(css);
+        pageAssets[replace].css.push(css);
 
-        pageAssets.css.push(css);
-
-
-        // =========================
-        // 5. Load new JS
-        // =========================
-
-        const script = document.createElement("script");
-
-        script.src = mainPath + ".js";
-
-        script.dataset.pageAsset = "true";
+        const script=document.createElement("script");
+        script.src=mainPath+".js";
+        script.dataset.pageAsset="true";
+        script.dataset.area=replace;
 
         document.body.appendChild(script);
+        pageAssets[replace].js.push(script);
 
-        pageAssets.js.push(script);
+    }catch(error){
+        console.error("Router error:",error);
 
+        removeAssets(replace);
 
-    } catch (error) {
+        try{
+            const response=await fetch(root+"/pages/404.html");
 
-        console.error("Router error:", error);
+            if(!response.ok)throw new Error("404 page not found");
 
-        // Remove previous page assets
-        pageAssets.css.forEach(link => link.remove());
-        pageAssets.js.forEach(script => script.remove());
-
-        pageAssets.css = [];
-        pageAssets.js = [];
-
-
-        // Load 404
-        try {
-
-            const response = await fetch(root + "/pages/404.html");
-
-            if (!response.ok) {
-                throw new Error("404 page not found");
-            }
-
-            app.innerHTML = await response.text();
-
-        } catch (error) {
-
-            app.innerHTML = `
-                <h1>404</h1>
-                <p>Page not found.</p>
-            `;
+            app.innerHTML=await response.text();
+        }catch(error){
+            app.innerHTML="<h1>404</h1><p>Page not found.</p>";
         }
     }
 }
 
 
-document.addEventListener("click", event => {
+async function loadLayout(){
+    currentUser=getCurrentUser();
+    isAdmin=currentUser&&currentUser.role==="HR"?true:false;
 
-    const link = event.target.closest(".load-page");
-
-    if (!link) {
-        return;
+    if(isAdmin){
+        await loadPage("/Shared/hr_header","header");
+    }else{
+        await loadPage("/Shared/employee_header","header");
+        await loadPage("/Shared/employee_footer","footer");
     }
+}
 
-    const href = link.getAttribute("href");
-
-    if (!href || href.startsWith("http")) {
-        return;
+async function init(){
+    await loadLayout();
+    let currentPath = window.location.pathname;
+    alert(currentPath);
+    if(isAdmin || isEmployee || visitorPaths.includes(currentPath)){
+        await loadPage(currentPath,"app");
+    }else{
+        window.location.href = "/Ahmad/loginEmp";
     }
+}
+
+document.addEventListener("click",event=>{
+    const link=event.target.closest(".load-page");
+
+    if(!link)return;
+
+    const href=link.getAttribute("href");
+
+    if(!href||href.startsWith("http"))return;
+
     event.preventDefault();
-    loadPage(href);
+
+    history.pushState(null,"",href);
+    loadPage(href,"app");
 });
 
-window.addEventListener("popstate", () => {
-    loadPage(window.location.pathname);
+window.addEventListener("popstate",()=>{
+    loadPage(window.location.pathname,"app");
 });
 
-loadPage(window.location.pathname);
+init();
+
+
+window.addEventListener('load', function() {
+    const loader = document.getElementById('loader');
+    setTimeout(() => loader.style.opacity = '0', 300);
+    setTimeout(() => loader.style.display = 'none', 700);
+});
+
+
+saveData("site_users", [
+            { id:"1", name:"Lina Haddad", email:"lina@workforce.example", position:"People & Culture Lead", department:"Human Resources", role:"Employee", phone:"+962 6 555 0101", location:"Amman, Jordan", image:"", bio:"" },
+            { id:"2", name:"Julian Drake",      email:"julian@workforce.example", position:"Senior Software Engineer",  department:"Engineering",     role:"Employee", phone:"",                 location:"Berlin, Germany",  image:"", bio:"" },
+            { id:"3", name:"Aria Montgomery",   email:"aria@workforce.example",   position:"Lead Product Designer",     department:"Design",          role:"Employee", phone:"",                 location:"London, UK",       image:"", bio:"" },
+            { id:"4", name:"Siddharth Kumar",   email:"sid@workforce.example",    position:"Data Operations Lead",      department:"Data",            role:"Employee", phone:"",                 location:"Bangalore, India", image:"", bio:"" },
+            { id:"5", name:"Marcus Vance",      email:"marcus@workforce.example", position:"Director of Brand Strategy", department:"Marketing",      role:"Employee", phone:"",                 location:"New York, USA",    image:"", bio:"" }
+        ]);
+
+        saveData("site_session", {
+            id:"1", name:"Lina Haddad", email:"lina@workforce.example",
+            position:"People & Culture Lead", department:"Human Resources",
+            role:"Employee", phone:"+962 6 555 0101", location:"Amman, Jordan",
+            image:"", bio:""
+        });

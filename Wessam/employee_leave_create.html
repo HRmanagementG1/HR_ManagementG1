@@ -1,0 +1,93 @@
+<div class="create-page">
+
+    <a href="/Wessam/employee_leave" class="load-page back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to my leave requests
+    </a>
+
+    <section class="form-banner">
+        <p class="breadcrumb">Home / Leave / New</p>
+        <h1>Submit a new leave request</h1>
+        <p>Fill in the details below and attach any supporting documents if needed. Your request will be reviewed by the People Operations team.</p>
+    </section>
+
+    <section class="form-panel">
+
+        <div class="panel-heading">
+            <span class="tag">New request</span>
+            <h2>Apply for leave</h2>
+        </div>
+
+        <form id="leave-form">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label for="employee">Employee</label>
+                    <select id="employee" name="employee" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Leave type</label>
+                    <select id="type" name="type" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="start">Start date</label>
+                    <input type="date" id="start" name="start" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="end">End date</label>
+                    <input type="date" id="end" name="end" required>
+                </div>
+
+                <div class="form-group full">
+                    <label for="reason">Reason</label>
+                    <textarea id="reason" name="reason" minlength="5" maxlength="1000"
+                        placeholder="Tell us a little about your request..." required></textarea>
+                    <small><span id="reason-count">0</span>/1000 characters</small>
+                </div>
+
+                <div class="form-group full attachments-section">
+
+                    <label for="myfile">Upload Files</label>
+
+                    <label for="myfile" class="upload-box">
+                        <input class="hidden" id="myfile" type="file" name="images[]"
+                            accept="image/png,image/jpeg,image/jpg,image/webp" multiple>
+
+                        <div class="upload-icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+
+                        <div class="upload-text">
+                            <p class="upload-title">Drag files here or browse</p>
+                            <p class="upload-info">Max 10MB (PNG, JPG, WEBP)</p>
+                        </div>
+                    </label>
+
+                    <div id="imagePreview" class="image-preview"></div>
+
+                </div>
+
+            </div>
+
+            <div id="form-result" class="form-message error"></div>
+
+            <div class="form-actions">
+                <a href="/Wessam/employee_leave" class="load-page cancel-button">
+                    <i class="fa-solid fa-xmark"></i>
+                    Cancel
+                </a>
+                <button type="submit" class="submit-button">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Submit application
+                </button>
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
