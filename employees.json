@@ -1,8 +1,0 @@
-[
-{"id":"1","name":"Lina Haddad","email":"lina@workforce.example","position":"People & Culture Lead","department":"Human Resources","role":"HR","phone":"+962 6 555 0101","location":"Amman, Jordan","image":"","bio":"Helping our people feel supported, connected, and ready to do their best work."},
-{"id":"2","name":"Omar Khalil","email":"omar@workforce.example","position":"Frontend Developer","department":"Engineering","role":"Employee","phone":"+962 6 555 0102","location":"Amman, Jordan","image":"","bio":"Building thoughtful web experiences with a focus on accessibility and collaboration."},
-{"id":"3","name":"Sara Nasser","email":"sara@workforce.example","position":"Product Designer","department":"Design","role":"Employee","phone":"+962 6 555 0103","location":"Amman, Jordan","image":"","bio":"Turning complex problems into simple, human-centered experiences."},
-{"id":"4","name":"Yousef Saleh","email":"yousef@workforce.example","position":"Project Manager","department":"Operations","role":"Employee","phone":"+962 6 555 0104","location":"Amman, Jordan","image":"","bio":"Keeping teams aligned and projects moving forward."},
-{"id":"5","name":"Noor Hamdan","email":"noor@workforce.example","position":"QA Engineer","department":"Engineering","role":"Employee","phone":"+962 6 555 0105","location":"Irbid, Jordan","image":"","bio":"Making sure every experience is reliable and easy to use."},
-{"id":"6","name":"Kareem Ali","email":"kareem@workforce.example","position":"Marketing Specialist","department":"Marketing","role":"Employee","phone":"+962 6 555 0106","location":"Amman, Jordan","image":"","bio":"Connecting people with ideas through clear, creative communication."}
-]
