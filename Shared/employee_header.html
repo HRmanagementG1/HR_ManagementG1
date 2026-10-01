@@ -1,24 +1,19 @@
-<div class="navbar">
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
-
-    <nav class="nav-inner" aria-label="Main navigation">
-        <a href="/" class="logo load-page" aria-label="Workforce home">
-            <img src="/images/logo.png">
-        </a>
-
-        <label for="menu-toggle" class="burger">
-        <span></span><span></span><span></span>
-        </label>
-
-        <ul class="nav-links">
-            <li><a href="/Deyaa/HomePage" class="load-page active" >Home</a></li>
-            <li><a href="/Amani/employeeFeedback/FeedbackEmployee" class="load-page">About</a></li>
-            <li><a href="/test/leave" class="load-page">Test</a></li>
-            <li><a href="/Wessam/employee_leave" class="load-page">Leave</a></li>
-        </ul>
-
-        <div class="nav-actions">
-        <a href="/Ahmad/LoginEmp/loginEmp" class="login load-page">Log in</a>
-        </div>
-    </nav>
-</div>
+<!-- Only existing pages have links. Add missing pages here when they are available. -->
+<header class="employee-header">
+  <nav class="employee-header-inner" aria-label="Employee navigation">
+    <a class="employee-brand" href="../Deyaa/HomePage.html" aria-label="Workforce home">
+      <span class="employee-brand-mark" aria-hidden="true">w</span>
+      <span><strong>Workforce</strong><small>PEOPLE • WORK •<br>GROW TOGETHER</small></span>
+    </a>
+    <ul class="employee-header-links">
+      <li><span aria-disabled="true" title="My Profile page is not available yet">My Profile</span></li>
+      <li><a data-employee-page="leaves" href="../Wessam/employee_leave.html">Leaves</a></li>
+      <li><span aria-disabled="true" title="Tasks page is not available yet">Tasks</span></li>
+      <li><a data-employee-page="policy" href="../Ahmad/policyEmp/policyEmp.html">Policy</a></li>
+      <li><a data-employee-page="meetings" href="../Amani/employee-meeting/meeting-employee.html">Zoom meeting</a></li>
+      <li><a data-employee-page="feedback" href="../Amani/employeeFeedback/FeedbackEmployee.html">Feedback</a></li>
+      <li><span aria-disabled="true" title="Information page is not available yet">Information</span></li>
+    </ul>
+    <a class="employee-logout" data-employee-logout href="../Ahmad/LoginEmp/LoginEmp.html">Log out</a>
+  </nav>
+</header>

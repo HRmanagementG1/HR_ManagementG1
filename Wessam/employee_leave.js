@@ -1,4 +1,6 @@
 (() => {
+    const { getData, saveData } = window.employeeWorkspace;
+    const currentUser = window.employeeWorkspace.getCurrentUser();
     const LEAVES_KEY = (typeof leavesKey !== "undefined") ? leavesKey : "site_leaves";
     let currentFilter = "All";
     let imagesDB = null;

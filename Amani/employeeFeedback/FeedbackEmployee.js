@@ -30,9 +30,7 @@ const noFeedback =
 // =========================
 
 const loggedInUser =
-    JSON.parse(
-        localStorage.getItem("loggedInUser")
-    );
+    window.employeeWorkspace.getCurrentUser();
 
 
 // =========================

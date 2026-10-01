@@ -69,6 +69,19 @@
     search.setAttribute('aria-label', placeholder.dataset.searchLabel || 'Search workspace');
     showCurrentUser(header);
 
+    // Existing pages can point the shared search at their own filter input.
+    const pageSearch = document.querySelector(placeholder.dataset.searchTarget || '#global-search');
+    if (pageSearch && pageSearch !== search) {
+      search.value = pageSearch.value;
+      search.addEventListener('input', () => {
+        pageSearch.value = search.value;
+        pageSearch.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      pageSearch.addEventListener('input', () => {
+        search.value = pageSearch.value;
+      });
+    }
+
     // Refresh the displayed user when another tab changes the login session.
     window.addEventListener('storage', event => {
       if (event.key === sessionKey || event.key === null) {
@@ -92,7 +105,11 @@
 
     if (sidebarPlaceholder) {
       const sidebar = template.content.querySelector('[data-hr-sidebar]');
-      setupSidebar(sidebar, sidebarPlaceholder.dataset.activePage || 'policies');
+      const currentPath = window.location.pathname.toLowerCase();
+      const currentLink = Array.from(sidebar.querySelectorAll('[data-hr-nav]')).find(link => {
+        return new URL(link.getAttribute('href'), sharedUrl).pathname.toLowerCase() === currentPath;
+      });
+      setupSidebar(sidebar, sidebarPlaceholder.dataset.activePage || currentLink?.dataset.hrNav);
       sidebarPlaceholder.replaceChildren(sidebar);
     }
     if (headerPlaceholder) {

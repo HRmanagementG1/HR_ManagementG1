@@ -1,4 +1,45 @@
 (() => {
+    // This page also opens directly from the shared HR sidebar.
+    const employeesUrl = new URL('../data/employees.json', document.currentScript.src);
+    let employees = [];
+
+    function getData(key) {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : null;
+    }
+
+    function saveData(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    async function loadEmployees() {
+        try {
+            const response = await fetch(employeesUrl);
+            if (!response.ok) throw new Error('Could not load employees.');
+            employees = await response.json();
+        } catch (error) {
+            employees = getData('site_users') || [];
+            console.warn('Using saved employees.', error);
+        }
+    }
+
+    function getEmployee(id) {
+        return employees.find(employee => String(employee.id) === String(id));
+    }
+
+    function getEmployeeName(id) {
+        return getEmployee(id)?.name || 'Unknown Employee';
+    }
+
+    function getEmployeeRole(id) {
+        const employee = getEmployee(id);
+        return employee?.position || employee?.role || '';
+    }
+
+    function getEmployeeAvatar(id) {
+        return getEmployee(id)?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(getEmployeeName(id))}&background=0F4C3A&color=fff&bold=true`;
+    }
+
     const LEAVES_KEY = (typeof leavesKey !== "undefined") ? leavesKey : "site_leaves";
     const PER_PAGE = 5;
 
@@ -20,15 +61,6 @@
             { id:"4", name:"Siddharth Kumar",   email:"sid@workforce.example",    position:"Data Operations Lead",      department:"Data",            role:"Employee", phone:"",                 location:"Bangalore, India", image:"", bio:"" },
             { id:"5", name:"Marcus Vance",      email:"marcus@workforce.example", position:"Director of Brand Strategy", department:"Marketing",      role:"Employee", phone:"",                 location:"New York, USA",    image:"", bio:"" }
         ]);
-    }
-
-    if (!getData("site_session")) {
-        saveData("site_session", {
-            id:"1", name:"Lina Haddad", email:"lina@workforce.example",
-            position:"People & Culture Lead", department:"Human Resources",
-            role:"HR", phone:"+962 6 555 0101", location:"Amman, Jordan",
-            image:"", bio:""
-        });
     }
 
     if (!getData(LEAVES_KEY)) {

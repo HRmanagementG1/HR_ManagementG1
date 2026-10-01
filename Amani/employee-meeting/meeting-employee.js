@@ -24,7 +24,7 @@ const emptyHistory = document.getElementById("empty-history");
 // =========================
 
 const loggedInUser =
-    JSON.parse(localStorage.getItem("loggedInUser"));
+    window.employeeWorkspace.getCurrentUser();
 
 
 // =========================

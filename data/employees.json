@@ -1,75 +1,81 @@
 [
   {
     "id": "1",
-    "name": "Lina Haddad",
+    "username": "Lina Haddad",
     "email": "lina@workforce.example",
     "position": "People & Culture Lead",
     "department": "Human Resources",
     "role": "HR",
     "phone": "+962 6 555 0101",
     "location": "Amman, Jordan",
-    "salary": 75000
+    "salary": 75000,
+    "password": "Lina@123"
     
   },
   {
     "id": "2",
-    "name": "Omar Khalil",
+    "username": "Omar Khalil",
     "email": "omar@workforce.example",
     "position": "Frontend Developer",
     "department": "Engineering",
     "role": "Employee",
     "phone": "+962 6 555 0102",
     "location": "Amman, Jordan",
-     "salary": 5000
+     "salary": 5000,
+     "password": "Omar@123"
 
     
   },
   {
     "id": "3",
-    "name": "Sara Nasser",
+    "username": "Sara Nasser",
     "email": "sara@workforce.example",
     "position": "Product Designer",
     "department": "Design",
     "role": "Employee",
     "phone": "+962 6 555 0103",
     "location": "Amman, Jordan",
-     "salary": 65000
+     "salary": 65000,
+     "password": "Sara@123"
     
   },
   {
     "id": "4",
-    "name": "Yousef Saleh",
+    "username": "Yousef Saleh",
     "email": "yousef@workforce.example",
     "position": "Project Manager",
     "department": "Operations",
     "role": "Employee",
     "phone": "+962 6 555 0104",
     "location": "Amman, Jordan",
-     "salary": 70000
+     "salary": 70000,
+     "password": "Yousef@123"
     
   },
   {
     "id": "5",
-    "name": "Noor Hamdan",
+    "username": "Noor Hamdan",
     "email": "noor@workforce.example",
     "position": "QA Engineer",
     "department": "Engineering",
     "role": "Employee",
     "phone": "+962 6 555 0105",
     "location": "Irbid, Jordan",
-     "salary": 55000
+     "salary": 55000,
+      "password": "Noor@123"
     
   },
   {
     "id": "6",
-    "name": "Kareem Ali",
+    "username": "Kareem Ali",
     "email": "kareem@workforce.example",
     "position": "Marketing Specialist",
     "department": "Marketing",
     "role": "Employee",
     "phone": "+962 6 555 0106",
     "location": "Amman, Jordan",
-     "salary": 60000
+     "salary": 60000,
+     "password": "Kareem@123"
     
   }
 ]

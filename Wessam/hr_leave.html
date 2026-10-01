@@ -1,3 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workforce | Leave Requests</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="hr_leave.css" />
+  <link rel="stylesheet" href="../Shared/hr_dashboard.css" />
+  <script defer src="../Shared/hr_dashboard.js"></script>
+  <script defer src="hr_leave.js"></script>
+</head>
+<body class="hr-workspace-page">
+  <div data-hr-dashboard-sidebar data-active-page="leave"></div>
+  <div class="hr-dashboard-content">
+    <div data-hr-dashboard-topbar data-search-placeholder="Search leave requests…" data-search-label="Search leave requests" data-search-target="#hr-search"></div>
 <!-- ==================== MAIN CONTENT ==================== -->
 <div class="main-content">
 
@@ -114,24 +132,6 @@
     </div>
 
 </div>
-
-<!-- ==================== MOBILE MENU SCRIPT ==================== -->
-<script>
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const menuToggle = document.getElementById('menuToggle');
-
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('show');
-        });
-    }
-
-    if (overlay) {
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('show');
-        });
-    }
-</script>
+  </div>
+</body>
+</html>

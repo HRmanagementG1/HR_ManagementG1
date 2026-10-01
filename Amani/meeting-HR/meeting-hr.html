@@ -15,13 +15,20 @@
 
     <link
         rel="stylesheet"
-        href="assets/css/meeting-hr.css">
+        href="meeting-hr.css">
     
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="../../Shared/hr_dashboard.css" />
+  <script defer src="../../Shared/hr_dashboard.js"></script>
 </head>
 
 
-<body>
+<body class="hr-workspace-page">
+  <div data-hr-dashboard-sidebar data-active-page="meetings"></div>
+  <div class="hr-dashboard-content">
+    <div data-hr-dashboard-topbar data-search-placeholder="Search meetings…" data-search-label="Search meetings" data-search-target="#meeting-search"></div>
 
     <section class="hr-meeting-page">
 
@@ -463,10 +470,11 @@
 
 
 
-    <script src="assets/js/jitsi.js"></script>
+    <script src="jitsi.js"></script>
 
-<script src="assets/js/meeting-hr.js"></script>
+<script src="meeting-hr.js"></script>
 
+  </div>
 </body>
 
 </html>

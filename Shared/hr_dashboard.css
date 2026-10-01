@@ -9,6 +9,25 @@
 }
 
 /* Page layout: sidebar on desktop, full-width content on smaller screens. */
+body.hr-workspace-page {
+  margin: 0;
+  background: #fafaf8;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+.hr-workspace-page *,
+.hr-workspace-page *::before,
+.hr-workspace-page *::after {
+  box-sizing: border-box;
+}
+
+/* The shared layout already reserves space for the sidebar and header. */
+.hr-dashboard-content > .main-content {
+  margin: 0;
+  min-height: 0;
+}
+
 .hr-dashboard-content {
   display: flex;
   flex-direction: column;

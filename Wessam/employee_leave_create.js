@@ -1,4 +1,6 @@
 (() => {
+    const { getData, saveData } = window.employeeWorkspace;
+    const currentUser = window.employeeWorkspace.getCurrentUser();
     const LEAVES_KEY = (typeof leavesKey !== "undefined") ? leavesKey : "site_leaves";
     const leaveTypes = ["Annual", "Sick", "Personal", "Unpaid"];
 
@@ -227,7 +229,7 @@
             showMessage("Your leave application was submitted successfully. Redirecting...", true);
 
             setTimeout(() => {
-                loadPage("/Wessam/employee_leave","app");
+                window.location.href = new URL("employee_leave.html", window.location.href).href;
             }, 1200);
         });
     }
@@ -236,7 +238,7 @@
     async function init() {
         try { await openImagesDB(); } catch (e) { console.log(e); }
 
-        await loadEmployees();
+        employees = await window.employeeWorkspace.loadEmployees();
         showEmployee();
         showLeaveTypes();
         setupDates();
