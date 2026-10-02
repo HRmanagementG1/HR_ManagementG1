@@ -49,3 +49,14 @@ The browser check covers home/login navigation, employee creation and salary,
 assignment and task visibility, file upload/download, review and revisions,
 password changes, role routing, and responsive navigation. Optional screenshots
 are written when `WORKFLOW_SCREENSHOT_DIR` names an output directory.
+
+On `secondVersion`, the homepage uses the supplied Mostar photographic layers
+and Ogg Medium font directly from their remote URLs. The 3,700-pixel scroll story
+is implemented in `Deyaa/HomePage/cinema.js` and `cinema.css`; reduced motion skips
+pointer parallax and smoothing. Services, about, values, feedback and the shared
+footer remain below it. `Shared/brand.css` applies the matching workspace palette.
+Run `node tests/cinema.cjs` with network access to check the scene assets and carousel.
+
+The Powered By page uses the supplied `Deyaa/team.json`. Portrait files were not
+provided, so cards show initials. Add each image at its recorded path and set
+`portraitAvailable: true` on that member when portraits are available.

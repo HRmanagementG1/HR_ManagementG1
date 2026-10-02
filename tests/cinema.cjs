@@ -1,0 +1,45 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
+const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
+const root=path.resolve(__dirname,'..');
+const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(file,(e,data)=>{if(e){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml'})[path.extname(file)]||'application/octet-stream');res.end(data);});});
+(async()=>{
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;
+ const browser=await chromium.launch({channel:'msedge',headless:true});
+ try{
+  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.route('**/*',route=>{const u=new URL(route.request().url());return u.origin===origin||u.hostname.endsWith('.figma.site')||u.hostname.endsWith('.cloudfront.net')?route.continue():route.abort();});
+  await page.goto(origin+'/Deyaa/HomePage/HomePage.html');
+  await page.waitForFunction(()=>[...document.querySelectorAll('.scene-img')].every(i=>i.complete&&i.naturalWidth>0),{},{timeout:60000});
+  await page.evaluate(()=>document.fonts.ready);
+  const out=process.env.WORKFLOW_SCREENSHOT_DIR;
+  if(out)fs.mkdirSync(out,{recursive:true});
+  const shot=async name=>{if(out)await page.screenshot({path:path.join(out,name+'.png')});};
+  await shot('cinema-intro');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.evaluate(()=>scrollTo({top:1000,behavior:'instant'}));
+  await page.waitForFunction(()=>parseFloat(document.documentElement.style.getPropertyValue('--panel2-opacity'))>.99);
+  await shot('cinema-bridge');
+  await page.evaluate(()=>scrollTo({top:2250,behavior:'instant'}));
+  await page.waitForFunction(()=>parseFloat(document.documentElement.style.getPropertyValue('--panel3-opacity'))>.99);
+  await shot('cinema-people');
+  await page.evaluate(()=>scrollTo({top:3700,behavior:'instant'}));
+  await page.locator('.sights-controls.is-ready').waitFor();
+  assert.equal(await page.locator('.sight-card').count(),18);
+  await shot('cinema-services');
+  for(let i=0;i<15;i++)await page.locator('.sight-next').click();
+  assert.equal(await page.locator('.sight-card.is-active').count(),1);
+  const active=await page.locator('.sight-card.is-active').getAttribute('data-sight-index');
+  await page.locator('.sight-prev').click();
+  assert.notEqual(await page.locator('.sight-card.is-active').getAttribute('data-sight-index'),active);
+  assert(await page.locator('.service-open').getAttribute('href'));
+  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
+  await page.waitForFunction(()=>document.documentElement.style.getPropertyValue('--title-opacity')==='1');
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await shot('cinema-mobile');
+  await page.locator('.skip-story').click();await page.waitForFunction(()=>document.querySelector('#services').getBoundingClientRect().top<100);
+  await page.goto(origin+'/Deyaa/PoweredBy.html');await page.waitForFunction(()=>document.querySelectorAll('.team-card').length===6);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  assert.deepEqual(errors,[]);console.log('PASS: remote scene layers, story transitions, looping service carousel, mobile layout, reduced motion, skip navigation and six team records.');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>server.close());

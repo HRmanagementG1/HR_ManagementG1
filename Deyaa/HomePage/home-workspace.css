@@ -1,15 +1,68 @@
-body { font-family:var(--workforce-font); }
-.navbar .nav-actions { gap:16px; flex-wrap:wrap; }
-.navbar .nav-actions .login { font-size:12px; white-space:nowrap; }
-.navbar .logo img { width:180px; height:auto; }
-.hero h1 { font-family:var(--workforce-heading); font-weight:800; }
-.hero .tag { background:#e6f1e7; font-size:10px; letter-spacing:1px; }
-.hero-btns .btn { background:#005758; }
-.hero-btns .btn-outline { border-color:#c7d6c5; background:#f4f6ee; }
-.hero .stats { color:#5d7265; }
-.services .card { border:1px solid #e3eadc; border-radius:22px; box-shadow:none; }
-.services .card:hover { border-color:#b3cec0; box-shadow:0 12px 25px #0057580c; }
-.footer .footer-logo { max-width:180px; }
-.reveal { opacity:1; transform:none; }
-.hero .fade-up { opacity:1; animation:none; }
-@media(max-width:700px) { .navbar .nav-actions { gap:10px; } .navbar .logo img { width:110px; } .hero-btns { flex-wrap:wrap; } .footer-container { gap:24px; } }
+body {
+  font-family: var(--workforce-font);
+}
+.navbar .nav-actions {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.navbar .nav-actions .login {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.navbar .logo img {
+  width: 180px;
+  height: auto;
+}
+.hero h1 {
+  font-family: var(--workforce-heading);
+  font-weight: 800;
+}
+.hero .tag {
+  background: #e6f1e7;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.hero-btns .btn {
+  background: #005758;
+}
+.hero-btns .btn-outline {
+  border-color: #c7d6c5;
+  background: #f4f6ee;
+}
+.hero .stats {
+  color: #5d7265;
+}
+.services .card {
+  border: 1px solid #e3eadc;
+  border-radius: 22px;
+  box-shadow: none;
+}
+.services .card:hover {
+  border-color: #b3cec0;
+  box-shadow: 0 12px 25px #0057580c;
+}
+.footer .footer-logo {
+  max-width: 180px;
+}
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+.hero .fade-up {
+  opacity: 1;
+  animation: none;
+}
+@media (max-width: 700px) {
+  .navbar .nav-actions {
+    gap: 10px;
+  }
+  .navbar .logo img {
+    width: 110px;
+  }
+  .hero-btns {
+    flex-wrap: wrap;
+  }
+  .footer-container {
+    gap: 24px;
+  }
+}

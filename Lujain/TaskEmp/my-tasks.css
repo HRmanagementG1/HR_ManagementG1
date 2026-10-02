@@ -1,51 +1,177 @@
-
 /* Employee task board, matching the shared Workforce design. */
-body[data-page="my-tasks"] { background:#fff; color:#283b39; }
-body[data-page="my-tasks"] .emp-main { max-width:1440px; margin:12px auto 40px; padding:0 34px; }
-body[data-page="my-tasks"] .hero { background:#005758; border:1px solid #c5dfd8; border-radius:18px; padding:36px 38px; min-height:187px; }
-body[data-page="my-tasks"] .hero h1 { font-size:34px; font-weight:700; letter-spacing:-1px; margin:4px 0; }
-body[data-page="my-tasks"] .hero > p { font-size:13px; margin:0 0 12px; color:#b9d9d8; }
-body[data-page="my-tasks"] .hero .task-breadcrumb { font-size:10px; margin-bottom:8px; }
-.assigned-badge { display:inline-flex; align-items:center; gap:4px; background:#d0e5df; color:#233f3d; border-radius:20px; padding:4px 10px; font-size:10px; }
-.assigned-badge > span { width:6px; height:6px; background:#10b98f; border-radius:50%; margin-right:3px; }
-body[data-page="my-tasks"] .task-columns { gap:15px; align-items:start; }
-body[data-page="my-tasks"] .task-column { padding:16px; background:#eff2eb; border:1px solid #e4e9df; border-radius:14px; }
-.column-heading { display:flex; justify-content:space-between; align-items:center; padding:0 3px 4px; font-size:12px; }
-.column-heading > span { background:#fafbf8; color:#8c9690; font-size:10px; border-radius:50%; padding:1px 5px; }
-body[data-page="my-tasks"] .task-card { border:0; border-radius:10px; padding:16px 13px 13px; margin-top:12px; }
-body[data-page="my-tasks"] .task-card .pill { font-size:10px; padding:2px 9px; color:#59805b; background:#eaf2e7; }
-body[data-page="my-tasks"] .task-card .pill.high { color:#947020; background:#fff4d5; }
-body[data-page="my-tasks"] .task-card h5 { font-size:11px; font-weight:650; margin:10px 0 4px; line-height:1.5; }
-.task-description { font-size:10px; color:#89908b; margin:0 0 14px; line-height:1.5; }
-.task-meta { display:grid; gap:3px; font-size:9px; color:#8e9590; margin:12px 0 14px; }
-.task-status-label { display:flex; justify-content:space-between; align-items:center; font-size:9px; color:#a1a6a2; margin-bottom:4px; }
-.task-status-label a { color:#4f7770; font-size:9px; text-decoration:none; }
-.task-card select { width:100%; border:1px solid #e0e5df; border-radius:7px; background:white; font:inherit; font-size:10px; padding:6px 8px; color:#384740; }
-.task-card select:disabled { opacity:1; color:#668273; background:#f8faf7; }
-.task-feedback { font-size:10px; color:#986d18; background:#fff7df; padding:8px; border-radius:6px; }
-@media (max-width:600px) {
-  body[data-page="my-tasks"] .emp-main { padding:0 16px; }
-  body[data-page="my-tasks"] .hero { padding:26px 24px; }
-  body[data-page="my-tasks"] .hero h1 { font-size:29px; }
+body[data-page="my-tasks"] {
+  background: #fff;
+  color: #283b39;
+}
+body[data-page="my-tasks"] .emp-main {
+  max-width: 1440px;
+  margin: 12px auto 40px;
+  padding: 0 34px;
+}
+body[data-page="my-tasks"] .hero {
+  background: #005758;
+  border: 1px solid #c5dfd8;
+  border-radius: 18px;
+  padding: 36px 38px;
+  min-height: 187px;
+}
+body[data-page="my-tasks"] .hero h1 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 4px 0;
+}
+body[data-page="my-tasks"] .hero > p {
+  font-size: 13px;
+  margin: 0 0 12px;
+  color: #b9d9d8;
+}
+body[data-page="my-tasks"] .hero .task-breadcrumb {
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+.assigned-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #d0e5df;
+  color: #233f3d;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 10px;
+}
+.assigned-badge > span {
+  width: 6px;
+  height: 6px;
+  background: #10b98f;
+  border-radius: 50%;
+  margin-right: 3px;
+}
+body[data-page="my-tasks"] .task-columns {
+  gap: 15px;
+  align-items: start;
+}
+body[data-page="my-tasks"] .task-column {
+  padding: 16px;
+  background: #eff2eb;
+  border: 1px solid #e4e9df;
+  border-radius: 14px;
+}
+.column-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3px 4px;
+  font-size: 12px;
+}
+.column-heading > span {
+  background: #fafbf8;
+  color: #8c9690;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 1px 5px;
+}
+body[data-page="my-tasks"] .task-card {
+  border: 0;
+  border-radius: 10px;
+  padding: 16px 13px 13px;
+  margin-top: 12px;
+}
+body[data-page="my-tasks"] .task-card .pill {
+  font-size: 10px;
+  padding: 2px 9px;
+  color: #59805b;
+  background: #eaf2e7;
+}
+body[data-page="my-tasks"] .task-card .pill.high {
+  color: #947020;
+  background: #fff4d5;
+}
+body[data-page="my-tasks"] .task-card h5 {
+  font-size: 11px;
+  font-weight: 650;
+  margin: 10px 0 4px;
+  line-height: 1.5;
+}
+.task-description {
+  font-size: 10px;
+  color: #89908b;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+.task-meta {
+  display: grid;
+  gap: 3px;
+  font-size: 9px;
+  color: #8e9590;
+  margin: 12px 0 14px;
+}
+.task-status-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  color: #a1a6a2;
+  margin-bottom: 4px;
+}
+.task-status-label a {
+  color: #4f7770;
+  font-size: 9px;
+  text-decoration: none;
+}
+.task-card select {
+  width: 100%;
+  border: 1px solid #e0e5df;
+  border-radius: 7px;
+  background: white;
+  font: inherit;
+  font-size: 10px;
+  padding: 6px 8px;
+  color: #384740;
+}
+.task-card select:disabled {
+  opacity: 1;
+  color: #668273;
+  background: #f8faf7;
+}
+.task-feedback {
+  font-size: 10px;
+  color: #986d18;
+  background: #fff7df;
+  padding: 8px;
+  border-radius: 6px;
+}
+@media (max-width: 600px) {
+  body[data-page="my-tasks"] .emp-main {
+    padding: 0 16px;
+  }
+  body[data-page="my-tasks"] .hero {
+    padding: 26px 24px;
+  }
+  body[data-page="my-tasks"] .hero h1 {
+    font-size: 29px;
+  }
 }
 
 body[data-page="my-tasks"] .hero {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 body[data-page="my-tasks"] .form-wrap,
 body[data-page="my-tasks"] .emp-form {
-    max-width: 850px;
+  max-width: 850px;
 }
 
 body[data-page="my-tasks"] .task-card,
 body[data-page="my-tasks"] .card,
 body[data-page="my-tasks"] .task-row {
-    transition: box-shadow .2s ease, transform .2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 body[data-page="my-tasks"] .task-card:hover,
 body[data-page="my-tasks"] .card:hover,
 body[data-page="my-tasks"] .task-row:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }

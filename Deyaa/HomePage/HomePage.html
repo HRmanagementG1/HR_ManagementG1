@@ -1,1065 +1,679 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workforce | People. Work. Grow together.</title><link rel="stylesheet" href="HomePage.css"><link rel="stylesheet" href="../navbar/navbar_Home.css"><link rel="stylesheet" href="../Footer/Footer.css"><link rel="stylesheet" href="../../Shared/theme.css"><link rel="stylesheet" href="home-workspace.css"><script src="../../Shared/site-shell.js" defer></script></head><body><!-- ================= NAVBAR ================= -->
-
-<header class="navbar">
-
-    <input
-        type="checkbox"
-        id="menu-toggle"
-        class="menu-toggle"
-        aria-label="Toggle menu"
-    >
-
-    <nav class="nav-inner" aria-label="Main navigation">
-
-        <!-- ================= LOGO ================= -->
-
-        <a
-            href="../../index.html"
-            class="load-page logo"
-            aria-label="Workforce home"
-        >
-
-            <img class="workforce-logo" src="../../Images/workforce-logo.svg" alt="Workforce">
-
-        </a>
-
-
-        <!-- ================= MOBILE MENU ================= -->
-
-        <label for="menu-toggle" class="burger">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </label>
-
-
-        <!-- ================= NAVIGATION LINKS ================= -->
-
-        <ul class="nav-links" id="navLinks">
-
-            <li>
-                <a href="#services">
-                    Services
-                </a>
-            </li>
-
-            <li>
-                <a href="#about">
-                    About
-                </a>
-            </li>
-
-            <li>
-                <a href="#contact">
-                    Contact
-                </a>
-            </li>
-
-        </ul>
-
-
-        <!-- ================= LOGIN / JOIN ================= -->
-
-        <div class="nav-actions" id="navActions">
-
-            <a
-                href="../../Ahmad/LoginEmp/LoginEmp.html"
-                class="login"
-            >Employee login</a><a href="../../Ahmad/loginHr/LoginHr.html" class="login">HR login</a><a id="resumeWorkspace" class="login" hidden>My workspace →</a>
-
-
-
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Workforce for IT Consulting</title>
+    <meta
+      name="description"
+      content="People, projects, and everyday work, connected. Workforce for IT Consulting."
+    />
+    <link rel="stylesheet" href="HomePage.css" />
+    <link rel="stylesheet" href="../../Shared/theme.css" />
+    <link rel="stylesheet" href="cinema.css" />
+    <script src="../../Shared/site-shell.js" defer></script>
+    <script src="cinema.js" defer></script>
+  </head>
+  <body class="home-page">
+    <main class="site-shell">
+      <section
+        class="cinema-scroll"
+        id="home"
+        aria-label="Workforce cinematic scroll story"
+      >
+        <div class="stage">
+          <div class="world">
+            <img
+              class="scene-img sky-img"
+              src="https://raft-blast-61784561.figma.site/_assets/v11/16b5007d9c93971e26ffe4e0e3e37946f6bd538c.png"
+              alt=""
+              decoding="async"
+              draggable="false"
+            />
+            <header class="site-header" aria-label="Primary navigation">
+              <a class="site-logo" href="../../index.html"
+                ><img
+                  src="../../Images/workforce-logo.svg"
+                  alt="Workforce for IT Consulting"
+              /></a>
+              <nav class="site-nav" aria-label="Main menu">
+                <a href="#services">Services</a><a href="#about">About</a
+                ><a href="#values">Our values</a
+                ><a href="#feedback">Feedback</a>
+              </nav>
+              <div class="nav-actions">
+                <a class="login" href="../../Ahmad/LoginEmp/LoginEmp.html"
+                  >Employee login</a
+                ><a class="login" href="../../Ahmad/loginHr/LoginHr.html"
+                  >HR login</a
+                ><a id="resumeWorkspace" class="login" hidden>My workspace →</a>
+              </div>
+            </header>
+            <div class="back-stack">
+              <img
+                class="scene-img back-img back-four"
+                src="https://raft-blast-61784561.figma.site/_assets/v11/8a7f8af50e0ce92ec2e228e7b0b4112178c51cf1.png"
+                alt=""
+                decoding="async"
+                draggable="false"
+              />
+              <section
+                class="sights-slider"
+                aria-label="Workspace services carousel"
+              >
+                <div class="sights-track">
+                  <article
+                    class="sight-card"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Select Leave Application"
+                    data-service-index="0"
+                  >
+                    <span class="sight-kicker">Your workspace / 01</span
+                    ><img
+                      class="sight-pin"
+                      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230438_d526b8b6-8a2e-4e3b-9993-3908acae03a7.png"
+                      alt=""
+                    />
+                    <h3>Leave Application</h3>
+                    <p>Apply for leave and keep track of your time off.</p>
+                  </article>
+                  <article
+                    class="sight-card"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Select View Employees"
+                    data-service-index="1"
+                  >
+                    <span class="sight-kicker">Your workspace / 02</span
+                    ><img
+                      class="sight-pin"
+                      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230442_140bc25b-b165-4249-904a-f708bff6970e.png"
+                      alt=""
+                    />
+                    <h3>View Employees</h3>
+                    <p>Find the people and information you need.</p>
+                  </article>
+                  <article
+                    class="sight-card"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Select Company Policies"
+                    data-service-index="2"
+                  >
+                    <span class="sight-kicker">Your workspace / 03</span
+                    ><img
+                      class="sight-pin"
+                      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230448_825949c9-ccdb-4857-b4a6-e349eccc9010.png"
+                      alt=""
+                    />
+                    <h3>Company Policies</h3>
+                    <p>Clear guidance for a better working day.</p>
+                  </article>
+                  <article
+                    class="sight-card"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Select Task Management"
+                    data-service-index="3"
+                  >
+                    <span class="sight-kicker">Your workspace / 04</span
+                    ><img
+                      class="sight-pin"
+                      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230438_d526b8b6-8a2e-4e3b-9993-3908acae03a7.png"
+                      alt=""
+                    />
+                    <h3>Task Management</h3>
+                    <p>Organize your work and follow your progress.</p>
+                  </article>
+                  <article
+                    class="sight-card"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Select Feedback System"
+                    data-service-index="4"
+                  >
+                    <span class="sight-kicker">Your workspace / 05</span
+                    ><img
+                      class="sight-pin"
+                      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230442_140bc25b-b165-4249-904a-f708bff6970e.png"
+                      alt=""
+                    />
+                    <h3>Feedback System</h3>
+                    <p>Share your ideas and help us improve.</p>
+                  </article>
+                  <article
+                    class="sight-card"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Select Zoom Meeting"
+                    data-service-index="5"
+                  >
+                    <span class="sight-kicker">Your workspace / 06</span
+                    ><img
+                      class="sight-pin"
+                      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230448_825949c9-ccdb-4857-b4a6-e349eccc9010.png"
+                      alt=""
+                    />
+                    <h3>Zoom Meeting</h3>
+                    <p>Stay connected, wherever you work.</p>
+                  </article>
+                </div>
+              </section>
+              <img
+                class="scene-img back-img back-bazaar"
+                src="https://raft-blast-61784561.figma.site/_assets/v11/864afe00e41e2fa20a5aa546e15cb807e0f81384.png"
+                alt=""
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+            <div class="sights-controls" aria-label="Carousel controls" inert>
+              <button
+                class="sight-nav sight-prev"
+                aria-label="Previous service"
+              >
+                ←</button
+              ><button class="sight-nav sight-next" aria-label="Next service">
+                →</button
+              ><a class="service-open" href="#services"
+                >Explore all services ↗</a
+              >
+            </div>
+            <h1 class="hero-title">Workforce</h1>
+            <img
+              class="scene-img splitframe-img splitframe-left"
+              src="https://raft-blast-61784561.figma.site/_assets/v11/7536d7b60a1fce482cf6edf3f0bffd3bad5d0f8a.png"
+              alt=""
+              decoding="async"
+              draggable="false"
+            /><img
+              class="scene-img splitframe-img splitframe-right"
+              src="https://raft-blast-61784561.figma.site/_assets/v11/392db6a6a6b98e868bd7f8d3f55bb719d51e5028.png"
+              alt=""
+              decoding="async"
+              draggable="false"
+            /><img
+              class="scene-img bridge-img"
+              src="https://raft-blast-61784561.figma.site/_assets/v11/c6a6d8ef49bca43f708aa852692942c45ec950d4.png"
+              alt=""
+              decoding="async"
+              draggable="false"
+            /><img
+              class="scene-img frame-two-img"
+              src="https://raft-blast-61784561.figma.site/_assets/v11/ba75252bab2b1c510987b74837770f7bc8a6b2d4.png"
+              alt=""
+              decoding="async"
+              draggable="false"
+            />
+            <div class="shade"></div>
+          </div>
+          <section class="intro-copy" aria-label="Workforce overview">
+            <p>
+              Good people. Great work. One place.<br />Your people, projects,
+              and everyday work, connected.
+            </p>
+            <div class="hero-tags" aria-label="Workforce highlights">
+              <span>People first</span><span>Work together</span
+              ><span>Grow together</span>
+            </div>
+            <a class="scroll-cue" href="#services">SCROLL TO DISCOVER ↓</a>
+          </section>
+          <section
+            class="story-panel story-panel-bridge"
+            aria-label="Our approach"
+            inert
+          >
+            <h2>We turn ideas into<br />digital solutions.</h2>
+            <p>
+              Technology, design and problem-solving come together to create
+              software that solves real business needs.
+            </p>
+            <dl class="facts">
+              <div>
+                <dt>120+</dt>
+                <dd>Projects delivered</dd>
+              </div>
+              <div>
+                <dt>8+</dt>
+                <dd>Years of experience</dd>
+              </div>
+            </dl>
+          </section>
+          <section
+            class="story-panel story-panel-bazaar"
+            aria-label="Our people"
+            inert
+          >
+            <h2>Better work starts<br />with good people.</h2>
+            <p>
+              A simpler way to stay informed, get things done, and grow
+              together. Everything your team needs, in one connected workspace.
+            </p>
+            <a class="note-button" href="../PoweredBy.html"
+              ><span aria-hidden="true">↗</span
+              ><span>Meet the people behind Workforce</span></a
+            >
+          </section>
+          <a class="skip-story" href="#services">Skip to services ↓</a>
+          <div class="scene-progress" aria-hidden="true"><span></span></div>
         </div>
-
-    </nav>
-
-</header><main>
-
-        <!-- =====================================================
-             1. HERO
-        ====================================================== -->
-
-        <section class="hero" id="home">
-
-            <div class="container hero-grid">
-
-
-                <!-- Hero Text -->
-
-                <div class="hero-text">
-
-                    <span class="tag fade-up d1">
-                        YOUR CONNECTED WORKSPACE
-                    </span>
-
-
-                    <h1 class="fade-up d2">Good people.<br><span>Great work.</span><br>One place.</h1>
-
-
-                    <p class="fade-up d3">Your people, projects, and everyday work, connected. A simpler way to stay informed, get things done, and grow together.</p>
-
-
-                    <!-- Hero Buttons -->
-
-                    <div class="hero-btns fade-up d4">
-
-                        <a href="../../Ahmad/LoginEmp/LoginEmp.html" class="btn">Employee sign in</a>
-
-
-                        <a href="../../Ahmad/loginHr/LoginHr.html" class="btn-outline">HR sign in</a>
-
-                    </div>
-
-
-                    <!-- Statistics -->
-
-                    <div class="stats fade-up d5">
-
-
-                        <div>
-
-                            <strong>
-                                120+
-                            </strong>
-
-                            <span>
-                                Projects delivered
-                            </span>
-
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                40+
-                            </strong>
-
-                            <span>
-                                Developers
-                            </span>
-
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                8
-                            </strong>
-
-                            <span>
-                                Years of experience
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-                <!-- Hero Visual -->
-
-                <div class="hero-visual fade-up d3">
-
-
-                    <div class="code-card">
-
-
-                        <div class="dots">
-
-                            <i></i>
-
-                            <i></i>
-
-                            <i></i>
-
-                        </div>
-
-
-                        <pre><code><span class="c-mut">// workforce.js</span>
-<span class="c-key">const</span> team = <span class="c-key">new</span> <span class="c-fn">Team</span>();
-
-team.<span class="c-fn">plan</span>(<span class="c-str">"idea"</span>);
-team.<span class="c-fn">design</span>(<span class="c-str">"clean UI"</span>);
-team.<span class="c-fn">code</span>(<span class="c-str">"fast &amp; secure"</span>);
-team.<span class="c-fn">launch</span>();<span class="cursor"></span></code></pre>
-
-                    </div>
-
-
-                    <div class="float-badge b1">
-
-                        ✔ Deployed
-
-                    </div>
-
-
-                    <div class="float-badge b2">
-
-                        &lt;/&gt; Clean code
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             2. ABOUT WORKFORCE
-        ====================================================== -->
-
-        <section class="about-section" id="about">
-
-
-            <div class="about-container">
-
-
-                <!-- About Introduction -->
-
-                <div class="about-intro reveal">
-
-
-                    <span class="section-tag">
-                        ABOUT WORKFORCE
-                    </span>
-
-
-                    <h2>
-
-                        We turn ideas into
-
-                        <span>
-                            digital solutions.
-                        </span>
-
-                    </h2>
-
-
-                    <p>
-
-                        Workforce is a software development company
-                        that builds modern digital solutions for
-                        businesses and organizations. We combine
-                        technology, design and problem-solving to
-                        create software that solves real business needs.
-
-                    </p>
-
-
-                    <!-- Experience -->
-
-                    <div class="about-stat">
-
-                        <strong>
-                            8+
-                        </strong>
-
-                        <span>
-                            Years of experience
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- About Process -->
-
-                <div class="about-process">
-
-
-                    <div class="process-line"></div>
-
-
-                    <!-- Discover -->
-
-                    <div class="process-item reveal">
-
-
-                        <div class="process-number">
-                            01
-                        </div>
-
-
-                        <div class="process-content">
-
-                            <h3>
-                                Discover
-                            </h3>
-
-
-                            <p>
-
-                                We understand the business, its goals
-                                and the problems that need to be solved
-                                before writing a single line of code.
-
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- Build -->
-
-                    <div class="process-item reveal">
-
-
-                        <div class="process-number">
-                            02
-                        </div>
-
-
-                        <div class="process-content">
-
-                            <h3>
-                                Build
-                            </h3>
-
-
-                            <p>
-
-                                Our developers turn ideas into reliable
-                                web, mobile and custom software solutions
-                                using modern technologies.
-
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- Deliver -->
-
-                    <div class="process-item reveal">
-
-
-                        <div class="process-number">
-                            03
-                        </div>
-
-
-                        <div class="process-content">
-
-                            <h3>
-                                Deliver
-                            </h3>
-
-
-                            <p>
-
-                                We test, improve and deliver a clean,
-                                responsive and practical product ready
-                                for real users.
-
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             3. SERVICES
-        ====================================================== -->
-
-
-<section class="services" id="services">
-
-    <div class="container">
-
-
-        <!-- ================= SECTION HEADING ================= -->
-
-        <div class="section-heading reveal">
-
-            <span class="section-tag">
-                OUR SERVICES
-            </span>
-
-            <h2>
-                Everything you need in one place
-            </h2>
+      </section>
+      <section class="services" id="services">
+        <div class="container">
+          <!-- ================= SECTION HEADING ================= -->
+
+          <div class="section-heading reveal">
+            <span class="section-tag"> OUR SERVICES </span>
+
+            <h2>Everything you need in one place</h2>
 
             <p>
-                Access the tools and services you need
-                to manage your work easily and efficiently.
+              Access the tools and services you need to manage your work easily
+              and efficiently.
             </p>
+          </div>
 
-        </div>
+          <!-- ================= SERVICES CARDS ================= -->
 
-
-        <!-- ================= SERVICES CARDS ================= -->
-
-        <div class="cards">
-
-
+          <div class="cards">
             <!-- ================= SERVICE 1 ================= -->
 
-            <a href="../../Wessam/employee_leave.html" data-home-service="LeaveApplication.html" class="card-link">
+            <a
+              href="../../Wessam/employee_leave.html"
+              data-home-service="LeaveApplication.html"
+              class="card-link"
+            >
+              <article class="card reveal">
+                <div class="icon">
+                  <i class="bi bi-calendar-check"></i>
+                </div>
 
-                <article class="card reveal">
+                <h3>Leave Application</h3>
 
-                    <div class="icon">
+                <p>
+                  Apply for leave by selecting the leave type, start date, end
+                  date and reason.
+                </p>
 
-                        <i class="bi bi-calendar-check"></i>
+                <span class="service-link">
+                  Apply Now
 
-                    </div>
-
-
-                    <h3>
-                        Leave Application
-                    </h3>
-
-
-                    <p>
-
-                        Apply for leave by selecting the leave
-                        type, start date, end date and reason.
-
-                    </p>
-
-
-                    <span class="service-link">
-
-                        Apply Now
-
-                        <i class="bi bi-arrow-right"></i>
-
-                    </span>
-
-                </article>
-
+                  <i class="bi bi-arrow-right"></i>
+                </span>
+              </article>
             </a>
-
-
 
             <!-- ================= SERVICE 2 ================= -->
 
-            <a href="../../Ala%60a/task/employee-profile/employee-profile.html" data-home-service="Employees.html" class="card-link">
+            <a
+              href="../../Ala%60a/task/employee-profile/employee-profile.html"
+              data-home-service="Employees.html"
+              class="card-link"
+            >
+              <article class="card reveal">
+                <div class="icon">
+                  <i class="bi bi-people"></i>
+                </div>
 
-                <article class="card reveal">
+                <h3>View Employees</h3>
 
-                    <div class="icon">
+                <p>
+                  View employee information in an organized table and quickly
+                  search for employees.
+                </p>
 
-                        <i class="bi bi-people"></i>
+                <span class="service-link">
+                  View Employees
 
-                    </div>
-
-
-                    <h3>
-                        View Employees
-                    </h3>
-
-
-                    <p>
-
-                        View employee information in an organized
-                        table and quickly search for employees.
-
-                    </p>
-
-
-                    <span class="service-link">
-
-                        View Employees
-
-                        <i class="bi bi-arrow-right"></i>
-
-                    </span>
-
-                </article>
-
+                  <i class="bi bi-arrow-right"></i>
+                </span>
+              </article>
             </a>
-
-
 
             <!-- ================= SERVICE 3 ================= -->
 
-            <a href="../../Ahmad/policyEmp/policyEmp.html" data-home-service="Policies.html" class="card-link">
+            <a
+              href="../../Ahmad/policyEmp/policyEmp.html"
+              data-home-service="Policies.html"
+              class="card-link"
+            >
+              <article class="card reveal">
+                <div class="icon">
+                  <i class="bi bi-file-text"></i>
+                </div>
 
-                <article class="card reveal">
+                <h3>Company Policies</h3>
 
-                    <div class="icon">
+                <p>
+                  Explore company policies and guidelines to understand
+                  workplace rules and procedures.
+                </p>
 
-                        <i class="bi bi-file-text"></i>
+                <span class="service-link">
+                  View Policies
 
-                    </div>
-
-
-                    <h3>
-                        Company Policies
-                    </h3>
-
-
-                    <p>
-
-                        Explore company policies and guidelines
-                        to understand workplace rules and procedures.
-
-                    </p>
-
-
-                    <span class="service-link">
-
-                        View Policies
-
-                        <i class="bi bi-arrow-right"></i>
-
-                    </span>
-
-                </article>
-
+                  <i class="bi bi-arrow-right"></i>
+                </span>
+              </article>
             </a>
-
-
 
             <!-- ================= SERVICE 4 ================= -->
 
-            <a href="../../Lujain/TaskEmp/my-tasks.html" data-home-service="Tasks.html" class="card-link">
+            <a
+              href="../../Lujain/TaskEmp/my-tasks.html"
+              data-home-service="Tasks.html"
+              class="card-link"
+            >
+              <article class="card reveal">
+                <div class="icon">
+                  <i class="bi bi-list-check"></i>
+                </div>
 
-                <article class="card reveal">
+                <h3>Task Management</h3>
 
-                    <div class="icon">
+                <p>
+                  Create, view and update tasks to organize your work and keep
+                  track of your progress.
+                </p>
 
-                        <i class="bi bi-list-check"></i>
+                <span class="service-link">
+                  Manage Tasks
 
-                    </div>
-
-
-                    <h3>
-                        Task Management
-                    </h3>
-
-
-                    <p>
-
-                        Create, view and update tasks to organize
-                        your work and keep track of your progress.
-
-                    </p>
-
-
-                    <span class="service-link">
-
-                        Manage Tasks
-
-                        <i class="bi bi-arrow-right"></i>
-
-                    </span>
-
-                </article>
-
+                  <i class="bi bi-arrow-right"></i>
+                </span>
+              </article>
             </a>
-
-
 
             <!-- ================= SERVICE 5 ================= -->
 
-            <a href="../../Amani/employeeFeedback/FeedbackEmployee.html" data-home-service="Feedback.html" class="card-link">
+            <a
+              href="../../Amani/employeeFeedback/FeedbackEmployee.html"
+              data-home-service="Feedback.html"
+              class="card-link"
+            >
+              <article class="card reveal">
+                <div class="icon">
+                  <i class="bi bi-chat-square-text"></i>
+                </div>
 
-                <article class="card reveal">
+                <h3>Feedback System</h3>
 
-                    <div class="icon">
+                <p>
+                  Share your feedback through our contact form and help us
+                  improve the workplace.
+                </p>
 
-                        <i class="bi bi-chat-square-text"></i>
+                <span class="service-link">
+                  Give Feedback
 
-                    </div>
-
-
-                    <h3>
-                        Feedback System
-                    </h3>
-
-
-                    <p>
-
-                        Share your feedback through our contact
-                        form and help us improve the workplace.
-
-                    </p>
-
-
-                    <span class="service-link">
-
-                        Give Feedback
-
-                        <i class="bi bi-arrow-right"></i>
-
-                    </span>
-
-                </article>
-
+                  <i class="bi bi-arrow-right"></i>
+                </span>
+              </article>
             </a>
-
-
 
             <!-- ================= SERVICE 6 ================= -->
 
-            <a href="../../Amani/employee-meeting/meeting-employee.html" data-home-service="ZoomMeeting.html" class="card-link">
+            <a
+              href="../../Amani/employee-meeting/meeting-employee.html"
+              data-home-service="ZoomMeeting.html"
+              class="card-link"
+            >
+              <article class="card reveal">
+                <div class="icon">
+                  <i class="bi bi-camera-video"></i>
+                </div>
 
-                <article class="card reveal">
+                <h3>Zoom Meeting</h3>
 
-                    <div class="icon">
+                <p>
+                  Join and manage online Zoom meetings for team discussions and
+                  remote collaboration.
+                </p>
 
-                        <i class="bi bi-camera-video"></i>
+                <span class="service-link">
+                  Join Meeting
 
-                    </div>
-
-
-                    <h3>
-                        Zoom Meeting
-                    </h3>
-
-
-                    <p>
-
-                        Join and manage online Zoom meetings
-                        for team discussions and remote
-                        collaboration.
-
-                    </p>
-
-
-                    <span class="service-link">
-
-                        Join Meeting
-
-                        <i class="bi bi-arrow-right"></i>
-
-                    </span>
-
-                </article>
-
+                  <i class="bi bi-arrow-right"></i>
+                </span>
+              </article>
             </a>
-
-
+          </div>
         </div>
-
-    </div>
-
-</section>
-
-
-        <!-- =====================================================
-             4. OUR VALUES
-        ====================================================== -->
-
-        <section class="section" id="values">
-
-
-            <div class="container">
-
-
-                <!-- Section Heading -->
-
-                <div class="section-head reveal">
-
-
-                    <span class="tag">
-                        Our Values
-                    </span>
-
-
-                    <h2>
-                        What We Believe In
-                    </h2>
-
-
-                    <p>
-
-                        The principles that guide the way we build
-                        software and work with our clients.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <!-- Values -->
-
-                <div class="values">
-
-
-                    <!-- Value 1 -->
-
-                    <div class="value reveal">
-
-
-                        <span class="num">
-                            01
-                        </span>
-
-
-                        <h3>
-                            Quality
-                        </h3>
-
-
-                        <p>
-
-                            We focus on building reliable software
-                            with attention to detail.
-
-                        </p>
-
-
-                    </div>
-
-
-
-                    <!-- Value 2 -->
-
-                    <div class="value reveal">
-
-
-                        <span class="num">
-                            02
-                        </span>
-
-
-                        <h3>
-                            Collaboration
-                        </h3>
-
-
-                        <p>
-
-                            We work closely with clients and
-                            communicate throughout the project.
-
-                        </p>
-
-
-                    </div>
-
-
-
-                    <!-- Value 3 -->
-
-                    <div class="value reveal">
-
-
-                        <span class="num">
-                            03
-                        </span>
-
-
-                        <h3>
-                            Simplicity
-                        </h3>
-
-
-                        <p>
-
-                            We create solutions that are clear,
-                            practical and easy to use.
-
-                        </p>
-
-
-                    </div>
-
-
-
-                    <!-- Value 4 -->
-
-                    <div class="value reveal">
-
-
-                        <span class="num">
-                            04
-                        </span>
-
-
-                        <h3>
-                            Innovation
-                        </h3>
-
-
-                        <p>
-
-                            We use modern technologies to create
-                            useful digital solutions.
-
-                        </p>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
- <!-- =====================================================
-     HR SUPPORT
-====================================================== -->
-
-<section class="hr-support" id="hr-support">
-
-    <div class="hr-support-box">
-
-        <div class="hr-support-text">
-
-            <span class="hr-tag">
-                NEED HELP?
-            </span>
+      </section>
+      <section class="about-section" id="about">
+        <div class="about-container">
+          <!-- About Introduction -->
+
+          <div class="about-intro reveal">
+            <span class="section-tag"> ABOUT WORKFORCE </span>
 
             <h2>
-                Need help? We're here.
+              We turn ideas into
+
+              <span> digital solutions. </span>
             </h2>
 
             <p>
-                Have a question about your work, leave or company policies?
-                Contact HR or find a quick answer in our FAQs.
+              Workforce for IT Consulting is a software development company that
+              builds modern digital solutions for businesses and organizations.
+              We combine technology, design and problem-solving to create
+              software that solves real business needs.
             </p>
 
-        </div>
+            <!-- Experience -->
 
+            <div class="about-stat">
+              <strong> 8+ </strong>
 
-        <div class="hr-support-buttons">
+              <span> Years of experience </span>
+            </div>
+          </div>
 
-            <a href="#contact" class="hr-btn">
+          <!-- About Process -->
 
-                <i class="bi bi-headset"></i>
+          <div class="about-process">
+            <div class="process-line"></div>
 
-                Contact HR
+            <!-- Discover -->
 
-            </a>
+            <div class="process-item reveal">
+              <div class="process-number">01</div>
 
+              <div class="process-content">
+                <h3>Discover</h3>
 
-            <a href="../../Ahmad/LoginEmp/LoginEmp.html" class="hr-btn-outline">
-
-                Read FAQs
-
-                <i class="bi bi-arrow-right"></i>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-        <!-- =====================================================
-             5. FEEDBACK
-        ====================================================== -->
-
-        <section class="section light" id="feedback">
-
-
-            <div class="container">
-
-
-                <!-- Section Heading -->
-
-                <div class="section-head reveal">
-
-
-                    <span class="tag">
-                        Client Feedback
-                    </span>
-
-
-                    <h2>
-                        What Our Clients Say
-                    </h2>
-
-
-                    <p>
-
-                        Feedback from people who worked with
-                        Workforce.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <!-- Feedback Cards -->
-
-                <div class="cards three">
-
-
-                    <!-- Feedback 1 -->
-
-                    <article class="card review reveal">
-
-
-                        <div class="stars">
-                            ★★★★★
-                        </div>
-
-
-                        <p>
-
-                            "They delivered our HR system on time
-                            and it works perfectly. Very professional
-                            team."
-
-                        </p>
-
-
-                        <div class="person">
-
-
-                            <span class="avatar">
-                                S
-                            </span>
-
-
-                            <div>
-
-                                <strong>
-                                    Sara Ahmad
-                                </strong>
-
-                                <span>
-                                    Operations Manager
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- Feedback 2 -->
-
-                    <article class="card review reveal">
-
-
-                        <div class="stars">
-                            ★★★★★
-                        </div>
-
-
-                        <p>
-
-                            "Great communication from day one.
-                            They understood exactly what we wanted."
-
-                        </p>
-
-
-                        <div class="person">
-
-
-                            <span class="avatar">
-                                O
-                            </span>
-
-
-                            <div>
-
-                                <strong>
-                                    Omar Khaled
-                                </strong>
-
-                                <span>
-                                    Startup Founder
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                    </article>
-
-
-
-                    <!-- Feedback 3 -->
-
-                    <article class="card review reveal">
-
-
-                        <div class="stars">
-                            ★★★★★
-                        </div>
-
-
-                        <p>
-
-                            "Our mobile app is fast and beautiful.
-                            Support after launch was excellent too."
-
-                        </p>
-
-
-                        <div class="person">
-
-
-                            <span class="avatar">
-                                R
-                            </span>
-
-
-                            <div>
-
-                                <strong>
-                                    Rana Yousef
-                                </strong>
-
-                                <span>
-                                    Product Owner
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                    </article>
-
-
-                </div>
-
+                <p>
+                  We understand the business, its goals and the problems that
+                  need to be solved before writing a single line of code.
+                </p>
+              </div>
             </div>
 
-        </section>
+            <!-- Build -->
 
+            <div class="process-item reveal">
+              <div class="process-number">02</div>
 
+              <div class="process-content">
+                <h3>Build</h3>
+
+                <p>
+                  Our developers turn ideas into reliable web, mobile and custom
+                  software solutions using modern technologies.
+                </p>
+              </div>
+            </div>
+
+            <!-- Deliver -->
+
+            <div class="process-item reveal">
+              <div class="process-number">03</div>
+
+              <div class="process-content">
+                <h3>Deliver</h3>
+
+                <p>
+                  We test, improve and deliver a clean, responsive and practical
+                  product ready for real users.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="values">
+        <div class="container">
+          <!-- Section Heading -->
+
+          <div class="section-head reveal">
+            <span class="tag"> Our Values </span>
+
+            <h2>What We Believe In</h2>
+
+            <p>
+              The principles that guide the way we build software and work with
+              our clients.
+            </p>
+          </div>
+
+          <!-- Values -->
+
+          <div class="values">
+            <!-- Value 1 -->
+
+            <div class="value reveal">
+              <span class="num"> 01 </span>
+
+              <h3>Quality</h3>
+
+              <p>
+                We focus on building reliable software with attention to detail.
+              </p>
+            </div>
+
+            <!-- Value 2 -->
+
+            <div class="value reveal">
+              <span class="num"> 02 </span>
+
+              <h3>Collaboration</h3>
+
+              <p>
+                We work closely with clients and communicate throughout the
+                project.
+              </p>
+            </div>
+
+            <!-- Value 3 -->
+
+            <div class="value reveal">
+              <span class="num"> 03 </span>
+
+              <h3>Simplicity</h3>
+
+              <p>
+                We create solutions that are clear, practical and easy to use.
+              </p>
+            </div>
+
+            <!-- Value 4 -->
+
+            <div class="value reveal">
+              <span class="num"> 04 </span>
+
+              <h3>Innovation</h3>
+
+              <p>
+                We use modern technologies to create useful digital solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section light" id="feedback">
+        <div class="container">
+          <!-- Section Heading -->
+
+          <div class="section-head reveal">
+            <span class="tag"> Client Feedback </span>
+
+            <h2>What Our Clients Say</h2>
+
+            <p>Feedback from people who worked with Workforce.</p>
+          </div>
+
+          <!-- Feedback Cards -->
+
+          <div class="cards three">
+            <!-- Feedback 1 -->
+
+            <article class="card review reveal">
+              <div class="stars">★★★★★</div>
+
+              <p>
+                "They delivered our HR system on time and it works perfectly.
+                Very professional team."
+              </p>
+
+              <div class="person">
+                <span class="avatar"> S </span>
+
+                <div>
+                  <strong> Sara Ahmad </strong>
+
+                  <span> Operations Manager </span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Feedback 2 -->
+
+            <article class="card review reveal">
+              <div class="stars">★★★★★</div>
+
+              <p>
+                "Great communication from day one. They understood exactly what
+                we wanted."
+              </p>
+
+              <div class="person">
+                <span class="avatar"> O </span>
+
+                <div>
+                  <strong> Omar Khaled </strong>
+
+                  <span> Startup Founder </span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Feedback 3 -->
+
+            <article class="card review reveal">
+              <div class="stars">★★★★★</div>
+
+              <p>
+                "Our mobile app is fast and beautiful. Support after launch was
+                excellent too."
+              </p>
+
+              <div class="person">
+                <span class="avatar"> R </span>
+
+                <div>
+                  <strong> Rana Yousef </strong>
+
+                  <span> Product Owner </span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
-<script src="HomePage.js"></script><script src="home-workspace.js"></script></body></html>
+    <script src="HomePage.js"></script>
+    <script src="home-workspace.js"></script>
+  </body>
+</html>

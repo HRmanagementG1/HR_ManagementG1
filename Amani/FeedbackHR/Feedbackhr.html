@@ -1,141 +1,116 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Workforce | Feedback</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="FeedbackHR.css" />
-  <link rel="stylesheet" href="../../Shared/hr_dashboard.css" />
-  <script defer src="../../Shared/hr_dashboard.js"></script>
-  <script defer src="FeedbackHR.js"></script>
-<link rel="stylesheet" href="../../Shared/theme.css"><script defer src="../../Shared/workspace.js"></script><script defer src="../../Shared/access.js"></script><script src="../../Shared/site-shell.js" defer></script></head>
-<body class="hr-workspace-page" data-workspace-role="HR">
-  <div data-hr-dashboard-sidebar data-active-page="feedback"></div>
-  <div class="hr-dashboard-content">
-    <div data-hr-dashboard-topbar data-search-placeholder="Search feedback…" data-search-label="Search feedback" data-search-target=".feedback-search"></div>
-<section class="feedback-inbox">
-
-    <!-- Header -->
-    <div class="feedback-header">
-
-        <div class="header-content">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Workforce | Feedback</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="FeedbackHR.css" />
+    <link rel="stylesheet" href="../../Shared/hr_dashboard.css" />
+    <script defer src="../../Shared/hr_dashboard.js"></script>
+    <script defer src="FeedbackHR.js"></script>
+    <link rel="stylesheet" href="../../Shared/theme.css" />
+    <script defer src="../../Shared/workspace.js"></script>
+    <script defer src="../../Shared/access.js"></script>
+    <script src="../../Shared/site-shell.js" defer></script>
+  </head>
+  <body class="hr-workspace-page" data-workspace-role="HR">
+    <div data-hr-dashboard-sidebar data-active-page="feedback"></div>
+    <div class="hr-dashboard-content">
+      <div
+        data-hr-dashboard-topbar
+        data-search-placeholder="Search feedback…"
+        data-search-label="Search feedback"
+        data-search-target=".feedback-search"
+      ></div>
+      <section class="feedback-inbox">
+        <!-- Header -->
+        <div class="feedback-header">
+          <div class="header-content">
             <span class="breadcrumb">
-                PEOPLE OPERATIONS / EMPLOYEE FEEDBACK
+              PEOPLE OPERATIONS / EMPLOYEE FEEDBACK
             </span>
 
             <h1>Feedback & Employee Support Inbox</h1>
 
             <p>
-                Review anonymous and direct employee feedback,
-                workplace suggestions, and support inquiries.
+              Review anonymous and direct employee feedback, workplace
+              suggestions, and support inquiries.
             </p>
+          </div>
         </div>
 
-
-
-    </div>
-
-
-    <!-- Statistics -->
-    <div class="feedback-stats">
-
-        <div class="stat-card">
-            <span class="stat-title">
-                TOTAL FEEDBACK
-            </span>
+        <!-- Statistics -->
+        <div class="feedback-stats">
+          <div class="stat-card">
+            <span class="stat-title"> TOTAL FEEDBACK </span>
 
             <div class="stat-number">
-                18
-                <small>+12% this mo</small>
+              18
+              <small>+12% this mo</small>
             </div>
 
             <p>All active submissions</p>
-        </div>
+          </div>
 
+          <div class="stat-card">
+            <span class="stat-title"> UNREAD / ACTION REQ. </span>
 
-        <div class="stat-card">
-            <span class="stat-title">
-                UNREAD / ACTION REQ.
-            </span>
+            <div class="stat-number">4</div>
 
-            <div class="stat-number">
-                4
-            </div>
-
-            <span class="action-badge">
-                Requires Action
-            </span>
+            <span class="action-badge"> Requires Action </span>
 
             <p>Waiting for your review</p>
-        </div>
+          </div>
 
+          <div class="stat-card">
+            <span class="stat-title"> POSITIVE / KUDOS </span>
 
-        <div class="stat-card">
-            <span class="stat-title">
-                POSITIVE / KUDOS
-            </span>
+            <div class="stat-number">12</div>
 
-            <div class="stat-number">
-                12
-            </div>
-
-            <span class="kudos-text">
-                Team appreciation
-            </span>
+            <span class="kudos-text"> Team appreciation </span>
 
             <p>Positive feedback from your team</p>
+          </div>
         </div>
 
-    </div>
+        <!-- Filters -->
+        <div class="feedback-container">
+          <div class="feedback-filters">
+            <button class="filter active">All Feedback (18)</button>
 
+            <button class="filter">Unread (4)</button>
 
-    <!-- Filters -->
-    <div class="feedback-container">
+            <button class="filter">Anonymous</button>
 
-        <div class="feedback-filters">
+            <button class="filter">Support Requests</button>
 
-            <button class="filter active">
-                All Feedback (18)
-            </button>
-
-            <button class="filter">
-                Unread (4)
-            </button>
-
-            <button class="filter">
-                Anonymous
-            </button>
-
-            <button class="filter">
-                Support Requests
-            </button>
-
-            <button class="filter">
-                Kudos
-            </button>
+            <button class="filter">Kudos</button>
 
             <input
-                type="text"
-                class="feedback-search"
-                placeholder="⌕ Search feedback..."
-            >
+              type="text"
+              class="feedback-search"
+              placeholder="⌕ Search feedback..."
+            />
+          </div>
 
+          <!-- Feedback List -->
+
+          <div class="feedback-list"></div>
+          <!-- Pagination -->
         </div>
-
-
-        <!-- Feedback List -->
-
-        <div class="feedback-list"></div>
-<!-- Pagination -->
-
-
-
+      </section>
     </div>
-
-</section>
-  </div>
-</body>
+  </body>
 </html>

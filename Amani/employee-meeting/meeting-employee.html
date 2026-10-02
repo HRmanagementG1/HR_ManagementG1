@@ -1,372 +1,212 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>HR Meeting</title>
 
+    <link rel="stylesheet" href="meeting-employee.css" />
+
     <link
-        rel="stylesheet"
-        href="meeting-employee.css"
-    >
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="../../Shared/employee_header.css" />
+    <script defer src="../../Shared/employee_header.js"></script>
+    <link rel="stylesheet" href="../../Shared/theme.css" />
+    <script defer src="../../Shared/workspace.js"></script>
+    <script defer src="../../Shared/access.js"></script>
+    <script src="../../Shared/site-shell.js" defer></script>
+  </head>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="../../Shared/employee_header.css" />
-  <script defer src="../../Shared/employee_header.js"></script>
-<link rel="stylesheet" href="../../Shared/theme.css"><script defer src="../../Shared/workspace.js"></script><script defer src="../../Shared/access.js"></script><script src="../../Shared/site-shell.js" defer></script></head>
-
-
-<body data-workspace-role="Employee">
-  <div data-employee-header data-active-page="meetings"></div>
+  <body data-workspace-role="Employee">
+    <div data-employee-header data-active-page="meetings"></div>
 
     <section class="meeting-page">
+      <!-- HERO -->
 
+      <section class="meeting-hero">
+        <p>Home / HR Meeting</p>
 
-        <!-- HERO -->
+        <h1>Book a Meeting with HR</h1>
 
-        <section class="meeting-hero">
+        <p>
+          Schedule a meeting with HR to discuss your questions, concerns or any
+          support you need.
+        </p>
+      </section>
 
-            <p>Home / HR Meeting</p>
+      <!-- TOP SECTION -->
 
-            <h1>Book a Meeting with HR</h1>
+      <section class="meeting-top">
+        <!-- REQUEST MEETING -->
 
-            <p>
-                Schedule a meeting with HR to discuss your
-                questions, concerns or any support you need.
-            </p>
+        <div class="request-card">
+          <div class="section-title">
+            <div class="icon">📅</div>
 
-        </section>
+            <div>
+              <h2>Request a Meeting</h2>
 
+              <p>Fill in the details below to request a meeting with HR.</p>
+            </div>
+          </div>
 
+          <form id="meeting-form">
+            <!-- MEETING TOPIC -->
 
-        <!-- TOP SECTION -->
+            <div class="form-group">
+              <label for="meeting-topic"> Meeting Topic </label>
 
-        <section class="meeting-top">
+              <select id="meeting-topic" required>
+                <option value="">Select a topic</option>
 
+                <option value="Performance Discussion">
+                  Performance Discussion
+                </option>
 
-            <!-- REQUEST MEETING -->
+                <option value="Leave Discussion">Leave Discussion</option>
 
-            <div class="request-card">
+                <option value="Career Development">Career Development</option>
 
-                <div class="section-title">
+                <option value="Policy Inquiry">Policy Inquiry</option>
 
-                    <div class="icon">
-                        📅
-                    </div>
-
-                    <div>
-
-                        <h2>Request a Meeting</h2>
-
-                        <p>
-                            Fill in the details below to request
-                            a meeting with HR.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <form id="meeting-form">
-
-
-                    <!-- MEETING TOPIC -->
-
-                    <div class="form-group">
-
-                        <label for="meeting-topic">
-                            Meeting Topic
-                        </label>
-
-                        <select
-                            id="meeting-topic"
-                            required
-                        >
-
-                            <option value="">
-                                Select a topic
-                            </option>
-
-                            <option value="Performance Discussion">
-                                Performance Discussion
-                            </option>
-
-                            <option value="Leave Discussion">
-                                Leave Discussion
-                            </option>
-
-                            <option value="Career Development">
-                                Career Development
-                            </option>
-
-                            <option value="Policy Inquiry">
-                                Policy Inquiry
-                            </option>
-
-                            <option value="General Support">
-                                General Support
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-
-                    <!-- REASON -->
-
-                    <div class="form-group">
-
-                        <label for="meeting-reason">
-                            Reason / Message
-                        </label>
-
-                        <textarea
-                            id="meeting-reason"
-                            maxlength="500"
-                            placeholder="Please share the reason for your meeting..."
-                            required
-                        ></textarea>
-
-                        <span id="character-count">
-                            0/500
-                        </span>
-
-                    </div>
-
-
-
-                    <!-- DATE AND TIME -->
-
-                    <div class="date-time">
-
-                        <div class="form-group">
-
-                            <label for="meeting-date">
-                                Preferred Date
-                            </label>
-
-                            <input
-                                type="date"
-                                id="meeting-date"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="meeting-time">
-                                Preferred Time
-                            </label>
-
-                            <input
-                                type="time"
-                                id="meeting-time"
-                                required
-                            >
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- SUBMIT -->
-
-                    <button
-                        type="submit"
-                        id="request-meeting"
-                    >
-                        Request Meeting
-                    </button>
-
-
-                </form>
-
+                <option value="General Support">General Support</option>
+              </select>
             </div>
 
+            <!-- REASON -->
 
+            <div class="form-group">
+              <label for="meeting-reason"> Reason / Message </label>
 
-            <!-- UPCOMING MEETING -->
+              <textarea
+                id="meeting-reason"
+                maxlength="500"
+                placeholder="Please share the reason for your meeting..."
+                required
+              ></textarea>
 
-            <div class="upcoming-card">
-
-                <div class="section-title">
-
-                    <div class="icon">
-                        🕐
-                    </div>
-
-                    <div>
-
-                        <h2>Your Upcoming Meeting</h2>
-
-                        <p>
-                            Your confirmed HR meeting will appear here.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- JS WILL ADD THE MEETING HERE -->
-
-                <div
-                    id="upcoming-meeting"
-                    class="upcoming-meeting"
-                >
-
-                    <p class="no-meeting">
-                        You don't have an upcoming meeting.
-                    </p>
-
-                </div>
-
+              <span id="character-count"> 0/500 </span>
             </div>
 
+            <!-- DATE AND TIME -->
 
-        </section>
+            <div class="date-time">
+              <div class="form-group">
+                <label for="meeting-date"> Preferred Date </label>
 
+                <input type="date" id="meeting-date" required />
+              </div>
 
+              <div class="form-group">
+                <label for="meeting-time"> Preferred Time </label>
 
-        <!-- MEETING HISTORY -->
-
-        <section class="history-card">
-
-
-            <div class="history-header">
-
-                <div class="section-title">
-
-                    <div class="icon">
-                        ↶
-                    </div>
-
-                    <div>
-
-                        <h2>Meeting History</h2>
-
-                        <p>
-                            View your previous meeting requests.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FILTER -->
-
-                <select id="status-filter">
-
-                    <option value="all">
-                        All Status
-                    </option>
-
-                    <option value="Pending">
-                        Pending
-                    </option>
-
-                    <option value="Confirmed">
-                        Confirmed
-                    </option>
-
-                    <option value="Completed">
-                        Completed
-                    </option>
-
-                    <option value="Cancelled">
-                        Cancelled
-                    </option>
-
-                </select>
-
+                <input type="time" id="meeting-time" required />
+              </div>
             </div>
 
+            <!-- SUBMIT -->
 
+            <button type="submit" id="request-meeting">Request Meeting</button>
+          </form>
+        </div>
 
-            <!-- TABLE -->
+        <!-- UPCOMING MEETING -->
 
-            <div class="table-container">
+        <div class="upcoming-card">
+          <div class="section-title">
+            <div class="icon">🕐</div>
 
-                <table>
+            <div>
+              <h2>Your Upcoming Meeting</h2>
 
-                    <thead>
+              <p>Your confirmed HR meeting will appear here.</p>
+            </div>
+          </div>
 
-                        <tr>
+          <!-- JS WILL ADD THE MEETING HERE -->
 
-                            <th>Topic</th>
+          <div id="upcoming-meeting" class="upcoming-meeting">
+            <p class="no-meeting">You don't have an upcoming meeting.</p>
+          </div>
+        </div>
+      </section>
 
-                            <th>Date</th>
+      <!-- MEETING HISTORY -->
 
-                            <th>Time</th>
+      <section class="history-card">
+        <div class="history-header">
+          <div class="section-title">
+            <div class="icon">↶</div>
 
-                            <th>HR Representative</th>
+            <div>
+              <h2>Meeting History</h2>
 
-                            <th>Status</th>
+              <p>View your previous meeting requests.</p>
+            </div>
+          </div>
 
-                            <th>Meeting Link</th>
+          <!-- FILTER -->
 
-                            <th>Actions</th>
+          <select id="status-filter">
+            <option value="all">All Status</option>
 
-                        </tr>
+            <option value="Pending">Pending</option>
 
-                    </thead>
+            <option value="Confirmed">Confirmed</option>
 
+            <option value="Completed">Completed</option>
 
-                    <tbody id="meeting-history">
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
 
-                        <!--
+        <!-- TABLE -->
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Topic</th>
+
+                <th>Date</th>
+
+                <th>Time</th>
+
+                <th>HR Representative</th>
+
+                <th>Status</th>
+
+                <th>Meeting Link</th>
+
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="meeting-history">
+              <!--
                             JavaScript will display
                             the employee's meetings here.
                         -->
+            </tbody>
+          </table>
+        </div>
 
-                    </tbody>
+        <!-- NO HISTORY -->
 
-                </table>
+        <div id="empty-history" class="empty-history">
+          <p>No meeting history yet.</p>
 
-            </div>
-
-
-            <!-- NO HISTORY -->
-
-            <div
-                id="empty-history"
-                class="empty-history"
-            >
-
-                <p>No meeting history yet.</p>
-
-                <span>
-                    Your meeting requests will appear here.
-                </span>
-
-            </div>
-
-
-        </section>
-
-
+          <span> Your meeting requests will appear here. </span>
+        </div>
+      </section>
     </section>
-
-
 
     <!-- JAVASCRIPT -->
 
     <script defer src="meeting-employee.js"></script>
-
-</body>
-
+  </body>
 </html>

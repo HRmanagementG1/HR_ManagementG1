@@ -1,131 +1,106 @@
-
 // =========================
 // GET ELEMENTS
 // =========================
 
-const totalFeedback =
-    document.querySelector(".stat-card:nth-child(1) .stat-number");
+const totalFeedback = document.querySelector(
+  ".stat-card:nth-child(1) .stat-number",
+);
 
-const unreadFeedback =
-    document.querySelector(".stat-card:nth-child(2) .stat-number");
+const unreadFeedback = document.querySelector(
+  ".stat-card:nth-child(2) .stat-number",
+);
 
-const kudosFeedback =
-    document.querySelector(".stat-card:nth-child(3) .stat-number");
+const kudosFeedback = document.querySelector(
+  ".stat-card:nth-child(3) .stat-number",
+);
 
-const feedbackList =
-    document.querySelector(".feedback-list");
+const feedbackList = document.querySelector(".feedback-list");
 
-const searchInput =
-    document.querySelector(".feedback-search");
+const searchInput = document.querySelector(".feedback-search");
 
-const filters =
-    document.querySelectorAll(".filter");
-
+const filters = document.querySelectorAll(".filter");
 
 // =========================
 // GET FEEDBACK
 // =========================
 
-let feedbacks =
-    JSON.parse(localStorage.getItem("feedback")) || [];
-
+let feedbacks = JSON.parse(localStorage.getItem("feedback")) || [];
 
 // =========================
 // DISPLAY STATISTICS
 // =========================
 
 function displayStatistics() {
+  const total = feedbacks.length;
 
-    const total = feedbacks.length;
+  const unread = feedbacks.filter(function (feedback) {
+    return feedback.read === false;
+  }).length;
 
-    const unread =
-        feedbacks.filter(function (feedback) {
-            return feedback.read === false;
-        }).length;
+  const kudos = feedbacks.filter(function (feedback) {
+    return feedback.topic === "Kudos";
+  }).length;
 
-    const kudos =
-        feedbacks.filter(function (feedback) {
-            return feedback.topic === "Kudos";
-        }).length;
+  totalFeedback.textContent = total;
 
+  unreadFeedback.textContent = unread;
 
-    totalFeedback.textContent = total;
-
-    unreadFeedback.textContent = unread;
-
-    kudosFeedback.textContent = kudos;
-    filters[0].textContent = `All Feedback (${total})`;
-    filters[1].textContent = `Unread (${unread})`;
+  kudosFeedback.textContent = kudos;
+  filters[0].textContent = `All Feedback (${total})`;
+  filters[1].textContent = `Unread (${unread})`;
 }
-
 
 // =========================
 // DISPLAY FEEDBACK
 // =========================
 
 function displayFeedback(data = feedbacks) {
+  feedbackList.innerHTML = "";
 
-    feedbackList.innerHTML = "";
-
-
-    if (data.length === 0) {
-
-        feedbackList.innerHTML = `
+  if (data.length === 0) {
+    feedbackList.innerHTML = `
             <p style="text-align:center;">
                 No feedback found.
             </p>
         `;
 
-        return;
+    return;
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    const feedback = data[i];
+
+    let initials = "AE";
+
+    if (feedback.name) {
+      const words = feedback.name.split(" ");
+
+      initials = words
+        .map(function (word) {
+          return word[0];
+        })
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
     }
 
+    let typeClass = "suggestion";
 
-    for (let i = 0; i < data.length; i++) {
+    if (feedback.topic === "Kudos") {
+      typeClass = "kudos";
+    }
 
-        const feedback = data[i];
+    if (feedback.topic === "Support") {
+      typeClass = "support";
+    }
 
+    const status = feedback.read ? "Reviewed" : "◉ Unread";
 
-        let initials = "AE";
+    const feedbackCard = document.createElement("div");
 
-        if (feedback.name) {
+    feedbackCard.className = "feedback-card";
 
-            const words =
-                feedback.name.split(" ");
-
-            initials =
-                words
-                    .map(function (word) {
-                        return word[0];
-                    })
-                    .join("")
-                    .substring(0, 2)
-                    .toUpperCase();
-        }
-
-
-        let typeClass = "suggestion";
-
-        if (feedback.topic === "Kudos") {
-            typeClass = "kudos";
-        }
-
-        if (feedback.topic === "Support") {
-            typeClass = "support";
-        }
-
-
-        const status =
-            feedback.read ? "Reviewed" : "◉ Unread";
-
-
-        const feedbackCard =
-            document.createElement("div");
-
-        feedbackCard.className =
-            "feedback-card";
-
-
-        feedbackCard.innerHTML = `
+    feedbackCard.innerHTML = `
 
             <div class="feedback-top">
 
@@ -173,13 +148,11 @@ function displayFeedback(data = feedbacks) {
                 <div class="feedback-actions">
 
                     ${
-                        !feedback.read
-                        ?
-                        `<button onclick="markAsRead(${feedback.id})">
+                      !feedback.read
+                        ? `<button onclick="markAsRead(${feedback.id})">
                             Mark as Read
                         </button>`
-                        :
-                        ""
+                        : ""
                     }
 
 
@@ -187,13 +160,11 @@ function displayFeedback(data = feedbacks) {
 
 
                     ${
-                        !feedback.read
-                        ?
-                        `<button onclick="assignToHR(${feedback.id})">
+                      !feedback.read
+                        ? `<button onclick="assignToHR(${feedback.id})">
                             Assign to HR Lead
                         </button>`
-                        :
-                        ""
+                        : ""
                     }
 
                 </div>
@@ -201,214 +172,113 @@ function displayFeedback(data = feedbacks) {
             </div>
         `;
 
-
-        feedbackList.appendChild(feedbackCard);
-    }
+    feedbackList.appendChild(feedbackCard);
+  }
 }
-
 
 // =========================
 // MARK AS READ
 // =========================
 
 function markAsRead(id) {
+  const feedback = feedbacks.find(function (feedback) {
+    return feedback.id === id;
+  });
 
-    const feedback =
-        feedbacks.find(function (feedback) {
-            return feedback.id === id;
-        });
+  if (!feedback) {
+    return;
+  }
 
+  feedback.read = true;
 
-    if (!feedback) {
-        return;
-    }
+  localStorage.setItem("feedback", JSON.stringify(feedbacks));
 
+  displayStatistics();
 
-    feedback.read = true;
-
-
-    localStorage.setItem(
-        "feedback",
-        JSON.stringify(feedbacks)
-    );
-
-
-    displayStatistics();
-
-    displayFeedback(feedbacks);
+  displayFeedback(feedbacks);
 }
-
 
 // =========================
 // REPLY BY EMAIL
 // =========================
-
-
-
 
 // =========================
 // ASSIGN TO HR
 // =========================
 
 function assignToHR(id) {
+  const feedback = feedbacks.find(function (feedback) {
+    return feedback.id === id;
+  });
 
-    const feedback =
-        feedbacks.find(function (feedback) {
-            return feedback.id === id;
-        });
+  if (!feedback) {
+    return;
+  }
 
+  feedback.assignedTo = "HR Lead";
 
-    if (!feedback) {
-        return;
-    }
+  localStorage.setItem("feedback", JSON.stringify(feedbacks));
 
-
-    feedback.assignedTo = "HR Lead";
-
-
-    localStorage.setItem(
-        "feedback",
-        JSON.stringify(feedbacks)
-    );
-
-
-    alert("Feedback assigned to HR Lead.");
+  alert("Feedback assigned to HR Lead.");
 }
-
 
 // =========================
 // SEARCH
 // =========================
 
-searchInput.addEventListener(
-    "input",
-    function () {
+searchInput.addEventListener("input", function () {
+  const searchText = searchInput.value.toLowerCase().trim();
 
-        const searchText =
-            searchInput.value
-                .toLowerCase()
-                .trim();
+  const filtered = feedbacks.filter(function (feedback) {
+    return (
+      (feedback.name || "").toLowerCase().includes(searchText) ||
+      (feedback.message || "").toLowerCase().includes(searchText) ||
+      (feedback.topic || "").toLowerCase().includes(searchText)
+    );
+  });
 
-
-        const filtered =
-            feedbacks.filter(function (feedback) {
-
-                return (
-                    (feedback.name || "")
-                        .toLowerCase()
-                        .includes(searchText)
-
-                    ||
-
-                    (feedback.message || "")
-                        .toLowerCase()
-                        .includes(searchText)
-
-                    ||
-
-                    (feedback.topic || "")
-                        .toLowerCase()
-                        .includes(searchText)
-                );
-            });
-
-
-        displayFeedback(filtered);
-    }
-);
-
+  displayFeedback(filtered);
+});
 
 // =========================
 // FILTERS
 // =========================
 
 filters.forEach(function (filter) {
+  filter.addEventListener("click", function () {
+    filters.forEach(function (button) {
+      button.classList.remove("active");
+    });
 
-    filter.addEventListener(
-        "click",
-        function () {
+    filter.classList.add("active");
 
-            filters.forEach(function (button) {
-                button.classList.remove("active");
-            });
+    const filterText = filter.textContent.toLowerCase().trim();
 
+    let filtered = feedbacks;
 
-            filter.classList.add("active");
+    if (filterText.startsWith("all")) {
+      filtered = feedbacks;
+    } else if (filterText.startsWith("unread")) {
+      filtered = feedbacks.filter(function (feedback) {
+        return feedback.read === false;
+      });
+    } else if (filterText.startsWith("anonymous")) {
+      filtered = feedbacks.filter(function (feedback) {
+        return !feedback.name || feedback.name === "Anonymous Employee";
+      });
+    } else if (filterText.startsWith("support")) {
+      filtered = feedbacks.filter(function (feedback) {
+        return feedback.topic === "Support";
+      });
+    } else if (filterText.startsWith("kudos")) {
+      filtered = feedbacks.filter(function (feedback) {
+        return feedback.topic === "Kudos";
+      });
+    }
 
-
-            const filterText =
-                filter.textContent
-                    .toLowerCase()
-                    .trim();
-
-
-            let filtered = feedbacks;
-
-
-            if (filterText.startsWith("all")) {
-
-                filtered = feedbacks;
-
-            }
-
-
-            else if (filterText.startsWith("unread")) {
-
-                filtered =
-                    feedbacks.filter(function (feedback) {
-
-                        return feedback.read === false;
-
-                    });
-
-            }
-
-
-            else if (filterText.startsWith("anonymous")) {
-
-                filtered =
-                    feedbacks.filter(function (feedback) {
-
-                        return (
-                            !feedback.name ||
-                            feedback.name === "Anonymous Employee"
-                        );
-
-                    });
-
-            }
-
-
-            else if (filterText.startsWith("support")) {
-
-                filtered =
-                    feedbacks.filter(function (feedback) {
-
-                        return feedback.topic === "Support";
-
-                    });
-
-            }
-
-
-            else if (filterText.startsWith("kudos")) {
-
-                filtered =
-                    feedbacks.filter(function (feedback) {
-
-                        return feedback.topic === "Kudos";
-
-                    });
-
-            }
-
-
-            displayFeedback(filtered);
-        }
-    );
-
+    displayFeedback(filtered);
+  });
 });
-
 
 // =========================
 // INITIAL DISPLAY

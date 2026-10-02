@@ -4,6 +4,7 @@
     const css = document.createElement('link');
     css.rel = 'stylesheet'; css.href = new URL('Deyaa/Footer/Footer.css', root);
     document.head.append(css);
+    const brand=document.createElement('link');brand.rel='stylesheet';brand.href=new URL('Shared/brand.css',root);document.head.append(brand);
     const response = await fetch(new URL('Deyaa/Footer/Footer.html', root));
     if (!response.ok) throw new Error('Could not load footer');
     const template = document.createElement('template'); template.innerHTML = await response.text();
