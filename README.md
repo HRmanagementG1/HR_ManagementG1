@@ -51,7 +51,9 @@ password changes, role routing, and responsive navigation. Optional screenshots
 are written when `WORKFLOW_SCREENSHOT_DIR` names an output directory.
 
 The shared charcoal/yellow palette lives in `Shared/brand.css`. The homepage
-particle animation pauses when offscreen and respects reduced-motion preferences.
+car-and-road animation uses JavaScript canvas, pauses when offscreen and respects
+reduced-motion preferences. Scrolling shifts the driving viewpoint. The homepage
+uses the locally bundled Bootstrap 5.3.3 stylesheet for its hero layout and controls.
 The Powered By page uses the supplied `Deyaa/team.json` names and roles. Portraits
 were not included, so cards show initials. To enable a portrait, add its image at
 the path in `image` and set `portraitAvailable: true` on that team member.
