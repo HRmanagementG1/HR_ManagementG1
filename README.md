@@ -49,3 +49,9 @@ The browser check covers home/login navigation, employee creation and salary,
 assignment and task visibility, file upload/download, review and revisions,
 password changes, role routing, and responsive navigation. Optional screenshots
 are written when `WORKFLOW_SCREENSHOT_DIR` names an output directory.
+
+The shared charcoal/yellow palette lives in `Shared/brand.css`. The homepage
+particle animation pauses when offscreen and respects reduced-motion preferences.
+The Powered By page uses the supplied `Deyaa/team.json` names and roles. Portraits
+were not included, so cards show initials. To enable a portrait, add its image at
+the path in `image` and set `portraitAvailable: true` on that team member.

@@ -279,6 +279,26 @@ const server = http.createServer((req,res) => {
     assert.equal(await page.locator('footer [data-footer-service]').count(),6);
     await page.locator('#poweredBy').click();
     await page.waitForURL('**/PoweredBy.html');
+    await page.waitForFunction(() => document.querySelectorAll('.team-card').length === 6);
+    assert((await page.locator('#teamContainer').textContent()).includes('Deyaa Alwardat'));
+    assert((await page.locator('#teamContainer').textContent()).includes('Ahmad Smairat'));
+    if(process.env.WORKFLOW_SCREENSHOT_DIR) await page.screenshot({path:path.join(process.env.WORKFLOW_SCREENSHOT_DIR,'team.png'),fullPage:true});
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),'Team page must fit mobile');
+    await page.setViewportSize({width:1200,height:900});
+    await open('/Deyaa/HomePage/HomePage.html');
+    for(const section of ['home','services','about','values','feedback']) assert.equal(await page.locator(`section#${section}`).count(),1);
+    await page.locator('#motion-toggle').click();
+    assert.equal(await page.locator('#motion-toggle').getAttribute('aria-pressed'),'true');
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await page.reload();
+    assert.equal(await page.locator('#motion-toggle').getAttribute('aria-pressed'),'true');
+    await page.emulateMedia({reducedMotion:'no-preference'});
+    await page.evaluate(() => window.siteFooterReady);
+    if(process.env.WORKFLOW_SCREENSHOT_DIR) await page.screenshot({path:path.join(process.env.WORKFLOW_SCREENSHOT_DIR,'home-redesign.png'),fullPage:true});
+    if(process.env.WORKFLOW_SCREENSHOT_DIR) await page.screenshot({path:path.join(process.env.WORKFLOW_SCREENSHOT_DIR,'home-redesign-hero.png')});
+    const moving=await page.evaluate(async()=>{const canvas=document.querySelector('#hero-motion');const before=canvas.toDataURL();await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));return before!==canvas.toDataURL();});
+    assert(moving,'Hero particles should animate when reduced motion is off');
     await login('Employee','omar@workforce.example','UpdatedOmar123');
     assert.equal(await page.locator('[data-employee-name]').textContent(),'Omar Khalil');
     for(const link of ['profile','information','leaves','policy','meetings','feedback','tasks']) {
