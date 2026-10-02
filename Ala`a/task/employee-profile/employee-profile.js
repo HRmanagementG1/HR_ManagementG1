@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const avatar = document.getElementById('profileAvatar');
   avatar.textContent = user.name.split(/\s+/).map(word => word[0]).slice(0,2).join('');
   if (user.image && /^(https?:|data:image\/)/.test(user.image)) { const img = document.createElement('img'); img.src = user.image; img.alt = user.name; avatar.replaceChildren(img); }
-  document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+  if (document.getElementById('copyrightYear')) document.getElementById('copyrightYear').textContent = new Date().getFullYear();
   document.querySelectorAll('[data-toggle]').forEach(button => button.addEventListener('click', () => {
     const input = document.getElementById(button.dataset.toggle);
     const show = input.type === 'password'; input.type = show ? 'text' : 'password';

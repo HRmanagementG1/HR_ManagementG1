@@ -44,6 +44,7 @@
   }
 
   function setupSidebar(sidebar, activePage) {
+    sidebar.querySelectorAll('img[src]').forEach(img => img.src = new URL(img.getAttribute('src'), sharedUrl));
     // Navigation links in the HTML are relative to the Shared folder.
     sidebar.querySelectorAll('a[href]').forEach(link => {
       link.href = new URL(link.getAttribute('href'), sharedUrl).href;
@@ -64,6 +65,7 @@
   }
 
   function setupHeader(header, placeholder) {
+    header.querySelectorAll('a[href]').forEach(link => link.href = new URL(link.getAttribute('href'), sharedUrl));
     const search = header.querySelector('#global-search');
     search.placeholder = placeholder.dataset.searchPlaceholder || 'Search workspace…';
     search.setAttribute('aria-label', placeholder.dataset.searchLabel || 'Search workspace');

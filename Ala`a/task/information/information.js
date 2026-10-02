@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     item.querySelector('strong').textContent = value == null ? 'Not rated' : `${value} / 5.0`;
     item.querySelector('.progress-fill').style.width = `${Math.max(0,Math.min(100,(Number(value)||0)/5*100))}%`;
   });
-  document.getElementById('recordFooter').textContent = `Workforce People Systems · Record ${employeeId}`;
+  if (document.getElementById('recordFooter')) document.getElementById('recordFooter').textContent = `Workforce People Systems · Record ${employeeId}`;
   const dialog = document.getElementById('credentialDialog');
   document.getElementById('credentialDetails').textContent = `${user.name} · ${employeeId} · ${user.email}`;
   document.getElementById('credentialButton').onclick = () => dialog.showModal();

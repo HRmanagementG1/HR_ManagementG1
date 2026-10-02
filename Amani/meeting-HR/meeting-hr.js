@@ -37,6 +37,25 @@ const scheduleDuration =
 const meetingLink =
     document.getElementById("meeting-link");
 
+function eligibleMeetingEmployee(user) {
+    const session = window.workspace.session();
+    return session?.role === 'HR' && user.role === 'Employee'
+        && String(user.id) !== String(session.id)
+        && user.email?.toLowerCase() !== session.email?.toLowerCase();
+}
+scheduleEmployee.disabled = true;
+document.addEventListener('DOMContentLoaded', async () => {
+    await window.workspace.ready;
+    window.workspace.users().filter(eligibleMeetingEmployee).forEach(user => {
+        scheduleEmployee.add(new Option(`${user.name} — ${user.email}`, user.email));
+    });
+    scheduleEmployee.disabled = false;
+    document.getElementById('open-schedule').addEventListener('click', () => {
+        document.getElementById('schedule-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scheduleEmployee.focus({ preventScroll: true });
+    });
+});
+
 
 // =========================
 // GET MEETINGS
@@ -184,7 +203,7 @@ function displayMeetings() {
 
                 <button
                     class="action-button"
-                    onclick="joinMeeting('${meeting.meetingLink}')"
+                    data-join-meeting
                 >
                     Join Room
                 </button>
@@ -242,6 +261,7 @@ function displayMeetings() {
 
 
         meetingList.appendChild(row);
+        row.querySelector('[data-join-meeting]')?.addEventListener('click', () => joinMeeting(meeting.meetingLink));
 
     }
 
@@ -480,6 +500,11 @@ scheduleForm.addEventListener(
 
             });
 
+        if (!selectedEmployee || !eligibleMeetingEmployee(selectedEmployee)) {
+            alert('Please select an employee other than yourself.');
+            return;
+        }
+
 
         // Create unique room
 
@@ -521,13 +546,13 @@ scheduleForm.addEventListener(
                 duration,
 
             hrRepresentative:
-                "HR Team",
+                window.workspace.session().name,
 
             status:
                 "Confirmed",
 
             meetingLink:
-                generatedLink,
+                meetingLink.value.trim() || generatedLink,
 
             createdAt:
                 new Date().toLocaleString()

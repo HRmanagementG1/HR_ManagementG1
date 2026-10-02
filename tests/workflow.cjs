@@ -10,7 +10,7 @@ const server = http.createServer((req,res) => {
   if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
   fs.readFile(file,(error,data) => {
     if (error) { res.writeHead(404).end(); return; }
-    res.setHeader('Content-Type', {'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'}[path.extname(file)] || 'application/octet-stream');
+    res.setHeader('Content-Type', {'.svg':'image/svg+xml','.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'}[path.extname(file)] || 'application/octet-stream');
     res.end(data);
   });
 });
@@ -179,6 +179,8 @@ const server = http.createServer((req,res) => {
     for (const link of ['leave','policies','meetings','feedback','dashboard']) {
       await page.locator(`[data-hr-nav=${link}]`).click();
       await page.locator(`[data-hr-nav=${link}][aria-current=page]`).waitFor();
+      await page.locator('footer.footer').waitFor();
+      assert.equal(await page.locator('footer.footer').count(),1);
       assert(!page.url().includes('/loginHr/'),`${link} should keep HR signed in`);
     }
     await page.setViewportSize({width:390,height:844});
@@ -231,7 +233,71 @@ const server = http.createServer((req,res) => {
       await page.setViewportSize({width:390,height:844});
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),'Home must fit on mobile');
     }
+    await page.setViewportSize({width:1200,height:900});
+    await login('HR','lina@workforce.example','Lina@123');
+    await page.locator('[data-hr-nav=meetings]').click();
+    await page.waitForFunction(() => document.querySelector('#schedule-employee')?.options.length > 1);
+    assert.equal(await page.locator('#schedule-employee option[value="lina@workforce.example"]').count(),0);
+    assert.equal(await page.locator('#schedule-employee option[value="cycle@workforce.example"]').count(),1);
+    await page.locator('#open-schedule').click();
+    assert(await page.locator('#schedule-employee').evaluate(el => el === document.activeElement));
+    await page.locator('#schedule-employee').selectOption('omar@workforce.example');
+    await page.locator('#schedule-topic').fill('Design review');
+    await page.locator('#schedule-date').fill('2026-10-15');
+    await page.locator('#schedule-time').fill('10:30');
+    await page.locator('#meeting-link').fill('https://meet.jit.si/workforce-design-review');
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#create-meeting').click();
+    const meeting = await page.evaluate(() => JSON.parse(localStorage.getItem('meetings')).at(-1));
+    assert.equal(meeting.employeeEmail,'omar@workforce.example');
+    assert.equal(meeting.hrRepresentative,'Lina Haddad');
+    assert.equal(meeting.meetingLink,'https://meet.jit.si/workforce-design-review');
+    // A manipulated selector must still reject the HR account.
+    await page.evaluate(() => document.querySelector('#schedule-employee').add(new Option('Self','lina@workforce.example')));
+    await page.locator('#schedule-employee').selectOption('lina@workforce.example');
+    await page.locator('#schedule-topic').fill('Invalid self meeting');
+    await page.locator('#schedule-date').fill('2026-10-15');
+    await page.locator('#schedule-time').fill('11:00');
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#create-meeting').click();
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('meetings')).at(-1).topic),'Design review');
+    await page.locator('[data-hr-user-initials]').click();
+    await page.waitForURL('**/TaskHr/dashboard.html');
+    await page.evaluate(() => localStorage.setItem('feedback',JSON.stringify([{id:123,name:'Omar Khalil',topic:'Support',message:'Please review the updated workspace.',read:false}])));
+    await page.locator('[data-hr-nav=feedback]').click();
+    await page.locator('.feedback-message').waitFor();
+    assert.equal(await page.getByText(/Reply via Email|Export Report|New Announcement/).count(),0);
+    assert.equal(await page.locator('.feedback-pagination').count(),0);
+    assert(await page.locator('.feedback-message').evaluate(el => parseFloat(getComputedStyle(el).fontSize) >= 15));
+    await page.evaluate(() => window.siteFooterReady);
+    if(process.env.WORKFLOW_SCREENSHOT_DIR) await page.screenshot({path:path.join(process.env.WORKFLOW_SCREENSHOT_DIR,'feedback-updated.png'),fullPage:true});
+    await page.locator('.hr-brand').click();
+    await page.waitForURL('**/HomePage/HomePage.html');
+    assert.equal(await page.locator('.nav-actions a').count(),1);
+    await page.locator('.home-logout').waitFor();
+    await page.evaluate(() => window.siteFooterReady);
+    assert.equal(await page.locator('footer [data-footer-service]').count(),6);
+    await page.locator('#poweredBy').click();
+    await page.waitForURL('**/PoweredBy.html');
+    await login('Employee','omar@workforce.example','UpdatedOmar123');
+    assert.equal(await page.locator('[data-employee-name]').textContent(),'Omar Khalil');
+    for(const link of ['profile','information','leaves','policy','meetings','feedback','tasks']) {
+      await page.locator(`[data-employee-page=${link}]`).click();
+      await page.locator('footer.footer').waitFor();
+      await page.evaluate(() => window.siteFooterReady);
+      assert.equal(await page.locator('footer.footer').count(),1);
+      assert((await page.locator('.employee-brand img').getAttribute('src')).endsWith('/Images/workforce-logo.svg'));
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),`${link} with shared footer must fit mobile`);
+      await page.setViewportSize({width:1200,height:900});
+    }
+    await page.locator('.employee-brand').click();
+    await page.waitForURL('**/HomePage/HomePage.html');
+    assert.equal(await page.locator('.nav-actions a').count(),1);
+    await page.locator('.home-logout').click();
+    await page.locator('.nav-actions').getByText('Employee login',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(() => localStorage.getItem('site_session')),null);
     assert.deepEqual(errors,[]);
-    console.log('PASS: home/login cycles; full employee records; task assignment/hiding; file upload/download; review/revision/approval; password changes; salary; HR role routing; mobile navigation.');
+    console.log('PASS: employee/HR cycles, tasks and uploads, password and salary, meeting scheduling and self-exclusion, feedback controls, shared logos/footers, signed-in home navigation, logout and mobile layouts.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; }).finally(() => server.close());

@@ -54,6 +54,8 @@ function displayStatistics() {
     unreadFeedback.textContent = unread;
 
     kudosFeedback.textContent = kudos;
+    filters[0].textContent = `All Feedback (${total})`;
+    filters[1].textContent = `Unread (${unread})`;
 }
 
 
@@ -181,9 +183,7 @@ function displayFeedback(data = feedbacks) {
                     }
 
 
-                    <button onclick="replyByEmail('${feedback.email}')">
-                        Reply via Email
-                    </button>
+
 
 
                     ${
@@ -243,19 +243,7 @@ function markAsRead(id) {
 // REPLY BY EMAIL
 // =========================
 
-function replyByEmail(email) {
 
-    if (!email) {
-
-        alert("Email address not available.");
-
-        return;
-    }
-
-
-    window.location.href =
-        "mailto:" + email;
-}
 
 
 // =========================

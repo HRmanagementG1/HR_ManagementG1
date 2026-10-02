@@ -47,6 +47,10 @@
     header.querySelectorAll('a[href]').forEach(link => {
       link.href = new URL(link.getAttribute('href'), sharedUrl).href;
     });
+    header.querySelectorAll('img[src]').forEach(img => img.src = new URL(img.getAttribute('src'), sharedUrl));
+    if (window.workspace) await window.workspace.ready;
+    const user = getData('site_session');
+    header.querySelector('[data-employee-name]').textContent = user?.name || user?.username || '';
     const pathname = window.location.pathname.toLowerCase();
     header.querySelectorAll('[data-employee-page]').forEach(link => {
       const isCurrent = placeholder?.dataset.activePage === link.dataset.employeePage
