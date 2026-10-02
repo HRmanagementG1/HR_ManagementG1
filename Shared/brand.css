@@ -47,3 +47,6 @@ body.home-page .hero-title { font-family: 'Ogg Medium', Georgia, serif !importan
 body.home-page .sight-card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.025em; }
 body.home-page .sight-card p { font-size: 15px; line-height: 1.45; max-height: 2.9em; }
 body .team-header h1 { letter-spacing: -0.045em; }
+
+/* Keep the leave heading readable against the shared teal banner. */
+body .leave-banner h1 { color: #fff9ee; }
