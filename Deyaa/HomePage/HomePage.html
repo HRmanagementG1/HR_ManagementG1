@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" href="data:," />
-    <title>Workforce for IT Consulting</title>
+    <title>Wanderly Travel</title>
     <meta
       name="description"
-      content="People, projects, and everyday work, connected. Workforce for IT Consulting."
+      content="Discover new places and meaningful journeys with Wanderly Travel."
     />
     <link rel="stylesheet" href="HomePage.css" />
     <link rel="stylesheet" href="../../Shared/theme.css" />
@@ -20,8 +20,9 @@
       <section
         class="cinema-scroll"
         id="home"
-        aria-label="Workforce cinematic scroll story"
+        aria-label="Wanderly cinematic scroll story"
       >
+        <span id="services" class="services-anchor" aria-hidden="true"></span>
         <div class="stage">
           <div class="world">
             <img
@@ -34,8 +35,8 @@
             <header class="site-header" aria-label="Primary navigation">
               <a class="site-logo" href="../../index.html"
                 ><img
-                  src="../../Images/workforce-logo.svg"
-                  alt="Workforce for IT Consulting"
+                  src="../../Images/wanderly-logo.png"
+                  alt="Wanderly Travel"
               /></a>
               <nav class="site-nav" aria-label="Main menu">
                 <a href="#services">Services</a><a href="#about">About</a
@@ -58,17 +59,28 @@
                 decoding="async"
                 draggable="false"
               />
+
+              <img
+                class="scene-img back-img back-bazaar"
+                src="https://raft-blast-61784561.figma.site/_assets/v11/864afe00e41e2fa20a5aa546e15cb807e0f81384.png"
+                alt=""
+                decoding="async"
+                draggable="false"
+              />
+            </div>
               <section
                 class="sights-slider"
-                aria-label="Workspace services carousel"
+                aria-label="Services"
               >
                 <div class="sights-track">
-                  <article
+                  <a
                     class="sight-card"
                     tabindex="0"
-                    role="button"
-                    aria-label="Select Leave Application"
+                    aria-label="Open Leave Application"
                     data-service-index="0"
+                    data-home-service="LeaveApplication.html"
+                    data-service-url="../../Wessam/employee_leave.html"
+                    href="../../Wessam/employee_leave.html"
                   >
                     <span class="sight-kicker">Your workspace / 01</span
                     ><img
@@ -78,13 +90,15 @@
                     />
                     <h3>Leave Application</h3>
                     <p>Apply for leave and keep track of your time off.</p>
-                  </article>
-                  <article
+                  </a>
+                  <a
                     class="sight-card"
                     tabindex="0"
-                    role="button"
-                    aria-label="Select View Employees"
+                    aria-label="Open View Employees"
                     data-service-index="1"
+                    data-home-service="Employees.html"
+                    data-service-url="../../Ala%60a/task/employee-profile/employee-profile.html"
+                    href="../../Ala%60a/task/employee-profile/employee-profile.html"
                   >
                     <span class="sight-kicker">Your workspace / 02</span
                     ><img
@@ -94,13 +108,15 @@
                     />
                     <h3>View Employees</h3>
                     <p>Find the people and information you need.</p>
-                  </article>
-                  <article
+                  </a>
+                  <a
                     class="sight-card"
                     tabindex="0"
-                    role="button"
-                    aria-label="Select Company Policies"
+                    aria-label="Open Company Policies"
                     data-service-index="2"
+                    data-home-service="Policies.html"
+                    data-service-url="../../Ahmad/policyEmp/policyEmp.html"
+                    href="../../Ahmad/policyEmp/policyEmp.html"
                   >
                     <span class="sight-kicker">Your workspace / 03</span
                     ><img
@@ -110,13 +126,15 @@
                     />
                     <h3>Company Policies</h3>
                     <p>Clear guidance for a better working day.</p>
-                  </article>
-                  <article
+                  </a>
+                  <a
                     class="sight-card"
                     tabindex="0"
-                    role="button"
-                    aria-label="Select Task Management"
+                    aria-label="Open Task Management"
                     data-service-index="3"
+                    data-home-service="Tasks.html"
+                    data-service-url="../../Lujain/TaskEmp/my-tasks.html"
+                    href="../../Lujain/TaskEmp/my-tasks.html"
                   >
                     <span class="sight-kicker">Your workspace / 04</span
                     ><img
@@ -126,13 +144,15 @@
                     />
                     <h3>Task Management</h3>
                     <p>Organize your work and follow your progress.</p>
-                  </article>
-                  <article
+                  </a>
+                  <a
                     class="sight-card"
                     tabindex="0"
-                    role="button"
-                    aria-label="Select Feedback System"
+                    aria-label="Open Feedback System"
                     data-service-index="4"
+                    data-home-service="Feedback.html"
+                    data-service-url="../../Amani/employeeFeedback/FeedbackEmployee.html"
+                    href="../../Amani/employeeFeedback/FeedbackEmployee.html"
                   >
                     <span class="sight-kicker">Your workspace / 05</span
                     ><img
@@ -142,13 +162,15 @@
                     />
                     <h3>Feedback System</h3>
                     <p>Share your ideas and help us improve.</p>
-                  </article>
-                  <article
+                  </a>
+                  <a
                     class="sight-card"
                     tabindex="0"
-                    role="button"
-                    aria-label="Select Zoom Meeting"
+                    aria-label="Open Zoom Meeting"
                     data-service-index="5"
+                    data-home-service="ZoomMeeting.html"
+                    data-service-url="../../Amani/employee-meeting/meeting-employee.html"
+                    href="../../Amani/employee-meeting/meeting-employee.html"
                   >
                     <span class="sight-kicker">Your workspace / 06</span
                     ><img
@@ -158,17 +180,9 @@
                     />
                     <h3>Zoom Meeting</h3>
                     <p>Stay connected, wherever you work.</p>
-                  </article>
+                  </a>
                 </div>
               </section>
-              <img
-                class="scene-img back-img back-bazaar"
-                src="https://raft-blast-61784561.figma.site/_assets/v11/864afe00e41e2fa20a5aa546e15cb807e0f81384.png"
-                alt=""
-                decoding="async"
-                draggable="false"
-              />
-            </div>
             <div class="sights-controls" aria-label="Carousel controls" inert>
               <button
                 class="sight-nav sight-prev"
@@ -181,7 +195,7 @@
                 >Explore all services ↗</a
               >
             </div>
-            <h1 class="hero-title">Workforce</h1>
+            <h1 class="hero-title">wanderly</h1>
             <img
               class="scene-img splitframe-img splitframe-left"
               src="https://raft-blast-61784561.figma.site/_assets/v11/7536d7b60a1fce482cf6edf3f0bffd3bad5d0f8a.png"
@@ -209,14 +223,12 @@
             />
             <div class="shade"></div>
           </div>
-          <section class="intro-copy" aria-label="Workforce overview">
+          <section class="intro-copy" aria-label="Wanderly overview">
             <p>
-              Good people. Great work. One place.<br />Your people, projects,
-              and everyday work, connected.
+              New places. Lasting memories.<br />Thoughtfully planned journeys, brought to life by our people.
             </p>
-            <div class="hero-tags" aria-label="Workforce highlights">
-              <span>People first</span><span>Work together</span
-              ><span>Grow together</span>
+            <div class="hero-tags" aria-label="Wanderly highlights">
+              <span>Explore more</span><span>Travel together</span><span>Make memories</span>
             </div>
             <a class="scroll-cue" href="#services">SCROLL TO DISCOVER ↓</a>
           </section>
@@ -225,19 +237,18 @@
             aria-label="Our approach"
             inert
           >
-            <h2>We turn ideas into<br />digital solutions.</h2>
+            <h2>Your next chapter<br />starts with a journey.</h2>
             <p>
-              Technology, design and problem-solving come together to create
-              software that solves real business needs.
+              From vibrant cities to quiet escapes, we bring care, curiosity, and local knowledge to every journey we plan.
             </p>
             <dl class="facts">
               <div>
-                <dt>120+</dt>
-                <dd>Projects delivered</dd>
+                <dt>Explore</dt>
+                <dd>Places with a story</dd>
               </div>
               <div>
-                <dt>8+</dt>
-                <dd>Years of experience</dd>
+                <dt>Connect</dt>
+                <dd>People and cultures</dd>
               </div>
             </dl>
           </section>
@@ -246,200 +257,17 @@
             aria-label="Our people"
             inert
           >
-            <h2>Better work starts<br />with good people.</h2>
+            <h2>Great journeys start<br />with good people.</h2>
             <p>
-              A simpler way to stay informed, get things done, and grow
-              together. Everything your team needs, in one connected workspace.
+              Our travel team makes every detail count. This shared workspace keeps our employees and HR connected, wherever the journey leads.
             </p>
             <a class="note-button" href="../PoweredBy.html"
               ><span aria-hidden="true">↗</span
-              ><span>Meet the people behind Workforce</span></a
+              ><span>Meet the website creators</span></a
             >
           </section>
           <a class="skip-story" href="#services">Skip to services ↓</a>
           <div class="scene-progress" aria-hidden="true"><span></span></div>
-        </div>
-      </section>
-      <section class="services" id="services">
-        <div class="container">
-          <!-- ================= SECTION HEADING ================= -->
-
-          <div class="section-heading reveal">
-            <span class="section-tag"> OUR SERVICES </span>
-
-            <h2>Everything you need in one place</h2>
-
-            <p>
-              Access the tools and services you need to manage your work easily
-              and efficiently.
-            </p>
-          </div>
-
-          <!-- ================= SERVICES CARDS ================= -->
-
-          <div class="cards">
-            <!-- ================= SERVICE 1 ================= -->
-
-            <a
-              href="../../Wessam/employee_leave.html"
-              data-home-service="LeaveApplication.html"
-              class="card-link"
-            >
-              <article class="card reveal">
-                <div class="icon">
-                  <i class="bi bi-calendar-check"></i>
-                </div>
-
-                <h3>Leave Application</h3>
-
-                <p>
-                  Apply for leave by selecting the leave type, start date, end
-                  date and reason.
-                </p>
-
-                <span class="service-link">
-                  Apply Now
-
-                  <i class="bi bi-arrow-right"></i>
-                </span>
-              </article>
-            </a>
-
-            <!-- ================= SERVICE 2 ================= -->
-
-            <a
-              href="../../Ala%60a/task/employee-profile/employee-profile.html"
-              data-home-service="Employees.html"
-              class="card-link"
-            >
-              <article class="card reveal">
-                <div class="icon">
-                  <i class="bi bi-people"></i>
-                </div>
-
-                <h3>View Employees</h3>
-
-                <p>
-                  View employee information in an organized table and quickly
-                  search for employees.
-                </p>
-
-                <span class="service-link">
-                  View Employees
-
-                  <i class="bi bi-arrow-right"></i>
-                </span>
-              </article>
-            </a>
-
-            <!-- ================= SERVICE 3 ================= -->
-
-            <a
-              href="../../Ahmad/policyEmp/policyEmp.html"
-              data-home-service="Policies.html"
-              class="card-link"
-            >
-              <article class="card reveal">
-                <div class="icon">
-                  <i class="bi bi-file-text"></i>
-                </div>
-
-                <h3>Company Policies</h3>
-
-                <p>
-                  Explore company policies and guidelines to understand
-                  workplace rules and procedures.
-                </p>
-
-                <span class="service-link">
-                  View Policies
-
-                  <i class="bi bi-arrow-right"></i>
-                </span>
-              </article>
-            </a>
-
-            <!-- ================= SERVICE 4 ================= -->
-
-            <a
-              href="../../Lujain/TaskEmp/my-tasks.html"
-              data-home-service="Tasks.html"
-              class="card-link"
-            >
-              <article class="card reveal">
-                <div class="icon">
-                  <i class="bi bi-list-check"></i>
-                </div>
-
-                <h3>Task Management</h3>
-
-                <p>
-                  Create, view and update tasks to organize your work and keep
-                  track of your progress.
-                </p>
-
-                <span class="service-link">
-                  Manage Tasks
-
-                  <i class="bi bi-arrow-right"></i>
-                </span>
-              </article>
-            </a>
-
-            <!-- ================= SERVICE 5 ================= -->
-
-            <a
-              href="../../Amani/employeeFeedback/FeedbackEmployee.html"
-              data-home-service="Feedback.html"
-              class="card-link"
-            >
-              <article class="card reveal">
-                <div class="icon">
-                  <i class="bi bi-chat-square-text"></i>
-                </div>
-
-                <h3>Feedback System</h3>
-
-                <p>
-                  Share your feedback through our contact form and help us
-                  improve the workplace.
-                </p>
-
-                <span class="service-link">
-                  Give Feedback
-
-                  <i class="bi bi-arrow-right"></i>
-                </span>
-              </article>
-            </a>
-
-            <!-- ================= SERVICE 6 ================= -->
-
-            <a
-              href="../../Amani/employee-meeting/meeting-employee.html"
-              data-home-service="ZoomMeeting.html"
-              class="card-link"
-            >
-              <article class="card reveal">
-                <div class="icon">
-                  <i class="bi bi-camera-video"></i>
-                </div>
-
-                <h3>Zoom Meeting</h3>
-
-                <p>
-                  Join and manage online Zoom meetings for team discussions and
-                  remote collaboration.
-                </p>
-
-                <span class="service-link">
-                  Join Meeting
-
-                  <i class="bi bi-arrow-right"></i>
-                </span>
-              </article>
-            </a>
-          </div>
         </div>
       </section>
       <section class="about-section" id="about">
@@ -447,27 +275,22 @@
           <!-- About Introduction -->
 
           <div class="about-intro reveal">
-            <span class="section-tag"> ABOUT WORKFORCE </span>
+            <span class="section-tag"> ABOUT WANDERLY </span>
 
             <h2>
-              We turn ideas into
-
-              <span> digital solutions. </span>
+              We turn travel dreams into <span> memorable journeys. </span>
             </h2>
 
             <p>
-              Workforce for IT Consulting is a software development company that
-              builds modern digital solutions for businesses and organizations.
-              We combine technology, design and problem-solving to create
-              software that solves real business needs.
+              Wanderly is a travel company built around the joy of discovery. We help people explore new places, experience local cultures, and make meaningful memories. Behind every trip is a connected team that cares about the details.
             </p>
 
             <!-- Experience -->
 
             <div class="about-stat">
-              <strong> 8+ </strong>
+              <strong> Together </strong>
 
-              <span> Years of experience </span>
+              <span> From the first idea to the last mile </span>
             </div>
           </div>
 
@@ -485,8 +308,7 @@
                 <h3>Discover</h3>
 
                 <p>
-                  We understand the business, its goals and the problems that
-                  need to be solved before writing a single line of code.
+                  We listen to your interests, your pace, and the places you dream of visiting. Every journey starts with you.
                 </p>
               </div>
             </div>
@@ -497,11 +319,10 @@
               <div class="process-number">02</div>
 
               <div class="process-content">
-                <h3>Build</h3>
+                <h3>Plan</h3>
 
                 <p>
-                  Our developers turn ideas into reliable web, mobile and custom
-                  software solutions using modern technologies.
+                  We bring destinations, stays, and experiences together into a thoughtful itinerary that fits your journey.
                 </p>
               </div>
             </div>
@@ -512,11 +333,10 @@
               <div class="process-number">03</div>
 
               <div class="process-content">
-                <h3>Deliver</h3>
+                <h3>Explore</h3>
 
                 <p>
-                  We test, improve and deliver a clean, responsive and practical
-                  product ready for real users.
+                  Set off with confidence, discover something unexpected, and return with stories worth sharing.
                 </p>
               </div>
             </div>
@@ -533,8 +353,7 @@
             <h2>What We Believe In</h2>
 
             <p>
-              The principles that guide the way we build software and work with
-              our clients.
+              The principles that guide how we plan journeys, support our team, and care for the places we visit.
             </p>
           </div>
 
@@ -549,7 +368,7 @@
               <h3>Quality</h3>
 
               <p>
-                We focus on building reliable software with attention to detail.
+                We care for every detail, from the first conversation to the journey home.
               </p>
             </div>
 
@@ -561,8 +380,7 @@
               <h3>Collaboration</h3>
 
               <p>
-                We work closely with clients and communicate throughout the
-                project.
+                Our employees, HR team, and local partners work together to create thoughtful travel experiences.
               </p>
             </div>
 
@@ -574,7 +392,7 @@
               <h3>Simplicity</h3>
 
               <p>
-                We create solutions that are clear, practical and easy to use.
+                We make planning clear and straightforward, so you can enjoy the adventure.
               </p>
             </div>
 
@@ -583,10 +401,10 @@
             <div class="value reveal">
               <span class="num"> 04 </span>
 
-              <h3>Innovation</h3>
+              <h3>Respect</h3>
 
               <p>
-                We use modern technologies to create useful digital solutions.
+                We value local cultures, care for our surroundings, and travel with respect.
               </p>
             </div>
           </div>
@@ -597,78 +415,17 @@
           <!-- Section Heading -->
 
           <div class="section-head reveal">
-            <span class="tag"> Client Feedback </span>
+            <span class="tag"> Team Feedback </span>
 
-            <h2>What Our Clients Say</h2>
+            <h2>Good journeys start with listening</h2>
 
-            <p>Feedback from people who worked with Workforce.</p>
+            <p>Ideas from our people help us improve the way we work and travel.</p>
           </div>
 
-          <!-- Feedback Cards -->
-
           <div class="cards three">
-            <!-- Feedback 1 -->
-
-            <article class="card review reveal">
-              <div class="stars">★★★★★</div>
-
-              <p>
-                "They delivered our HR system on time and it works perfectly.
-                Very professional team."
-              </p>
-
-              <div class="person">
-                <span class="avatar"> S </span>
-
-                <div>
-                  <strong> Sara Ahmad </strong>
-
-                  <span> Operations Manager </span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Feedback 2 -->
-
-            <article class="card review reveal">
-              <div class="stars">★★★★★</div>
-
-              <p>
-                "Great communication from day one. They understood exactly what
-                we wanted."
-              </p>
-
-              <div class="person">
-                <span class="avatar"> O </span>
-
-                <div>
-                  <strong> Omar Khaled </strong>
-
-                  <span> Startup Founder </span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Feedback 3 -->
-
-            <article class="card review reveal">
-              <div class="stars">★★★★★</div>
-
-              <p>
-                "Our mobile app is fast and beautiful. Support after launch was
-                excellent too."
-              </p>
-
-              <div class="person">
-                <span class="avatar"> R </span>
-
-                <div>
-                  <strong> Rana Yousef </strong>
-
-                  <span> Product Owner </span>
-                </div>
-              </div>
-            </article>
+            <article class="card review reveal"><h3>Share an idea</h3><p>Have a better way to support our travelers or work together? We want to hear it.</p></article>
+            <article class="card review reveal"><h3>Tell us what works</h3><p>Celebrate the people and small details that make a great journey possible.</p></article>
+            <article class="card review reveal"><h3>Help us improve</h3><p>Use the Feedback System in your Employee or HR workspace to share suggestions with the team.</p></article>
           </div>
         </div>
       </section>

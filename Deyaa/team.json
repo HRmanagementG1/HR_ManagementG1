@@ -1,41 +1,44 @@
 [
-    {
-        "name": "Deyaa Alwardat",
-        "role": "Software Developer",
-        "image": "/Images/Deyaa_Alwardat.jpg",
-        "description":"Full-Stack Developer"
-    },
-    {
-        "name": "Amani Alazzam",
-        "role": "Software Developer",
-        "image": "/Images/Amani.jpg",
-        "description": "Full-Stack Developer"
-    },
-    {
-        "name": "Lujain Qaqaa",
-        "role": "Software Developer",
-        "image": "/Images/Lujain_Qaqaa.jpg",
-        "description": "UI/UX Designer"
-    },
-
- {
-        "name": "Ahmad Smairat",
-        "role": "Software Developer",
-        "image": "/Images/Ahmad_Smairat.jpg",
-        "description": "Team Leader"
-    },
-    {
-        "name": "Ala`a Frihat",
-        "role": "Software Developer",
-        "image": "/Images/Ala`a_Frihat.jpg",
-        "description": "back-End Developer"
-    },
-    {
-        "name": "Wessam Khraisat",
-        "role": "Software Developer",
-        "image": "/Images/Wessam_Khraisat.png",
-        "description": "Front-End Developer"
-    }
-   
-    
+  {
+    "name": "Deyaa Alwardat",
+    "role": "Software Developer",
+    "image": "/Images/Deyaa_Alwardat.jpg",
+    "description": "Full-Stack Developer",
+    "portraitAvailable": true
+  },
+  {
+    "name": "Amani Alazzam",
+    "role": "Software Developer",
+    "image": "/Images/Amani.jpg",
+    "description": "Full-Stack Developer",
+    "portraitAvailable": true
+  },
+  {
+    "name": "Lujain Qaqaa",
+    "role": "Software Developer",
+    "image": "/Images/Lujain_Qaqaa.jpg",
+    "description": "UI/UX Designer",
+    "portraitAvailable": true
+  },
+  {
+    "name": "Ahmad Smairat",
+    "role": "Software Developer",
+    "image": "/Images/Ahmad_Smairat.jpg",
+    "description": "Team Leader",
+    "portraitAvailable": true
+  },
+  {
+    "name": "Ala`a Frihat",
+    "role": "Software Developer",
+    "image": "/Images/Alaa_Frihat.jpg",
+    "description": "back-End Developer",
+    "portraitAvailable": true
+  },
+  {
+    "name": "Wessam Khraisat",
+    "role": "Software Developer",
+    "image": "/Images/wessam_khraisat.png",
+    "description": "Front-End Developer",
+    "portraitAvailable": true
+  }
 ]

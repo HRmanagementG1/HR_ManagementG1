@@ -1,14 +1,14 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
 const root=path.resolve(__dirname,'..');
-const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(file,(e,data)=>{if(e){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml'})[path.extname(file)]||'application/octet-stream');res.end(data);});});
+const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(file,(e,data)=>{if(e){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg'})[path.extname(file)]||'application/octet-stream');res.end(data);});});
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;
  const browser=await chromium.launch({channel:'msedge',headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.route('**/*',route=>{const u=new URL(route.request().url());return u.origin===origin||u.hostname.endsWith('.figma.site')||u.hostname.endsWith('.cloudfront.net')?route.continue():route.abort();});
+  await page.route('**/*',route=>{const u=new URL(route.request().url());return u.origin===origin||u.hostname.endsWith('.figma.site')||u.hostname.endsWith('.cloudfront.net')||['fonts.googleapis.com','fonts.gstatic.com'].includes(u.hostname)?route.continue():route.abort();});
   await page.goto(origin+'/Deyaa/HomePage/HomePage.html');
   await page.waitForFunction(()=>[...document.querySelectorAll('.scene-img')].every(i=>i.complete&&i.naturalWidth>0),{},{timeout:60000});
   await page.evaluate(()=>document.fonts.ready);
@@ -16,6 +16,12 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+deco
   if(out)fs.mkdirSync(out,{recursive:true});
   const shot=async name=>{if(out)await page.screenshot({path:path.join(out,name+'.png')});};
   await shot('cinema-intro');
+  assert.equal(await page.locator('.hero-title').textContent(),'wanderly');
+  await page.setViewportSize({width:1877,height:720});
+  await page.waitForFunction(()=>document.querySelector('.bridge-img').getBoundingClientRect().height<500);
+  assert(await page.evaluate(()=>Number(getComputedStyle(document.querySelector('.hero-title')).zIndex)>Number(getComputedStyle(document.querySelector('.bridge-img')).zIndex)));
+  await shot('wanderly-wide-hero');
+  await page.setViewportSize({width:1440,height:1000});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.evaluate(()=>scrollTo({top:1000,behavior:'instant'}));
   await page.waitForFunction(()=>parseFloat(document.documentElement.style.getPropertyValue('--panel2-opacity'))>.99);
@@ -25,8 +31,24 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+deco
   await shot('cinema-people');
   await page.evaluate(()=>scrollTo({top:3700,behavior:'instant'}));
   await page.locator('.sights-controls.is-ready').waitFor();
-  assert.equal(await page.locator('.sight-card').count(),18);
+  assert.equal(await page.locator('a.sight-card[href]').count(),18);
+  assert(await page.evaluate(()=>document.querySelector('.sights-slider').parentElement.classList.contains('world')));
+  assert(await page.evaluate(()=>{
+    const card=document.querySelector('.sight-card.is-active'),r=card.getBoundingClientRect();
+    return r.top>document.querySelector('.site-header').getBoundingClientRect().bottom && r.left>=0 && r.right<=innerWidth;
+  }));
+  assert.equal(await page.locator('section.services').count(),0);
+  assert.equal(await page.locator('#services').count(),1);
+  assert((await page.locator('.service-open').getAttribute('href')).endsWith('/Wessam/employee_leave.html'));
+  assert(await page.evaluate(()=>getComputedStyle(document.querySelector('.sight-card h3')).fontFamily.includes('Outfit')));
   await shot('cinema-services');
+  await page.setViewportSize({width:1877,height:720});
+  await page.waitForFunction(()=>document.querySelector('.sight-card.is-active').getBoundingClientRect().top>document.querySelector('.site-header').getBoundingClientRect().bottom);
+  await shot('wanderly-wide-services');
+  await page.setViewportSize({width:1440,height:1000});
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  await page.evaluate(()=>scrollTo({top:3700,behavior:'instant'}));
+  await page.locator('.sights-controls.is-ready').waitFor({timeout:5000}).catch(async e=>{console.log(await page.evaluate(()=>({scroll:scrollY,height:innerHeight,styles:document.documentElement.style.cssText,box:document.querySelector('.cinema-scroll').getBoundingClientRect().toJSON()})));throw e;});
   for(let i=0;i<15;i++)await page.locator('.sight-next').click();
   assert.equal(await page.locator('.sight-card.is-active').count(),1);
   const active=await page.locator('.sight-card.is-active').getAttribute('data-sight-index');
@@ -37,8 +59,37 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+deco
   await page.waitForFunction(()=>document.documentElement.style.getPropertyValue('--title-opacity')==='1');
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await shot('cinema-mobile');
-  await page.locator('.skip-story').click();await page.waitForFunction(()=>document.querySelector('#services').getBoundingClientRect().top<100);
-  await page.goto(origin+'/Deyaa/PoweredBy.html');await page.waitForFunction(()=>document.querySelectorAll('.team-card').length===6);
+  await page.locator('.skip-story').click();
+  await page.locator('.sights-controls.is-ready').waitFor();
+  await page.waitForFunction(()=>{const r=document.querySelector('.sight-card.is-active').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;});
+  await shot('services-mobile');
+  await page.goto(origin+'/Deyaa/HomePage/HomePage.html#services');
+  await page.reload();
+  await page.locator('.sights-controls.is-ready').waitFor();
+  assert((await page.locator('.service-open').getAttribute('href')).endsWith('/Wessam/employee_leave.html'));
+  await page.evaluate(()=>localStorage.setItem('site_session',JSON.stringify({id:1,role:'HR',name:'Lina Haddad'})));
+  await page.reload();await page.locator('.sights-controls.is-ready').waitFor();
+  const expected=['/Wessam/hr_leave.html','/Ala%60a/task/allemployeehr/allemployeehr.html','/Ahmad/policyHr/policyHr.html','/Lujain/TaskHr/all-tasks.html','/Amani/FeedbackHR/Feedbackhr.html','/Amani/meeting-HR/meeting-hr.html'];
+  for(let i=0;i<6;i++){
+    assert((await page.locator('.service-open').getAttribute('href')).endsWith(expected[i]));
+    assert((await page.locator('.sight-card.is-active').getAttribute('href')).endsWith(expected[i]));
+    if(i<5){await page.locator('.sight-next').click();await page.waitForFunction(i=>Number(document.querySelector('.sight-card.is-active').dataset.serviceIndex)===i,i+1);}
+  }
+  await page.locator('.sight-card.is-active').click();await page.waitForURL('**/Amani/meeting-HR/meeting-hr.html');
+  await page.evaluate(()=>localStorage.setItem('site_session',JSON.stringify({id:2,role:'Employee',name:'Omar Khalil'})));
+  await page.goto(origin+'/Deyaa/HomePage/HomePage.html#services');
+  await page.locator('.sights-controls.is-ready').waitFor();
+  await page.locator('.sight-card.is-active').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForURL('**/Wessam/employee_leave.html');
+  await page.evaluate(()=>localStorage.removeItem('site_session'));
+  await page.goto(origin+'/Deyaa/PoweredBy.html');
+  await page.waitForFunction(()=>document.querySelectorAll('.team-portrait img').length===6 && [...document.querySelectorAll('.team-portrait img')].every(i=>i.complete&&i.naturalWidth>0));
+  const team=JSON.parse(fs.readFileSync(path.join(root,'Deyaa/team.json')));
+  for(const member of team){const card=page.locator('.team-card').filter({has:page.getByRole('heading',{name:member.name,exact:true})});assert((await card.locator('img').getAttribute('src')).endsWith(member.image));}
+  await shot('wanderly-team-mobile');
+  await page.setViewportSize({width:1440,height:1000});
+  if(out)await page.screenshot({path:path.join(out,'wanderly-team.png'),fullPage:true});
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   assert.deepEqual(errors,[]);console.log('PASS: remote scene layers, story transitions, looping service carousel, mobile layout, reduced motion, skip navigation and six team records.');
  }finally{await browser.close();}

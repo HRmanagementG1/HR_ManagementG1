@@ -15,18 +15,19 @@
         .slice(0, 2)
         .map((word) => word[0])
         .join("");
-      // Supplied portrait paths are preserved in team.json; initials display until images are added.
+      // Keep initials as a fallback if a portrait cannot load.
       if (member.portraitAvailable && member.image) {
         const image = new Image();
-        image.src = new URL(
-          "../" + member.image.replace(/^\//, ""),
-          location.href,
-        );
+
         image.alt = member.name;
         image.onload = () => {
           portrait.removeAttribute("aria-hidden");
           portrait.replaceChildren(image);
         };
+        image.src = new URL(
+          "../" + member.image.replace(/^\//, ""),
+          location.href,
+        );
       }
       const name = document.createElement("h2");
       name.textContent = member.name;

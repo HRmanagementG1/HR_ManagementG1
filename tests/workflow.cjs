@@ -10,7 +10,7 @@ const server = http.createServer((req,res) => {
   if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
   fs.readFile(file,(error,data) => {
     if (error) { res.writeHead(404).end(); return; }
-    res.setHeader('Content-Type', {'.svg':'image/svg+xml','.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'}[path.extname(file)] || 'application/octet-stream');
+    res.setHeader('Content-Type', {'.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'}[path.extname(file)] || 'application/octet-stream');
     res.end(data);
   });
 });
@@ -286,7 +286,7 @@ const server = http.createServer((req,res) => {
       await page.locator('footer.footer').waitFor();
       await page.evaluate(() => window.siteFooterReady);
       assert.equal(await page.locator('footer.footer').count(),1);
-      assert((await page.locator('.employee-brand img').getAttribute('src')).endsWith('/Images/workforce-logo.svg'));
+      assert((await page.locator('.employee-brand img').getAttribute('src')).endsWith('/Images/wanderly-logo.png'));
       await page.setViewportSize({width:390,height:844});
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),`${link} with shared footer must fit mobile`);
       await page.setViewportSize({width:1200,height:900});

@@ -224,6 +224,7 @@ body.home-page {
   filter: blur(var(--blur-px)) brightness(var(--back-brightness));
 }
 .back-stack {
+  pointer-events: none;
   z-index: 1;
   top: 0;
   bottom: 0;
@@ -267,7 +268,7 @@ body.home-page {
     scale(var(--four-scale));
 }
 .sights-slider {
-  z-index: 2;
+  z-index: 8;
   left: 0;
   right: 0;
   top: var(--sights-top);
@@ -401,14 +402,14 @@ body.home-page {
   border-radius: 30px;
 }
 .home-page .hero-title {
-  z-index: 3;
+  z-index: 7;
   left: 50%;
-  top: clamp(122px, 19vh, 205px);
+  top: clamp(150px, 19vh, 205px);
   width: min(94vw, 1780px);
   margin: 0;
   color: #fdf1e1;
   font:
-    500 clamp(5rem, 13vw, 14rem)/0.78 "Ogg Medium",
+    500 clamp(4rem, min(15vw, 20vh), 14rem)/0.95 "Ogg Medium",
     Georgia,
     serif;
   letter-spacing: -0.05em;
@@ -566,7 +567,7 @@ body.home-page {
 .facts dt {
   color: #fdf1e1;
   font:
-    500 4.2rem/0.9 "Ogg Medium",
+    500 clamp(2rem, 4.5vw, 4.2rem)/0.9 "Ogg Medium",
     Georgia,
     serif;
   text-shadow: 0 14px 34px #0005;
@@ -621,7 +622,7 @@ body.home-page {
   width: calc(var(--scene-progress, 0) * 100%);
   background: #fdf1e1;
 }
-/* Workforce content is retained below the scroll sequence. */
+/* Wanderly content is retained below the scroll sequence. */
 .home-page main > section:not(.cinema-scroll) {
   padding: 100px 6%;
   background: #fdf1e1;
@@ -781,7 +782,7 @@ body.home-page {
     font-size: 12vw;
   }
   .bridge-img {
-    width: 138vw;
+    width: min(138vw, 100vh);
   }
   .frame-two-img {
     width: 132vw;
@@ -940,3 +941,16 @@ body.home-page {
     width: 260%;
   }
 }
+
+/* Keep the panorama edge-to-edge on short, wide displays. */
+@media (min-width: 1101px) and (min-aspect-ratio: 3/2) {
+  .splitframe-img { height: 100vh; object-fit: fill; }
+  .bridge-img { height: var(--bridge-height); object-fit: fill; }
+}
+
+/* Native #services links land on the fully revealed scenic carousel. */
+.services-anchor { position: absolute; top: 3700px; left: 0; width: 1px; height: 1px; scroll-margin: 0; pointer-events: none; }
+
+/* The entire service card is a native link, including keyboard and new-tab access. */
+a.sight-card { display: block; text-decoration: none; }
+a.sight-card:hover { background: #fff8ed; box-shadow: 0 0 0 3px #47858f, 0 18px 52px #022f4033; }

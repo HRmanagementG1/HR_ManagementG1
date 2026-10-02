@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   if (document.getElementById("recordFooter"))
     document.getElementById("recordFooter").textContent =
-      `Workforce People Systems · Record ${employeeId}`;
+      `Wanderly People Systems · Record ${employeeId}`;
   const dialog = document.getElementById("credentialDialog");
   document.getElementById("credentialDetails").textContent =
     `${user.name} · ${employeeId} · ${user.email}`;

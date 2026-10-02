@@ -49,14 +49,11 @@
     cards.forEach((card, i) => {
       card.classList.toggle("is-active", i === active);
       card.tabIndex = i === active ? 0 : -1;
-      card.setAttribute("aria-pressed", String(i === active));
     });
-    const source = document.querySelectorAll("#services [data-home-service]")[
-      active % count
-    ];
+    const source = originalCards[active % count];
     const link = document.querySelector(".service-open");
     if (source) {
-      link.href = source.href;
+      link.href = source.dataset.serviceUrl;
       link.textContent = `Open ${originalCards[active % count].querySelector("h3").textContent} ↗`;
     }
   }
@@ -91,16 +88,7 @@
     for (const [i, card] of originalCards.entries()) {
       const clone = card.cloneNode(true);
       clone.dataset.sightIndex = setIndex * count + i;
-      clone.addEventListener("click", () => {
-        active = Number(clone.dataset.sightIndex);
-        updateSlider();
-        if (reduceMotion.matches) normalize();
-      });
       clone.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          clone.click();
-        }
         if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
           event.preventDefault();
           move(event.key === "ArrowRight" ? 1 : -1);
@@ -141,8 +129,8 @@
     const backScale = 0.76 + progress * 0.2 + f2.enter * 0.18 + f3.enter * 0.16;
     const sharedY = progress * -74,
       sharedScale = progress * 0.23;
-    const screenTop = Math.min(220, Math.max(112, innerHeight * 0.19)) - 50;
-    const parentTop = innerHeight - (innerHeight - screenTop) / backScale;
+    const screenTop = Math.max(document.querySelector(".site-header").offsetHeight + 28, Math.min(220, innerHeight * 0.22));
+    const sceneWidth = Math.min(innerWidth, innerHeight * 1.48);
     const values = {
       mx: mouseX.toFixed(4),
       my: mouseY.toFixed(4),
@@ -170,7 +158,8 @@
       "bridge-x": `calc(-50% + ${mouseX * 18}px)`,
       "bridge-y": `${mouseY * 8 + sharedY - f2.exit * 760}px`,
       "bridge-bottom": `${5 - f2.enter * 13}vh`,
-      "bridge-width": `${67.2 + f2.enter * 37.8}vw`,
+      "bridge-width": `${innerWidth * (0.672 + f2.enter * 0.378)}px`,
+      "bridge-height": `${(sceneWidth * 0.672 + f2.enter * innerWidth * 0.378) / (document.querySelector(".bridge-img").naturalWidth / document.querySelector(".bridge-img").naturalHeight || 1.8)}px`,
       "bridge-scale": 1.02 + sharedScale + f2.exit * 0.46,
       "split-left-x": `calc(-50% + ${-split * 46}vw + ${mouseX * 22}px)`,
       "split-left-y": `${mouseY * 10 + sharedY - split * 180}px`,
@@ -193,18 +182,21 @@
       "sights-visibility": sightsEnter > 0.01 ? "visible" : "hidden",
       "sights-y": "0px",
       "sights-enter-x": `${(1 - sightsEnter) * 420}vw`,
-      "sights-scale": 1 / backScale,
-      "sights-top": `${parentTop}px`,
+      "sights-scale": 1,
+      "sights-top": `${screenTop}px`,
       "sights-screen-top": `${screenTop}px`,
     };
     Object.entries(values).forEach(([key, value]) => set(key, value));
-    // Keep the selected Workforce service visible despite the scaled parent's left edge.
+    // Foreground cards use viewport coordinates, independently of the scenery.
     set(
       "sights-offset",
-      `${innerWidth * 0.03 + (backScale - 1) * innerWidth * 0.53 + mouseX * 12 + (innerWidth <= 640 ? 20 : 48)}px`,
+      `${innerWidth <= 640 ? 20 : 48}px`,
     );
     controls.classList.toggle("is-ready", controlsEnter > 0.98);
     controls.inert = controlsEnter <= 0.98;
+    const skip = document.querySelector(".skip-story");
+    skip.href = controlsEnter > 0.98 ? "#about" : "#services";
+    skip.textContent = controlsEnter > 0.98 ? "Continue to about ↓" : "Skip to services ↓";
     slider.inert = sightsEnter < 0.99;
     intro.inert = introExit > 0.98;
     panel2.inert = f2.active < 0.1;
@@ -223,6 +215,11 @@
     }
   }
   addEventListener("scroll", requestTick, { passive: true });
+  // Viewport CSS can settle after the resize event; refresh from final dimensions.
+  new ResizeObserver(() => {
+    updateSlider();
+    requestTick();
+  }).observe(section);
   addEventListener("resize", () => {
     updateSlider();
     requestTick();
@@ -247,6 +244,7 @@
       section.dataset.assetFallback = "true";
     }),
   );
+  document.querySelectorAll(".scene-img").forEach(img => img.addEventListener("load", requestTick));
   updateSlider();
   requestTick();
 })();

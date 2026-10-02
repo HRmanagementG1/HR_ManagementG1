@@ -114,7 +114,7 @@ const root = document.getElementById('employee-policies');
           y += 5;
         };
         pdf.setTextColor(0, 57, 58);
-        write('WORKFORCE / EMPLOYEE POLICIES', 11, true);
+        write('WANDERLY / EMPLOYEE POLICIES', 11, true);
         write(policy.code, 10);
         write(policy.title, 20, true);
         pdf.setTextColor(63, 73, 72);
@@ -129,7 +129,7 @@ const root = document.getElementById('employee-policies');
       for (let page = 1; page <= count; page++) {
         pdf.setPage(page);
         pdf.setFontSize(9);
-        pdf.text(`Workforce | Page ${page} of ${count}`, 20, 287);
+        pdf.text(`Wanderly | Page ${page} of ${count}`, 20, 287);
       }
       pdf.save(filename);
       status(`PDF ready: ${filename}`);

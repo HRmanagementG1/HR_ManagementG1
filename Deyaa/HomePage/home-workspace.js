@@ -35,6 +35,9 @@
     };
     document
       .querySelectorAll("[data-home-service]")
-      .forEach((link) => (link.href = routes[link.dataset.homeService]));
+      .forEach((card) => {
+        card.dataset.serviceUrl = routes[card.dataset.homeService];
+        card.href = card.dataset.serviceUrl;
+      });
   }
 })();

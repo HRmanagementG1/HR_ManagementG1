@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
-:root { --workforce-font:'DM Sans',Arial,sans-serif; --workforce-heading:'Manrope',Arial,sans-serif; }
+:root { --workforce-font:'Plus Jakarta Sans','Segoe UI',sans-serif; --workforce-heading:'Outfit','Segoe UI',sans-serif; }
 *,*::before,*::after { box-sizing:border-box; }
 body { font-family:var(--workforce-font); -webkit-font-smoothing:antialiased; }
 body * { font-family:inherit; }
