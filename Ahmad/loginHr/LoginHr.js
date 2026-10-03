@@ -1,11 +1,1 @@
-import('../../Shared/login.js').then(({ setupLogin }) => {
-  setupLogin({
-    role: 'HR',
-    usernameId: 'workEmail',
-    destination: '../Lujain/TaskHr/dashboard.html'
-  });
-}).catch(() => {
-  const message = document.getElementById('login-message');
-  message.hidden = false;
-  message.textContent = 'Login could not load. Open the project through its web server and refresh.';
-});
+setupLogin("HR", "workEmail", "../../Lujain/TaskHr/dashboard.html");

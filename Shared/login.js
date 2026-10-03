@@ -1,100 +1,134 @@
-// Load as a normal script so workspace.js can resolve its own folder.
-const workspaceLoaded = new Promise((resolve, reject) => {
-  if (window.workspace) return resolve();
-  const script = document.createElement("script");
-  script.src = new URL("workspace.js", import.meta.url).href;
-  script.onload = resolve;
-  script.onerror = () => reject(new Error("Could not load the employee workspace."));
-  document.head.append(script);
-});
-// Simple browser-only login for this project.
-const employeesUrl = new URL("../data/employees.json", import.meta.url);
+// Shared login code for employee and HR pages.
+const employeeFile = new URL("../data/employees.json", document.currentScript.src);
 
-async function loadLoginEmployees() {
-  await workspaceLoaded;
-  await window.workspace.ready;
-  return window.workspace.users();
+async function getEmployees() {
+  const response = await fetch(employeeFile);
+  if (!response.ok) {
+    throw new Error("Could not load employee data.");
+  }
+
+  const employeesFromFile = await response.json();
+  let savedEmployees = [];
+
+  try {
+    savedEmployees = JSON.parse(localStorage.getItem("site_users")) || [];
+  } catch (error) {
+    savedEmployees = [];
+  }
+
+  try {
+    const oldEmployees = JSON.parse(localStorage.getItem("employees")) || [];
+    oldEmployees.forEach(function (employee) {
+      const alreadySaved = savedEmployees.some(function (saved) {
+        return String(saved.id) === String(employee.id);
+      });
+      if (!alreadySaved) savedEmployees.push(employee);
+    });
+  } catch (error) {
+    // Continue with the current employee list if older saved data is unreadable.
+  }
+
+  const employees = [];
+
+  employeesFromFile.forEach(function (employee) {
+    const savedEmployee = savedEmployees.find(function (saved) {
+      return String(saved.id) === String(employee.id);
+    });
+
+    if (savedEmployee) {
+      employees.push(savedEmployee);
+    } else {
+      employees.push(employee);
+    }
+  });
+
+  savedEmployees.forEach(function (employee) {
+    const alreadyAdded = employees.some(function (saved) {
+      return String(saved.id) === String(employee.id);
+    });
+
+    if (!alreadyAdded) {
+      employees.push(employee);
+    }
+  });
+
+  localStorage.setItem("site_users", JSON.stringify(employees));
+  return employees;
 }
 
-export function setupLogin({ role, usernameId, destination }) {
+function setupLogin(role, usernameId, destination) {
   const form = document.getElementById("loginForm");
   const username = document.getElementById(usernameId);
   const password = document.getElementById("password");
   const toggle = document.getElementById("togglePassword");
   const message = document.getElementById("login-message");
-  const submit = form.querySelector('button[type="submit"]');
+  const submitButton = form.querySelector("button[type='submit']");
 
-  function showMessage(text) {
-    message.textContent = text;
-    message.hidden = !text;
-  }
-  
-  // Toggle password visibility
-  toggle.addEventListener("click", () => {
-    const showPassword = password.type === "password";
-    password.type = showPassword ? "text" : "password";
-    toggle.textContent = showPassword ? "Hide" : "Show";
-    toggle.setAttribute("aria-pressed", String(showPassword));
+  toggle.addEventListener("click", function () {
+    if (password.type === "password") {
+      password.type = "text";
+      toggle.textContent = "Hide";
+      toggle.setAttribute("aria-pressed", "true");
+    } else {
+      password.type = "password";
+      toggle.textContent = "Show";
+      toggle.setAttribute("aria-pressed", "false");
+    }
   });
 
-  // Start loading when the form opens. A failed load can be retried on submit.
-  let employeesReady = loadLoginEmployees().catch((error) => {
-    showMessage(error.message);
-    return null;
-  });
-
-  // Handle form submission
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", async function (event) {
     event.preventDefault();
-    if (!form.reportValidity()) return;
-    submit.disabled = true;
-    showMessage("");
+    message.hidden = true;
 
+    if (!form.reportValidity()) {
+      return;
+    }
+
+    submitButton.disabled = true;
     try {
-      if (!(await employeesReady)) employeesReady = loadLoginEmployees();
-      await employeesReady;
-      const employees = JSON.parse(localStorage.getItem("site_users"));
-      const enteredUsername = username.value.trim().toLowerCase();
-      const employee = employees.find((person) => {
-        const matchesUsername = [
-          person.username,
-          person.name,
-          person.email,
-        ].some(
-          (value) =>
-            typeof value === "string" &&
-            value.toLowerCase() === enteredUsername,
-        );
-        return matchesUsername && person.password === password.value;
+      const employees = await getEmployees();
+      const enteredName = username.value.trim().toLowerCase();
+      let foundEmployee = null;
+
+      for (let i = 0; i < employees.length; i++) {
+        const employee = employees[i];
+        const usernameValue = (employee.username || "").toLowerCase();
+        const employeeName = (employee.name || "").toLowerCase();
+        const email = (employee.email || "").toLowerCase();
+
+        if ((enteredName === usernameValue || enteredName === employeeName || enteredName === email) && employee.password === password.value) {
+          foundEmployee = employee;
+          break;
+        }
+      }
+
+      if (foundEmployee === null) {
+        message.textContent = "Email, username, or password is incorrect.";
+        message.hidden = false;
+        return;
+      }
+
+      const employeeRole = String(foundEmployee.role || "Employee").toLowerCase();
+      if (employeeRole !== role.toLowerCase()) {
+        message.textContent = "Please use the correct login page for your account.";
+        message.hidden = false;
+        return;
+      }
+
+      const currentUser = {};
+      Object.keys(foundEmployee).forEach(function (key) {
+        if (key !== "password") currentUser[key] = foundEmployee[key];
       });
-
-      if (!employee) {
-        showMessage(
-          "Incorrect username, email, or password. Please try again.",
-        );
-        return;
-      }
-      if (employee.role.toLowerCase() !== role.toLowerCase()) {
-        showMessage(
-          `This account cannot use the ${role} login. Please use the ${employee.role} login page.`,
-        );
-        return;
-      }
-
-      // Keep the password out of the logged-in user's session.
-      const { password: savedPassword, ...session } = employee;
-      session.name = employee.name || employee.username;
-      localStorage.setItem("site_session", JSON.stringify(session));
+      currentUser.name = foundEmployee.name || foundEmployee.username;
+      localStorage.setItem("site_session", JSON.stringify(currentUser));
       localStorage.removeItem("loggedInUser");
-      window.location.href = new URL(destination, employeesUrl).href;
+      location.href = new URL(destination, location.href).href;
     } catch (error) {
-      employeesReady = Promise.resolve(null);
-      showMessage(
-        "Could not sign in. Check that browser storage is enabled and open the project through its web server.",
-      );
-      console.error("Login failed:", error);
+      message.textContent = "Could not load the employee file. Please open the project through a web server and try again.";
+      message.hidden = false;
+      console.error(error);
     } finally {
-      submit.disabled = false;
+      submitButton.disabled = false;
     }
   });
 }
