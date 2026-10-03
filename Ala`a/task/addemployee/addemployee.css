@@ -146,3 +146,16 @@ body {
     min-height: calc(100vh - 64px);
     transition: margin-left 0.3s ease;
 }
+/* Use the HR workspace width for the employee editor instead of a narrow centered card. */
+.hr-dashboard-content > .record-form {
+    width: calc(100% - 64px);
+    max-width: 1400px;
+    margin: 24px auto;
+}
+
+@media (max-width: 600px) {
+    .hr-dashboard-content > .record-form {
+        width: calc(100% - 32px);
+        margin: 16px auto;
+    }
+}
