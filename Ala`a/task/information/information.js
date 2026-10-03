@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const W = window.workspace;
   await W.ready;
+
+  // Only allow Employee role to access this page.
   const hrView = document.body.dataset.workspaceRole === "HR";
   if (!W.requireRole(hrView ? "HR" : "Employee")) return;
+
+  
   const userId = hrView
     ? new URLSearchParams(location.search).get("id")
     : String(W.session().id);

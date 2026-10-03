@@ -1,13 +1,5 @@
-import "./workspace.js";
-// Simple browser-only login for this project.
-const employeesUrl = new URL("../data/employees.json", import.meta.url);
-
-async function loadLoginEmployees() {
-  await window.workspace.ready;
-  return window.workspace.users();
-}
-
-export function setupLogin({ role, usernameId, destination }) {
+// Both login pages call this function with their own settings.
+function setupLogin(role, usernameId, destination) {
   const form = document.getElementById("loginForm");
   const username = document.getElementById(usernameId);
   const password = document.getElementById("password");
@@ -17,72 +9,94 @@ export function setupLogin({ role, usernameId, destination }) {
 
   function showMessage(text) {
     message.textContent = text;
-    message.hidden = !text;
+    message.hidden = text === "";
   }
-  
-  // Toggle password visibility
-  toggle.addEventListener("click", () => {
-    const showPassword = password.type === "password";
-    password.type = showPassword ? "text" : "password";
-    toggle.textContent = showPassword ? "Hide" : "Show";
-    toggle.setAttribute("aria-pressed", String(showPassword));
+
+  // Load the employee list from localStorage or the JSON file.
+  async function loadEmployees() {
+
+    const saved = localStorage.getItem("site_users");
+    if (saved !== null) {
+      const employees = JSON.parse(saved);
+      if (!Array.isArray(employees)) throw new Error("Invalid employee list.");
+      return employees;
+    }
+    // If not in localStorage, load from the JSON file and save it to localStorage.
+    const response = await fetch("../../data/employees.json");
+    if (!response.ok) throw new Error("Could not load employees.");
+    const employees = await response.json();
+    if (!Array.isArray(employees)) throw new Error("Invalid employee file.");
+    // Normalize the employee data to ensure consistent structure.
+    for (const employee of employees) {
+      employee.id = String(employee.id);
+      employee.name = employee.name || employee.username || "";
+      employee.username = employee.username || employee.name;
+    }
+    // Save the normalized employee list to localStorage for future logins.
+    localStorage.setItem("site_users", JSON.stringify(employees));
+    return employees;
+  }
+
+  // Toggle password visibility when the toggle button is clicked.
+  toggle.addEventListener("click", function () {
+    // Toggle the password input type between "password" and "text" to show or hide the password.
+    if (password.type === "password") {
+      password.type = "text";
+      toggle.textContent = "Hide";
+      toggle.setAttribute("aria-pressed", "true");
+    } 
+    else {
+      password.type = "password";
+      toggle.textContent = "Show";
+      toggle.setAttribute("aria-pressed", "false");
+    }
   });
 
-  // Start loading when the form opens. A failed load can be retried on submit.
-  let employeesReady = loadLoginEmployees().catch((error) => {
-    showMessage(error.message);
-    return null;
-  });
-
-  // Handle form submission
-  form.addEventListener("submit", async (event) => {
+  // Handle the form submission for login.
+  form.addEventListener("submit", async function (event) {
     event.preventDefault();
-    if (!form.reportValidity()) return;
+    // Validate the form and check if the submit button is disabled to prevent multiple submissions.
+    if (!form.reportValidity() || submit.disabled) return;
     submit.disabled = true;
     showMessage("");
-
     try {
-      if (!(await employeesReady)) employeesReady = loadLoginEmployees();
-      await employeesReady;
-      const employees = JSON.parse(localStorage.getItem("site_users"));
-      const enteredUsername = username.value.trim().toLowerCase();
-      const employee = employees.find((person) => {
-        const matchesUsername = [
-          person.username,
-          person.name,
-          person.email,
-        ].some(
-          (value) =>
-            typeof value === "string" &&
-            value.toLowerCase() === enteredUsername,
-        );
-        return matchesUsername && person.password === password.value;
-      });
-
-      if (!employee) {
-        showMessage(
-          "Incorrect username, email, or password. Please try again.",
-        );
+      const employees = await loadEmployees();
+      const enteredName = username.value.trim().toLowerCase();
+      let user = null;
+      // Check if the entered username or email matches any employee's username, name, or email, and if the password matches.
+      for (const employee of employees) {
+        const names = [employee.username, employee.name, employee.email];
+        for (const name of names) {
+          if (typeof name === "string" && name.toLowerCase() === enteredName &&
+              employee.password === password.value) {
+            user = employee;
+            break;
+          }
+        }
+        if (user) break;
+      }
+      if (!user) {
+        showMessage("Incorrect username, email, or password.");
         return;
       }
-      if (employee.role.toLowerCase() !== role.toLowerCase()) {
-        showMessage(
-          `This account cannot use the ${role} login. Please use the ${employee.role} login page.`,
-        );
+      // Check if the user's role matches the expected role for this login page.
+      if (String(user.role).toLowerCase() !== role.toLowerCase()) {
+        showMessage("Please use the " + user.role + " login page.");
         return;
       }
-
-      // Keep the password out of the logged-in user's session.
-      const { password: savedPassword, ...session } = employee;
-      session.name = employee.name || employee.username;
+      // Keep the password out of the signed-in user's session.
+      const session = {};
+      for (const key in user) {
+        if (key !== "password") session[key] = user[key];
+      }
+      session.id = String(user.id);
+      session.name = user.name || user.username;
+      session.role = role;
       localStorage.setItem("site_session", JSON.stringify(session));
       localStorage.removeItem("loggedInUser");
-      window.location.href = new URL(destination, employeesUrl).href;
+      location.href = destination;
     } catch (error) {
-      employeesReady = Promise.resolve(null);
-      showMessage(
-        "Could not sign in. Check that browser storage is enabled and open the project through its web server.",
-      );
+      showMessage("Could not sign in. Check browser storage and open the project through its web server.");
       console.error("Login failed:", error);
     } finally {
       submit.disabled = false;

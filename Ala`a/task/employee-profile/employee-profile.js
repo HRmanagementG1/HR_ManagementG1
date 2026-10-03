@@ -1,6 +1,9 @@
+// Employee Profile Page Script
 document.addEventListener("DOMContentLoaded", async () => {
   const W = window.workspace;
   await W.ready;
+
+  // Only allow Employee role to access this page.
   if (!W.requireRole("Employee")) return;
   const user = W.users().find((person) => person.id === String(W.session().id));
   if (!user) return;
@@ -9,9 +12,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     .forEach(
       (el) => (el.textContent = user[el.dataset.user] || "Not provided"),
     );
+    // Set the profile department and employee code, and display the user's avatar or initials.
   document.getElementById("profileDepartment").textContent =
     `${user.department || "Employee"} · ${user.employeeCode || `EMP-${String(user.id).padStart(3, "0")}`}`;
-  const avatar = document.getElementById("profileAvatar");
+  // Set the profile position and email, and display the user's avatar or initials.
+    const avatar = document.getElementById("profileAvatar");
   avatar.textContent = user.name
     .split(/\s+/)
     .map((word) => word[0])
@@ -26,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (document.getElementById("copyrightYear"))
     document.getElementById("copyrightYear").textContent =
       new Date().getFullYear();
+      // Set up the password change form and handle its submission with validation and feedback.
   document.querySelectorAll("[data-toggle]").forEach((button) =>
     button.addEventListener("click", () => {
       const input = document.getElementById(button.dataset.toggle);
@@ -39,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     }),
   );
+  // Handle password strength indicator and form submission for changing the password.
   const next = document.getElementById("newPassword");
   next.addEventListener("input", () => {
     const score = [
@@ -52,6 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ? ["Too short", "Weak", "Good", "Strong", "Strong"][score]
       : "";
   });
+  // Handle password change form submission with validation and feedback.
   document
     .getElementById("passwordForm")
     .addEventListener("submit", (event) => {
@@ -83,6 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return show("Choose a password different from your current password.");
       account.password = next.value;
       account.passwordUpdatedAt = new Date().toISOString();
+      // Save the updated users list to browser storage and reset the form.
       W.save("site_users", users);
       event.target.reset();
       next.dispatchEvent(new Event("input"));

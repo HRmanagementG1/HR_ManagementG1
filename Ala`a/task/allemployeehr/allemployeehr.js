@@ -1,13 +1,27 @@
+
+// This script manages the employee HR page, including displaying employee data, filtering, sorting, and showing detailed information in a modal.
 document.addEventListener("DOMContentLoaded", async () => {
+  // Wait for the workspace to be ready to load the users and other data.
   const W = window.workspace;
   await W.ready;
+
+  // Only allow HR role to access this page.
   if (!W.requireRole("HR")) return;
-  const all = W.users(),
-    esc = W.escape;
+
+  // Initialize variables for employee data, search input, tabs, and sorting.
+  const all = W.users(),esc = W.escape;
+
+  // Set up the employee table body and search input.
   const body = document.getElementById("employeeTableBody");
+
+  // Set the search input value based on the query parameter in the URL.
   const search = document.querySelector(".main-search input");
   search.value = new URLSearchParams(location.search).get("q") || "";
+
+  // Set up tabs for filtering employees by department and sorting options.
   const tabs = [...document.querySelectorAll(".tab")];
+
+  // Define categories for filtering employees based on their department.
   const categories = [
     () => true,
     (e) => ["Engineering", "IT"].includes(e.department),
@@ -16,8 +30,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     (e) => ["Human Resources", "HR", "Operations"].includes(e.department),
     (e) => e.department === "Sales",
   ];
+
+  // Initialize variables for the current category and sorting order.
   let category = 0,
     ascending = true;
+
+    // Update the tab labels with the count of employees in each category and set up click handlers for filtering.
   tabs.forEach((tab, index) => {
     tab.textContent = `${tab.textContent.replace(/\s*\(.*\)/, "")} (${all.filter(categories[index]).length})`;
     tab.onclick = () => {
@@ -26,8 +44,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       render();
     };
   });
+
+  // Render the employee table based on the current search query, selected category, and sorting order.
   function render() {
     const query = search.value.trim().toLowerCase();
+  
     const visible = all
       .filter(categories[category])
       .filter((e) =>
@@ -54,7 +75,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector(".pagination-info").textContent =
       `Showing ${visible.length} of ${all.length} employees`;
   }
+
+  // Set up event listeners for search input, sorting button, and modal interactions.
   search.addEventListener("input", render);
+
+  // Set up the sorting button to toggle between ascending and descending order.
   document.querySelector(".pagination-controls").hidden = true;
   const filter = document.querySelector(".controls-row .btn-outline");
   filter.textContent = "Sort A–Z";
@@ -63,6 +88,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     filter.textContent = ascending ? "Sort A–Z" : "Sort Z–A";
     render();
   };
+
+  // Set up the modal for displaying detailed employee information when clicking on "More Details" buttons.
   const modal = document.getElementById("employeeModal");
   body.onclick = (event) => {
     const button = event.target.closest("[data-id]");
@@ -81,10 +108,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       modalLocation: e.location || "—",
       modalWorkId: e.id,
       modalFullName: e.name,
-    };
+    };// Populate the modal with employee details, formatting values as needed.
     Object.entries(values).forEach(
       ([id, value]) => (document.getElementById(id).textContent = value || "—"),
     );
+    // Format and display the salary, phone number, hire date, and employment type in the modal.
     document.getElementById("modalSalary").textContent =
       e.salary == null
         ? "Not provided"
@@ -92,13 +120,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             style: "currency",
             currency: "USD",
           }).format(e.salary);
+          // Display the phone number, hire date, and employment type in the modal, with fallbacks for missing data.
     document.getElementById("modalPhone").textContent =
       e.phone || "Not provided";
+      // Display the hire date and employment type in the modal, with fallbacks for missing data.
     document.getElementById("modalHireDate").textContent =
       e.hireDate ||
       (e.joinDate ? new Date(e.joinDate).toLocaleDateString() : "Not recorded");
+      // Display the employment type in the modal, with a fallback for missing data.
     document.getElementById("modalEmploymentType").textContent =
       e.employmentType || "Full-time";
+      // Set the link to the full employee record page with the employee's ID as a query parameter.
     document.getElementById("fullEmployeeRecord").href =
       `employee-details.html?id=${encodeURIComponent(e.id)}`;
     modal.classList.add("active");
@@ -132,6 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       )
       .map((leave) => String(leave.owner)),
   ).size;
+  // Calculate the counts for each category and update the stat cards with the corresponding values.
   const counts = [
     all.length,
     all.length - onLeave,
@@ -144,6 +177,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     }).length,
   ];
+  // Update the stat cards with the calculated counts and hide unnecessary elements.
   cards.forEach((card, index) => {
     card.querySelector(".stat-title").textContent = labels[index];
     card.querySelector(".stat-number").textContent = counts[index];

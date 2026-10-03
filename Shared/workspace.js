@@ -1,3 +1,4 @@
+// Shared/workspace.js
 (() => {
   "use strict";
   const base = new URL(
@@ -5,6 +6,7 @@
     document.currentScript?.src ||
       new URL("/Shared/workspace.js", location.href),
   );
+  // Read JSON data to browser storage with error handling and fallback values.
   const read = (key, fallback = null) => {
     try {
       return JSON.parse(localStorage.getItem(key)) ?? fallback;
@@ -12,7 +14,9 @@
       return fallback;
     }
   };
+  // Save JSON data to browser storage with error handling.
   const save = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+  // Escape HTML special characters to prevent XSS attacks.
   const escape = (value) =>
     String(value ?? "").replace(
       /[&<>"']/g,
