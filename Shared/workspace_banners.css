@@ -45,6 +45,8 @@ body[data-workspace-role] .workspace-banner.meeting-hero > p:first-child {
   margin: 0 0 14px;
 }
 body[data-workspace-role] .workspace-banner .breadcrumb strong { color: inherit; }
+body[data-workspace-role] .workspace-banner .policy-total #total-count { color: #fff; }
+body[data-workspace-role] .workspace-banner .hero-copy > .eyebrow { color: #fff !important; }
 body[data-workspace-role] .workspace-banner > .position-absolute { display: none; }
 body[data-workspace-role] .workspace-banner :is(.assigned-badge, .status-badge, .department-badge) {
   background: #e2e9d9;
