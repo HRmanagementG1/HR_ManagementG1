@@ -1,8 +1,17 @@
-import "./workspace.js";
+// Load as a normal script so workspace.js can resolve its own folder.
+const workspaceLoaded = new Promise((resolve, reject) => {
+  if (window.workspace) return resolve();
+  const script = document.createElement("script");
+  script.src = new URL("workspace.js", import.meta.url).href;
+  script.onload = resolve;
+  script.onerror = () => reject(new Error("Could not load the employee workspace."));
+  document.head.append(script);
+});
 // Simple browser-only login for this project.
 const employeesUrl = new URL("../data/employees.json", import.meta.url);
 
 async function loadLoginEmployees() {
+  await workspaceLoaded;
   await window.workspace.ready;
   return window.workspace.users();
 }

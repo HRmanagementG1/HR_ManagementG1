@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .map((n) => n[0])
                 .join("")
                 .slice(0, 2),
-            )}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || "—")}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button></td></tr>`,
+            )}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || "—")}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button> <a class="btn-more" href="../addemployee/addemployee.html?id=${encodeURIComponent(e.id)}">Edit</a></td></tr>`,
         )
         .join("") || '<tr><td colspan="4">No employees found.</td></tr>';
     document.querySelector(".pagination-info").textContent =

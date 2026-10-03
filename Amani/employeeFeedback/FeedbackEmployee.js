@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", async function () {
+    await window.workspace.ready;
+    if (!window.workspace.requireRole("Employee")) return;
+const feedbackEscape = value => window.workspace.escape(value);
 
 // =========================
 // GET ELEMENTS
@@ -115,6 +119,7 @@ form.addEventListener(
         const feedback = {
 
             id: Date.now(),
+            employeeId: loggedInUser.id,
 
             name:
                 loggedInUser.name,
@@ -139,6 +144,7 @@ form.addEventListener(
 
         // Add feedback
 
+        feedbacks = window.workspace.read("feedback", []);
         feedbacks.push(feedback);
 
 
@@ -198,8 +204,7 @@ function displayFeedbackHistory() {
             function (feedback) {
 
                 return (
-                    feedback.email ===
-                    loggedInUser.email
+                    feedback.employeeId != null ? String(feedback.employeeId) === String(loggedInUser.id) : feedback.email?.toLowerCase() === loggedInUser.email?.toLowerCase()
                 );
 
             }
@@ -255,11 +260,11 @@ function displayFeedbackHistory() {
                 <div>
 
                     <span class="feedback-topic">
-                        ${feedback.topic}
+                        ${feedbackEscape(feedback.topic)}
                     </span>
 
                     <h3>
-                        ${feedback.message}
+                        ${feedbackEscape(feedback.message)}
                     </h3>
 
                 </div>
@@ -275,7 +280,7 @@ function displayFeedbackHistory() {
             <div class="feedback-card-footer">
 
                 <span>
-                    Submitted: ${feedback.date}
+                    Submitted: ${feedbackEscape(feedback.date)}
                 </span>
 
             </div>
@@ -297,3 +302,4 @@ function displayFeedbackHistory() {
 // =========================
 
 displayFeedbackHistory();
+});

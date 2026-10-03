@@ -42,6 +42,9 @@ const root = document.getElementById('employee-policies');
   let selected = policies[0]?.id;
   let statusTimer;
   function renderCounts() {
+  const dates = policies.map(policy => policy.updatedAt || policy.effectiveDate || policy.meta?.match(/Effective Date: ([^•]+)/)?.[1]?.trim()).filter(value => value && !Number.isNaN(Date.parse(value)));
+  dates.sort((a, b) => Date.parse(b) - Date.parse(a));
+  get("latest-update").textContent = dates.length ? "Updated " + new Date(dates[0]).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }) : "No update date available";
   get('total-count').textContent = policies.length;
   get('new-count').textContent = policies.filter(policy => policy.isNew).length;
   get('filters').innerHTML = Object.entries(categories).map(([key, label]) => `<button type="button" class="btn filter-pill${key === 'all' ? ' active' : ''}" data-category="${key}" aria-pressed="${key === 'all'}">${escape(label)} (${policies.filter(policy => key === 'all' || (key === 'new' ? policy.isNew : policy.category === key)).length})</button>`).join('');

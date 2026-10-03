@@ -1,406 +1,92 @@
-// =========================
-// GET ELEMENTS
-// =========================
-
-const totalMeetings = document.getElementById("total-meetings");
-const pendingMeetings = document.getElementById("pending-meetings");
-const approvedToday = document.getElementById("approved-today");
-
-const meetingList = document.getElementById("hr-meeting-list");
-const emptyMeetings = document.getElementById("empty-meetings");
-
-const statusFilter = document.getElementById("meeting-status-filter");
-
-const searchInput = document.getElementById("meeting-search");
-
-const scheduleForm = document.getElementById("schedule-form");
-
-const scheduleEmployee = document.getElementById("schedule-employee");
-
-const scheduleTopic = document.getElementById("schedule-topic");
-
-const scheduleDate = document.getElementById("schedule-date");
-
-const scheduleTime = document.getElementById("schedule-time");
-
-const scheduleDuration = document.getElementById("schedule-duration");
-
-const meetingLink = document.getElementById("meeting-link");
-
-function eligibleMeetingEmployee(user) {
-  const session = window.workspace.session();
-  return (
-    session?.role === "HR" &&
-    user.role === "Employee" &&
-    String(user.id) !== String(session.id) &&
-    user.email?.toLowerCase() !== session.email?.toLowerCase()
-  );
-}
-scheduleEmployee.disabled = true;
-document.addEventListener("DOMContentLoaded", async () => {
-  await window.workspace.ready;
-  window.workspace
-    .users()
-    .filter(eligibleMeetingEmployee)
-    .forEach((user) => {
-      scheduleEmployee.add(
-        new Option(`${user.name} — ${user.email}`, user.email),
-      );
-    });
-  scheduleEmployee.disabled = false;
-  document.getElementById("open-schedule").addEventListener("click", () => {
-    document
-      .getElementById("schedule-section")
-      .scrollIntoView({ behavior: "smooth", block: "start" });
-    scheduleEmployee.focus({ preventScroll: true });
+document.addEventListener("DOMContentLoaded", async function () {
+  const W = window.workspace;
+  await W.ready;
+  if (!W.requireRole("HR")) return;
+  const M = window.meetingStore;
+  const get = id => document.getElementById(id);
+  const esc = W.escape;
+  const form = get("schedule-form");
+  const hours = M.availability();
+  get("start-time").value = hours.start;
+  get("end-time").value = hours.end;
+  get("schedule-date").min = M.today();
+  W.users().filter(user => user.role === "Employee").forEach(user => {
+    get("schedule-employee").add(new Option(user.name + " — " + user.email, user.id));
   });
-});
-
-// =========================
-// GET MEETINGS
-// =========================
-
-let meetings = JSON.parse(localStorage.getItem("meetings")) || [];
-
-// =========================
-// DISPLAY STATISTICS
-// =========================
-
-function displayStatistics() {
-  totalMeetings.textContent = meetings.length;
-
-  const pending = meetings.filter(function (meeting) {
-    return meeting.status === "Pending";
-  });
-
-  pendingMeetings.textContent = pending.length;
-
-  const today = new Date().toISOString().split("T")[0];
-
-  const approved = meetings.filter(function (meeting) {
-    return meeting.status === "Confirmed" && meeting.date === today;
-  });
-
-  approvedToday.textContent = approved.length;
-}
-
-// =========================
-// DISPLAY MEETINGS
-// =========================
-
-function displayMeetings() {
-  meetingList.innerHTML = "";
-
-  const selectedStatus = statusFilter.value;
-
-  const searchText = searchInput.value.toLowerCase().trim();
-
-  const filteredMeetings = meetings.filter(function (meeting) {
-    const statusMatch =
-      selectedStatus === "all" || meeting.status === selectedStatus;
-
-    const employeeName = meeting.employeeName
-      ? meeting.employeeName.toLowerCase()
-      : "";
-
-    const searchMatch = employeeName.includes(searchText);
-
-    return statusMatch && searchMatch;
-  });
-
-  if (filteredMeetings.length === 0) {
-    emptyMeetings.style.display = "block";
-
-    return;
+  function render() {
+    const meetings = M.read();
+    get("total-meetings").textContent = meetings.length;
+    get("pending-meetings").textContent = meetings.filter(m => m.status === "Pending").length;
+    get("approved-today").textContent = meetings.filter(m => m.status === "Confirmed" && m.date === M.today()).length;
+    const query = get("meeting-search").value.trim().toLowerCase();
+    const visible = meetings.filter(m => (get("meeting-status-filter").value === "all" || m.status === get("meeting-status-filter").value) && (m.employeeName || "").toLowerCase().includes(query));
+    get("empty-meetings").style.display = visible.length ? "none" : "block";
+    get("hr-meeting-list").innerHTML = visible.map(m => {
+      const status = ["Pending", "Confirmed", "Cancelled", "Completed"].includes(m.status) ? m.status : "Pending";
+      let actions = "—";
+      if (status === "Pending") actions = '<button class="action-button" data-action="approve" data-id="' + esc(m.id) + '">Approve</button> <button class="action-button" data-action="decline" data-id="' + esc(m.id) + '">Decline</button>';
+      const link = M.safeLink(m.meetingLink);
+      if (status === "Confirmed" && link) actions = '<a class="action-button" target="_blank" rel="noopener noreferrer" href="' + esc(link) + '">Join Room</a>';
+      return '<tr><td><strong>' + esc(m.employeeName) + '</strong><br><small>' + esc(m.employeeEmail) + '</small></td><td>' + esc(m.topic) + '</td><td>' + esc(m.date) + '</td><td>' + esc(m.time) + '</td><td><span class="status ' + status.toLowerCase() + '">' + status + '</span></td><td>' + actions + '</td></tr>';
+    }).join("");
   }
-
-  emptyMeetings.style.display = "none";
-
-  for (let i = 0; i < filteredMeetings.length; i++) {
-    const meeting = filteredMeetings[i];
-
-    const row = document.createElement("tr");
-
-    let actionHTML = "";
-
-    // =========================
-    // PENDING
-    // =========================
-
-    if (meeting.status === "Pending") {
-      actionHTML = `
-
-                <button
-                    class="action-button"
-                    onclick="approveMeeting(${meeting.id})"
-                >
-                    Approve
-                </button>
-
-                <button
-                    class="action-button"
-                    onclick="declineMeeting(${meeting.id})"
-                >
-                    Decline
-                </button>
-
-            `;
+  get("hr-meeting-list").addEventListener("click", function (event) {
+    const button = event.target.closest("[data-action]");
+    if (!button || !W.requireRole("HR")) return;
+    const meetings = M.read();
+    const meeting = meetings.find(m => String(m.id) === button.dataset.id);
+    if (!meeting || meeting.status !== "Pending") return render();
+    if (button.dataset.action === "approve") {
+      const error = M.validate(meeting.date, meeting.time, meeting.duration || 30);
+      if (error) return alert(error);
     }
-
-    // =========================
-    // CONFIRMED
-    // =========================
-    else if (meeting.status === "Confirmed") {
-      actionHTML = `
-
-                <button
-                    class="action-button"
-                    data-join-meeting
-                >
-                    Join Room
-                </button>
-
-            `;
+    if (!confirm(button.dataset.action === "approve" ? "Approve this meeting request?" : "Decline this meeting request?")) return;
+    meeting.status = button.dataset.action === "approve" ? "Confirmed" : "Cancelled";
+    if (meeting.status === "Confirmed") {
+      meeting.hrRepresentative = W.session().name;
+      meeting.meetingLink = "https://meet.jit.si/Workforce-HR-" + encodeURIComponent(meeting.id);
     }
-
-    // =========================
-    // TABLE ROW
-    // =========================
-
-    row.innerHTML = `
-
-            <td>
-                <strong>
-                    ${meeting.employeeName}
-                </strong>
-                <br>
-                <small>
-                    ${meeting.employeeEmail}
-                </small>
-            </td>
-
-            <td>
-                ${meeting.topic}
-            </td>
-
-            <td>
-                ${meeting.date}
-            </td>
-
-            <td>
-                ${meeting.time}
-            </td>
-
-            <td>
-
-                <span class="status ${meeting.status.toLowerCase()}">
-
-                    ${meeting.status}
-
-                </span>
-
-            </td>
-
-            <td>
-
-                ${actionHTML}
-
-            </td>
-
-        `;
-
-    meetingList.appendChild(row);
-    row
-      .querySelector("[data-join-meeting]")
-      ?.addEventListener("click", () => joinMeeting(meeting.meetingLink));
-  }
-}
-
-// =========================
-// APPROVE MEETING
-// =========================
-
-function approveMeeting(id) {
-  const meeting = meetings.find(function (meeting) {
-    return meeting.id === id;
+    M.save(meetings);
+    render();
   });
-
-  if (!meeting) {
-    return;
-  }
-
-  const confirmed = confirm("Approve this meeting request?");
-
-  if (!confirmed) {
-    return;
-  }
-
-  // Generate unique Jitsi room
-
-  const roomName = "Workforce-HR-" + meeting.id;
-
-  const link = "https://meet.jit.si/" + roomName;
-
-  meeting.status = "Confirmed";
-
-  meeting.hrRepresentative = "HR Team";
-
-  meeting.meetingLink = link;
-
-  localStorage.setItem("meetings", JSON.stringify(meetings));
-
-  alert("Meeting approved successfully.");
-
-  displayStatistics();
-
-  displayMeetings();
-}
-
-// =========================
-// DECLINE MEETING
-// =========================
-
-function declineMeeting(id) {
-  const meeting = meetings.find(function (meeting) {
-    return meeting.id === id;
+  get("open-schedule").addEventListener("click", function () {
+    get("schedule-section").scrollIntoView({ behavior: "smooth", block: "start" });
+    get("schedule-employee").focus({ preventScroll: true });
   });
-
-  if (!meeting) {
-    return;
-  }
-
-  const confirmed = confirm("Decline this meeting request?");
-
-  if (!confirmed) {
-    return;
-  }
-
-  meeting.status = "Cancelled";
-
-  localStorage.setItem("meetings", JSON.stringify(meetings));
-
-  displayStatistics();
-
-  displayMeetings();
-}
-
-// =========================
-// JOIN JITSI MEETING
-// =========================
-
-function joinMeeting(link) {
-  if (!link) {
-    alert("No meeting link is available.");
-
-    return;
-  }
-
-  // Send the link to jitsi.js
-
-  openJitsiMeeting(link);
-}
-
-// =========================
-// SEARCH
-// =========================
-
-searchInput.addEventListener("input", function () {
-  displayMeetings();
-});
-
-// =========================
-// FILTER
-// =========================
-
-statusFilter.addEventListener("change", function () {
-  displayMeetings();
-});
-
-// =========================
-// SCHEDULE NEW MEETING
-// =========================
-
-scheduleForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const employee = scheduleEmployee.value;
-
-  const topic = scheduleTopic.value.trim();
-
-  const date = scheduleDate.value;
-
-  const time = scheduleTime.value;
-
-  const duration = scheduleDuration.value;
-
-  if (employee === "" || topic === "" || date === "" || time === "") {
-    alert("Please fill in all required fields.");
-
-    return;
-  }
-
-  // Find employee data
-
-  const employees = JSON.parse(localStorage.getItem("site_users")) || [];
-
-  const selectedEmployee = employees.find(function (user) {
-    return user.email === employee;
+  get("save-availability").addEventListener("click", function () {
+    if (!W.requireRole("HR")) return;
+    const start = get("start-time").value;
+    const end = get("end-time").value;
+    if (!start || !end || start >= end) {
+      get("availability-message").textContent = "Choose an end time after the start time.";
+      return;
+    }
+    W.save("meeting_availability", { start, end });
+    get("availability-message").textContent = "Availability saved. New requests and approvals must fit these hours.";
   });
-
-  if (!selectedEmployee || !eligibleMeetingEmployee(selectedEmployee)) {
-    alert("Please select an employee other than yourself.");
-    return;
-  }
-
-  // Create unique room
-
-  const roomName = "Workforce-HR-" + Date.now();
-
-  const generatedLink = "https://meet.jit.si/" + roomName;
-
-  const newMeeting = {
-    id: Date.now(),
-
-    employeeName: selectedEmployee ? selectedEmployee.name : employee,
-
-    employeeEmail: employee,
-
-    topic: topic,
-
-    reason: "Meeting scheduled by HR",
-
-    date: date,
-
-    time: time,
-
-    duration: duration,
-
-    hrRepresentative: window.workspace.session().name,
-
-    status: "Confirmed",
-
-    meetingLink: meetingLink.value.trim() || generatedLink,
-
-    createdAt: new Date().toLocaleString(),
-  };
-
-  meetings.push(newMeeting);
-
-  localStorage.setItem("meetings", JSON.stringify(meetings));
-
-  alert("Meeting created successfully.");
-
-  scheduleForm.reset();
-
-  displayStatistics();
-
-  displayMeetings();
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (!W.requireRole("HR") || !form.reportValidity()) return;
+    const user = W.users().find(user => String(user.id) === get("schedule-employee").value && user.role === "Employee");
+    if (!user) return alert("Please select an employee.");
+    const topic = get("schedule-topic").value.trim();
+    const date = get("schedule-date").value;
+    const time = get("schedule-time").value;
+    const duration = Number.parseInt(get("schedule-duration").value, 10);
+    const error = M.validate(date, time, duration);
+    if (error || !topic) return alert(error || "Enter a meeting topic.");
+    const enteredLink = get("meeting-link").value.trim();
+    if (enteredLink && !M.safeLink(enteredLink)) return alert("Use an http or https meeting link.");
+    const id = crypto.randomUUID();
+    const meetings = M.read();
+    meetings.push({ id, employeeId: user.id, employeeName: user.name, employeeEmail: user.email, topic, reason: "Meeting scheduled by HR", date, time, duration, hrRepresentative: W.session().name, status: "Confirmed", meetingLink: enteredLink || "https://meet.jit.si/Workforce-HR-" + id, createdAt: new Date().toISOString() });
+    M.save(meetings);
+    form.reset();
+    render();
+    alert("Meeting created successfully.");
+  });
+  get("meeting-search").addEventListener("input", render);
+  get("meeting-status-filter").addEventListener("change", render);
+  window.addEventListener("storage", event => { if (event.key === "meetings") render(); });
+  render();
 });
-
-// =========================
-// INITIAL DISPLAY
-// =========================
-
-displayStatistics();
-
-displayMeetings();

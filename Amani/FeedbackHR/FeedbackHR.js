@@ -1,289 +1,49 @@
-// =========================
-// GET ELEMENTS
-// =========================
-
-const totalFeedback = document.querySelector(
-  ".stat-card:nth-child(1) .stat-number",
-);
-
-const unreadFeedback = document.querySelector(
-  ".stat-card:nth-child(2) .stat-number",
-);
-
-const kudosFeedback = document.querySelector(
-  ".stat-card:nth-child(3) .stat-number",
-);
-
-const feedbackList = document.querySelector(".feedback-list");
-
-const searchInput = document.querySelector(".feedback-search");
-
-const filters = document.querySelectorAll(".filter");
-
-// =========================
-// GET FEEDBACK
-// =========================
-
-let feedbacks = JSON.parse(localStorage.getItem("feedback")) || [];
-
-// =========================
-// DISPLAY STATISTICS
-// =========================
-
-function displayStatistics() {
-  const total = feedbacks.length;
-
-  const unread = feedbacks.filter(function (feedback) {
-    return feedback.read === false;
-  }).length;
-
-  const kudos = feedbacks.filter(function (feedback) {
-    return feedback.topic === "Kudos";
-  }).length;
-
-  totalFeedback.textContent = total;
-
-  unreadFeedback.textContent = unread;
-
-  kudosFeedback.textContent = kudos;
-  filters[0].textContent = `All Feedback (${total})`;
-  filters[1].textContent = `Unread (${unread})`;
-}
-
-// =========================
-// DISPLAY FEEDBACK
-// =========================
-
-function displayFeedback(data = feedbacks) {
-  feedbackList.innerHTML = "";
-
-  if (data.length === 0) {
-    feedbackList.innerHTML = `
-            <p style="text-align:center;">
-                No feedback found.
-            </p>
-        `;
-
-    return;
-  }
-
-  for (let i = 0; i < data.length; i++) {
-    const feedback = data[i];
-
-    let initials = "AE";
-
-    if (feedback.name) {
-      const words = feedback.name.split(" ");
-
-      initials = words
-        .map(function (word) {
-          return word[0];
-        })
-        .join("")
-        .substring(0, 2)
-        .toUpperCase();
-    }
-
-    let typeClass = "suggestion";
-
-    if (feedback.topic === "Kudos") {
-      typeClass = "kudos";
-    }
-
-    if (feedback.topic === "Support") {
-      typeClass = "support";
-    }
-
-    const status = feedback.read ? "Reviewed" : "◉ Unread";
-
-    const feedbackCard = document.createElement("div");
-
-    feedbackCard.className = "feedback-card";
-
-    feedbackCard.innerHTML = `
-
-            <div class="feedback-top">
-
-                <div class="employee-info">
-
-                    <div class="avatar">
-                        ${initials}
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${feedback.name || "Anonymous Employee"}
-                        </h3>
-
-                        <span>
-                            Employee • Submitted
-                            ${feedback.date || ""}
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <span class="feedback-type ${typeClass}">
-                    ${feedback.topic}
-                </span>
-
-            </div>
-
-
-            <p class="feedback-message">
-                "${feedback.message}"
-            </p>
-
-
-            <div class="feedback-bottom">
-
-                <span class="status ${feedback.read ? "reviewed" : "unread"}">
-                    ${status}
-                </span>
-
-
-                <div class="feedback-actions">
-
-                    ${
-                      !feedback.read
-                        ? `<button onclick="markAsRead(${feedback.id})">
-                            Mark as Read
-                        </button>`
-                        : ""
-                    }
-
-
-
-
-
-                    ${
-                      !feedback.read
-                        ? `<button onclick="assignToHR(${feedback.id})">
-                            Assign to HR Lead
-                        </button>`
-                        : ""
-                    }
-
-                </div>
-
-            </div>
-        `;
-
-    feedbackList.appendChild(feedbackCard);
-  }
-}
-
-// =========================
-// MARK AS READ
-// =========================
-
-function markAsRead(id) {
-  const feedback = feedbacks.find(function (feedback) {
-    return feedback.id === id;
-  });
-
-  if (!feedback) {
-    return;
-  }
-
-  feedback.read = true;
-
-  localStorage.setItem("feedback", JSON.stringify(feedbacks));
-
-  displayStatistics();
-
-  displayFeedback(feedbacks);
-}
-
-// =========================
-// REPLY BY EMAIL
-// =========================
-
-// =========================
-// ASSIGN TO HR
-// =========================
-
-function assignToHR(id) {
-  const feedback = feedbacks.find(function (feedback) {
-    return feedback.id === id;
-  });
-
-  if (!feedback) {
-    return;
-  }
-
-  feedback.assignedTo = "HR Lead";
-
-  localStorage.setItem("feedback", JSON.stringify(feedbacks));
-
-  alert("Feedback assigned to HR Lead.");
-}
-
-// =========================
-// SEARCH
-// =========================
-
-searchInput.addEventListener("input", function () {
-  const searchText = searchInput.value.toLowerCase().trim();
-
-  const filtered = feedbacks.filter(function (feedback) {
-    return (
-      (feedback.name || "").toLowerCase().includes(searchText) ||
-      (feedback.message || "").toLowerCase().includes(searchText) ||
-      (feedback.topic || "").toLowerCase().includes(searchText)
-    );
-  });
-
-  displayFeedback(filtered);
-});
-
-// =========================
-// FILTERS
-// =========================
-
-filters.forEach(function (filter) {
-  filter.addEventListener("click", function () {
-    filters.forEach(function (button) {
-      button.classList.remove("active");
+document.addEventListener("DOMContentLoaded", async function () {
+  const W = window.workspace;
+  await W.ready;
+  if (!W.requireRole("HR")) return;
+  const esc = W.escape;
+  const list = document.querySelector(".feedback-list");
+  const search = document.querySelector(".feedback-search");
+  const filters = [...document.querySelectorAll(".filter")];
+  const categories = ["all", "unread", "anonymous", "support", "kudos"];
+  let selected = "all";
+  function render() {
+    const feedbacks = W.read("feedback", []);
+    const unread = feedbacks.filter(f => !f.read).length;
+    const counts = [feedbacks.length, unread, feedbacks.filter(f => f.topic === "Kudos").length];
+    document.querySelectorAll(".stat-card .stat-number").forEach((el, i) => el.textContent = counts[i]);
+    filters[0].textContent = "All Feedback (" + feedbacks.length + ")";
+    filters[1].textContent = "Unread (" + unread + ")";
+    const query = search.value.trim().toLowerCase();
+    const visible = feedbacks.filter(f => {
+      const matchesCategory = selected === "all" || (selected === "unread" && !f.read) || (selected === "anonymous" && (!f.name || f.name === "Anonymous Employee")) || (selected === "support" && f.topic === "Support") || (selected === "kudos" && f.topic === "Kudos");
+      return matchesCategory && [f.name, f.message, f.topic].some(value => String(value || "").toLowerCase().includes(query));
     });
-
-    filter.classList.add("active");
-
-    const filterText = filter.textContent.toLowerCase().trim();
-
-    let filtered = feedbacks;
-
-    if (filterText.startsWith("all")) {
-      filtered = feedbacks;
-    } else if (filterText.startsWith("unread")) {
-      filtered = feedbacks.filter(function (feedback) {
-        return feedback.read === false;
-      });
-    } else if (filterText.startsWith("anonymous")) {
-      filtered = feedbacks.filter(function (feedback) {
-        return !feedback.name || feedback.name === "Anonymous Employee";
-      });
-    } else if (filterText.startsWith("support")) {
-      filtered = feedbacks.filter(function (feedback) {
-        return feedback.topic === "Support";
-      });
-    } else if (filterText.startsWith("kudos")) {
-      filtered = feedbacks.filter(function (feedback) {
-        return feedback.topic === "Kudos";
-      });
-    }
-
-    displayFeedback(filtered);
+    list.innerHTML = visible.map(f => {
+      const name = f.name || "Anonymous Employee";
+      const initials = name.split(/\s+/).map(word => word[0]).join("").slice(0, 2);
+      const type = f.topic === "Support" ? "support" : f.topic === "Kudos" ? "kudos" : "suggestion";
+      return '<div class="feedback-card"><div class="feedback-top"><div class="employee-info"><div class="avatar">' + esc(initials) + '</div><div><h3>' + esc(name) + '</h3><span>Employee • Submitted ' + esc(f.date || "") + '</span></div></div><span class="feedback-type ' + type + '">' + esc(f.topic) + '</span></div><p class="feedback-message">' + esc(f.message) + '</p><div class="feedback-bottom"><span class="status ' + (f.read ? "reviewed" : "unread") + '">' + (f.read ? "Reviewed" : "◉ Unread") + '</span><div class="feedback-actions">' + (!f.read ? '<button data-action="read" data-id="' + esc(f.id) + '">Mark as Read</button><button data-action="assign" data-id="' + esc(f.id) + '">Assign to HR Lead</button>' : "") + '</div></div>' + (f.assignedTo ? '<p>Assigned to ' + esc(f.assignedTo) + '</p>' : "") + '</div>';
+    }).join("") || '<p style="text-align:center">No feedback found.</p>';
+  }
+  filters.forEach((button, index) => button.addEventListener("click", function () {
+    selected = categories[index];
+    filters.forEach(item => item.classList.toggle("active", item === button));
+    render();
+  }));
+  search.addEventListener("input", render);
+  list.addEventListener("click", function (event) {
+    const button = event.target.closest("[data-action]");
+    if (!button || !W.requireRole("HR")) return;
+    const feedbacks = W.read("feedback", []);
+    const feedback = feedbacks.find(f => String(f.id) === button.dataset.id);
+    if (!feedback) return;
+    if (button.dataset.action === "read") feedback.read = true;
+    if (button.dataset.action === "assign") feedback.assignedTo = "HR Lead";
+    W.save("feedback", feedbacks);
+    render();
   });
+  window.addEventListener("storage", event => { if (event.key === "feedback") render(); });
+  render();
 });
-
-// =========================
-// INITIAL DISPLAY
-// =========================
-
-displayStatistics();
-
-displayFeedback();

@@ -68,9 +68,9 @@
     const session = read("site_session");
     if (session) {
       const account = users.find((person) =>
-        session.email
-          ? person.email?.toLowerCase() === session.email.toLowerCase()
-          : person.id === String(session.id),
+        session.id != null
+          ? person.id === String(session.id)
+          : person.email?.toLowerCase() === session.email?.toLowerCase(),
       );
       if (account) {
         const { password, ...details } = account;
