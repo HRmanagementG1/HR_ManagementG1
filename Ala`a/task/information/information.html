@@ -1,182 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Information | Wanderly</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Information | Wanderly</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- Page CSS -->
     <link rel="stylesheet" href="information.css">
-<link rel="stylesheet" href="../../../Shared/employee_header.css"><script defer src="../../../Shared/employee_header.js"></script><script defer src="../../../Shared/workspace.js"></script><link rel="stylesheet" href="../../../Shared/theme.css"><script defer src="../../../Shared/access.js"></script><script src="../../../Shared/site-shell.js" defer></script></head>
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../../Shared/theme.css">
+    <link rel="stylesheet" href="../../../Shared/employee_header.css">
+
+</head>
+
+
 <body data-workspace-role="Employee">
 
-    <div data-employee-header data-active-page="information"></div>
+
+    <!-- Employee Navbar -->
+    <div
+        data-employee-header
+        data-active-page="information">
+    </div>
+
 
     <main class="main-container">
+
+
+        <!-- ================= HERO ================= -->
+
         <section class="hero-banner">
+
             <div class="hero-content">
-                <div class="breadcrumb">Home › <strong>Info</strong></div>
-                <h1 class="hero-title">Empowering your journey.</h1>
-                <p class="hero-subtitle">Detailed employee record, performance metrics, verified credentials, and compensation profile.</p>
-            </div>
-            <div class="hero-badges">
-                <div class="status-badge">
-                    <span class="dot"></span> <span id="recordStatus"></span>
+
+                <div class="breadcrumb">
+                    Home › <strong>Information</strong>
                 </div>
-                <button class="btn-credential" type="button" id="credentialButton"><i class="fa-solid fa-id-badge"></i> Credential ID</button>
+
+                <h1 class="hero-title">
+                    Empowering your journey.
+                </h1>
+
+                <p class="hero-subtitle">
+                    Detailed employee record, performance metrics,
+                    verified credentials, and compensation profile.
+                </p>
+
             </div>
+
+
+            <div class="hero-badges">
+
+                <div class="status-badge">
+
+                    <span class="dot"></span>
+
+                    <span id="recordStatus"></span>
+
+                </div>
+
+
+                <button
+                    class="btn-credential"
+                    type="button"
+                    id="credentialButton">
+
+                    <i class="fa-solid fa-id-badge"></i>
+
+                    Credential ID
+
+                </button>
+
+            </div>
+
         </section>
+
+
+
+        <!-- ================= CONTENT ================= -->
 
         <div class="content-grid">
 
+
+            <!-- ================= LEFT ================= -->
+
             <div class="left-column">
 
+
+                <!-- Employee Profile -->
+
                 <div class="profile-header">
+
                     <div class="profile-image-container">
-                        <div class="profile-img" id="informationAvatar"></div>
-                        <span class="online-status"></span>
-                    </div>
-                    <div class="profile-info">
-                        <div class="name-row">
-                            <h2 data-user="name"></h2>
-                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Employee Record</span>
+
+                        <div
+                            class="profile-img"
+                            id="informationAvatar">
                         </div>
-                        <p class="role-title" data-user="position"></p>
-                        <p class="dept-location" id="departmentLocation"></p>
+
+                        <span class="online-status"></span>
+
                     </div>
+
+
+                    <div class="profile-info">
+
+                        <div class="name-row">
+
+                            <h2 data-user="name"></h2>
+
+                            <span class="verified-badge">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                                Employee Record
+
+                            </span>
+
+                        </div>
+
+
+                        <p
+                            class="role-title"
+                            data-user="position">
+                        </p>
+
+
+                        <p
+                            class="dept-location"
+                            id="departmentLocation">
+                        </p>
+
+                    </div>
+
                 </div>
+
+
+
+                <!-- ================= EMPLOYEE INFORMATION ================= -->
 
                 <div class="info-cards-grid">
+
+
+                    <!-- Employee ID -->
+
                     <div class="info-card bg-teal">
-                        <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
+
+                        <div class="card-icon">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+
                         <div class="card-text">
+
                             <small>EMPLOYEE ID</small>
+
                             <strong data-info="employeeId"></strong>
+
                         </div>
+
                     </div>
+
+
+
+                    <!-- Email -->
+
                     <div class="info-card bg-orange">
-                        <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
+
+                        <div class="card-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
                         <div class="card-text">
+
                             <small>OFFICIAL EMAIL</small>
+
                             <strong data-info="email"></strong>
+
                         </div>
+
                     </div>
+
+
+
+                    <!-- Phone -->
+
                     <div class="info-card bg-green">
-                        <div class="card-icon"><i class="fa-solid fa-phone"></i></div>
+
+                        <div class="card-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+
                         <div class="card-text">
+
                             <small>PHONE NUMBER</small>
+
                             <strong data-info="phone"></strong>
-                            <button type="button" id="editPhone" class="phone-edit-button" aria-expanded="false" aria-controls="phoneForm">Edit number</button>
+
+
+                            <button
+                                type="button"
+                                id="editPhone"
+                                class="phone-edit-button">
+
+                                Edit number
+
+                            </button>
+
+
                             <form id="phoneForm" hidden>
-                                <label for="phoneInput">Phone number</label>
-                                <input id="phoneInput" type="tel" autocomplete="tel" maxlength="30" required aria-describedby="phoneHelp">
-                                <small id="phoneHelp">Enter 7–15 digits. Spaces, +, brackets and hyphens are allowed.</small>
+
+                                <label for="phoneInput">
+                                    Phone number
+                                </label>
+
+
+                                <input
+                                    id="phoneInput"
+                                    type="tel"
+                                    required
+                                >
+
+
                                 <div class="phone-actions">
-                                    <button type="submit">Save</button>
-                                    <button type="button" id="cancelPhone">Cancel</button>
+
+                                    <button type="submit">
+                                        Save
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        id="cancelPhone">
+
+                                        Cancel
+
+                                    </button>
+
                                 </div>
+
                             </form>
-                            <p id="phoneMessage" role="status" aria-live="polite"></p>
+
+
+                            <p id="phoneMessage"></p>
+
                         </div>
+
                     </div>
+
+
+
+                    <!-- Location -->
+
                     <div class="info-card bg-blue">
-                        <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="card-text">
-                            <small>LOCATION / OFFICE</small>
-                            <strong data-info="location"></strong>
+
+                        <div class="card-icon">
+                            <i class="fa-solid fa-location-dot"></i>
                         </div>
+
+                        <div class="card-text">
+
+                            <small>LOCATION / OFFICE</small>
+
+                            <strong data-info="location"></strong>
+
+                        </div>
+
                     </div>
+
                 </div>
+
+
+
+                <!-- ================= PERFORMANCE ================= -->
 
                 <div class="performance-section">
+
+
                     <div class="section-header">
-                        <div class="header-icon"><i class="fa-solid fa-star"></i></div>
-                        <div class="header-text">
-                            <h3>Performance & Appraisals</h3>
-                            <p>Validated through continuous peer and leadership reviews</p>
+
+                        <div class="header-icon">
+
+                            <i class="fa-solid fa-star"></i>
+
                         </div>
+
+
+                        <div class="header-text">
+
+                            <h3>
+                                Performance & Appraisals
+                            </h3>
+
+                            <p>
+                                Employee performance information
+                            </p>
+
+                        </div>
+
                     </div>
 
-                    <span class="quarter-badge"><i class="fa-solid fa-circle"></i> Q3 2026 Completed</span>
+
+
+                    <span class="quarter-badge">
+
+                        <i class="fa-solid fa-circle"></i>
+
+                        Q3 2026 Completed
+
+                    </span>
+
+
 
                     <div class="rating-box">
+
+
                         <div class="rating-score">
-                            <span class="score-big">4.9</span><span class="score-small">/5.0</span>
+
+                            <span class="score-big">
+                                4.9
+                            </span>
+
+                            <span class="score-small">
+                                /5.0
+                            </span>
+
+
                             <div class="rating-stars-text">
+
                                 <div class="stars">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+
                                 </div>
-                                <strong>Exceptional Contributor</strong>
+
+
+                                <strong>
+                                    Exceptional Contributor
+                                </strong>
+
                             </div>
+
                         </div>
+
+
                         <div class="bonus-badge">
-                            <i class="fa-solid fa-award"></i> Eligible for Leadership Bonus
+
+                            <i class="fa-solid fa-award"></i>
+
+                            Eligible for Leadership Bonus
+
                         </div>
+
                     </div>
+
+
+
+                    <!-- Progress -->
 
                     <div class="progress-bars">
+
+
                         <div class="progress-item">
+
                             <div class="progress-labels">
-                                <span class="label-with-dot"><span class="dot-color green"></span> Team Collaboration</span>
-                                <strong>5.0 / 5.0</strong>
+
+                                <span>
+                                    Team Collaboration
+                                </span>
+
+                                <strong>
+                                    5.0 / 5.0
+                                </strong>
+
                             </div>
-                            <div class="progress-track"><div class="progress-fill green" style="width: 100%;"></div></div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill green"
+                                    style="width:100%;">
+                                </div>
+
+                            </div>
+
                         </div>
+
+
+
                         <div class="progress-item">
+
                             <div class="progress-labels">
-                                <span class="label-with-dot"><span class="dot-color blue"></span> Leadership & Mentorship</span>
-                                <strong>4.9 / 5.0</strong>
+
+                                <span>
+                                    Leadership & Mentorship
+                                </span>
+
+                                <strong>
+                                    4.9 / 5.0
+                                </strong>
+
                             </div>
-                            <div class="progress-track"><div class="progress-fill blue" style="width: 98%;"></div></div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill blue"
+                                    style="width:98%;">
+                                </div>
+
+                            </div>
+
                         </div>
+
+
+
                         <div class="progress-item">
+
                             <div class="progress-labels">
-                                <span class="label-with-dot"><span class="dot-color purple"></span> Initiative & Execution</span>
-                                <strong>4.8 / 5.0</strong>
+
+                                <span>
+                                    Initiative & Execution
+                                </span>
+
+                                <strong>
+                                    4.8 / 5.0
+                                </strong>
+
                             </div>
-                            <div class="progress-track"><div class="progress-fill purple" style="width: 96%;"></div></div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill purple"
+                                    style="width:96%;">
+                                </div>
+
+                            </div>
+
                         </div>
+
+
+
                         <div class="progress-item">
+
                             <div class="progress-labels">
-                                <span class="label-with-dot"><span class="dot-color yellow"></span> Policy Adherence</span>
-                                <strong>5.0 / 5.0</strong>
+
+                                <span>
+                                    Policy Adherence
+                                </span>
+
+                                <strong>
+                                    5.0 / 5.0
+                                </strong>
+
                             </div>
-                            <div class="progress-track"><div class="progress-fill yellow" style="width: 100%;"></div></div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill yellow"
+                                    style="width:100%;">
+                                </div>
+
+                            </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
+
+
+            <!-- ================= RIGHT ================= -->
 
             <div class="right-column">
+
+
+                <!-- Salary -->
+
                 <div class="compensation-card">
+
+
                     <div class="comp-header">
+
+
                         <div class="comp-title-group">
-                            <div class="comp-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
-                            <div>
-                                <h3>Compensation Profile</h3>
-                                <p>Confidential Financial Details</p>
+
+                            <div class="comp-icon">
+
+                                <i class="fa-solid fa-money-bill-wave"></i>
+
                             </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Compensation Profile
+                                </h3>
+
+                                <p>
+                                    Confidential Financial Details
+                                </p>
+
+                            </div>
+
                         </div>
-                        <button class="btn-toggle-eye" id="toggleSalary" type="button" aria-label="Hide salary" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+
+
+                        <button
+                            class="btn-toggle-eye"
+                            id="toggleSalary"
+                            type="button">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
                     </div>
 
+
+
                     <div class="salary-box">
+
+
                         <div class="salary-left">
-                            <small>ANNUAL BASE SALARY</small>
-                            <strong id="annualSalary">$85,000 USD</strong>
+
+                            <small>
+                                ANNUAL BASE SALARY
+                            </small>
+
+                            <strong id="annualSalary">
+                                $85,000 USD
+                            </strong>
+
                         </div>
+
+
                         <div class="salary-right">
-                            <strong id="monthlySalary">$7,083.33 / mo</strong>
+
+                            <strong id="monthlySalary">
+                                $7,083.33 / mo
+                            </strong>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </main>
 
 
 
-    <dialog id="credentialDialog"><h2>Employee credential</h2><p id="credentialDetails"></p><button type="button" id="closeCredential">Close</button></dialog><script defer src="information.js"></script>
+    <!-- ================= CREDENTIAL POPUP ================= -->
+
+    <dialog id="credentialDialog">
+
+        <h2>
+            Employee credential
+        </h2>
+
+        <p id="credentialDetails"></p>
+
+        <button
+            type="button"
+            id="closeCredential">
+
+            Close
+
+        </button>
+
+    </dialog>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script
+        defer
+        src="../../../Shared/workspace.js">
+    </script>
+
+    <script
+        defer
+        src="../../../Shared/access.js">
+    </script>
+
+    <script
+        defer
+        src="../../../Shared/employee_header.js">
+    </script>
+
+    <script
+        defer
+        src="../../../Shared/site-shell.js">
+    </script>
+
+    <script
+        defer
+        src="information.js">
+    </script>
+
+
 </body>
+
 </html>

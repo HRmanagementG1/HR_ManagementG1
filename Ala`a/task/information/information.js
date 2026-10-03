@@ -1,201 +1,450 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const W = window.workspace;
-  await W.ready;
-  const hrView = document.body.dataset.workspaceRole === "HR";
-  if (!W.requireRole(hrView ? "HR" : "Employee")) return;
-  const userId = hrView
-    ? new URLSearchParams(location.search).get("id")
-    : String(W.session().id);
-  const user = W.users().find((person) => person.id === userId);
-  if (!user) {
-    document.querySelector(".main-container").textContent =
-      "Employee record not found.";
-    return;
-  }
-  const employeeId =
-    user.employeeCode || `EMP-${String(user.id).padStart(3, "0")}`;
-  document
-    .querySelectorAll("[data-user]")
-    .forEach(
-      (el) => (el.textContent = user[el.dataset.user] || "Not provided"),
-    );
-  document.getElementById("recordStatus").textContent =
-    `${employeeId} · Active Employee`;
-  document.getElementById("departmentLocation").textContent = [
-    user.department,
-    user.location,
-  ]
-    .filter(Boolean)
-    .join(" · ");
-  const avatar = document.getElementById("informationAvatar");
-  avatar.textContent = user.name
-    .split(/\s+/)
-    .map((word) => word[0])
-    .slice(0, 2)
-    .join("");
-  if (user.image && /^(https?:|data:image\/)/.test(user.image)) {
-    const image = document.createElement("img");
-    image.src = user.image;
-    image.alt = user.name;
-    avatar.replaceChildren(image);
-  }
-  const hired = new Date(user.hireDate || user.joinDate);
-  const fields = {
-    ...user,
-    employeeId,
-    hireDate: Number.isNaN(hired.getTime())
-      ? "Not recorded"
-      : hired.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        }),
-    manager:
-      W.users().find((person) => String(person.id) === String(user.managerId))
-        ?.name ||
-      user.manager ||
-      "Not assigned",
-  };
-  document
-    .querySelectorAll("[data-info]")
-    .forEach(
-      (el) => (el.textContent = fields[el.dataset.info] || "Not provided"),
-    );
-  const phoneForm = document.getElementById("phoneForm");
-  if (!hrView && phoneForm) {
-    const phoneInput = document.getElementById("phoneInput");
-    const editPhone = document.getElementById("editPhone");
-    const phoneMessage = document.getElementById("phoneMessage");
+document.addEventListener("DOMContentLoaded", function () {
 
-    function closePhoneEditor() {
-      phoneForm.hidden = true;
-      editPhone.hidden = false;
-      editPhone.setAttribute("aria-expanded", "false");
-      editPhone.focus();
-    }
+    // Get workspace
+    const W = window.workspace;
 
-    editPhone.addEventListener("click", () => {
-      phoneInput.value = user.phone || "";
-      phoneInput.setCustomValidity("");
-      phoneMessage.textContent = "";
-      phoneForm.hidden = false;
-      editPhone.hidden = true;
-      editPhone.setAttribute("aria-expanded", "true");
-      phoneInput.focus();
-    });
-    document.getElementById("cancelPhone").addEventListener("click", closePhoneEditor);
-    phoneInput.addEventListener("input", () => phoneInput.setCustomValidity(""));
 
-    phoneForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const phone = phoneInput.value.trim();
-      const digits = phone.replace(/\D/g, "");
-      if (!/^\+?[\d\s()-]+$/.test(phone) || digits.length < 7 || digits.length > 15) {
-        phoneInput.setCustomValidity("Enter a phone number with 7–15 digits.");
-        phoneInput.reportValidity();
-        return;
-      }
+    // Wait until workspace is ready
+    W.ready.then(function () {
 
-      const session = W.session();
-      if (!session || session.role !== "Employee" || String(session.id) !== userId) {
-        phoneMessage.textContent = "Please sign in again to edit your phone number.";
-        return;
-      }
 
-      try {
-        // Read the latest records and update only this employee's phone number.
+        // ================= GET CURRENT USER =================
+
+        const session = W.session();
+
+        if (!session) {
+            return;
+        }
+
+
+        // Get all users
         const users = W.users();
-        const account = users.find((person) => String(person.id) === userId);
-        if (!account) throw new Error("Employee record not found.");
-        account.phone = phone;
-        W.save("site_users", users);
-      } catch {
-        phoneMessage.textContent = "Could not save your number. Please try again.";
-        return;
-      }
 
-      user.phone = phone;
-      document.querySelector('[data-info="phone"]').textContent = phone;
-      closePhoneEditor();
-      phoneMessage.textContent = "Phone number saved.";
-      try {
-        W.save("site_session", { ...session, phone });
-      } catch {
-        phoneMessage.textContent = "Phone number saved. Refresh to update your session.";
-      }
+
+        // Find the logged-in employee
+        const user = users.find(function (person) {
+
+            return String(person.id) === String(session.id);
+
+        });
+
+
+        // If employee does not exist
+        if (!user) {
+
+            document.querySelector(".main-container").textContent =
+                "Employee record not found.";
+
+            return;
+        }
+
+
+
+        // ================= EMPLOYEE ID =================
+
+        let employeeId = user.employeeCode;
+
+        if (!employeeId) {
+
+            employeeId =
+                "EMP-" + String(user.id).padStart(3, "0");
+
+        }
+
+
+
+        // ================= BASIC INFORMATION =================
+
+        document.querySelector('[data-user="name"]').textContent =
+            user.name || "Not provided";
+
+
+        document.querySelector('[data-user="position"]').textContent =
+            user.position || "Not provided";
+
+
+        document.getElementById("recordStatus").textContent =
+            employeeId + " · Active Employee";
+
+
+        document.getElementById("departmentLocation").textContent =
+            (user.department || "No department") +
+            " · " +
+            (user.location || "No location");
+
+
+
+        // ================= EMPLOYEE INFORMATION CARDS =================
+
+        document.querySelector('[data-info="employeeId"]').textContent =
+            employeeId;
+
+
+        document.querySelector('[data-info="email"]').textContent =
+            user.email || "Not provided";
+
+
+        document.querySelector('[data-info="phone"]').textContent =
+            user.phone || "Not provided";
+
+
+        document.querySelector('[data-info="location"]').textContent =
+            user.location || "Not provided";
+
+
+
+        // ================= EMPLOYEE AVATAR =================
+
+        const avatar =
+            document.getElementById("informationAvatar");
+
+
+        const nameParts =
+            user.name.split(" ");
+
+
+        let initials =
+            nameParts[0][0];
+
+
+        if (nameParts.length > 1) {
+
+            initials += nameParts[1][0];
+
+        }
+
+
+        avatar.textContent = initials;
+
+
+
+        // If employee has an image
+        if (user.image) {
+
+            avatar.innerHTML =
+                '<img src="' +
+                user.image +
+                '" alt="' +
+                user.name +
+                '">';
+
+        }
+
+
+
+        // ================= PHONE EDIT =================
+
+        const editPhone =
+            document.getElementById("editPhone");
+
+
+        const phoneForm =
+            document.getElementById("phoneForm");
+
+
+        const phoneInput =
+            document.getElementById("phoneInput");
+
+
+        const cancelPhone =
+            document.getElementById("cancelPhone");
+
+
+        const phoneMessage =
+            document.getElementById("phoneMessage");
+
+
+
+        // Click Edit
+        editPhone.onclick = function () {
+
+            phoneInput.value =
+                user.phone || "";
+
+            phoneForm.hidden = false;
+
+            editPhone.hidden = true;
+
+            phoneInput.focus();
+
+        };
+
+
+
+        // Click Cancel
+        cancelPhone.onclick = function () {
+
+            phoneForm.hidden = true;
+
+            editPhone.hidden = false;
+
+            phoneMessage.textContent = "";
+
+        };
+
+
+
+        // Save phone
+        phoneForm.onsubmit = function (event) {
+
+            event.preventDefault();
+
+
+            const newPhone =
+                phoneInput.value.trim();
+
+
+            if (newPhone === "") {
+
+                phoneMessage.textContent =
+                    "Please enter a phone number.";
+
+                return;
+
+            }
+
+
+            // Update user
+            user.phone = newPhone;
+
+
+            // Save users in localStorage
+            W.save("site_users", users);
+
+
+            // Update page
+            document.querySelector(
+                '[data-info="phone"]'
+            ).textContent = newPhone;
+
+
+            phoneForm.hidden = true;
+
+            editPhone.hidden = false;
+
+            phoneMessage.textContent =
+                "Phone number saved.";
+
+        };
+
+
+
+        // ================= SALARY =================
+
+        const salary =
+            Number(user.salary);
+
+
+        const annualSalary =
+            document.getElementById("annualSalary");
+
+
+        const monthlySalary =
+            document.getElementById("monthlySalary");
+
+
+        if (!isNaN(salary)) {
+
+            annualSalary.textContent =
+                "$" +
+                salary.toLocaleString() +
+                " USD";
+
+
+            monthlySalary.textContent =
+                "$" +
+                (salary / 12).toFixed(2) +
+                " / mo";
+
+        }
+        else {
+
+            annualSalary.textContent =
+                "Not provided";
+
+
+            monthlySalary.textContent =
+                "—";
+
+        }
+
+
+
+        // ================= HIDE / SHOW SALARY =================
+
+        const salaryButton =
+            document.getElementById("toggleSalary");
+
+
+        let salaryHidden = false;
+
+
+        salaryButton.onclick = function () {
+
+            salaryHidden =
+                !salaryHidden;
+
+
+            if (salaryHidden) {
+
+                annualSalary.textContent =
+                    "••••••";
+
+
+                monthlySalary.textContent =
+                    "••••••";
+
+            }
+            else {
+
+                annualSalary.textContent =
+                    "$" +
+                    salary.toLocaleString() +
+                    " USD";
+
+
+                monthlySalary.textContent =
+                    "$" +
+                    (salary / 12).toFixed(2) +
+                    " / mo";
+
+            }
+
+        };
+
+
+
+        // ================= PERFORMANCE =================
+
+        const performance =
+            user.performance;
+
+
+        if (performance) {
+
+
+            document.querySelector(
+                ".quarter-badge"
+            ).textContent =
+                performance.period;
+
+
+            document.querySelector(
+                ".score-big"
+            ).textContent =
+                performance.score;
+
+
+            document.querySelector(
+                ".rating-stars-text strong"
+            ).textContent =
+                performance.summary;
+
+
+            document.querySelector(
+                ".bonus-badge"
+            ).textContent =
+                performance.bonus;
+
+
+
+            // Performance progress values
+
+            const progressItems =
+                document.querySelectorAll(
+                    ".progress-item"
+                );
+
+
+            const values = [
+                performance.collaboration,
+                performance.leadership,
+                performance.initiative,
+                performance.policy
+            ];
+
+
+            progressItems.forEach(
+                function (item, index) {
+
+                    if (values[index] != null) {
+
+                        const value =
+                            Number(values[index]);
+
+
+                        item.querySelector(
+                            "strong"
+                        ).textContent =
+                            value + " / 5.0";
+
+
+                        item.querySelector(
+                            ".progress-fill"
+                        ).style.width =
+                            (value / 5 * 100) + "%";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        // ================= CREDENTIAL =================
+
+        const dialog =
+            document.getElementById(
+                "credentialDialog"
+            );
+
+
+        const credentialDetails =
+            document.getElementById(
+                "credentialDetails"
+            );
+
+
+        const credentialButton =
+            document.getElementById(
+                "credentialButton"
+            );
+
+
+        const closeCredential =
+            document.getElementById(
+                "closeCredential"
+            );
+
+
+        // Open credential
+        credentialButton.onclick =
+            function () {
+
+                credentialDetails.textContent =
+                    user.name +
+                    " · " +
+                    employeeId +
+                    " · " +
+                    user.email;
+
+
+                dialog.showModal();
+
+            };
+
+
+        // Close credential
+        closeCredential.onclick =
+            function () {
+
+                dialog.close();
+
+            };
+
+
     });
-  }
-  const extra = document.createElement("section");
-  extra.className = "employee-record-extra";
-  const title = document.createElement("h3");
-  title.textContent = "Employment details";
-  extra.append(title);
-  for (const [label, value] of [
-    ["Employment type", user.employmentType || "Full-time"],
-    ["Account role", user.role],
-    ["About", user.bio || "No employee notes recorded."],
-  ]) {
-    const p = document.createElement("p"),
-      strong = document.createElement("strong");
-    strong.textContent = `${label}: `;
-    p.append(strong, document.createTextNode(value));
-    extra.append(p);
-  }
-  document.querySelector(".left-column").append(extra);
-  const salary = Number(user.salary);
-  const available = user.salary != null && Number.isFinite(salary);
-  const amount = (value) =>
-    new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      maximumFractionDigits: 2,
-    }).format(value);
-  let hidden = false;
-  const displaySalary = () => {
-    document.getElementById("annualSalary").textContent = hidden
-      ? "••••••"
-      : available
-        ? `${amount(salary)} USD`
-        : "Not provided";
-    document.getElementById("monthlySalary").textContent = hidden
-      ? "••••••"
-      : available
-        ? `${amount(salary / 12)} / mo`
-        : "—";
-    const toggle = document.getElementById("toggleSalary");
-    toggle.setAttribute("aria-label", hidden ? "Show salary" : "Hide salary");
-    toggle.setAttribute("aria-pressed", String(hidden));
-    toggle.innerHTML = `<i class="fa-solid fa-eye${hidden ? "-slash" : ""}"></i>`;
-  };
-  displaySalary();
-  document.getElementById("toggleSalary").onclick = () => {
-    hidden = !hidden;
-    displaySalary();
-  };
-  const performance = user.performance;
-  document.querySelector(".quarter-badge").textContent =
-    performance?.period || "Awaiting appraisal";
-  document.querySelector(".score-big").textContent = performance?.score ?? "—";
-  document.querySelector(".rating-stars-text strong").textContent =
-    performance?.summary || "No appraisal recorded";
-  document.querySelector(".stars").hidden = !performance;
-  document.querySelector(".bonus-badge").textContent =
-    performance?.bonus || "Review details will appear here";
-  const metrics = ["collaboration", "leadership", "initiative", "policy"];
-  document.querySelectorAll(".progress-item").forEach((item, index) => {
-    const value = performance?.[metrics[index]];
-    item.querySelector("strong").textContent =
-      value == null ? "Not rated" : `${value} / 5.0`;
-    item.querySelector(".progress-fill").style.width =
-      `${Math.max(0, Math.min(100, ((Number(value) || 0) / 5) * 100))}%`;
-  });
-  if (document.getElementById("recordFooter"))
-    document.getElementById("recordFooter").textContent =
-      `Wanderly People Systems · Record ${employeeId}`;
-  const dialog = document.getElementById("credentialDialog");
-  document.getElementById("credentialDetails").textContent =
-    `${user.name} · ${employeeId} · ${user.email}`;
-  document.getElementById("credentialButton").onclick = () =>
-    dialog.showModal();
-  document.getElementById("closeCredential").onclick = () => dialog.close();
+
 });
