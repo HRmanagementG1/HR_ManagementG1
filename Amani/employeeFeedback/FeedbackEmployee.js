@@ -1,7 +1,7 @@
 
-// =========================
+
 // GET ELEMENTS
-// =========================
+
 
 const form =
     document.getElementById("feedback-form");
@@ -25,17 +25,16 @@ const noFeedback =
     document.getElementById("no-feedback");
 
 
-// =========================
+
 // GET LOGGED-IN USER
-// =========================
+
 
 const loggedInUser =
-    window.employeeWorkspace.getCurrentUser();
+    window.employeeWorkspace.getCurrentUser();//مين الموظف الي عامل لوق ان 
 
 
-// =========================
 // DISPLAY USER INFORMATION
-// =========================
+
 
 if (loggedInUser) {
 
@@ -56,9 +55,8 @@ if (loggedInUser) {
 }
 
 
-// =========================
 // GET FEEDBACK
-// =========================
+
 
 let feedbacks =
     JSON.parse(
@@ -66,9 +64,9 @@ let feedbacks =
     ) || [];
 
 
-// =========================
+
 // SUBMIT FEEDBACK
-// =========================
+
 
 form.addEventListener(
     "submit",
@@ -170,9 +168,9 @@ form.addEventListener(
 );
 
 
-// =========================
+
 // DISPLAY FEEDBACK HISTORY
-// =========================
+
 
 function displayFeedbackHistory() {
 
@@ -291,9 +289,7 @@ function displayFeedbackHistory() {
 
 }
 
-
-// =========================
 // INITIAL DISPLAY
-// =========================
+
 
 displayFeedbackHistory();

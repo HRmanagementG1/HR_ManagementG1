@@ -1,7 +1,7 @@
 
-// =========================
+
 // GET ELEMENTS
-// =========================
+
 
 const meetingForm = document.getElementById("meeting-form");
 
@@ -19,44 +19,44 @@ const meetingHistory = document.getElementById("meeting-history");
 const emptyHistory = document.getElementById("empty-history");
 
 
-// =========================
+
 // GET LOGGED-IN USER
-// =========================
+
 
 const loggedInUser =
-    window.employeeWorkspace.getCurrentUser();
+    window.employeeWorkspace.getCurrentUser();//يجيب الموظف الي عامل لوق ان 
 
 
-// =========================
+
 // GET SAVED MEETINGS
-// =========================
+
 
 let meetings =
     JSON.parse(localStorage.getItem("meetings")) || [];
 
 
-// =========================
+
 // CHARACTER COUNT
-// =========================
+
 
 meetingReason.addEventListener("input", function () {
 
     characterCount.textContent =
-        meetingReason.value.length + "/500";
+        meetingReason.value.length + "/500";//يظهر للمستخدم عدد الاحرف 
 
 });
 
 
-// =========================
+
 // REQUEST MEETING
-// =========================
+
 
 meetingForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
-
+//اخذ البيانات من الفورم
     const topic = meetingTopic.value;
-    const reason = meetingReason.value.trim();
+    const reason = meetingReason.value.trim();//تحذف المسافه بين البدايه و النهايه 
     const date = meetingDate.value;
     const time = meetingTime.value;
 
@@ -85,7 +85,7 @@ meetingForm.addEventListener("submit", function (event) {
 
     const meeting = {
 
-        id: Date.now(),
+        id: Date.now(),//يعتمد ع الوقت الحالي 
 
         employeeName: loggedInUser.name,
 
@@ -101,18 +101,18 @@ meetingForm.addEventListener("submit", function (event) {
 
         hrRepresentative: "Not assigned yet",
 
-        status: "Pending",
+        status: "Pending",//يعني الطلب لسى ينتظر الموافقه 
 
         meetingLink: "",
 
-        createdAt: new Date().toLocaleString()
+        createdAt: new Date().toLocaleString()//يحفظ وقت و تاريخ انشاء الطلب 
 
     };
 
 
     // Add meeting to array
 
-    meetings.push(meeting);
+    meetings.push(meeting);//رح يضيف الاجتماع ال{}
 
 
     // Save to localStorage
@@ -130,9 +130,9 @@ meetingForm.addEventListener("submit", function (event) {
 
     // Clear form
 
-    meetingForm.reset();
+    meetingForm.reset();//يمسح كل البيانات من الفورم
 
-    characterCount.textContent = "0/500";
+    characterCount.textContent = "0/500";//ييرجع عداد الاحرف الى صفر
 
 
     // Update page
@@ -144,13 +144,13 @@ meetingForm.addEventListener("submit", function (event) {
 });
 
 
-// =========================
+
 // DISPLAY MEETING HISTORY
-// =========================
+
 
 function displayMeetings() {
 
-    meetingHistory.innerHTML = "";
+    meetingHistory.innerHTML = "";//تمسح الجدول القديم
 
     const selectedStatus = statusFilter.value;
 
@@ -191,7 +191,7 @@ function displayMeetings() {
         const meeting = filteredMeetings[i];
 
 
-        const row = document.createElement("tr");
+        const row = document.createElement("tr");//اعملهم جدول 
 
 
         // Meeting link
@@ -263,9 +263,9 @@ function displayMeetings() {
 }
 
 
-// =========================
+
 // FILTER
-// =========================
+
 
 statusFilter.addEventListener("change", function () {
 
@@ -274,9 +274,9 @@ statusFilter.addEventListener("change", function () {
 });
 
 
-// =========================
+
 // CANCEL MEETING
-// =========================
+
 
 function cancelMeeting(id) {
 
@@ -321,9 +321,9 @@ function cancelMeeting(id) {
 }
 
 
-// =========================
+
 // UPCOMING MEETING
-// =========================
+
 
 function displayUpcomingMeeting() {
 
@@ -376,6 +376,7 @@ function displayUpcomingMeeting() {
                 <strong>HR Representative:</strong>
                 ${confirmedMeeting.hrRepresentative}
             </p>
+            
 
             ${
                 confirmedMeeting.meetingLink
@@ -398,11 +399,18 @@ function displayUpcomingMeeting() {
     `;
 
 }
+/*{ if (confirmedMeeting.meetingLink )
+لعرض الرابط {
+    else {
+         لا تعرض شيء
+    }
+}*/
+//ternary operator اسمه 
 
 
-// =========================
+
 // INITIAL DISPLAY
-// =========================
+
 
 displayMeetings();
 
