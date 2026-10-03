@@ -67,6 +67,17 @@
                         <div class="card-text">
                             <small>PHONE NUMBER</small>
                             <strong data-info="phone"></strong>
+                            <button type="button" id="editPhone" class="phone-edit-button" aria-expanded="false" aria-controls="phoneForm">Edit number</button>
+                            <form id="phoneForm" hidden>
+                                <label for="phoneInput">Phone number</label>
+                                <input id="phoneInput" type="tel" autocomplete="tel" maxlength="30" required aria-describedby="phoneHelp">
+                                <small id="phoneHelp">Enter 7–15 digits. Spaces, +, brackets and hyphens are allowed.</small>
+                                <div class="phone-actions">
+                                    <button type="submit">Save</button>
+                                    <button type="button" id="cancelPhone">Cancel</button>
+                                </div>
+                            </form>
+                            <p id="phoneMessage" role="status" aria-live="polite"></p>
                         </div>
                     </div>
                     <div class="info-card bg-blue">
@@ -74,20 +85,6 @@
                         <div class="card-text">
                             <small>LOCATION / OFFICE</small>
                             <strong data-info="location"></strong>
-                        </div>
-                    </div>
-                    <div class="info-card bg-purple">
-                        <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                        <div class="card-text">
-                            <small>HIRE DATE / TENURE</small>
-                            <strong data-info="hireDate"></strong>
-                        </div>
-                    </div>
-                    <div class="info-card bg-indigo">
-                        <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
-                        <div class="card-text">
-                            <small>DIRECT MANAGER</small>
-                            <strong data-info="manager"></strong>
                         </div>
                     </div>
                 </div>

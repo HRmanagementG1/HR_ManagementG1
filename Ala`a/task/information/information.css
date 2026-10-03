@@ -65,6 +65,19 @@ body { background-color: var(--bg-main); color: var(--text-dark); }
 .card-text small { font-size: 11px; font-weight: 600; opacity: 0.8; }
 .card-text strong { font-size: 14px; }
 
+/* Employees can update their phone number from its card. */
+.phone-edit-button { align-self:flex-start; border:0; background:transparent; color:var(--primary-dark); text-decoration:underline; cursor:pointer; padding:6px 0; font-size:12px; }
+.phone-edit-button[hidden], #phoneForm[hidden] { display:none; }
+#phoneForm { display:grid; gap:8px; margin-top:8px; width:100%; }
+#phoneForm label { font-size:12px; font-weight:600; }
+#phoneInput { width:100%; min-width:0; border:1px solid #9bc6ad; border-radius:8px; background:white; padding:9px; font-size:14px; }
+#phoneHelp { line-height:1.5; }
+.phone-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.phone-actions button { border:1px solid var(--primary-dark); border-radius:8px; padding:7px 12px; background:var(--primary-dark); color:white; cursor:pointer; }
+.phone-actions #cancelPhone { background:white; color:var(--primary-dark); }
+#phoneMessage { font-size:12px; line-height:1.5; }
+#phoneMessage:empty { display:none; }
+
 /* ألوان البطاقات المخصصة */
 .bg-teal { background: var(--bg-teal); color: var(--text-teal); } .bg-teal .card-icon { background: rgba(15, 118, 110, 0.1); }
 .bg-orange { background: var(--bg-orange); color: var(--text-orange); } .bg-orange .card-icon { background: rgba(194, 65, 12, 0.1); }

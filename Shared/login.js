@@ -1,6 +1,6 @@
-import './workspace.js';
+import "./workspace.js";
 // Simple browser-only login for this project.
-const employeesUrl = new URL('../data/employees.json', import.meta.url);
+const employeesUrl = new URL("../data/employees.json", import.meta.url);
 
 async function loadLoginEmployees() {
   await window.workspace.ready;
@@ -8,67 +8,82 @@ async function loadLoginEmployees() {
 }
 
 export function setupLogin({ role, usernameId, destination }) {
-  const form = document.getElementById('loginForm');
+  const form = document.getElementById("loginForm");
   const username = document.getElementById(usernameId);
-  const password = document.getElementById('password');
-  const toggle = document.getElementById('togglePassword');
-  const message = document.getElementById('login-message');
+  const password = document.getElementById("password");
+  const toggle = document.getElementById("togglePassword");
+  const message = document.getElementById("login-message");
   const submit = form.querySelector('button[type="submit"]');
 
   function showMessage(text) {
     message.textContent = text;
     message.hidden = !text;
   }
-
-  toggle.addEventListener('click', () => {
-    const showPassword = password.type === 'password';
-    password.type = showPassword ? 'text' : 'password';
-    toggle.textContent = showPassword ? 'Hide' : 'Show';
-    toggle.setAttribute('aria-pressed', String(showPassword));
+  
+  // Toggle password visibility
+  toggle.addEventListener("click", () => {
+    const showPassword = password.type === "password";
+    password.type = showPassword ? "text" : "password";
+    toggle.textContent = showPassword ? "Hide" : "Show";
+    toggle.setAttribute("aria-pressed", String(showPassword));
   });
 
   // Start loading when the form opens. A failed load can be retried on submit.
-  let employeesReady = loadLoginEmployees().catch(error => {
+  let employeesReady = loadLoginEmployees().catch((error) => {
     showMessage(error.message);
     return null;
   });
 
-  form.addEventListener('submit', async event => {
+  // Handle form submission
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
     submit.disabled = true;
-    showMessage('');
+    showMessage("");
 
     try {
-      if (!await employeesReady) employeesReady = loadLoginEmployees();
+      if (!(await employeesReady)) employeesReady = loadLoginEmployees();
       await employeesReady;
-      const employees = JSON.parse(localStorage.getItem('site_users'));
+      const employees = JSON.parse(localStorage.getItem("site_users"));
       const enteredUsername = username.value.trim().toLowerCase();
-      const employee = employees.find(person => {
-        const matchesUsername = [person.username, person.name, person.email]
-          .some(value => typeof value === 'string' && value.toLowerCase() === enteredUsername);
+      const employee = employees.find((person) => {
+        const matchesUsername = [
+          person.username,
+          person.name,
+          person.email,
+        ].some(
+          (value) =>
+            typeof value === "string" &&
+            value.toLowerCase() === enteredUsername,
+        );
         return matchesUsername && person.password === password.value;
       });
 
       if (!employee) {
-        showMessage('Incorrect username, email, or password. Please try again.');
+        showMessage(
+          "Incorrect username, email, or password. Please try again.",
+        );
         return;
       }
       if (employee.role.toLowerCase() !== role.toLowerCase()) {
-        showMessage(`This account cannot use the ${role} login. Please use the ${employee.role} login page.`);
+        showMessage(
+          `This account cannot use the ${role} login. Please use the ${employee.role} login page.`,
+        );
         return;
       }
 
       // Keep the password out of the logged-in user's session.
       const { password: savedPassword, ...session } = employee;
       session.name = employee.name || employee.username;
-      localStorage.setItem('site_session', JSON.stringify(session));
-      localStorage.removeItem('loggedInUser');
+      localStorage.setItem("site_session", JSON.stringify(session));
+      localStorage.removeItem("loggedInUser");
       window.location.href = new URL(destination, employeesUrl).href;
     } catch (error) {
       employeesReady = Promise.resolve(null);
-      showMessage('Could not sign in. Check that browser storage is enabled and open the project through its web server.');
-      console.error('Login failed:', error);
+      showMessage(
+        "Could not sign in. Check that browser storage is enabled and open the project through its web server.",
+      );
+      console.error("Login failed:", error);
     } finally {
       submit.disabled = false;
     }
