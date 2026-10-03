@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* The HR Policies palette, shared by every HR page. */
+body[data-workspace-role="HR"] {
+  --hr-green: #18554a;
+  --hr-yellow: #fbd36b;
+  --hr-muted: #6c757d;
+  --hr-surface: #f6f7f4;
+  --hr-border: #dee2e6;
+  --primary-color: var(--hr-green);
+  --primary-dark: var(--hr-green);
+  --primary-hover: #123f37;
+  --bg-main: #fafaf8;
+  --bg-sidebar: var(--hr-surface);
+  --text-dark: #212529;
+  --text-muted: var(--hr-muted);
+  --border-color: var(--hr-border);
+  --teal: var(--hr-green);
+  --yellow: var(--hr-yellow);
+  --ink: #212529;
+  --soft: var(--hr-surface);
+  --line: var(--hr-border);
+  --workforce-font: 'Inter', sans-serif;
+  --workforce-heading: 'Inter', sans-serif;
+  background: #fafaf8;
+  color: #212529;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+body[data-workspace-role="HR"] :is(h1, h2, h3, h4, h5, h6, input, select, textarea, button) {
+  font-family: 'Inter', sans-serif;
+}
+
+body[data-workspace-role="HR"] :is(.hr-dashboard-sidebar, .hr-dashboard-topbar) {
+  background: #fff;
+  border-color: var(--hr-border);
+}
+body[data-workspace-role="HR"] .hr-brand { color: var(--hr-green); }
+body[data-workspace-role="HR"] .hr-dashboard-sidebar .hr-nav-item { font-size: 14px; color: var(--hr-muted); }
+body[data-workspace-role="HR"] .hr-dashboard-sidebar .hr-nav-item:hover { background: #eaf0eb; color: var(--hr-green); }
+body[data-workspace-role="HR"] .hr-dashboard-sidebar .hr-nav-item[aria-current="page"] {
+  background: var(--hr-green);
+  color: #fff;
+}
+body[data-workspace-role="HR"] .hr-dashboard-sidebar .hr-logout { color: var(--hr-green); border-color: var(--hr-border); }
+body[data-workspace-role="HR"] .hr-dashboard-sidebar .hr-brand img { background: var(--hr-surface); }
+body[data-workspace-role="HR"] footer.footer { background: var(--hr-green); border-color: var(--hr-green); }
+body[data-workspace-role="HR"] :is(.hr-search-pill, .hr-user-avatar) {
+  background: #eaf0eb;
+  color: var(--hr-green);
+}
+
+/* Consistent content spacing and the soft green Policies heading panel. */
+body[data-workspace-role="HR"] :is(.hr-main, .page-content, .feedback-inbox, .hr-meeting-page, .main-container) {
+  width: 100%;
+  max-width: none;
+  padding: 40px;
+  margin: 0;
+}
+body[data-workspace-role="HR"] .hr-dashboard-content > .main-content {
+  margin: 0;
+  width: 100%;
+  min-height: 0;
+  padding: 40px;
+}
+body[data-workspace-role="HR"] .main-content:has(> .page-content) { padding: 0; }
+body[data-workspace-role="HR"] :is(.hr-main > .topbar, .page-header, .page-title-area, .feedback-header, .meeting-hero, .hero-banner) {
+  height: auto;
+  background: #f2f5ef;
+  color: #212529;
+  border: 0;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 0 0 28px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+body[data-workspace-role="HR"] :is(h1, .page-title, .hero-title, .meeting-hero h1, .header-content h1) {
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #212529;
+  margin-bottom: 10px;
+}
+body[data-workspace-role="HR"] :is(.workspace-eyebrow, .breadcrumb, .meeting-hero > p:first-child) {
+  color: var(--hr-green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+body[data-workspace-role="HR"] :is(.muted, .page-subtitle, .hero-subtitle, .header-content p, .meeting-hero > p:last-child) {
+  color: var(--hr-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+body[data-workspace-role="HR"] :is(h2, h3) { font-weight: 700; }
+
+/* Cards and tables share the Policies library's white surface. */
+body[data-workspace-role="HR"] :is(.stat, .stat-card, .task-metrics article, .feedback-container, .form-wrap, .record-form, .table-container, .table-wrap, .task-row, .quick-links a, .meeting-requests, .schedule-section, .compensation-card, .performance-section) {
+  background: #fff;
+  border: 1px solid var(--hr-border);
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgb(33 37 41 / 3%);
+}
+body[data-workspace-role="HR"] :is(.stat, .stat-card) { padding: 24px; }
+body[data-workspace-role="HR"] :is(.stat-title, .stat-label, .stat-header, .stat-card > span) {
+  color: var(--hr-muted);
+  font-size: 12px;
+}
+body[data-workspace-role="HR"] :is(.stat-number, .stat-value, .stat strong, .stat-card h2) {
+  color: var(--hr-green);
+  font-size: 30px;
+  font-weight: 700;
+}
+body[data-workspace-role="HR"] .stat-card p { font-size: 13px; color: var(--hr-muted); }
+body[data-workspace-role="HR"] :is(.meeting-stats, .meeting-requests, .schedule-section, .availability-section) {
+  width: 100%;
+  margin: 0 0 28px;
+}
+body[data-workspace-role="HR"] .availability-section { background: var(--hr-green); }
+body[data-workspace-role="HR"] .availability-section h2 { color: #fff; }
+body[data-workspace-role="HR"] :is(.table-container, .table-wrap) { overflow-x: auto; }
+body[data-workspace-role="HR"] table { width: 100%; border-collapse: collapse; font-size: 14px; }
+body[data-workspace-role="HR"] :is(table, .employee-table) th {
+  background: var(--hr-surface);
+  color: var(--hr-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+body[data-workspace-role="HR"] .task-metrics strong { color: var(--hr-green); }
+body[data-workspace-role="HR"] :is(.task-metrics span, .table-wrap small) { color: var(--hr-muted); font-size: 12px; }
+body[data-workspace-role="HR"] :is(.task-filters, .hr-task-board > section) { background: var(--hr-surface); border-color: var(--hr-border); }
+body[data-workspace-role="HR"] .task-filters :is(input, select) { font-size: 14px; }
+body[data-workspace-role="HR"] .view-switch button[aria-pressed="true"] { background: var(--hr-green); }
+body[data-workspace-role="HR"] .info-card .card-icon { background: #eaf0eb; }
+body[data-workspace-role="HR"] table :is(th, td) { padding: 16px; border-color: var(--hr-border); }
+
+/* Yellow primary actions; green selected tabs and filters. */
+body[data-workspace-role="HR"] :is(.btn-teal, .btn-primary, .export-btn, #open-schedule, #create-meeting, .record-actions button[type="submit"]) {
+  background: var(--hr-yellow);
+  border: 1px solid var(--hr-yellow);
+  color: #212529;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+}
+body[data-workspace-role="HR"] :is(.btn-teal, .btn-primary, .export-btn, #open-schedule, #create-meeting, .record-actions button[type="submit"]):hover {
+  background: #f5c750;
+  border-color: #f5c750;
+  color: #212529;
+}
+body[data-workspace-role="HR"] :is(.btn-outline, .btn-light, .action-button, .action-btn, .btn-more, .task-subnav a, .filter, .pill, .tab) {
+  background: var(--hr-surface);
+  color: var(--hr-green);
+  border: 1px solid var(--hr-border);
+  border-radius: 999px;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+body[data-workspace-role="HR"] :is(.task-subnav a[aria-current="page"], .task-subnav a.active, .filter.active, .pill.active, .tab.active, .page-btn.active, .pagination-buttons .page-active, .announcement-btn) {
+  background: var(--hr-green);
+  border-color: var(--hr-green);
+  color: #fff;
+}
+body[data-workspace-role="HR"] :is(.task-subnav, .controls-row, .feedback-filters) { flex-wrap: wrap; gap: 10px; }
+body[data-workspace-role="HR"] :is(.form-wrap, .record-form) :is(input, select, textarea),
+body[data-workspace-role="HR"] :is(.feedback-search, .meeting-filters input, .meeting-filters select, .form-group input, .form-group select, .table-search input, .main-search) {
+  background: var(--hr-surface);
+  border: 1px solid var(--hr-border);
+  border-radius: 10px;
+  color: #212529;
+  font-size: 14px;
+}
+body[data-workspace-role="HR"] :is(input, select, textarea, button, a):focus-visible {
+  outline: 2px solid var(--hr-green);
+  outline-offset: 3px;
+}
+body[data-workspace-role="HR"] .feedback-search { height: 42px; width: min(100%, 260px); }
+body[data-workspace-role="HR"] .feedback-card { background: var(--hr-surface); border-color: var(--hr-border); border-radius: 12px; }
+body[data-workspace-role="HR"] .feedback-message { font-size: 14px; }
+body[data-workspace-role="HR"] .employee-info h3 { font-size: 15px; }
+body[data-workspace-role="HR"] :is(.employee-info span, .feedback-type, .feedback-actions button, .feedback-bottom .status) { font-size: 12px; }
+body[data-workspace-role="HR"] .feedback-actions button { background: #eaf0eb; color: var(--hr-green); }
+body[data-workspace-role="HR"] :is(.info-card.bg-teal, .info-card.bg-orange, .info-card.bg-green, .info-card.bg-blue, .info-card.bg-purple, .info-card.bg-indigo) {
+  background: var(--hr-surface);
+  color: var(--hr-green);
+  border: 1px solid var(--hr-border);
+}
+
+@media (max-width: 767px) {
+  body[data-workspace-role="HR"] :is(.hr-main, .page-content, .feedback-inbox, .hr-meeting-page, .main-container, .hr-dashboard-content > .main-content) { padding: 20px; }
+  body[data-workspace-role="HR"] .main-content:has(> .page-content) { padding: 0; }
+  body[data-workspace-role="HR"] :is(.hr-main > .topbar, .page-header, .page-title-area, .feedback-header, .meeting-hero, .hero-banner) { padding: 24px; }
+  body[data-workspace-role="HR"] :is(.stats-grid, .stats, .task-metrics, .feedback-stats, .meeting-stats) { grid-template-columns: 1fr; }
+  body[data-workspace-role="HR"] .page-header { flex-direction: column; }
+  body[data-workspace-role="HR"] .main-search { width: 100%; }
+  body[data-workspace-role="HR"] .record-form { margin: 20px; padding: 24px; }
+}

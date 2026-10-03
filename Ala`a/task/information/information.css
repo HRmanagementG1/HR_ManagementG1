@@ -141,6 +141,13 @@ body { background-color: var(--bg-main); color: var(--text-dark); }
 .status-badge { font-size:11px; white-space:nowrap; }
 .btn-credential { font-size:11px; white-space:nowrap; }
 .content-grid { grid-template-columns:1.45fr 1fr; gap:34px; }
+.main-container > .content-grid {
+    background: #fff;
+    border: 1px solid #e4e7df;
+    border-radius: 22px;
+    padding: 32px;
+}
+.main-container > .content-grid > div { min-width: 0; }
 .profile-img { display:grid; place-items:center; background:#d9eee5; color:#075d55; border:2px solid #86c5b4; font-size:28px; overflow:hidden; }
 .profile-img img { width:100%; height:100%; object-fit:cover; }
 .name-row { flex-wrap:wrap; gap:8px; }
@@ -163,3 +170,4 @@ body { background-color: var(--bg-main); color: var(--text-dark); }
 @media(max-width:1000px) { .hero-banner { align-items:flex-start; flex-direction:column; } .content-grid { grid-template-columns:1.4fr 1fr; gap:20px; } .info-cards-grid { gap:10px; } .salary-box { flex-direction:column; align-items:flex-start; } }
 @media(max-width:700px) { .content-grid { grid-template-columns:1fr; } .main-container { padding:20px 16px; } .hero-banner { padding:24px; margin-bottom:28px; } .hero-badges { flex-wrap:wrap; } .page-footer { flex-direction:column; align-items:flex-start; gap:12px; } }
 @media(max-width:380px) { .info-cards-grid { grid-template-columns:1fr; } .rating-box { align-items:flex-start; gap:14px; flex-direction:column; } }
+@media(max-width:700px) { .main-container > .content-grid { padding: 20px; } }

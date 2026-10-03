@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="../../../Shared/theme.css" />
     <script defer src="../../../Shared/access.js"></script>
     <script src="../../../Shared/site-shell.js" defer></script>
-  </head>
+    <link rel="stylesheet" href="../../../Shared/hr_theme.css" />
+<link rel="stylesheet" href="../../../Shared/workspace_banners.css" />
+</head>
   <body class="hr-workspace-page" data-workspace-role="HR">
     <div data-hr-dashboard-sidebar data-active-page="employees"></div>
     <div class="hr-dashboard-content">
@@ -32,9 +34,11 @@
         data-search-placeholder="Search employees…"
       ></div>
       <main class="record-form">
+        <header class="workspace-banner">
         <p class="workspace-eyebrow">PEOPLE OPERATIONS / ONBOARDING</p>
         <h1>Add New Employee</h1>
         <p>Give your new teammate a complete record and a place to start.</p>
+        </header>
         <div id="alertMessage" class="alert d-none" role="alert"></div>
         <form id="addEmployeeForm">
           <div class="record-fields">

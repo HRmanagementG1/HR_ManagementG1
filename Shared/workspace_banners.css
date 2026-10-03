@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* One type system for the HR and employee workspaces. */
+body[data-workspace-role] {
+  --workforce-font: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  --workforce-heading: 'Outfit', 'Segoe UI', sans-serif;
+  font-family: var(--workforce-font);
+}
+body[data-workspace-role] :is(input, select, textarea, button) {
+  font-family: var(--workforce-font);
+}
+
+/* Shared page introduction, matching the employee Tasks banner. */
+body[data-workspace-role] .workspace-banner {
+  background: radial-gradient(ellipse at right top, #74b5bd66, transparent 65%), #285761 !important;
+  border: 1px solid #79a5a6;
+  border-radius: 20px;
+  color: #fff9ee;
+  padding: 36px 42px;
+  height: auto;
+  margin-bottom: 28px;
+  box-shadow: none;
+}
+body[data-workspace-role] .workspace-banner :is(h1, h2, .page-title, .hero-title) {
+  color: #fff9ee !important;
+  font-family: var(--workforce-heading) !important;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  margin: 0 0 12px;
+}
+body[data-workspace-role] .workspace-banner :is(p, .page-subtitle, .hero-subtitle, .muted, .text-secondary) {
+  color: #d3e6e3 !important;
+  font-size: 15px;
+  line-height: 1.65;
+}
+body[data-workspace-role] .workspace-banner :is(.breadcrumb, .eyebrow, .workspace-eyebrow, .task-breadcrumb, .text-uppercase),
+body[data-workspace-role] .workspace-banner.meeting-hero > p:first-child {
+  color: #e4eee4 !important;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  margin: 0 0 14px;
+}
+body[data-workspace-role] .workspace-banner .breadcrumb strong { color: inherit; }
+body[data-workspace-role] .workspace-banner > .position-absolute { display: none; }
+body[data-workspace-role] .workspace-banner :is(.assigned-badge, .status-badge, .department-badge) {
+  background: #e2e9d9;
+  color: #33575a;
+  box-shadow: none;
+}
+body[data-workspace-role] .workspace-banner :is(.btn-teal, .btn-primary, .primary-btn, .btn-credential) {
+  background: #fbd36b;
+  border-color: #fbd36b;
+  color: #212529;
+}
+body[data-workspace-role] .workspace-banner :is(.btn-teal, .btn-primary, .primary-btn, .btn-credential):hover {
+  background: #f5c750;
+  border-color: #f5c750;
+  color: #212529;
+}
+body[data-workspace-role] .record-form > .workspace-banner { margin-bottom: 28px; }
+
+@media (max-width: 767px) {
+  body[data-workspace-role] .workspace-banner { padding: 28px 24px; border-radius: 16px; }
+}

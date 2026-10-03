@@ -1,6 +1,10 @@
 # HR_ManagementG1
 Hr management system for Orange code academy  
 
+Figma: [figma](https://www.figma.com/design/ipzudJJIUl49BYgllS42RA/NorthBank?node-id=105-2&p=f&t=wKjbqjEpY3N1pswR-0)
+<br>
+Trello: [trello](https://trello.com/b/uZRbCGCE/hr-mangement)
+
 Open `index.html` through a web server such as VS Code Live Server. It opens the
 home page with Employee login, HR login, and a My workspace link for a signed-in
 user. Each login page links back home and to the other role's login.

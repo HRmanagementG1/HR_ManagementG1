@@ -3,8 +3,9 @@
   window.siteFooterReady = (async () => {
     const css = document.createElement('link');
     css.rel = 'stylesheet'; css.href = new URL('Deyaa/Footer/Footer.css', root);
-    document.head.append(css);
-    const brand=document.createElement('link');brand.rel='stylesheet';brand.href=new URL('Shared/brand.css',root);document.head.append(brand);
+    const workspaceTheme = document.querySelector('link[href$="hr_theme.css"], link[href$="workspace_banners.css"]');
+    document.head.insertBefore(css, workspaceTheme);
+    const brand=document.createElement('link');brand.rel='stylesheet';brand.href=new URL('Shared/brand.css',root);document.head.insertBefore(brand, workspaceTheme);
     const response = await fetch(new URL('Deyaa/Footer/Footer.html', root));
     if (!response.ok) throw new Error('Could not load footer');
     const template = document.createElement('template'); template.innerHTML = await response.text();
