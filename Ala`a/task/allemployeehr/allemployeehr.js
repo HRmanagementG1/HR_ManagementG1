@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const W = window.workspace;
   await W.ready;
   if (!W.requireRole("HR")) return;
-  const all = W.users(),
-    esc = W.escape;
+  let all = W.users();
+  const esc = W.escape;
   const body = document.getElementById("employeeTableBody");
   const search = document.querySelector(".main-search input");
   search.value = new URLSearchParams(location.search).get("q") || "";
@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   });
   function render() {
+    tabs.forEach((tab, index) => {
+      tab.textContent = `${tab.textContent.replace(/\s*\(.*\)/, "")} (${all.filter(categories[index]).length})`;
+    });
+    updateStats();
     const query = search.value.trim().toLowerCase();
     const visible = all
       .filter(categories[category])
@@ -48,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .map((n) => n[0])
                 .join("")
                 .slice(0, 2),
-            )}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || "—")}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button> <a class="btn-more" href="../addemployee/addemployee.html?id=${encodeURIComponent(e.id)}">Edit</a></td></tr>`,
+            )}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || "—")}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button> <a class="btn-more" href="../addemployee/addemployee.html?id=${encodeURIComponent(e.id)}">Edit</a> <button type="button" class="btn-more btn-delete" data-delete-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}" ${String(e.id) === String(W.session().id) ? 'disabled title="You cannot delete your own account"' : ""}>Delete</button></td></tr>`,
         )
         .join("") || '<tr><td colspan="4">No employees found.</td></tr>';
     document.querySelector(".pagination-info").textContent =
@@ -64,7 +68,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     render();
   };
   const modal = document.getElementById("employeeModal");
+  //delete employee
   body.onclick = (event) => {
+    const deleteButton = event.target.closest("[data-delete-id]");
+    if (deleteButton) {
+      const employee = all.find((e) => String(e.id) === deleteButton.dataset.deleteId);
+      if (!employee || deleteButton.disabled) return;
+      if (!window.confirm(`Delete ${employee.name}? This will remove their employee account and sign-in access. This cannot be undone.`)) return;
+      try {
+        if (!W.deleteEmployee(employee.id)) return;
+        all = W.users();
+        modal.classList.remove("active");
+        render();
+      } catch (error) {
+        window.alert("Could not delete this employee. Please try again.");
+      }
+      return;
+    }
+    
     const button = event.target.closest("[data-id]");
     const e = all.find((e) => e.id === button?.dataset.id);
     if (!e) return;
@@ -119,6 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "ON LEAVE",
     "NEWLY ONBOARDED",
   ];
+  function updateStats() {
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const onLeave = new Set(
@@ -151,5 +173,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       .querySelectorAll(".stat-badge,.stat-desc,.stat-progress-bar")
       .forEach((el) => (el.hidden = true));
   });
+  }
   render();
 });
