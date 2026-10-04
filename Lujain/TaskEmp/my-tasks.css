@@ -22,12 +22,12 @@ body[data-page="my-tasks"] .hero h1 {
   margin: 4px 0;
 }
 body[data-page="my-tasks"] .hero > p {
-  font-size: 13px;
+  font-size: 18px;
   margin: 0 0 12px;
   color: #b9d9d8;
 }
 body[data-page="my-tasks"] .hero .task-breadcrumb {
-  font-size: 10px;
+  font-size: 15px;
   margin-bottom: 8px;
 }
 .assigned-badge {
@@ -38,7 +38,7 @@ body[data-page="my-tasks"] .hero .task-breadcrumb {
   color: #233f3d;
   border-radius: 20px;
   padding: 4px 10px;
-  font-size: 10px;
+  font-size: 15px;
 }
 .assigned-badge > span {
   width: 6px;
@@ -62,12 +62,12 @@ body[data-page="my-tasks"] .task-column {
   justify-content: space-between;
   align-items: center;
   padding: 0 3px 4px;
-  font-size: 12px;
+  font-size: 17px;
 }
 .column-heading > span {
   background: #fafbf8;
   color: #8c9690;
-  font-size: 10px;
+  font-size: 15px;
   border-radius: 50%;
   padding: 1px 5px;
 }
@@ -78,7 +78,7 @@ body[data-page="my-tasks"] .task-card {
   margin-top: 12px;
 }
 body[data-page="my-tasks"] .task-card .pill {
-  font-size: 10px;
+  font-size: 15px;
   padding: 2px 9px;
   color: #59805b;
   background: #eaf2e7;
@@ -88,13 +88,13 @@ body[data-page="my-tasks"] .task-card .pill.high {
   background: #fff4d5;
 }
 body[data-page="my-tasks"] .task-card h5 {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 650;
   margin: 10px 0 4px;
   line-height: 1.5;
 }
 .task-description {
-  font-size: 10px;
+  font-size: 15px;
   color: #89908b;
   margin: 0 0 14px;
   line-height: 1.5;
@@ -102,7 +102,7 @@ body[data-page="my-tasks"] .task-card h5 {
 .task-meta {
   display: grid;
   gap: 3px;
-  font-size: 9px;
+  font-size: 14px;
   color: #8e9590;
   margin: 12px 0 14px;
 }
@@ -110,13 +110,13 @@ body[data-page="my-tasks"] .task-card h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 9px;
+  font-size: 14px;
   color: #a1a6a2;
   margin-bottom: 4px;
 }
 .task-status-label a {
   color: #4f7770;
-  font-size: 9px;
+  font-size: 14px;
   text-decoration: none;
 }
 .task-card select {
@@ -125,7 +125,7 @@ body[data-page="my-tasks"] .task-card h5 {
   border-radius: 7px;
   background: white;
   font: inherit;
-  font-size: 10px;
+  font-size: 15px;
   padding: 6px 8px;
   color: #384740;
 }
@@ -135,7 +135,7 @@ body[data-page="my-tasks"] .task-card h5 {
   background: #f8faf7;
 }
 .task-feedback {
-  font-size: 10px;
+  font-size: 15px;
   color: #986d18;
   background: #fff7df;
   padding: 8px;

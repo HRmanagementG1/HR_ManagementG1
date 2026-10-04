@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .map((n) => n[0])
                 .join("")
                 .slice(0, 2),
-            )}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || "—")}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button> <a class="btn-more" href="../addemployee/addemployee.html?id=${encodeURIComponent(e.id)}">Edit</a> <button type="button" class="btn-more btn-delete" data-delete-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}" ${String(e.id) === String(W.session().id) ? 'disabled title="You cannot delete your own account"' : ""}>Delete</button></td></tr>`,
+            )}</div><div class="emp-info"><span class="emp-name">${esc(e.name)}</span><span class="emp-role-email">${esc(e.position || e.role)} · ${esc(e.email)}${e.blocked ? " · Blocked" : ""}</span></div></div></td><td><span class="dept-badge">${esc(e.department)}</span></td><td>${esc(e.location || "—")}</td><td><button class="btn-more" data-id="${esc(e.id)}">More Details</button> <a class="btn-more" href="../addemployee/addemployee.html?id=${encodeURIComponent(e.id)}">Edit</a> <button type="button" class="btn-more btn-block" data-block-id="${esc(e.id)}" aria-label="${e.blocked ? "Unblock" : "Block"} ${esc(e.name)}" ${String(e.id) === String(W.session().id) ? 'disabled title="You cannot block your own account"' : ""}>${e.blocked ? "Unblock" : "Block"}</button></td></tr>`,
         )
         .join("") || '<tr><td colspan="4">No employees found.</td></tr>';
     document.querySelector(".pagination-info").textContent =
@@ -68,24 +68,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     render();
   };
   const modal = document.getElementById("employeeModal");
-  //delete employee
+  const blockDialog = document.getElementById("blockDialog");
+  let selectedEmployeeId = null;
+  document.getElementById("cancelBlock").addEventListener("click", () => blockDialog.close());
+  document.getElementById("confirmBlock").addEventListener("click", function() {
+    const employee = W.users().find(person => String(person.id) === String(selectedEmployeeId));
+    if (!employee) { blockDialog.close(); return; }
+    try {
+      if (!W.setEmployeeBlocked(employee.id, !employee.blocked)) return;
+      all = W.users();
+      modal.classList.remove("active");
+      render();
+      blockDialog.close();
+    } catch (error) {
+      document.getElementById("blockDialogError").textContent = "Could not update this employee. Please try again.";
+    }
+  });
+  // Block or unblock an account without removing its records.
   body.onclick = (event) => {
-    const deleteButton = event.target.closest("[data-delete-id]");
-    if (deleteButton) {
-      const employee = all.find((e) => String(e.id) === deleteButton.dataset.deleteId);
-      if (!employee || deleteButton.disabled) return;
-      if (!window.confirm(`Delete ${employee.name}? This will remove their employee account and sign-in access. This cannot be undone.`)) return;
-      try {
-        if (!W.deleteEmployee(employee.id)) return;
-        all = W.users();
-        modal.classList.remove("active");
-        render();
-      } catch (error) {
-        window.alert("Could not delete this employee. Please try again.");
-      }
+    const blockButton = event.target.closest("[data-block-id]");
+    if (blockButton) {
+      const employee = all.find((e) => String(e.id) === blockButton.dataset.blockId);
+      if (!employee || blockButton.disabled) return;
+      selectedEmployeeId = employee.id;
+      document.getElementById("blockDialogTitle").textContent = employee.blocked ? "Unblock employee?" : "Block employee?";
+      document.getElementById("blockDialogMessage").textContent = employee.blocked
+        ? "Allow " + employee.name + " to sign in again?"
+        : "Block " + employee.name + "? They will not be able to sign in. Their records will be kept.";
+      document.getElementById("confirmBlock").textContent = employee.blocked ? "Unblock employee" : "Block employee";
+      document.getElementById("blockDialogError").textContent = "";
+      blockDialog.showModal();
+      document.getElementById("cancelBlock").focus();
       return;
     }
-    
+
     const button = event.target.closest("[data-id]");
     const e = all.find((e) => e.id === button?.dataset.id);
     if (!e) return;
@@ -141,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "NEWLY ONBOARDED",
   ];
   function updateStats() {
-  const now = new Date();
+    const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const onLeave = new Set(
     W.read("site_leaves", [])
@@ -150,13 +166,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           String(leave.status).toLowerCase() === "approved" &&
           leave.start <= today &&
           leave.end >= today &&
-          all.some((e) => e.id === String(leave.owner)),
+          all.some((e) => !e.blocked && e.id === String(leave.owner)),
       )
       .map((leave) => String(leave.owner)),
   ).size;
   const counts = [
     all.length,
-    all.length - onLeave,
+    all.filter(employee => !employee.blocked).length - onLeave,
     onLeave,
     all.filter((e) => {
       const date = new Date(e.hireDate || e.joinDate);

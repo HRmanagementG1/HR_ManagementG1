@@ -25,3 +25,8 @@ body { margin:0; background:#fff; color:#253d36; font-family:'DM Sans',Arial,san
 #login-message { color:#ac372c; font-size:12px; line-height:1.5; }
 .auth-footer { padding:0 32px 18px; font-size:10px; color:#819182; display:flex; justify-content:space-between; }
 @media(max-width:800px) { .auth-layout { grid-template-columns:1fr; padding:0 16px 16px; } .auth-visual { min-height:260px; } .auth-copy { padding:28px; } .auth-copy h1 { font-size:30px; } .auth-panel { padding:36px 24px; } .auth-top { padding:20px; } }
+
+.login-role-buttons { display: flex; gap: 10px; margin-bottom: 22px; }
+.login-role-buttons button { flex: 1; padding: 12px 8px; border: 1px solid #b6cabc; border-radius: 24px; background: white; color: #245645; font: inherit; font-size: 13px; cursor: pointer; }
+.login-role-buttons button[aria-pressed="true"] { background: #18554a; color: white; border-color: #18554a; }
+.login-role-buttons button:focus-visible { outline: 3px solid #ffd262; outline-offset: 3px; }

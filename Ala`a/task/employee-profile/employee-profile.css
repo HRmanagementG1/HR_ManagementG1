@@ -21,7 +21,7 @@ body {
   color: white;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 15px;
   letter-spacing: 0.8px;
   font-weight: 600;
   margin: 0 0 10px;
@@ -36,7 +36,7 @@ body {
 }
 .profile-hero > p:last-child {
   color: #a1c6c3;
-  font-size: 13px;
+  font-size: 18px;
   margin: 0;
 }
 .profile-layout {
@@ -60,7 +60,7 @@ body {
   background: #ffffff16;
   border-radius: 14px;
   padding: 4px 12px;
-  font-size: 9px;
+  font-size: 14px;
   color: #a3d7ce;
 }
 .profile-identity {
@@ -95,11 +95,11 @@ body {
 }
 .profile-identity p {
   margin: 0 0 8px;
-  font-size: 12px;
+  font-size: 17px;
   color: #a3c6c1;
 }
 .profile-note {
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.7;
   color: #8eb6b0;
   padding: 14px 12px;
@@ -131,13 +131,13 @@ body {
   color: #65b4ad;
 }
 .profile-facts dt {
-  font-size: 8px;
+  font-size: 13px;
   color: #8ebbb5;
   margin-bottom: 4px;
 }
 .profile-facts dd {
   margin: 0;
-  font-size: 12px;
+  font-size: 17px;
   overflow-wrap: anywhere;
 }
 .account-note {
@@ -145,7 +145,7 @@ body {
   border-radius: 8px;
   padding: 12px;
   margin: 0;
-  font-size: 10px;
+  font-size: 15px;
   color: #8fb5ae;
 }
 .security-panel {
@@ -159,7 +159,7 @@ body {
 }
 .security-panel .eyebrow {
   color: #507d77;
-  font-size: 9px;
+  font-size: 14px;
   margin-bottom: 7px;
 }
 .security-panel h2 {
@@ -172,14 +172,14 @@ body {
   background: #f3f4ee;
   border-radius: 10px;
   padding: 16px;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.5;
   color: #65776e;
   margin: 30px 0;
 }
 #passwordForm label {
   display: block;
-  font-size: 11px;
+  font-size: 16px;
   margin: 18px 0 6px;
 }
 .password-input {
@@ -196,7 +196,7 @@ body {
   background: transparent;
   padding: 12px 14px;
   font: inherit;
-  font-size: 11px;
+  font-size: 16px;
   color: #293d36;
 }
 .password-input input::placeholder {
@@ -206,7 +206,7 @@ body {
   border: 0;
   background: transparent;
   color: #6a7b72;
-  font-size: 10px;
+  font-size: 15px;
   cursor: pointer;
 }
 .password-strength {
@@ -226,7 +226,7 @@ body {
 .strength-label {
   text-align: right;
   color: #829080;
-  font-size: 9px;
+  font-size: 14px;
   min-height: 10px;
   margin: 3px 0;
 }
@@ -244,16 +244,16 @@ body {
   border: 0;
   border-radius: 24px;
   font: inherit;
-  font-size: 12px;
+  font-size: 17px;
   cursor: pointer;
 }
 .password-actions a {
   color: #286e68;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 15px;
 }
 #passwordMessage {
-  font-size: 12px;
+  font-size: 17px;
   color: #a42c2c;
 }
 #passwordMessage.success {
@@ -273,7 +273,7 @@ body {
   margin: auto;
 }
 .footer-grid h3 {
-  font-size: 13px;
+  font-size: 18px;
   color: #33413a;
   margin: 0 0 15px;
 }
@@ -283,7 +283,7 @@ body {
 }
 .footer-grid p,
 .footer-grid a {
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.7;
 }
 .footer-grid a {
@@ -301,13 +301,13 @@ body {
   font-size: 14px;
 }
 .footer-office span {
-  font-size: 9px;
+  font-size: 14px;
   display: block;
   margin-top: 10px;
   color: #187268;
 }
 .footer-copyright {
-  font-size: 9px;
+  font-size: 14px;
   margin: 32px auto 0;
   max-width: 1388px;
 }
@@ -347,3 +347,18 @@ body {
     font-size: 20px;
   }
 }
+
+.profile-page { font-size: 18px; color: #174c42; }
+.profile-page .profile-facts dd, .profile-page label { font-size: 18px; color: #124d40; font-weight: 600; }
+.profile-page .profile-note, .profile-page .security-hint { font-size: 16px; }
+.profile-phone-form { display: grid; gap: 12px; margin-top: 24px; }
+.profile-phone-form input { padding: 12px; border: 1px solid #89aaa0; border-radius: 10px; }
+
+.profile-page .profile-summary .profile-facts dd, .profile-page .profile-summary .profile-phone-form label { color: #fff; }
+.profile-page .profile-summary .profile-facts dt, .profile-summary #phoneMessage { color: #d5f2e7; }
+.profile-phone-form input { background: #fff; color: #174c42; font: inherit; }
+
+.profile-phone-form[hidden], .phone-edit[hidden] { display: none; }
+.profile-phone-row .phone-fact { min-width: 0; flex: 1; }
+.profile-summary .phone-edit { margin-top: 8px; border: 1px solid #8abbb1; border-radius: 20px; padding: 7px 14px; background: transparent; color: #d5f2e7; font: inherit; font-size: 13px; cursor: pointer; }
+.profile-summary .phone-edit:hover { background: #ffffff16; }

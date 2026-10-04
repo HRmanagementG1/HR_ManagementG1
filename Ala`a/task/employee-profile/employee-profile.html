@@ -13,7 +13,7 @@
 <body data-workspace-role="Employee">
   <div data-employee-header data-active-page="profile"></div>
   <main class="profile-page">
-    <section class="profile-hero workspace-banner"><p class="eyebrow">HOME / MY PROFILE</p><h1>Your employee profile.</h1><p>View your brief employee details and manage your account security and password.</p></section>
+    <section class="profile-hero workspace-banner"><p class="eyebrow">HOME / MY PROFILE</p><h1>Your employee profile.</h1><p>View your brief employee details and manage your phone number and password.</p></section>
     <div class="profile-layout">
       <section class="profile-summary" aria-label="Employee details">
         <span class="active-badge">● Active Employee</span>
@@ -24,7 +24,15 @@
           <div><span class="fact-icon" aria-hidden="true">▦</span><div><dt>DEPARTMENT</dt><dd data-user="department"></dd></div></div>
           <div><span class="fact-icon" aria-hidden="true">⌖</span><div><dt>LOCATION</dt><dd data-user="location"></dd></div></div>
           <div><span class="fact-icon" aria-hidden="true">♙</span><div><dt>ROLE</dt><dd data-user="role"></dd></div></div>
+          <div class="profile-phone-row"><span class="fact-icon" aria-hidden="true">☎</span><div class="phone-fact"><dt>PHONE NUMBER</dt><dd id="profilePhone" data-user="phone"></dd><button id="editPhone" type="button" class="phone-edit" aria-controls="phoneForm" aria-expanded="false">Change number</button></div></div>
         </dl>
+        <form id="phoneForm" class="profile-phone-form" hidden>
+          <label for="phoneInput">Phone number</label>
+          <input id="phoneInput" type="tel" autocomplete="tel" maxlength="30" required placeholder="Enter your phone number">
+          <button type="submit" class="update-password">Save phone number</button>
+          <button type="button" id="cancelPhone" class="phone-edit">Cancel</button>
+        </form>
+        <p id="phoneMessage" role="status" aria-live="polite"></p>
         <p class="account-note">Keep your password private and update it regularly.</p>
       </section>
       <section class="security-panel">

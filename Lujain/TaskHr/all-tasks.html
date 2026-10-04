@@ -35,13 +35,13 @@
                     <p class="muted">Browse and filter employee tasks.</p>
                 </div>
 
-                <a class="btn-teal" href="add-task.html">
-                    + Add task
-                </a>
+
 
             </div>
 
-            <section class="task-metrics"><article><span>Total active tasks</span><strong id="activeTaskCount">0</strong></article><article><span>Pending / To do</span><strong id="pendingTaskCount">0</strong></article><article><span>In progress</span><strong id="progressTaskCount">0</strong></article><article><span>HR only / Hidden</span><strong id="hiddenTaskCount">0</strong></article></section><div class="task-filters"><input id="searchTasks" type="search" placeholder="Filter tasks…" aria-label="Filter tasks"><select id="departmentFilter" aria-label="Department"><option value="">All departments</option></select><select id="priorityFilter" aria-label="Priority"><option value="">All priorities</option><option>High</option><option>Normal</option><option>Low</option></select><select id="visibilityFilter" aria-label="Visibility"><option value="">All visibilities</option><option value="visible">Visible to employee</option><option value="hidden">HR only</option></select><div class="view-switch"><button id="tableView" type="button" aria-pressed="true">Table</button><button id="boardView" type="button" aria-pressed="false">Kanban</button></div></div><div id="taskBoard" class="hr-task-board" hidden></div>
+            <section class="task-metrics"><article><span>Total active tasks</span><strong id="activeTaskCount">0</strong></article><article><span>Pending / To do</span><strong id="pendingTaskCount">0</strong></article><article><span>In progress</span><strong id="progressTaskCount">0</strong></article><article><span>HR only / Hidden</span><strong id="hiddenTaskCount">0</strong></article></section><div class="task-filters">                <a class="btn-teal" href="add-task.html">
+                    + Add task
+                </a><input id="searchTasks" type="search" placeholder="Filter tasks…" aria-label="Filter tasks"><select id="departmentFilter" aria-label="Department"><option value="">All departments</option></select><select id="priorityFilter" aria-label="Priority"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Normal</option><option>Low</option></select><select id="visibilityFilter" aria-label="Visibility"><option value="">All visibilities</option><option value="visible">Visible to employee</option><option value="hidden">HR only</option></select><div class="view-switch"><button id="tableView" type="button" aria-pressed="true">Table</button><button id="boardView" type="button" aria-pressed="false">Kanban</button></div></div><div id="taskBoard" class="hr-task-board" hidden></div>
 
             <div class="table-wrap mt-3">
 
@@ -67,4 +67,3 @@
 </body>
 
 </html>
-

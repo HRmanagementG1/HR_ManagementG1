@@ -3,23 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>HR Login | Wanderly</title>
-    <link rel="stylesheet" href="../../Shared/auth.css" />
-    <link rel="stylesheet" href="../../Shared/theme.css" />
-    <script src="../../Shared/site-shell.js" defer></script>
+    <title>Login | Wanderly</title>
+    <link rel="stylesheet" href="../Shared/auth.css" />
+    <link rel="stylesheet" href="../Shared/theme.css" />
+    <script src="../Shared/site-shell.js" defer></script>
   </head>
   <body>
     <header class="auth-top">
-      <a href="../../index.html" class="auth-brand"
+      <a href="../index.html" class="auth-brand"
         ><img
           class="workforce-logo"
-          src="../../Images/wanderly-logo.png"
+          src="../Images/wanderly-logo.png"
           alt="Wanderly" /></a
-      ><a href="../../index.html">← Back to home</a>
+      ><a href="../index.html">← Back to home</a>
     </header>
     <main class="auth-layout">
       <section class="auth-visual">
-        <img src="../../Images/hero.jpg" alt="A welcoming workplace" />
+        <img src="../Images/hero.jpg" alt="A welcoming workplace" />
         <div class="auth-copy">
           <h1>Your next great workday starts here.</h1>
           <p>People, work, and everything that brings them together.</p>
@@ -31,15 +31,15 @@
             <button type="button" data-login-role="Employee" aria-pressed="true">Employee login</button>
             <button type="button" data-login-role="HR" aria-pressed="false">HR login</button>
           </div>
-          <p class="auth-eyebrow">HR workspace</p>
+          <p class="auth-eyebrow">Employee workspace</p>
           <h2>Welcome back.</h2>
           <p class="auth-intro">
-            Support your people and keep your team moving forward.
+            Your tasks, your people, and the details that matter.
           </p>
           <form id="loginForm">
-            <label for="workEmail">Email or username</label
+            <label for="username">Email or username</label
             ><input
-              id="workEmail"
+              id="username"
               autocomplete="username"
               required
               placeholder="you@workforce.example"
@@ -56,14 +56,16 @@
               </button>
             </div>
             <p id="login-message" role="alert" hidden></p>
-            <button class="auth-submit" type="submit">Sign in to HR →</button>
+            <button class="auth-submit" type="submit">
+              Sign in to your workspace →
+            </button>
           </form>
 
         </div>
       </section>
     </main>
-    <script src="../../Shared/workspace.js"></script>
-    <script src="../../Shared/login.js"></script>
-    <script src="LoginHr.js"></script>
+    <script src="../Shared/workspace.js"></script>
+    <script src="../Shared/login.js"></script>
+    <script src="login-page.js"></script>
   </body>
 </html>

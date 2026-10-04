@@ -1,31 +1,22 @@
-(() => {
-    // This page also opens directly from the shared HR sidebar.
-    const employeesUrl = new URL('../data/employees.json', document.currentScript.src);
+document.addEventListener("DOMContentLoaded", async function () {
+    const W = window.workspace;
+    try { await W.ready; } catch (error) {
+        document.getElementById("leave-table-body").innerHTML = '<tr><td colspan="7">Could not load employees. Please refresh.</td></tr>';
+        return;
+    }
+    if (!W.requireRole("HR")) return;
     let employees = [];
 
     function getData(key) {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : null;
+        return window.workspace.read(key);
     }
 
     function saveData(key, value) {
-        localStorage.setItem(key, JSON.stringify(value));
+        window.workspace.save(key, value);
     }
 
     async function loadEmployees() {
-        try {
-            if (window.workspace) {
-                await window.workspace.ready;
-                employees = window.workspace.users();
-                return;
-            }
-            const response = await fetch(employeesUrl);
-            if (!response.ok) throw new Error('Could not load employees.');
-            employees = (await response.json()).map(employee => ({ ...employee, name: employee.name || employee.username }));
-        } catch (error) {
-            employees = getData('site_users') || [];
-            console.warn('Using saved employees.', error);
-        }
+        employees = W.users();
     }
 
     function getEmployee(id) {
@@ -54,31 +45,6 @@
     let currentFilter = "All";
     let currentSearch = "";
     let currentPage = 1;
-
-    /* =====================================================
-       DEMO SEED (delete when go live)
-       ===================================================== */
-    if (!getData("site_users")) {
-        saveData("site_users", [
-            { id:"1", name:"Lina Haddad",       email:"lina@workforce.example",   position:"People & Culture Lead",     department:"Human Resources", role:"HR",       phone:"+962 6 555 0101", location:"Amman, Jordan",    image:"", bio:"" },
-            { id:"2", name:"Julian Drake",      email:"julian@workforce.example", position:"Senior Software Engineer",  department:"Engineering",     role:"Employee", phone:"",                 location:"Berlin, Germany",  image:"", bio:"" },
-            { id:"3", name:"Aria Montgomery",   email:"aria@workforce.example",   position:"Lead Product Designer",     department:"Design",          role:"Employee", phone:"",                 location:"London, UK",       image:"", bio:"" },
-            { id:"4", name:"Siddharth Kumar",   email:"sid@workforce.example",    position:"Data Operations Lead",      department:"Data",            role:"Employee", phone:"",                 location:"Bangalore, India", image:"", bio:"" },
-            { id:"5", name:"Marcus Vance",      email:"marcus@workforce.example", position:"Director of Brand Strategy", department:"Marketing",      role:"Employee", phone:"",                 location:"New York, USA",    image:"", bio:"" }
-        ]);
-    }
-
-    if (!getData(LEAVES_KEY)) {
-        saveData(LEAVES_KEY, [
-            { id:1, owner:"2", type:"Annual",   start:"2026-10-24", end:"2026-10-28", reason:"Family trip to coastal cabin for annual gathering",         status:"Pending",  images:[] },
-            { id:2, owner:"3", type:"Sick",     start:"2026-10-22", end:"2026-10-23", reason:"Flu recovery, resting at home per physician advice",       status:"Pending",  images:[] },
-            { id:3, owner:"4", type:"Personal", start:"2026-11-02", end:"2026-11-16", reason:"Paternity leave for newborn arrival and family support",   status:"Pending",  images:[] },
-            { id:4, owner:"1", type:"Annual",   start:"2026-09-15", end:"2026-09-18", reason:"Cultural trip to Mediterranean heritage sites",            status:"Approved", images:[] },
-            { id:5, owner:"5", type:"Personal", start:"2026-09-10", end:"2026-09-12", reason:"Personal administrative matters and relocation",           status:"Approved", images:[] },
-            { id:6, owner:"2", type:"Unpaid",   start:"2026-09-01", end:"2026-09-05", reason:"Extended personal project work",                            status:"Declined", images:[] }
-        ]);
-    }
-    /* ===================================================== */
 
     /* ---------------- IndexedDB ---------------- */
     function openImagesDB() {
@@ -127,7 +93,7 @@
 
     /* ---------------- Stats ---------------- */
     function renderStats() {
-        const leaves = getData(LEAVES_KEY) || [];
+        const leaves = window.workspace.leaves();
         const total    = leaves.length;
         const pending  = leaves.filter(l => l.status === "Pending").length;
         const approved = leaves.filter(l => l.status === "Approved").length;
@@ -145,7 +111,7 @@
 
     /* ---------------- Filtering ---------------- */
     function applyFilters() {
-        let leaves = getData(LEAVES_KEY) || [];
+        let leaves = window.workspace.leaves();
         leaves = [...leaves].sort((a, b) => b.id - a.id);
 
         if (currentFilter === "Pending") {
@@ -233,11 +199,12 @@
                         <div class="date-range">${formatDateRange(leave.start, leave.end)}</div>
                     </td>
                     <td data-label="Duration">
-                        <div class="duration">${days} working day${days === 1 ? "" : "s"}</div>
+                        <div class="duration">${days} calendar day${days === 1 ? "" : "s"}</div>
                     </td>
                     <td data-label="Reason">
                         <div class="reason" title="${(leave.reason || "").replace(/"/g, "&quot;")}">
-                            ${leave.reason || ""}
+                            ${window.workspace.escape(leave.reason || "")}
+                            ${leave.rejectionReason ? `<p><strong>Rejected:</strong> ${window.workspace.escape(leave.rejectionReason)}</p>` : ""}
                         </div>
                     </td>
                     <td data-label="Status">
@@ -412,37 +379,78 @@
     }
 
     /* ---------------- Approve / Decline ---------------- */
-    function setupActions() {
-        const tbody = document.getElementById("leave-table-body");
-        if (!tbody) return;
+    const rejectionDialog = document.getElementById("rejectionDialog");
+    const rejectionForm = document.getElementById("rejectionForm");
+    let rejectingId = null;
 
-        tbody.addEventListener("click", function (e) {
-            const approveBtn = e.target.closest(".btn-approve");
-            const declineBtn = e.target.closest(".btn-decline");
-            if (!approveBtn && !declineBtn) return;
-
-            const id = Number((approveBtn || declineBtn).dataset.id);
-            const leaves = getData(LEAVES_KEY) || [];
-            const leave = leaves.find(l => Number(l.id) === id);
-            if (!leave) return;
-
-            leave.status = approveBtn ? "Approved" : "Declined";
+    function saveDecision(id, status, reason) {
+        if (!W.requireRole("HR")) return false;
+        const leaves = W.leaves();
+        const leave = leaves.find(item => String(item.id) === String(id));
+        if (!leave || leave.status !== "Pending") return false;
+        if (status === "Approved") {
+            const allowanceError = W.leaveAllowanceError(leave.owner, leave.start, leave.end);
+            if (allowanceError) {
+                document.getElementById("leaveActionError").textContent = allowanceError;
+                return false;
+            }
+        }
+        leave.status = status;
+        if (status === "Declined") leave.rejectionReason = reason;
+        try {
             saveData(LEAVES_KEY, leaves);
-
             renderStats();
             renderTable();
+            return true;
+        } catch (error) {
+            document.getElementById("leaveActionError").textContent = "Could not save this decision. Please try again.";
+            return false;
+        }
+    }
+
+    function setupActions() {
+        document.getElementById("leave-table-body").addEventListener("click", function(event) {
+            const approve = event.target.closest(".btn-approve");
+            const decline = event.target.closest(".btn-decline");
+            if (!approve && !decline) return;
+            const id = (approve || decline).dataset.id;
+            const leave = W.leaves().find(item => String(item.id) === String(id));
+            if (!leave || leave.status !== "Pending") return;
+            document.getElementById("leaveActionError").textContent = "";
+            if (approve) { saveDecision(id, "Approved"); return; }
+            rejectingId = id;
+            rejectionForm.reset();
+            document.getElementById("rejectionEmployee").textContent = "Request from " + getEmployeeName(leave.owner);
+            document.getElementById("rejectionError").textContent = "";
+            rejectionDialog.showModal();
+            document.getElementById("rejectionReason").focus();
+        });
+        document.getElementById("cancelRejection").addEventListener("click", () => rejectionDialog.close());
+        rejectionForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const reason = document.getElementById("rejectionReason").value.trim();
+            if (!this.reportValidity()) return;
+            if (!reason) {
+                document.getElementById("rejectionError").textContent = "Enter a rejection reason.";
+                return;
+            }
+            if (saveDecision(rejectingId, "Declined", reason)) rejectionDialog.close();
+            else document.getElementById("rejectionError").textContent = "Could not reject this request. Refresh and try again.";
         });
     }
 
     /* ---------------- Init ---------------- */
     async function init() {
-        await openImagesDB();
         await loadEmployees();
         renderStats();
         renderTable();
         setupFilters();
         setupActions();
+        try { await openImagesDB(); renderTable(); } catch (error) { console.warn("Leave attachments unavailable.", error); }
+        window.addEventListener("storage", event => {
+            if (event.key === LEAVES_KEY) { renderStats(); renderTable(); }
+        });
     }
 
-    init();
-})();
+    await init();
+});

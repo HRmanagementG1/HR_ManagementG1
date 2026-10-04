@@ -1,4 +1,6 @@
-(() => {
+document.addEventListener("DOMContentLoaded", async function () {
+    await window.workspace.ready;
+    if (!window.workspace.requireRole("Employee")) return;
     const { getData, saveData } = window.employeeWorkspace;
     const currentUser = window.employeeWorkspace.getCurrentUser();
     const LEAVES_KEY = (typeof leavesKey !== "undefined") ? leavesKey : "site_leaves";
@@ -7,6 +9,7 @@
     let employees = [];
     let selectedFiles = [];
     let imagesDB = null;
+    let submitting = false;
 
     const fileInput    = document.getElementById("myfile");
     const imagePreview = document.getElementById("imagePreview");
@@ -179,6 +182,7 @@
     function setupForm() {
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
+            if (submitting || !window.workspace.requireRole("Employee") || !form.reportValidity()) return;
 
             if (!currentUser) {
                 showMessage("Please log in first.");
@@ -197,11 +201,15 @@
                 return;
             }
 
-            const leaves = getData(LEAVES_KEY) || [];
+            const leaves = window.workspace.leaves();
+            const allowanceError = window.workspace.leaveAllowanceError(currentUser.id, start, end);
+            if (allowanceError) { showMessage(allowanceError); return; }
             const newId  = leaves.length
                 ? Math.max(...leaves.map(l => Number(l.id))) + 1
                 : 1;
 
+            submitting = true;
+            form.querySelector("button[type=submit]").disabled = true;
             // Save images to IndexedDB
             let imageNames = [];
             if (selectedFiles.length > 0) {
@@ -210,6 +218,8 @@
                     imageNames = selectedFiles.map(f => f.name);
                 } catch (err) {
                     console.log(err);
+                    submitting = false;
+                    form.querySelector("button[type=submit]").disabled = false;
                     showMessage("Failed to save images.");
                     return;
                 }
@@ -223,8 +233,21 @@
                 images: imageNames
             };
 
-            leaves.push(leaveObj);
-            saveData(LEAVES_KEY, leaves);
+            try {
+                const latestLeaves = window.workspace.leaves();
+                const latestError = window.workspace.leaveAllowanceError(currentUser.id, start, end);
+                if (latestError) throw new Error(latestError);
+                leaveObj.id = latestLeaves.reduce((maximum, leave) => Math.max(maximum, Number(leave.id) || 0), 0) + 1;
+                // Image identifiers use the original request ID, so avoid changing it silently.
+                if (leaveObj.id !== newId && imageNames.length) throw new Error("A new request was saved. Please submit this request again.");
+                latestLeaves.push(leaveObj);
+                saveData(LEAVES_KEY, latestLeaves);
+            } catch (error) {
+                submitting = false;
+                form.querySelector("button[type=submit]").disabled = false;
+                showMessage(error.message || "Could not save your leave request.");
+                return;
+            }
 
             showMessage("Your leave application was submitted successfully. Redirecting...", true);
 
@@ -236,19 +259,29 @@
 
     /* ==================== Init ==================== */
     async function init() {
-        try { await openImagesDB(); } catch (e) { console.log(e); }
-
-        employees = await window.employeeWorkspace.loadEmployees();
+        fileInput.disabled = true;
+        employees = window.workspace.users();
         showEmployee();
         showLeaveTypes();
         setupDates();
         setupReasonCounter();
         setupForm();
+        const balance = document.createElement("p");
+        balance.className = "leave-balance";
+        function updateBalance() {
+            const usage = window.workspace.leaveUsage(currentUser.id);
+            balance.textContent = usage.year + ": Maximum " + usage.maximum + " days · Approved days used: " + usage.used + " · Remaining: " + usage.remaining + " days. Only approved leave reduces your balance. Each calendar year has its own 15-day allowance.";
+        }
+        updateBalance();
+        window.addEventListener("pageshow", updateBalance);
+        window.addEventListener("storage", event => { if (event.key === LEAVES_KEY) updateBalance(); });
+        form.prepend(balance);
+        try { await openImagesDB(); fileInput.disabled = false; } catch (error) { console.warn("Leave attachments unavailable.", error); }
 
         if (!currentUser) {
             showMessage("Please log in first before submitting a leave request.");
         }
     }
 
-    init();
-})();
+    await init();
+});

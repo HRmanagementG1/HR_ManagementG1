@@ -1,4 +1,6 @@
-(() => {
+document.addEventListener("DOMContentLoaded", async function () {
+    await window.workspace.ready;
+    if (!window.workspace.requireRole("Employee")) return;
     const { getData, saveData } = window.employeeWorkspace;
     const currentUser = window.employeeWorkspace.getCurrentUser();
     const LEAVES_KEY = (typeof leavesKey !== "undefined") ? leavesKey : "site_leaves";
@@ -39,7 +41,7 @@
     }
 
     function getMyLeaves() {
-        const all = getData(LEAVES_KEY) || [];
+        const all = window.workspace.leaves();
         if (!currentUser) return [];
         return all.filter(l => String(l.owner) === String(currentUser.id));
     }
@@ -55,7 +57,11 @@
         const mine = getMyLeaves();
         const pending  = mine.filter(l => l.status === "Pending").length;
         const approved = mine.filter(l => l.status === "Approved").length;
-        const days     = mine.reduce((s, l) => s + calculateDays(l.start, l.end), 0);
+        const usage = window.workspace.leaveUsage(currentUser.id);
+        const days = usage.remaining;
+        document.getElementById("leave-year").textContent = usage.year;
+        document.getElementById("leave-maximum").textContent = usage.maximum;
+        document.getElementById("leave-used").textContent = usage.used;
 
         document.getElementById("stat-total").textContent    = mine.length;
         document.getElementById("stat-pending").textContent  = pending;
@@ -92,7 +98,8 @@
                         </div>
                         <span class="status ${statusCls}">${l.status}</span>
                     </div>
-                    <p>${l.reason || ""}</p>
+                    <p>${window.workspace.escape(l.reason || "")}</p>
+                    ${l.rejectionReason ? `<p class="rejection-reason"><strong>HR rejection reason:</strong> ${window.workspace.escape(l.rejectionReason)}</p>` : ""}
                 </article>
             `;
         });
@@ -140,20 +147,22 @@
 
     /* ==================== Init ==================== */
     async function init() {
-        try { await openImagesDB(); } catch (e) { console.log(e); }
-
         renderStats();
         renderList();
         setupFilters();
+        try { await openImagesDB(); await renderList(); } catch (error) { console.warn("Leave attachments unavailable.", error); }
 
         // When user returns from the create page (browser back / focus)
+        window.addEventListener("storage", event => {
+            if (event.key === LEAVES_KEY) { renderStats(); renderList(); }
+        });
         window.addEventListener("pageshow", () => {
             renderStats();
             renderList();
         });
 
-        
+
     }
 
-    init();
-})();
+    await init();
+});
