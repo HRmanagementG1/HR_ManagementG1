@@ -1,6 +1,8 @@
 # HR_ManagementG1
 Hr management system for Orange code academy  
 
+Live Version: [Link](https://hrmanagementg1.github.io/HR_ManagementG1/)
+<br>
 Figma: [figma](https://www.figma.com/design/ipzudJJIUl49BYgllS42RA/NorthBank?node-id=105-2&p=f&t=wKjbqjEpY3N1pswR-0)
 <br>
 Trello: [trello](https://trello.com/b/uZRbCGCE/hr-mangement)
