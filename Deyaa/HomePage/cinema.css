@@ -175,6 +175,9 @@ body.home-page {
   display: flex;
   justify-content: center;
   gap: clamp(18px, 2.2vw, 36px);
+    background: rgba(255, 255, 255, .25);
+    padding: 18px 44px;
+    border-radius: 25px;
 }
 .site-nav a {
   color: #fdf1e1;
