@@ -590,3 +590,7 @@ body {
     font-weight: 600;
 }
 .hr-workspace-page .main-content { margin:0; padding:0; width:100%; }
+
+.btn-delete { color: #b42318; border-color: #fda29b; }
+.btn-delete:hover { background: #fee4e2; }
+.btn-delete:disabled { opacity: 0.5; cursor: not-allowed; }

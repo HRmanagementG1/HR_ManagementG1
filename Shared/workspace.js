@@ -42,8 +42,9 @@
     const response = await fetch(new URL("../data/employees.json", base));
     if (!response.ok) throw new Error("Could not load employees.");
     const defaults = await response.json();
+    const deleted = new Set(read("site_deleted_users", []).map(String));
     const saved = read("site_users", []);
-    const users = defaults.map((person) =>
+    const users = defaults.filter((person) => !deleted.has(String(person.id))).map((person) =>
       normalize({
         ...person,
         ...saved.find(
@@ -54,6 +55,7 @@
       }),
     );
     [...saved, ...read("employees", [])].forEach((person) => {
+      if (deleted.has(String(person.id))) return;
       if (
         !users.some(
           (item) =>
@@ -75,6 +77,8 @@
       if (account) {
         const { password, ...details } = account;
         save("site_session", details);
+      } else {
+        localStorage.removeItem("site_session");
       }
     }
     return users;
@@ -86,6 +90,20 @@
     save,
     escape,
     users: () => read("site_users", []),
+    deleteEmployee(id) {
+      if (!this.requireRole("HR")) return false;
+      id = String(id);
+      if (String(this.session().id) === id) return false;
+      const users = this.users();
+      if (!users.some((person) => String(person.id) === id)) return false;
+      const deleted = read("site_deleted_users", []).map(String);
+      if (!deleted.includes(id)) deleted.push(id);
+      save("site_deleted_users", deleted);
+      save("site_users", users.filter((person) => String(person.id) !== id).map((person) =>
+        String(person.managerId) === id ? { ...person, managerId: "" } : person,
+      ));
+      return true;
+    },
     session: () => {
       const session = read("site_session");
       return session ? { ...session, role: normalizeRole(session.role) } : null;
