@@ -39,12 +39,80 @@
         </p>
       </section>
 
+      <!-- MEETING HISTORY -->
+
+      <section class="history-card">
+        <div class="history-header">
+          <div class="section-title">
+            <div class="icon">↶</div>
+
+            <div>
+              <h2>Meeting History</h2>
+
+              <p>View your previous meeting requests.</p>
+            </div>
+          </div>
+
+          <!-- FILTER -->
+
+          <div class="history-actions"><select id="status-filter">
+            <option value="all">All Status</option>
+
+            <option value="Pending">Pending</option>
+
+            <option value="Confirmed">Confirmed</option>
+
+            <option value="Completed">Completed</option>
+
+            <option value="Cancelled">Cancelled</option>
+          </select><a class="request-scroll" href="#request-meeting-form">Request meeting ↓</a></div>
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Topic</th>
+
+                <th>Date</th>
+
+                <th>Time</th>
+
+                <th>HR Representative</th>
+
+                <th>Status</th>
+
+                <th>Meeting Link</th>
+
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="meeting-history">
+              <!--
+                            JavaScript will display
+                            the employee's meetings here.
+                        -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- NO HISTORY -->
+
+        <div id="empty-history" class="empty-history">
+          <p>No meeting history yet.</p>
+
+          <span> Your meeting requests will appear here. </span>
+        </div>
+      </section>
       <!-- TOP SECTION -->
 
       <section class="meeting-top">
         <!-- REQUEST MEETING -->
 
-        <div class="request-card">
+        <div class="request-card" id="request-meeting-form">
           <div class="section-title">
             <div class="icon">📅</div>
 
@@ -136,74 +204,7 @@
         </div>
       </section>
 
-      <!-- MEETING HISTORY -->
 
-      <section class="history-card">
-        <div class="history-header">
-          <div class="section-title">
-            <div class="icon">↶</div>
-
-            <div>
-              <h2>Meeting History</h2>
-
-              <p>View your previous meeting requests.</p>
-            </div>
-          </div>
-
-          <!-- FILTER -->
-
-          <select id="status-filter">
-            <option value="all">All Status</option>
-
-            <option value="Pending">Pending</option>
-
-            <option value="Confirmed">Confirmed</option>
-
-            <option value="Completed">Completed</option>
-
-            <option value="Cancelled">Cancelled</option>
-          </select>
-        </div>
-
-        <!-- TABLE -->
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Topic</th>
-
-                <th>Date</th>
-
-                <th>Time</th>
-
-                <th>HR Representative</th>
-
-                <th>Status</th>
-
-                <th>Meeting Link</th>
-
-                <th>Actions</th>
-              </tr>
-            </thead>
-
-            <tbody id="meeting-history">
-              <!--
-                            JavaScript will display
-                            the employee's meetings here.
-                        -->
-            </tbody>
-          </table>
-        </div>
-
-        <!-- NO HISTORY -->
-
-        <div id="empty-history" class="empty-history">
-          <p>No meeting history yet.</p>
-
-          <span> Your meeting requests will appear here. </span>
-        </div>
-      </section>
     </section>
 
     <!-- JAVASCRIPT -->

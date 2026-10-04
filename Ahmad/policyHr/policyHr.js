@@ -115,7 +115,6 @@ function renderRows(pagePolicies) {
   let html = "";
   pagePolicies.forEach(function (policy) {
     const author = policy.author || "HR administrator";
-    const initials = author.split(/\s+/).slice(0, 2).map(function (part) { return part[0]; }).join("");
     const isHidden = policy.hidden === true;
     html += "<tr><td class=\"py-3 border-bottom text-secondary\"><div class=\"fw-semibold text-dark fs-6\">" +
       escapeText(policy.title) + "</div><div style=\"font-size:0.75rem\">v" + escapeText(policy.version || "1.0") +
@@ -124,10 +123,10 @@ function renderRows(pagePolicies) {
       "<td class=\"py-3 border-bottom\">" + escapeText(getEffectiveDate(policy)) + "</td>" +
       "<td class=\"py-3 border-bottom\"><span class=\"badge rounded-pill px-3 py-2\" style=\"background-color:" +
       (isHidden ? "#f6f7f4;color:#6c757d" : "#eaf0eb;color:#2b7a63") + "\">" + (isHidden ? "Hidden" : "Visible") + "</span></td>" +
-      "<td class=\"py-3 border-bottom\"><span class=\"rounded-circle d-inline-flex align-items-center justify-content-center me-2\" style=\"width:32px;height:32px;background:#f6f7f4;color:#6c757d\">" + escapeText(initials) + "</span>" + escapeText(author) + "</td>" +
-      "<td class=\"py-3 border-bottom text-end\"><button class=\"btn btn-sm text-secondary\" type=\"button\" data-action=\"visibility\" data-id=\"" +
+      "<td class=\"py-3 border-bottom\">" + escapeText(author) + "</td>" +
+      "<td class=\"py-3 border-bottom text-end\"><button class=\"btn btn-sm policy-action\" type=\"button\" data-action=\"visibility\" data-id=\"" +
       escapeText(policy.id) + "\">" + (isHidden ? "Show" : "Hide") + "</button> " +
-      "<button class=\"btn btn-sm text-secondary\" type=\"button\" data-action=\"edit\" data-id=\"" + escapeText(policy.id) + "\">Edit</button></td></tr>";
+      "<button class=\"btn btn-sm policy-action\" type=\"button\" data-action=\"edit\" data-id=\"" + escapeText(policy.id) + "\">Edit</button></td></tr>";
   });
   if (pagePolicies.length === 0) html = "<tr><td colspan=\"6\" class=\"text-center py-5\">No policies match your search.</td></tr>";
   get("rows").innerHTML = html;

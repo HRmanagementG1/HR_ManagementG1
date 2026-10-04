@@ -1,5 +1,5 @@
 # HR_ManagementG1
-Hr management system for Orange code academy  
+Hr management system for Orange code academy
 
 Live Version: [Link](https://hrmanagementg1.github.io/HR_ManagementG1/)
 <br>
@@ -8,8 +8,9 @@ Figma: [figma](https://www.figma.com/design/ipzudJJIUl49BYgllS42RA/NorthBank?nod
 Trello: [trello](https://trello.com/b/uZRbCGCE/hr-mangement)
 
 Open `index.html` through a web server such as VS Code Live Server. It opens the
-home page with Employee login, HR login, and a My workspace link for a signed-in
-user. Each login page links back home and to the other role's login.
+home page with one Login button and a My workspace link for a signed-in user.
+The login form has Employee login and HR login buttons above Welcome back;
+switching roles keeps the same page open.
 
 Demo accounts:
 
@@ -17,7 +18,8 @@ Demo accounts:
 - Employee: `omar@workforce.example` / `Omar@123`
 
 The employee login opens My Profile: a brief account summary and a working
-password-change form. Information shows the employee's full record and salary.
+phone-number and password-change forms. Only those two fields can be edited by
+employees. Information is read-only and shows the employee's full record and salary.
 The shared navigation connects tasks, leave, policies, meetings, and feedback.
 
 The HR dashboard provides quick access to the people directory, onboarding,
@@ -66,3 +68,24 @@ Run `node tests/cinema.cjs` with network access to check the scene assets and ca
 The Powered By page uses the supplied `Deyaa/team.json`. Portrait files were not
 provided, so cards show initials. Add each image at its recorded path and set
 `portraitAvailable: true` on that member when portraits are available.
+
+HR can block and unblock accounts without deleting employee records. Blocked
+accounts cannot sign in, and the current HR account cannot block itself.
+Employees have 15 calendar leave days per calendar year. Only approved requests
+reduce the balance. Pending and rejected requests do not use days. Requests that
+cross New Year count each day in its own year. HR cannot approve a request that
+would exceed either year's allowance.
+HR must enter a rejection reason, which appears in the employee's leave history.
+The leave page displays the current year, maximum, approved days used, and remaining balance.
+HR leave records load independently of attachment storage. Blocking and rejecting
+requests use in-page confirmation dialogs.
+HR can edit a task through the same form used to create it; edits preserve its
+submission, attachments, status, and review feedback.
+
+The updated page code uses the class topics: HTML required/minlength/maxlength
+validation; DOM className and event listeners; template strings for display;
+JSON for saved data; map/filter/reduce for directories, tasks, and leave totals;
+and async/await with try/catch for loading and saving. Shared/workspace.js holds
+the common data functions so login and other pages do not repeat that logic.
+Run the focused behavior checks with: node tests/employee-controls.cjs
+Run PDF generation checks for every policy with: node tests/policy-pdf.cjs

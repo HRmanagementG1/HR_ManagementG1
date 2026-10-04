@@ -39,6 +39,47 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     }),
   );
+  const phoneInput = document.getElementById("phoneInput");
+  const phoneForm = document.getElementById("phoneForm");
+  const editPhone = document.getElementById("editPhone");
+  function closePhoneEditor() {
+    phoneForm.hidden = true;
+    editPhone.hidden = false;
+    editPhone.setAttribute("aria-expanded", "false");
+    editPhone.focus();
+  }
+  editPhone.addEventListener("click", function() {
+    phoneInput.value = document.getElementById("profilePhone").textContent === "Not provided" ? "" : document.getElementById("profilePhone").textContent;
+    document.getElementById("phoneMessage").textContent = "";
+    phoneForm.hidden = false;
+    editPhone.hidden = true;
+    editPhone.setAttribute("aria-expanded", "true");
+    phoneInput.focus();
+  });
+  document.getElementById("cancelPhone").addEventListener("click", closePhoneEditor);
+  document.getElementById("phoneForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    if (!W.requireRole("Employee") || !this.reportValidity()) return;
+    const phone = phoneInput.value.trim();
+    const digits = phone.replace(/\D/g, "");
+    const message = document.getElementById("phoneMessage");
+    if (!/^\+?[\d\s()-]+$/.test(phone) || digits.length < 7 || digits.length > 15) {
+      message.textContent = "Enter a phone number with 7–15 digits.";
+      return;
+    }
+    try {
+      const users = W.users();
+      const account = users.find(person => person.id === user.id);
+      account.phone = phone;
+      W.save("site_users", users);
+      W.save("site_session", { ...W.session(), phone });
+      document.getElementById("profilePhone").textContent = phone;
+      closePhoneEditor();
+      message.textContent = "Phone number saved.";
+    } catch (error) {
+      message.textContent = "Could not save your phone number. Please try again.";
+    }
+  });
   const next = document.getElementById("newPassword");
   next.addEventListener("input", () => {
     const score = [
@@ -56,6 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("passwordForm")
     .addEventListener("submit", (event) => {
       event.preventDefault();
+      if (!W.requireRole("Employee") || !event.target.reportValidity()) return;
       const users = W.users(),
         account = users.find((person) => person.id === user.id);
       const message = document.getElementById("passwordMessage");
@@ -81,9 +123,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         return show("The new passwords do not match.");
       if (next.value === account.password)
         return show("Choose a password different from your current password.");
-      account.password = next.value;
-      account.passwordUpdatedAt = new Date().toISOString();
-      W.save("site_users", users);
+      try {
+        account.password = next.value;
+        account.passwordUpdatedAt = new Date().toISOString();
+        W.save("site_users", users);
+      } catch (error) {
+        return show("Could not update your password. Please try again.");
+      }
       event.target.reset();
       next.dispatchEvent(new Event("input"));
       show("Your password has been updated.", true);

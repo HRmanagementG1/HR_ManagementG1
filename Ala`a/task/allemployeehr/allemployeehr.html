@@ -15,9 +15,7 @@
                         <h1 class="page-title">All Employees</h1>
                         <p class="page-subtitle">Manage team records, employee profiles, access credentials, and department assignments.</p>
                     </div>
-                    <a href="../addemployee/addemployee.html" class="btn btn-primary" style="text-decoration: none;">
-                    <i class="fa-solid fa-user-plus"></i> Add New Employee
-                    </a>
+
                     </div>
 
                 <!-- Stats Cards -->
@@ -77,9 +75,12 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Search employees by name, role, department, or email...">
                     </div>
+                    <div class="directory-actions"><a href="../addemployee/addemployee.html" class="btn btn-primary" style="text-decoration: none;">
+                    <i class="fa-solid fa-user-plus"></i> Add New Employee
+                    </a>
                     <button class="btn btn-outline">
                         <i class="fa-solid fa-sliders"></i> Filters
-                    </button>
+                    </button></div>
                 </div>
 
                 <!-- Tabs -->
@@ -125,6 +126,12 @@
 
             </div>
             <!-- Employee Details Modal -->
+<dialog id="blockDialog" class="block-dialog" aria-labelledby="blockDialogTitle">
+    <h2 id="blockDialogTitle">Block employee?</h2>
+    <p id="blockDialogMessage"></p>
+    <p id="blockDialogError" role="alert"></p>
+    <div class="block-dialog-actions"><button type="button" id="cancelBlock">Cancel</button><button type="button" id="confirmBlock" class="confirm-block">Block employee</button></div>
+</dialog>
 <div id="employeeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalName">
     <div class="modal-card">
         <!-- Header -->

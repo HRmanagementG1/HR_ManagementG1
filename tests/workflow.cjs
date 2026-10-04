@@ -35,8 +35,10 @@ const server = http.createServer((req,res) => {
     };
     await open('/index.html');
     await page.waitForURL('**/HomePage/HomePage.html');
-    await page.locator('.nav-actions').getByText('HR login',{exact:true}).click();
-    await page.waitForURL('**/loginHr/LoginHr.html');
+    await page.locator('.nav-actions').getByText('Login',{exact:true}).click();
+    await page.locator('[data-login-role=HR]').click();
+    assert.equal(new URL(page.url()).pathname,'/Ahmad/login.html');
+    await page.waitForURL('**/Ahmad/login.html');
     await login('HR','lina@workforce.example','Lina@123');
     await open('/Ala%60a/task/allemployeehr/allemployeehr.html');
     await page.waitForFunction(() => document.querySelectorAll('#employeeTableBody tr').length === 6);
@@ -295,7 +297,7 @@ const server = http.createServer((req,res) => {
     await page.waitForURL('**/HomePage/HomePage.html');
     assert.equal(await page.locator('.nav-actions a').count(),1);
     await page.locator('.home-logout').click();
-    await page.locator('.nav-actions').getByText('Employee login',{exact:true}).waitFor();
+    await page.locator('.nav-actions').getByText('Login',{exact:true}).waitFor();
     assert.equal(await page.evaluate(() => localStorage.getItem('site_session')),null);
     assert.deepEqual(errors,[]);
     console.log('PASS: employee/HR cycles, tasks and uploads, password and salary, meeting scheduling and self-exclusion, feedback controls, shared logos/footers, signed-in home navigation, logout and mobile layouts.');

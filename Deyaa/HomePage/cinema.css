@@ -173,7 +173,7 @@ body.home-page {
 }
 .site-nav {
   display: flex;
-  
+
   background: rgba(255, 255, 255, .25);
     padding: 18px 44px;
     border-radius: 25px;
@@ -958,3 +958,9 @@ body.home-page {
 /* The entire service card is a native link, including keyboard and new-tab access. */
 a.sight-card { display: block; text-decoration: none; }
 a.sight-card:hover { background: #fff8ed; box-shadow: 0 0 0 3px #47858f, 0 18px 52px #022f4033; }
+
+.site-nav a { background: white; color: #174c42; padding: 10px 18px; border-radius: 999px; }
+.site-nav a:hover { background: #e6f2eb; }
+
+.site-nav { background: white; padding: 8px 12px; gap: 6px; }
+.site-nav a { text-shadow: none; }

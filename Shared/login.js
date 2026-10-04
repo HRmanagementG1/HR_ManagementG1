@@ -1,59 +1,8 @@
-// Shared login code for employee and HR pages.
-const employeeFile = new URL("../data/employees.json", document.currentScript.src);
-
+// Shared login form: switch roles without leaving this page.
+const loginRoot = new URL("../", document.currentScript.src);
 async function getEmployees() {
-  const response = await fetch(employeeFile);
-  if (!response.ok) {
-    throw new Error("Could not load employee data.");
-  }
-
-  const employeesFromFile = await response.json();
-  let savedEmployees = [];
-
-  try {
-    savedEmployees = JSON.parse(localStorage.getItem("site_users")) || [];
-  } catch (error) {
-    savedEmployees = [];
-  }
-
-  try {
-    const oldEmployees = JSON.parse(localStorage.getItem("employees")) || [];
-    oldEmployees.forEach(function (employee) {
-      const alreadySaved = savedEmployees.some(function (saved) {
-        return String(saved.id) === String(employee.id);
-      });
-      if (!alreadySaved) savedEmployees.push(employee);
-    });
-  } catch (error) {
-    // Continue with the current employee list if older saved data is unreadable.
-  }
-
-  const employees = [];
-
-  employeesFromFile.forEach(function (employee) {
-    const savedEmployee = savedEmployees.find(function (saved) {
-      return String(saved.id) === String(employee.id);
-    });
-
-    if (savedEmployee) {
-      employees.push(savedEmployee);
-    } else {
-      employees.push(employee);
-    }
-  });
-
-  savedEmployees.forEach(function (employee) {
-    const alreadyAdded = employees.some(function (saved) {
-      return String(saved.id) === String(employee.id);
-    });
-
-    if (!alreadyAdded) {
-      employees.push(employee);
-    }
-  });
-
-  localStorage.setItem("site_users", JSON.stringify(employees));
-  return employees;
+  await window.workspace.ready;
+  return window.workspace.users();
 }
 
 function setupLogin(role, usernameId, destination) {
@@ -63,6 +12,25 @@ function setupLogin(role, usernameId, destination) {
   const toggle = document.getElementById("togglePassword");
   const message = document.getElementById("login-message");
   const submitButton = form.querySelector("button[type='submit']");
+
+  function chooseRole(nextRole) {
+    role = nextRole;
+    destination = new URL(role === "HR" ? "Lujain/TaskHr/dashboard.html" : "Ala%60a/task/employee-profile/employee-profile.html", loginRoot).href;
+    document.querySelectorAll("[data-login-role]").forEach(function(button) {
+      button.setAttribute("aria-pressed", String(button.dataset.loginRole === role));
+    });
+    document.querySelector(".auth-eyebrow").textContent = role + " workspace";
+    document.querySelector(".auth-intro").textContent = role === "HR"
+      ? "Support your people and keep your team moving forward."
+      : "Your tasks, your people, and the details that matter.";
+    submitButton.textContent = role === "HR" ? "Sign in to HR →" : "Sign in to your workspace →";
+    message.hidden = true;
+    document.title = "Login | Wanderly";
+  }
+  document.querySelectorAll("[data-login-role]").forEach(function(button) {
+    button.addEventListener("click", function() { chooseRole(this.dataset.loginRole); });
+  });
+  chooseRole(role);
 
   toggle.addEventListener("click", function () {
     if (password.type === "password") {
@@ -88,29 +56,32 @@ function setupLogin(role, usernameId, destination) {
     try {
       const employees = await getEmployees();
       const enteredName = username.value.trim().toLowerCase();
-      let foundEmployee = null;
-
-      for (let i = 0; i < employees.length; i++) {
-        const employee = employees[i];
+      const foundEmployee = employees.find(function (employee) {
         const usernameValue = (employee.username || "").toLowerCase();
         const employeeName = (employee.name || "").toLowerCase();
         const email = (employee.email || "").toLowerCase();
 
         if ((enteredName === usernameValue || enteredName === employeeName || enteredName === email) && employee.password === password.value) {
-          foundEmployee = employee;
-          break;
+          return true;
         }
+        return false;
+      });
+
+      if (!foundEmployee) {
+        message.textContent = "Email, username, or password is incorrect.";
+        message.hidden = false;
+        return;
       }
 
-      if (foundEmployee === null) {
-        message.textContent = "Email, username, or password is incorrect.";
+      if (foundEmployee.blocked) {
+        message.textContent = "Your account is blocked. Contact HR for help.";
         message.hidden = false;
         return;
       }
 
       const employeeRole = String(foundEmployee.role || "Employee").toLowerCase();
       if (employeeRole !== role.toLowerCase()) {
-        message.textContent = "Please use the correct login page for your account.";
+        message.textContent = "Choose " + (employeeRole === "hr" ? "HR login" : "Employee login") + " above to sign in with this account.";
         message.hidden = false;
         return;
       }

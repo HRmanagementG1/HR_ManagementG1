@@ -157,3 +157,9 @@
     }
 }
 
+
+.task-row .pill { display: inline-block; margin-bottom: 18px; padding: 8px 14px; border-radius: 20px; }
+body[data-workspace-role="HR"] .task-row .priority-low, body[data-workspace-role="HR"] .priority-badge.low { background: #dcfce7; color: #166534; }
+body[data-workspace-role="HR"] .task-row .priority-medium, body[data-workspace-role="HR"] .task-row .priority-normal, body[data-workspace-role="HR"] .priority-badge.medium, body[data-workspace-role="HR"] .priority-badge.normal { background: #ffedd5; color: #9a3412; }
+body[data-workspace-role="HR"] .task-row .priority-high, body[data-workspace-role="HR"] .priority-badge.high { background: #fee2e2; color: #b91c1c; }
+.task-filters > .btn-teal { white-space: nowrap; }

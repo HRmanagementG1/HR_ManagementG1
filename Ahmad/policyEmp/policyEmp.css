@@ -572,3 +572,13 @@ body {
     padding: 10px 20px;
   }
 }
+
+.btn-outline-policy, .btn-primary-policy { border-radius: 22px; padding: 10px 18px; font-weight: 700; border: 1px solid #17634d; }
+.btn-outline-policy { background: #eff8f2; color: #17634d; }
+.btn-outline-policy:hover, .btn-primary-policy { background: #17634d; color: white; }
+
+#employee-policies .hero .eyebrow { color: #fff !important; }
+#employee-policies .card-actions button { border: 1px solid #17634d; border-radius: 24px; padding: 9px 15px; background: #eff8f2; color: #17634d; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+#employee-policies .card-actions button[data-download] { background: #17634d; color: #fff; }
+#employee-policies .card-actions button:hover { background: #d5eee1; color: #124b3a; }
+#employee-policies .card-actions button:focus-visible { outline: 3px solid #ffd262; outline-offset: 2px; }

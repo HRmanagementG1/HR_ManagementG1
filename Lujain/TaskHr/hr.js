@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   await W.ready;
   if (!W.requireRole('HR')) return;
   document.querySelectorAll('.task-subnav a').forEach(link => { if (new URL(link.href).pathname === location.pathname) link.setAttribute('aria-current','page'); });
-  const tasks = W.tasks(), employees = W.users().filter(e => e.role === 'Employee');
+  const tasks = W.tasks(), employees = W.users().filter(e => e.role === 'Employee' && !e.blocked);
   const $ = id => document.getElementById(id), esc = W.escape;
   const name = id => W.users().find(e => String(e.id) === String(id))?.name || 'Unknown employee';
-  const card = t => `<article class="task-row"><span class="pill">${esc(t.priority)} priority</span><h5>${esc(t.title)}</h5><p>${esc(name(t.employeeId))} · Due ${esc(t.dueDate)}</p><p>${esc(t.status)}</p><a class="btn-teal" href="task-details.html?id=${encodeURIComponent(t.id)}">View details</a></article>`;
+  const card = t => `<article class="task-row"><span class="pill priority-${esc(String(t.priority).toLowerCase())}">${esc(t.priority)} priority</span><h5>${esc(t.title)}</h5><p>${esc(name(t.employeeId))} · Due ${esc(t.dueDate)}</p><p>${esc(t.status)}</p><a class="btn-teal" href="task-details.html?id=${encodeURIComponent(t.id)}">View details</a></article>`;
   if ($('totalTasks')) {
     $('totalTasks').textContent = tasks.length;
     $('todoTasks').textContent = tasks.filter(t => ['To do','Revision Required'].includes(t.status)).length;
@@ -18,11 +18,63 @@ document.addEventListener('DOMContentLoaded', async () => {
     $('employeeSelect').required = true;
     $('employeeSelect').innerHTML = employees.map(e => `<option value="${esc(e.id)}">${esc(e.name)}</option>`).join('');
   }
+  const editId = new URLSearchParams(location.search).get('id');
+  const editingTask = editId ? W.tasks().find(task => String(task.id) === editId) : null;
+  if ($('taskForm') && editId) {
+    if (!editingTask) {
+      $('taskForm').hidden = true;
+      document.querySelector('.topbar h1').textContent = 'Task not found';
+      return;
+    }
+    const form = $('taskForm');
+    const assigned = W.users().find(employee => String(employee.id) === String(editingTask.employeeId));
+    if (assigned && !employees.some(employee => employee.id === assigned.id)) {
+      employees.push(assigned);
+      $('employeeSelect').add(new Option(assigned.name, assigned.id));
+    }
+    ['title', 'employeeId', 'description', 'priority', 'dueDate'].forEach(key => {
+      const field = form.elements[key];
+      if (key === 'priority' && editingTask[key] === 'Normal') field.value = 'Medium';
+      else field.value = editingTask[key] || '';
+    });
+    form.elements.visibility.value = editingTask.visibleToEmployee === false ? 'hidden' : 'visible';
+    document.querySelector('.topbar h1').textContent = 'Edit task';
+    form.querySelector('button').textContent = 'Save changes';
+    document.title = 'Edit Task | Wanderly';
+  }
   if ($('taskForm')) $('taskForm').addEventListener('submit', event => {
     event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.target));
+    if (!W.requireRole('HR') || !event.target.reportValidity()) return;
+    const data = {};
+    ['title', 'employeeId', 'description', 'priority', 'dueDate', 'visibility'].forEach(key => {
+      data[key] = event.target.elements[key].value;
+    });
     if (!employees.some(e => String(e.id) === data.employeeId) || !data.title.trim() || !data.description.trim()) return;
-    W.saveTasks([...W.tasks(), {...data,title:data.title.trim(),description:data.description.trim(),id:crypto.randomUUID(),createdBy:W.session().id,visibleToEmployee:data.visibility !== 'hidden',status:'To do',submission:'',feedback:'',comment:''}]);
+    if (editId) {
+      if (!W.tasks().some(task => String(task.id) === editId)) return;
+      W.updateTask(editId, {
+        title: data.title.trim(),
+        description: data.description.trim(),
+        employeeId: data.employeeId,
+        priority: data.priority,
+        dueDate: data.dueDate,
+        visibleToEmployee: data.visibility !== 'hidden'
+      });
+    } else {
+      const newTask = {
+        ...data,
+        title: data.title.trim(),
+        description: data.description.trim(),
+        id: crypto.randomUUID(),
+        createdBy: W.session().id,
+        visibleToEmployee: data.visibility !== 'hidden',
+        status: 'To do',
+        submission: '',
+        feedback: '',
+        comment: ''
+      };
+      W.saveTasks([...W.tasks(), newTask]);
+    }
     location.href = 'all-tasks.html';
   });
   if ($('allTasksBody')) {
@@ -37,8 +89,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       $('hiddenTaskCount').textContent = all.filter(t => t.visibleToEmployee === false).length;
       const query = $('searchTasks').value.trim().toLowerCase();
       const filtered = all.filter(t => `${t.title} ${name(t.employeeId)} ${t.status}`.toLowerCase().includes(query) && (!$('departmentFilter').value || department(t.employeeId) === $('departmentFilter').value) && (!$('priorityFilter').value || t.priority === $('priorityFilter').value) && (!$('visibilityFilter').value || ($('visibilityFilter').value === 'hidden') === (t.visibleToEmployee === false)));
-      $('allTasksBody').innerHTML = filtered.map(t => `<tr><td><strong>${esc(t.title)}</strong><small>${esc(t.description)}</small></td><td>${esc(name(t.employeeId))}<small>${esc(department(t.employeeId))}</small></td><td>${esc(t.dueDate)}<br><span class="priority-badge ${t.priority === 'High' ? 'high' : ''}">${esc(t.priority)} priority</span></td><td>${visibility(t)}</td><td><span class="status-badge">${esc(t.status)}</span></td><td><a class="details-link" href="task-details.html?id=${encodeURIComponent(t.id)}">Details</a></td></tr>`).join('') || '<tr><td colspan="6" class="empty-tasks">No tasks match your filters. Create a task to get started.</td></tr>';
-      $('taskBoard').innerHTML = ['To do','In progress','Submitted','Approved'].map(status => `<section><h3>${status}</h3>${filtered.filter(t => (t.status === 'Revision Required' ? 'To do' : t.status === 'Done' ? 'Approved' : t.status) === status).map(t => `<article><span class="priority-badge">${esc(t.priority)}</span><h4>${esc(t.title)}</h4><p>${esc(name(t.employeeId))}</p>${visibility(t)}<a href="task-details.html?id=${encodeURIComponent(t.id)}">Details →</a></article>`).join('') || '<p class="muted">No tasks</p>'}</section>`).join('');
+      $('allTasksBody').innerHTML = filtered.map(t => `<tr><td><strong>${esc(t.title)}</strong><small>${esc(t.description)}</small></td><td>${esc(name(t.employeeId))}<small>${esc(department(t.employeeId))}</small></td><td>${esc(t.dueDate)}<br><span class="priority-badge ${esc(String(t.priority).toLowerCase())}">${esc(t.priority)} priority</span></td><td>${visibility(t)}</td><td><span class="status-badge">${esc(t.status)}</span></td><td><a class="details-link" href="task-details.html?id=${encodeURIComponent(t.id)}">Details</a> <a class="details-link" href="add-task.html?id=${encodeURIComponent(t.id)}">Edit</a></td></tr>`).join('') || '<tr><td colspan="6" class="empty-tasks">No tasks match your filters. Create a task to get started.</td></tr>';
+      $('taskBoard').innerHTML = ['To do','In progress','Submitted','Approved'].map(status => `<section><h3>${status}</h3>${filtered.filter(t => (t.status === 'Revision Required' ? 'To do' : t.status === 'Done' ? 'Approved' : t.status) === status).map(t => `<article><span class="priority-badge ${esc(String(t.priority).toLowerCase())}">${esc(t.priority)}</span><h4>${esc(t.title)}</h4><p>${esc(name(t.employeeId))}</p>${visibility(t)}<a href="task-details.html?id=${encodeURIComponent(t.id)}">Details →</a></article>`).join('') || '<p class="muted">No tasks</p>'}</section>`).join('');
     };
     render();
     ['searchTasks','departmentFilter','priorityFilter','visibilityFilter'].forEach(id => $(id).addEventListener(id === 'searchTasks' ? 'input' : 'change',render));

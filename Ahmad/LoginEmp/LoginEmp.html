@@ -27,6 +27,10 @@
       </section>
       <section class="auth-panel">
         <div>
+          <div class="login-role-buttons" role="group" aria-label="Account type">
+            <button type="button" data-login-role="Employee" aria-pressed="true">Employee login</button>
+            <button type="button" data-login-role="HR" aria-pressed="false">HR login</button>
+          </div>
           <p class="auth-eyebrow">Employee workspace</p>
           <h2>Welcome back.</h2>
           <p class="auth-intro">
@@ -56,12 +60,11 @@
               Sign in to your workspace →
             </button>
           </form>
-          <p class="auth-switch">
-            Part of the HR team? <a href="../loginHr/LoginHr.html">HR login</a>
-          </p>
+
         </div>
       </section>
     </main>
+    <script src="../../Shared/workspace.js"></script>
     <script src="../../Shared/login.js"></script>
     <script src="LoginEmp.js"></script>
   </body>

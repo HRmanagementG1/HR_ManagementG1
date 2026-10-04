@@ -135,5 +135,16 @@
 
 </div>
   </div>
+<p id="leaveActionError" role="alert"></p>
+<dialog id="rejectionDialog" class="leave-dialog" aria-labelledby="rejectionTitle">
+  <form id="rejectionForm">
+    <h2 id="rejectionTitle">Reject leave request</h2>
+    <p id="rejectionEmployee"></p>
+    <label for="rejectionReason">Rejection reason</label>
+    <textarea id="rejectionReason" required maxlength="1000" rows="4" placeholder="Explain why this request is rejected"></textarea>
+    <p id="rejectionError" role="alert"></p>
+    <div class="dialog-actions"><button type="button" id="cancelRejection">Cancel</button><button type="submit" class="reject-confirm">Reject request</button></div>
+  </form>
+</dialog>
 </body>
 </html>

@@ -624,3 +624,9 @@ tbody tr:hover {
     }
 
 }
+html { scroll-behavior: smooth; }
+.request-scroll { background: #145440; color: white; padding: 12px 20px; border-radius: 24px; text-decoration: none; font-weight: 600; }
+#request-meeting-form { scroll-margin-top: 100px; }
+.history-card { margin-bottom: 28px; }
+
+.history-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }

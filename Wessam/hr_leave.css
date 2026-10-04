@@ -778,3 +778,12 @@ td {
         justify-content: flex-end;
     }
 }
+.leave-dialog { width: min(480px, calc(100% - 40px)); box-sizing: border-box; border: 1px solid #d9e5dd; border-radius: 20px; padding: 28px; color: #234c3d; }
+.leave-dialog::backdrop { background: #0a241c88; }
+.leave-dialog textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 10px; padding: 12px; border: 1px solid #b7cbbd; border-radius: 10px; font: inherit; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+.dialog-actions button { border: 1px solid #bccdc2; border-radius: 22px; padding: 10px 18px; background: #f5f8f4; cursor: pointer; font: inherit; }
+.dialog-actions .reject-confirm { background: #b42318; border-color: #b42318; color: white; }
+#leaveActionError, #rejectionError { color: #b42318; }
+
+.leave-dialog { position: fixed; inset: 0; margin: auto; max-height: calc(100vh - 40px); overflow: auto; }

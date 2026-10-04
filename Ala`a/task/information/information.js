@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       (el) => (el.textContent = user[el.dataset.user] || "Not provided"),
     );
   document.getElementById("recordStatus").textContent =
-    `${employeeId} · Active Employee`;
+    `${employeeId} · ${user.blocked ? "Blocked" : "Active Employee"}`;
   document.getElementById("departmentLocation").textContent = [
     user.department,
     user.location,
@@ -61,70 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     .forEach(
       (el) => (el.textContent = fields[el.dataset.info] || "Not provided"),
     );
-  const phoneForm = document.getElementById("phoneForm");
-  if (!hrView && phoneForm) {
-    const phoneInput = document.getElementById("phoneInput");
-    const editPhone = document.getElementById("editPhone");
-    const phoneMessage = document.getElementById("phoneMessage");
-
-    function closePhoneEditor() {
-      phoneForm.hidden = true;
-      editPhone.hidden = false;
-      editPhone.setAttribute("aria-expanded", "false");
-      editPhone.focus();
-    }
-
-    editPhone.addEventListener("click", () => {
-      phoneInput.value = user.phone || "";
-      phoneInput.setCustomValidity("");
-      phoneMessage.textContent = "";
-      phoneForm.hidden = false;
-      editPhone.hidden = true;
-      editPhone.setAttribute("aria-expanded", "true");
-      phoneInput.focus();
-    });
-    document.getElementById("cancelPhone").addEventListener("click", closePhoneEditor);
-    phoneInput.addEventListener("input", () => phoneInput.setCustomValidity(""));
-
-    phoneForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const phone = phoneInput.value.trim();
-      const digits = phone.replace(/\D/g, "");
-      if (!/^\+?[\d\s()-]+$/.test(phone) || digits.length < 7 || digits.length > 15) {
-        phoneInput.setCustomValidity("Enter a phone number with 7–15 digits.");
-        phoneInput.reportValidity();
-        return;
-      }
-
-      const session = W.session();
-      if (!session || session.role !== "Employee" || String(session.id) !== userId) {
-        phoneMessage.textContent = "Please sign in again to edit your phone number.";
-        return;
-      }
-
-      try {
-        // Read the latest records and update only this employee's phone number.
-        const users = W.users();
-        const account = users.find((person) => String(person.id) === userId);
-        if (!account) throw new Error("Employee record not found.");
-        account.phone = phone;
-        W.save("site_users", users);
-      } catch {
-        phoneMessage.textContent = "Could not save your number. Please try again.";
-        return;
-      }
-
-      user.phone = phone;
-      document.querySelector('[data-info="phone"]').textContent = phone;
-      closePhoneEditor();
-      phoneMessage.textContent = "Phone number saved.";
-      try {
-        W.save("site_session", { ...session, phone });
-      } catch {
-        phoneMessage.textContent = "Phone number saved. Refresh to update your session.";
-      }
-    });
-  }
   const extra = document.createElement("section");
   extra.className = "employee-record-extra";
   const title = document.createElement("h3");
