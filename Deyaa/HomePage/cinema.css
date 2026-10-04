@@ -173,6 +173,10 @@ body.home-page {
 }
 .site-nav {
   display: flex;
+  
+  background: rgba(255, 255, 255, .25);
+    padding: 18px 44px;
+    border-radius: 25px;
   justify-content: center;
   gap: clamp(18px, 2.2vw, 36px);
 }
