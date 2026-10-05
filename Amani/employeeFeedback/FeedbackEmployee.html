@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -20,10 +22,12 @@
     <script defer src="../../Shared/workspace.js"></script>
     <script defer src="../../Shared/access.js"></script>
     <script src="../../Shared/site-shell.js" defer></script>
-  <link rel="stylesheet" href="../../Shared/workspace_banners.css" />
-</head>
+    <link rel="stylesheet" href="../../Shared/workspace_banners.css" />
+  </head>
+
   <body data-workspace-role="Employee">
     <div data-employee-header data-active-page="feedback"></div>
+
     <section class="feedback-page">
       <!-- HERO -->
 
@@ -147,9 +151,24 @@
         <div id="no-feedback" class="no-feedback">
           <p>You haven't submitted any feedback yet.</p>
 
-          <span> Your submitted feedback will appear here. </span>
+          <span>Your submitted feedback will appear here.</span>
         </div>
       </section>
     </section>
+
+   
+
+    <div id="success-popup" class="success-popup">
+      <div class="success-popup-content">
+        <div class="success-icon">✓</div>
+
+        <h3>Feedback Submitted!</h3>
+
+        <p>Your feedback has been sent successfully.</p>
+
+        <button type="button" id="close-success-popup">OK</button>
+      </div>
+    </div>
   </body>
 </html>
+
